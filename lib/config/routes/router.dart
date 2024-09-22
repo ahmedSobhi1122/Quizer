@@ -5,10 +5,10 @@ class RouteGenerator {
 
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
-    //   case Routes.splashScreenRoute:
-    //     return MaterialPageRoute(
-    //       builder: (context) => const SplashScreen(),
-    //     );
+      // case Routes.splashScreenRoute:
+      //   return MaterialPageRoute(
+      //     builder: (context) => const SplashScreen(),
+      //   );
     //   // case onbordingScreenRoute:
     //   //   return MaterialPageRoute(
     //   //     builder: (context) => const OnBoardingScreen(),

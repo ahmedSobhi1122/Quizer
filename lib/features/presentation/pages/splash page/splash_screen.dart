@@ -2,7 +2,6 @@ import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_fonts.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
-import 'package:quizer/core/resources/text_styles.dart';
 
 import 'package:quizer/config/routes/screen_export.dart';
 
@@ -68,7 +67,7 @@ class SplashScreen extends StatelessWidget {
                   children: [
                     CircularProgressIndicator(
                       valueColor:
-                          AlwaysStoppedAnimation<Color>(AppColors.purpleColor),
+                      AlwaysStoppedAnimation<Color>(AppColors.purpleColor),
                     ),
                     SizedBox(height: 20),
                   ],

@@ -1,6 +1,4 @@
 
-import 'package:path/path.dart';
-import 'package:quizer/features/presentation/pages/splash%20page/splash_screen.dart';
 
 import 'screen_export.dart';
 
@@ -17,10 +15,14 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (context) =>const SplashScreen(),
         );
-    //   // case onbordingScreenRoute:
-    //   //   return MaterialPageRoute(
-    //   //     builder: (context) => const OnBoardingScreen(),
-    //   //   );
+      case Routes.signUpScreenRoute:
+        return MaterialPageRoute(
+            builder: (context) =>const SignUpScreen(),
+        );
+    case Routes.dataInfoScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) => const DataInfoScreen(),
+      );
     //   case Routes.logInScreenRoute:
     //     return MaterialPageRoute(
     //       builder: (context) => LoginScreen(),

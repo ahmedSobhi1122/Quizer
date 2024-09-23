@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizer/config/routes/route_constants.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
@@ -13,55 +14,63 @@ class SelectionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-          padding: EdgeInsets.only(top: context.height * .032),
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [
-              AppColors.purpleColor50,
-              AppColors.purpleColor30,
-              AppColors.purpleColor10,
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+      padding: EdgeInsets.only(top: context.height * .032),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(colors: [
+          AppColors.purpleColor50,
+          AppColors.purpleColor30,
+          AppColors.purpleColor10,
+        ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+      ),
+      child: Column(children: [
+        Row(
+          children: [
+            const BackButton(),
+            SizedBox(
+              width: context.width * .12,
+            ),
+            const CustomProgress(
+              progress: 3,
+            ),
+          ],
+        ),
+        SizedBox(height: context.height * .025),
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.defaultPadding),
+          child: Text(
+            '''What type of account would you like to create? 👦''',
+            style: AppTextStyles.headerSignupTextStyle(context),
           ),
-          child: Column(children: [
-                    Row(
-                      children: [
-                        const BackButton(),
-                        SizedBox(
-          width: context.width * .12,
-                        ),
-                        const CustomProgress(
-          progress: 3,
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: context.height * .025),
-                    Padding(
-                      padding: const EdgeInsets.all(AppPadding.defaultPadding),
-                      child: Text('''What type of account would you like to create? 👦''',style: AppTextStyles.headerSignupTextStyle(context),),
-                    ),
-                    SizedBox(height: context.height * .0966),
-                    const SelectedContainer(
-                      content: "Student",
-                      color: AppColors.purpleColor,
-                      icon: Icon(
-                        Icons.person,
-                        color: AppColors.whiteColor,
-                        size: 36,
-                      ),
-                    ),
-                    SizedBox(height: context.height * .032),
-                    const SelectedContainer(
-                      content: "Teacher",
-                      color: AppColors.warningColor,
-                      icon: Icon(
-                        Icons.person,
-                        color: AppColors.whiteColor,
-                        size: 36,
-                      ),
-                    ),
-                    const Spacer(),
-                    const CustomButton(text: "Next"),
-          ]),
-        ));
+        ),
+        SizedBox(height: context.height * .0966),
+        const SelectedContainer(
+          content: "Student",
+          color: AppColors.purpleColor,
+          icon: Icon(
+            Icons.person,
+            color: AppColors.whiteColor,
+            size: 36,
+          ),
+        ),
+        SizedBox(height: context.height * .032),
+        const SelectedContainer(
+          content: "Teacher",
+          color: AppColors.warningColor,
+          icon: Icon(
+            Icons.person,
+            color: AppColors.whiteColor,
+            size: 36,
+          ),
+        ),
+        const Spacer(),
+        CustomButton(
+          color: AppColors.lightPurpleColor.withOpacity(.7),
+          colorText: AppColors.purpleColor,
+          text: "Next",
+          onPressed: () => context.pushNamed(Routes.dataInfoScreenRoute),
+        ),
+      ]),
+    ));
   }
 }
 
@@ -125,7 +134,10 @@ class _SelectedContainerState extends State<SelectedContainer> {
             SizedBox(
               width: context.width * .046,
             ),
-            Text(widget.content,style: AppTextStyles.selectedBoxTextStyle(context),)
+            Text(
+              widget.content,
+              style: AppTextStyles.selectedBoxTextStyle(context),
+            )
           ],
         ),
       ),

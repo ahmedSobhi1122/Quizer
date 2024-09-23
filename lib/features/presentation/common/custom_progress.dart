@@ -17,7 +17,7 @@ class CustomProgress extends StatelessWidget {
           height: context.height * .018,
           decoration: BoxDecoration(
             border: Border.all(
-                style: BorderStyle.solid, color: AppColors.transparentColor),
+                style: BorderStyle.solid, color: AppColors.whiteColor),
             borderRadius: BorderRadius.circular(13),
             color: AppColors.lightGreyColor,
           ),

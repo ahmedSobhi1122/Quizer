@@ -10,14 +10,21 @@ class AppTextStyles {
   AppTextStyles._();
 
   ///TextField
+  static TextStyle textStyle(BuildContext context) =>
+      getMediumStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor,
+        fontSize: FontSize.f20,
+      );
 
 
   ///Button
 
-  static TextStyle customButtonTextStyle(BuildContext context) =>
+
+  static TextStyle customButtonTextStyle(BuildContext context,Color color) =>
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.purpleColor,
+        color: color,
         fontSize: FontSize.f20,
       );
 

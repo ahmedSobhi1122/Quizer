@@ -5,9 +5,17 @@ import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.text});
+  const CustomButton(
+      {super.key,
+      required this.text,
+      required this.onPressed,
+      required this.color,
+      required this.colorText});
 
   final String text;
+  final VoidCallback onPressed;
+  final Color color;
+  final Color colorText;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +28,7 @@ class CustomButton extends StatelessWidget {
             bottom: context.height * 0.122),
         child: Container(
           width: context.width * 0.779,
-          height: context.height * 0.0655,
+          height: context.height * 0.07,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppBorderRadius.br24),
               boxShadow: [
@@ -37,12 +45,12 @@ class CustomButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(AppBorderRadius.br24),
               ),
               side: const BorderSide(color: AppColors.purpleColor),
-              backgroundColor: AppColors.lightPurpleColor.withOpacity(.7),
+              backgroundColor: color,
             ),
-            onPressed: () {},
+            onPressed: onPressed,
             child: Text(
               text,
-              style: AppTextStyles.customButtonTextStyle(context),
+              style: AppTextStyles.customButtonTextStyle(context, colorText),
             ),
           ),
         ),

@@ -3,6 +3,7 @@ class ImageAssets {
 
   static const String _imagePath = "assets/images/";
 
+  static const String logo = "${_imagePath}logo.png";
   // static const String unknownUserImage = "${_imagePath}unknown_user.jpg";
 
 }
@@ -18,7 +19,7 @@ class SVGAssets {
 
   static const String _basePath = "assets/svg/";
 
-  // static const String logo = "${_basePath}logo.svg";
+  static const String logo = "${_basePath}logo.svg";
   static const String background = "${_basePath}bg.svg";
   static const String mail = "${_basePath}mail.svg";
   static const String google = "${_basePath}google.svg";

@@ -12,47 +12,56 @@ class SelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: Column(children: [
-        Row(
-          children: [
-            const BackButton(),
-            SizedBox(
-              width: context.width * .12,
-            ),
-            const CustomProgress(
-              progress: 3,
-            ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.all(AppPadding.defaultPadding),
-          child: Text('''What type of account would you like to create? 👦''',style: AppTextStyles.headerTextStyle(context),),
-        ),
-        SizedBox(height: context.height * .0966),
-        const SelectedContainer(
-          content: "Student",
-          color: AppColors.purpleColor,
-          icon: Icon(
-            Icons.person,
-            color: AppColors.whiteColor,
-            size: 36,
+        body: Container(
+          padding: EdgeInsets.only(top: context.height * .032),
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(colors: [
+              AppColors.purpleColor50,
+              AppColors.purpleColor30,
+              AppColors.purpleColor10,
+            ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
           ),
-        ),
-        SizedBox(height: context.height * .032),
-        const SelectedContainer(
-          content: "Teacher",
-          color: AppColors.warningColor,
-          icon: Icon(
-            Icons.person,
-            color: AppColors.whiteColor,
-            size: 36,
-          ),
-        ),
-        const Spacer(),
-        const CustomButton(text: "Next"),
-      ]),
-    ));
+          child: Column(children: [
+                    Row(
+                      children: [
+                        const BackButton(),
+                        SizedBox(
+          width: context.width * .12,
+                        ),
+                        const CustomProgress(
+          progress: 3,
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: context.height * .025),
+                    Padding(
+                      padding: const EdgeInsets.all(AppPadding.defaultPadding),
+                      child: Text('''What type of account would you like to create? 👦''',style: AppTextStyles.headerSignupTextStyle(context),),
+                    ),
+                    SizedBox(height: context.height * .0966),
+                    const SelectedContainer(
+                      content: "Student",
+                      color: AppColors.purpleColor,
+                      icon: Icon(
+                        Icons.person,
+                        color: AppColors.whiteColor,
+                        size: 36,
+                      ),
+                    ),
+                    SizedBox(height: context.height * .032),
+                    const SelectedContainer(
+                      content: "Teacher",
+                      color: AppColors.warningColor,
+                      icon: Icon(
+                        Icons.person,
+                        color: AppColors.whiteColor,
+                        size: 36,
+                      ),
+                    ),
+                    const Spacer(),
+                    const CustomButton(text: "Next"),
+          ]),
+        ));
   }
 }
 

@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:quizer/core/resources/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'config/routes/route_constants.dart';
@@ -41,13 +43,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: AppColors.transparentColor, // Set status bar color (transparent in this case)
+        statusBarBrightness: Brightness.light, // Set the status bar brightness (light/dark background)
+        statusBarIconBrightness: Brightness.dark, // Set the status bar icon color (light/dark icons)
+      ),
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Quizer',
       theme: AppTheme.lightTheme(context),
       themeMode: ThemeMode.light,
       onGenerateRoute: router.RouteGenerator.getRoute,
-      initialRoute: Routes.selectionScreenRoute,
+      initialRoute: Routes.signUpScreenRoute,
     );
   }
 }

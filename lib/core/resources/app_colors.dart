@@ -50,8 +50,11 @@ class AppColors {
 // static const Color greyColor10 = Color(0xFFF8F8F9);
 // static const Color greyColor5 = Color(0xFFFBFBFC);
 
-  static const Color lightPurpleColor = Color(0xFFB7A8FF);
   static const Color purpleColor = Color(0xFF6849FF);
+  static const Color purpleColor50 = Color(0xFF8369FA);
+  static const Color purpleColor30 = Color(0xFFCDC4FB);
+  static const Color purpleColor10 = Color(0xFFEEECF4);
+  static const Color lightPurpleColor = Color(0xFFB7A8FF);
 
 
 

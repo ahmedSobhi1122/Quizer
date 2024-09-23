@@ -5,4 +5,5 @@
 export 'package:flutter/material.dart';
 
 export 'package:quizer/features/presentation/pages/selection%20page/selection_screen.dart';
+export 'package:quizer/features/presentation/pages/signup%20page/signup_screen.dart';
 export 'route_constants.dart';

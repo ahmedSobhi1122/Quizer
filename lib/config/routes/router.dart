@@ -10,10 +10,10 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => const SelectionScreen(),
         );
-    //   // case onbordingScreenRoute:
-    //   //   return MaterialPageRoute(
-    //   //     builder: (context) => const OnBoardingScreen(),
-    //   //   );
+      case Routes.signUpScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => const SignUpScreen(),
+        );
     //   case Routes.logInScreenRoute:
     //     return MaterialPageRoute(
     //       builder: (context) => LoginScreen(),

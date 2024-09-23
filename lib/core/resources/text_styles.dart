@@ -22,11 +22,18 @@ class AppTextStyles {
       );
 
   ///Selection
-  static TextStyle headerTextStyle(BuildContext context) =>
+  static TextStyle headerSignupTextStyle(BuildContext context) =>
       getMediumStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.blackColor,
-        fontSize: FontSize.f32,
+        fontSize: FontSize.f28,
+      );
+
+  static TextStyle subHeaderSignupTextStyle(BuildContext context) =>
+      getRegularStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor.withOpacity(.5),
+        fontSize: FontSize.f18,
       );
 
   static TextStyle selectedBoxTextStyle(BuildContext context) =>

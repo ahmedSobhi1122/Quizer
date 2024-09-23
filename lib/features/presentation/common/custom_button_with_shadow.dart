@@ -6,14 +6,21 @@ import 'package:quizer/core/resources/text_styles.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key, required this.text});
- final String text;
+
+  final String text;
+
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Padding(
-        padding: const EdgeInsets.all(AppPadding.defaultPadding),
+        padding: EdgeInsets.only(
+            left: AppPadding.defaultPadding,
+            right: AppPadding.defaultPadding,
+            bottom: context.height * 0.122),
         child: Container(
+          width: context.width * 0.779,
+          height: context.height * 0.0655,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppBorderRadius.br24),
               boxShadow: [
@@ -31,10 +38,12 @@ class CustomButton extends StatelessWidget {
               ),
               side: const BorderSide(color: AppColors.purpleColor),
               backgroundColor: AppColors.lightPurpleColor.withOpacity(.7),
-              fixedSize: Size(context.width * 0.779, context.height * 0.0655),
             ),
             onPressed: () {},
-            child: Text(text,style: AppTextStyles.customButtonTextStyle(context),),
+            child: Text(
+              text,
+              style: AppTextStyles.customButtonTextStyle(context),
+            ),
           ),
         ),
       ),

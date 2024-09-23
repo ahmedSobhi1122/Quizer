@@ -31,6 +31,7 @@ class AppBorderRadius {
   static const double defaultBorderRadius = 12.0;
   static const double br4 = 4.0;
   static const double br8 = 8.0;
+  static const double br13 = 13.0;
   static const double br16 = 16.0;
   static const double br20 = 20.0;
   static const double br24 = 24.0;
@@ -66,4 +67,5 @@ class AppSize {
   static const double s140 = 140.0;
   static const double s160 = 160.0;
   static const double s190 = 190.0;
+  static const double s240 = 240.0;
 }

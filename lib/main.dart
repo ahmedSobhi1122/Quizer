@@ -43,11 +43,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'EShop',
+      title: 'Quizer',
       theme: AppTheme.lightTheme(context),
       themeMode: ThemeMode.light,
       onGenerateRoute: router.RouteGenerator.getRoute,
-      initialRoute: Routes.logInScreenRoute,
+      initialRoute: Routes.selectionScreenRoute,
     );
   }
 }

@@ -14,17 +14,17 @@ TextStyle _getTextStyle(String fontFamily, double fontSize, FontWeight fontWeigh
 
 // thin style
 
-TextStyle getThinStyle(
-    {fontFamily = FontConstants.primaryEnglishFont, fontSize = FontSize.f12, required Color color, List<Shadow>? shadows}) {
-  return _getTextStyle(fontFamily, fontSize, FontWeightManager.thin, color, shadows);
-}
+// TextStyle getThinStyle(
+//     {fontFamily = FontConstants.primaryEnglishFont, fontSize = FontSize.f12, required Color color, List<Shadow>? shadows}) {
+//   return _getTextStyle(fontFamily, fontSize, FontWeightManager.thin, color, shadows);
+// }
 
 // extraLight style
 
-TextStyle getExtraLightStyle(
-    {fontFamily = FontConstants.primaryEnglishFont, fontSize = FontSize.f12, required Color color, List<Shadow>? shadows}) {
-  return _getTextStyle(fontFamily, fontSize, FontWeightManager.extraLight, color, shadows);
-}
+// TextStyle getExtraLightStyle(
+//     {fontFamily = FontConstants.primaryEnglishFont, fontSize = FontSize.f12, required Color color, List<Shadow>? shadows}) {
+//   return _getTextStyle(fontFamily, fontSize, FontWeightManager.extraLight, color, shadows);
+// }
 
 // light style
 
@@ -47,12 +47,12 @@ TextStyle getMediumStyle(
   return _getTextStyle(fontFamily, fontSize, FontWeightManager.medium, color, shadows);
 }
 
-// medium style
+// semiBold style
 
-TextStyle getSemiBoldStyle(
-    {fontFamily = FontConstants.primaryEnglishFont, double fontSize = FontSize.f12, required Color color, List<Shadow>? shadows}) {
-  return _getTextStyle(fontFamily, fontSize, FontWeightManager.semiBold, color, shadows);
-}
+// TextStyle getSemiBoldStyle(
+//     {fontFamily = FontConstants.primaryEnglishFont, double fontSize = FontSize.f12, required Color color, List<Shadow>? shadows}) {
+//   return _getTextStyle(fontFamily, fontSize, FontWeightManager.semiBold, color, shadows);
+// }
 
 // bold style
 
@@ -63,10 +63,10 @@ TextStyle getBoldStyle(
 
 // extraBold style
 
-TextStyle getExtraBoldStyle(
-    {fontFamily = FontConstants.primaryEnglishFont, double fontSize = FontSize.f12, required Color color, List<Shadow>? shadows}) {
-  return _getTextStyle(fontFamily, fontSize, FontWeightManager.extraBold, color, shadows,);
-}
+// TextStyle getExtraBoldStyle(
+//     {fontFamily = FontConstants.primaryEnglishFont, double fontSize = FontSize.f12, required Color color, List<Shadow>? shadows}) {
+//   return _getTextStyle(fontFamily, fontSize, FontWeightManager.extraBold, color, shadows,);
+// }
 
 // black style
 

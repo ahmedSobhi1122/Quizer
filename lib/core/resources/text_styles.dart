@@ -11,66 +11,34 @@ class AppTextStyles {
 
   ///TextField
 
-  static TextStyle hintTextFieldTextStyle(BuildContext context) =>
-      getLightStyle(
-        fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.greyColor,
-        fontSize: FontSize.f16,
-      );
 
   ///Button
 
   static TextStyle customButtonTextStyle(BuildContext context) =>
-      getMediumStyle(
+      getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.whiteColor,
-        fontSize: FontSize.f22,
+        color: AppColors.purpleColor,
+        fontSize: FontSize.f20,
       );
 
-  static TextStyle cancelTextStyle(BuildContext context) => getMediumStyle(
+  ///Selection
+  static TextStyle headerTextStyle(BuildContext context) =>
+      getMediumStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blueColor,
-        fontSize: FontSize.f22,
+        color: AppColors.blackColor,
+        fontSize: FontSize.f32,
+      );
+
+  static TextStyle selectedBoxTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor,
+        fontSize: FontSize.f32,
       );
 
   ///Login
 
-  static TextStyle loginHeaderTextStyle(BuildContext context) => getBoldStyle(
-        fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.whiteColor,
-        fontSize: FontSize.f50,
-      );
-
-  static TextStyle loginSubHeaderTextStyle(BuildContext context) =>
-      getLightStyle(
-        fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.whiteColor,
-        fontSize: FontSize.f20,
-      );
-
-  static TextStyle loginOrTextStyle(BuildContext context) => getBoldStyle(
-        fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blueColor,
-        fontSize: FontSize.f16,
-      );
 
   ///Password
-  static TextStyle passwordHelloTextStyle(BuildContext context) => getBoldStyle(
-        fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blueColor,
-        fontSize: FontSize.f32,
-      );
 
-  static TextStyle passwordTextStyle(BuildContext context) => getMediumStyle(
-        fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blueColor,
-        fontSize: FontSize.f18,
-      );
-
-  static TextStyle forgotPasswordTextStyle(BuildContext context) =>
-      getLightStyle(
-        fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blueColor,
-        fontSize: FontSize.f14,
-      );
 }

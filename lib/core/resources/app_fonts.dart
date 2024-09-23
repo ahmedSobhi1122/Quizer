@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FontConstants {
-  static const String primaryEnglishFont = "Raleway";
-  static const String primaryArabicFont = "Raleway";
+  static const String primaryEnglishFont = "Satoshi";
+  static const String primaryArabicFont = "Satoshi";
 }
 
 class FontWeightManager {

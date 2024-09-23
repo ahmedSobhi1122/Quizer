@@ -12,5 +12,5 @@ CheckboxThemeData checkboxThemeData = CheckboxThemeData(
       Radius.circular(AppBorderRadius.defaultBorderRadius / 2),
     ),
   ),
-  side: const BorderSide(color: AppColors.whileColor40),
+  side: const BorderSide(color: AppColors.whiteColor40),
 );

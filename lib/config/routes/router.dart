@@ -1,3 +1,4 @@
+
 import 'screen_export.dart';
 
 class RouteGenerator {
@@ -5,10 +6,10 @@ class RouteGenerator {
 
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
-      // case Routes.splashScreenRoute:
-      //   return MaterialPageRoute(
-      //     builder: (context) => const SplashScreen(),
-      //   );
+      case Routes.selectionScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => const SelectionScreen(),
+        );
     //   // case onbordingScreenRoute:
     //   //   return MaterialPageRoute(
     //   //     builder: (context) => const OnBoardingScreen(),

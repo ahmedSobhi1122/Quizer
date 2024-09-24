@@ -33,7 +33,9 @@ dependencies:
 
   sqflite:
   path:
+  flutter_screenutil:
   flutter_svg:
+  lottie:
   form_field_validator:
   shared_preferences:
   flutter_bloc:

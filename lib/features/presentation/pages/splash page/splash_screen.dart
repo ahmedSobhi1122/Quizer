@@ -1,3 +1,4 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_fonts.dart';
@@ -39,8 +40,8 @@ class SplashScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      ImageAssets.logo,
+                    SvgPicture.asset(
+                      SVGAssets.logo,
                       width: context.width * 0.326,
                       height: context.width * 0.326,
                     ),
@@ -63,7 +64,7 @@ class SplashScreen extends StatelessWidget {
                   children: [
                     CircularProgressIndicator(
                       valueColor:
-                      AlwaysStoppedAnimation<Color>(AppColors.purpleColor),
+                          AlwaysStoppedAnimation<Color>(AppColors.purpleColor),
                     ),
                     SizedBox(height: 20),
                   ],

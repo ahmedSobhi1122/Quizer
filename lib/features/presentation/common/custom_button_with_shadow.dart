@@ -21,21 +21,26 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          fixedSize: Size(AppSize.s350.w, AppSize.s60.h),
-          backgroundColor: color,
-          splashFactory: InkRipple.splashFactory,
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppBorderRadius.br24.r),
-            side: const BorderSide(color: AppColors.purpleColor),
+      child: SizedBox(
+        width: AppSize.s335.w,
+        height: AppSize.s60.h,
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.all(0),
+            // fixedSize: Size(AppSize.s350.w, AppSize.s60.h),
+            backgroundColor: color,
+            splashFactory: InkRipple.splashFactory,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppBorderRadius.br24.r),
+              side: const BorderSide(color: AppColors.purpleColor),
+            ),
           ),
-        ),
-        child: Text(
-          text,
-          style: AppTextStyles.customButtonTextStyle(context, colorText),
+          child: Text(
+            text,
+            style: AppTextStyles.customButtonTextStyle(context, colorText),
+          ),
         ),
       ),
     );

@@ -42,12 +42,12 @@ class DataInfoScreen extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: AppSize.s60.h),
+          SizedBox(height: AppSize.s40.h),
           Text(
             '''Create an account ✏️''',
             style: AppTextStyles.headerSignupTextStyle(context),
           ),
-          SizedBox(height: AppSize.s16.h),
+          SizedBox(height: AppSize.s10.h),
           Text(
             '''Please complete your profile''',
             style: AppTextStyles.subHeaderSignupTextStyle(context),

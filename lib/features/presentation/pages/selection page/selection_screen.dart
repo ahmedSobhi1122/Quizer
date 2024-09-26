@@ -40,7 +40,7 @@ class SelectionScreen extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: AppSize.s60.h),
+        SizedBox(height: AppSize.s40.h),
         Text(
           '''What type of account would you like to create? ''',
           style: AppTextStyles.headerSignupTextStyle(context),

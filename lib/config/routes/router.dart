@@ -23,7 +23,7 @@ class RouteGenerator {
 
       case Routes.signUpScreenRoute:
         return MaterialPageRoute(
-            builder: (context) =>const SignUpScreen(),
+            builder: (context) => SignUpScreen(),
         );
     case Routes.dataInfoScreenRoute:
       return MaterialPageRoute(

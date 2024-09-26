@@ -21,13 +21,29 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
-      child: Container(
-        width: AppSize.s350.w,
-        height: AppSize.s60.h,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(AppBorderRadius.br24),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          fixedSize: Size(AppSize.s350.w, AppSize.s60.h),
+          backgroundColor: color,
+          splashFactory: InkRipple.splashFactory,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppBorderRadius.br24.r),
+            side: const BorderSide(color: AppColors.purpleColor),
+          ),
         ),
-        child: OutlinedButton(
+        child: Text(
+          text,
+          style: AppTextStyles.customButtonTextStyle(context, colorText),
+        ),
+      ),
+    );
+  }
+}
+
+/*
+OutlinedButton(
           style: OutlinedButton.styleFrom(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppBorderRadius.br24.r),
@@ -42,7 +58,4 @@ class CustomButton extends StatelessWidget {
             style: AppTextStyles.customButtonTextStyle(context, colorText),
           ),
         ),
-      ),
-    );
-  }
-}
+    */

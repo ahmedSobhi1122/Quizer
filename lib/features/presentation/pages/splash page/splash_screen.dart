@@ -1,7 +1,9 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_fonts.dart';
+import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
 
 import 'package:quizer/config/routes/screen_export.dart';
@@ -16,7 +18,8 @@ class SplashScreen extends StatelessWidget {
 
     return Scaffold(
       body: Container(
-        width: double.infinity,
+        width: context.width,
+        height: context.height,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -45,7 +48,7 @@ class SplashScreen extends StatelessWidget {
                       width: context.width * 0.326,
                       height: context.width * 0.326,
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: AppSize.s20.h),
                     Text(
                       'Quizzer',
                       style: TextStyle(

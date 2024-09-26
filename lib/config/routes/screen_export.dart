@@ -11,5 +11,5 @@ export 'package:quizer/features/presentation/pages/signup%20page/signup_screen.d
 
 export 'package:quizer/features/presentation/pages/Login%20page/login_screen.dart';
 
-export '../../features/presentation/pages/oboarding pages/onboarding_page.dart';
+export '../../features/presentation/pages/onboarding pages/onboarding_page.dart';
 export 'route_constants.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:quizer/config/routes/route_constants.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
@@ -158,7 +159,7 @@ class LoginScreen extends StatelessWidget {
             SizedBox(height: AppSize.s16.h),
             CustomButton(
               text: "Create new account",
-              onPressed: () {},
+              onPressed: () => context.pushNamed(Routes.selectionScreenRoute),
               color: AppColors.lightPurpleColor.withOpacity(.7),
               colorText: AppColors.purpleColor,
             )

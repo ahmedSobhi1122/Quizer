@@ -1,8 +1,10 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/screen_export.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
+import 'package:quizer/features/presentation/common/button_back.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
 import 'package:quizer/features/presentation/common/custom_progress.dart';
 import 'package:quizer/features/presentation/pages/data%20info%20page/widgets/date_of_birth.dart';
@@ -16,7 +18,10 @@ class DataInfoScreen extends StatelessWidget {
         body: Container(
           width: context.width,
       height: context.height,
-      padding: EdgeInsets.only(top: context.height * .032),
+      padding: EdgeInsets.only(
+          top: AppPadding.p50.h,
+          right: AppPadding.p24.w,
+          left: AppPadding.p24.w),
       decoration: const BoxDecoration(
         gradient: LinearGradient(colors: [
           AppColors.purpleColor50,
@@ -28,100 +33,62 @@ class DataInfoScreen extends StatelessWidget {
         child: Column(children: [
           Row(
             children: [
-              const BackButton(),
+              const CustomButtonBack(),
               SizedBox(
-                width: context.width * .12,
+                width: AppSize.s28.w,
               ),
               const CustomProgress(
                 progress: 2,
               ),
             ],
           ),
-          SizedBox(height: context.height * .025),
+          SizedBox(height: AppSize.s60.h),
           Text(
             '''Create an account ✏️''',
             style: AppTextStyles.headerSignupTextStyle(context),
           ),
-          SizedBox(height: context.height * .01),
+          SizedBox(height: AppSize.s16.h),
           Text(
             '''Please complete your profile''',
             style: AppTextStyles.subHeaderSignupTextStyle(context),
           ),
-          SizedBox(height: context.height * .0966),
+          SizedBox(height: AppSize.s90.h),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             SizedBox(
-              width: context.width * .349,
+              width: AppSize.s150.w,
+              height: AppSize.s50.h,
               child: TextField(
-                decoration: const InputDecoration(
-                  hintText: "First Name",
-                  hintStyle: TextStyle(color: AppColors.purpleColor50),
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: AppPadding.defaultPadding),
-                ),
+                decoration: style("First Name"),
                 style: AppTextStyles.textStyle(context),
               ),
             ),
-            SizedBox(width: context.width * .025),
+            SizedBox(width: AppSize.s36.w),
             SizedBox(
-              width: context.width * .349,
+              width: AppSize.s150.w,
+              height: AppSize.s50.h,
               child: TextField(
-                decoration: const InputDecoration(
-                  hintText: "Last Name",
-                  hoverColor: AppColors.purpleColor,
-                  // border: InputBorder,
-                  hintStyle: TextStyle(color: AppColors.purpleColor50),
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: AppPadding.defaultPadding),
-                ),
+                decoration:  style("Last Name"),
                 style: AppTextStyles.textStyle(context),
               ),
             ),
           ]),
-          SizedBox(height: context.height * .025),
+          SizedBox(height: AppSize.s32.h),
           SizedBox(
-            width: context.width * .732,
+            width: AppSize.s335.w,
+            height: AppSize.s50.h,
             child: const DateOfBirth(),
           ),
-          SizedBox(height: context.height * .025),
+          SizedBox(height: AppSize.s32.h),
           SizedBox(
-            width: context.width * .732,
+            width: AppSize.s335.w,
+            height: AppSize.s50.h,
             child: TextField(
-              decoration: const InputDecoration(
-                hintText: "Phone Number",
-                hoverColor: AppColors.purpleColor,
-                // border: InputBorder,
-                hintStyle: TextStyle(color: AppColors.purpleColor50),
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: AppPadding.defaultPadding),
-              ),
+              decoration: style("Phone Number"),
               keyboardType: TextInputType.phone,
               style: AppTextStyles.textStyle(context),
             ),
           ),
-          SizedBox(height: context.height * .025),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: context.width * .25,
-                child: TextField(
-                  decoration: const InputDecoration(
-                    hintText: "Gender",
-                    hoverColor: AppColors.purpleColor,
-                    // border: InputBorder,
-                    hintStyle: TextStyle(color: AppColors.purpleColor50),
-                    contentPadding: EdgeInsets.symmetric(
-                        horizontal: AppPadding.defaultPadding),
-                  ),
-                  style: AppTextStyles.textStyle(context),
-                  readOnly: true,
-                ),
-              ),
-              SizedBox(width: context.width * .22),
-              const GenderSelection(),
-            ],
-          ),
-          SizedBox(height: context.height * 0.172,),
+          SizedBox(height: AppSize.s230.h),
           CustomButton(
             color: AppColors.lightPurpleColor.withOpacity(.7),
             colorText: AppColors.purpleColor,
@@ -131,82 +98,5 @@ class DataInfoScreen extends StatelessWidget {
         ]),
       ),
     ));
-  }
-}
-
-class GenderSelection extends StatefulWidget {
-  const GenderSelection({super.key});
-
-  @override
-  State<GenderSelection> createState() => _GenderSelectionState();
-}
-
-class _GenderSelectionState extends State<GenderSelection> {
-  int _isSelected = -1;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              if (_isSelected == -1) {
-                _isSelected = 0;
-              } else {
-                _isSelected = _isSelected == 0 ? 1 : 0;
-              }
-            });
-          },
-          child: Container(
-            width: context.width * .121,
-            // height: context.height,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppBorderRadius.br16),
-              color: _isSelected != 0
-                  ? AppColors.whiteColor
-                  : AppColors.purpleColor50,
-            ),
-            child: const Center(
-                child: Text(
-              "M",
-              style: TextStyle(
-                  color: AppColors.blueColor,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold),
-            )),
-          ),
-        ),
-        SizedBox(width: context.width * .025),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              if (_isSelected == -1) {
-                _isSelected = 1;
-              } else {
-                _isSelected = _isSelected == 1 ? 0 : 1;
-              }
-            });
-          },
-          child: Container(
-            width: context.width * .121,
-            // height: context.height,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppBorderRadius.br16),
-                color: _isSelected != 1
-                    ? AppColors.whiteColor
-                    : AppColors.purpleColor50),
-            child: const Center(
-                child: Text(
-              "F",
-              style: TextStyle(
-                  color: AppColors.errorColor,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold),
-            )),
-          ),
-        ),
-      ],
-    );
   }
 }

@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.lightTheme(context),
         themeMode: ThemeMode.light,
         onGenerateRoute: router.RouteGenerator.getRoute,
-        initialRoute: Routes.onbordingScreenRoute,
+        initialRoute: Routes.dataInfoScreenRoute,
       ),
     );
   }

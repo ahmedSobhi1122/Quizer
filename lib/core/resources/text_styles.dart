@@ -65,9 +65,14 @@ class AppTextStyles {
         fontSize: FontSize.f14,
       );
 
-
   ///Login
 
+  static TextStyle forgotPasswordTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.purpleColor,
+        fontSize: FontSize.f14,
+      );
 
   ///Password
 

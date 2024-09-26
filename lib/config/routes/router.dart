@@ -1,6 +1,5 @@
 
 
-import '../../features/presentation/pages/oboarding pages/onboarding_page.dart';
 import 'screen_export.dart';
 
 class RouteGenerator {
@@ -10,7 +9,7 @@ class RouteGenerator {
     switch (settings.name) {
       case Routes.onbordingScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => OnboardingScreen(),
+          builder: (context) => const OnboardingScreen(),
         );
       case Routes.selectionScreenRoute:
         return MaterialPageRoute(
@@ -23,7 +22,11 @@ class RouteGenerator {
 
       case Routes.signUpScreenRoute:
         return MaterialPageRoute(
-            builder: (context) => SignUpScreen(),
+            builder: (context) => const SignUpScreen(),
+        );
+      case Routes.logInScreenRoute:
+        return MaterialPageRoute(
+            builder: (context) => const LoginScreen(),
         );
     case Routes.dataInfoScreenRoute:
       return MaterialPageRoute(

@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:quizer/config/routes/screen_export.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/core/resources/text_styles.dart';
-import 'package:quizer/features/presentation/common/button_back.dart';
 import 'package:quizer/features/presentation/common/checkable.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
-import 'package:quizer/features/presentation/common/custom_progress.dart';
 import 'package:quizer/features/presentation/pages/data%20info%20page/widgets/date_of_birth.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,38 +32,17 @@ class SignUpScreen extends StatelessWidget {
         ),
         child: SingleChildScrollView(
           child: Column(children: [
-            Row(
-              children: [
-                const CustomButtonBack(),
-                SizedBox(
-                  width: AppSize.s28.w,
-                ),
-                const CustomProgress(
-                  progress: 1,
-                ),
-              ],
-            ),
-            SizedBox(height: AppSize.s40.h),
+            SizedBox(height: AppSize.s80.h),
             Text(
-              '''Create an account ✏️''',
+              '''Login ✏️''',
               style: AppTextStyles.headerSignupTextStyle(context),
             ),
             SizedBox(height: AppSize.s10.h),
             Text(
-              '''Please enter your username, email address and password''',
+              '''Please Enter your email & password''',
               style: AppTextStyles.subHeaderSignupTextStyle(context),
             ),
             SizedBox(height: AppSize.s70.h),
-            SizedBox(
-              width: AppSize.s335.w,
-              height: AppSize.s50.h,
-              child: TextField(
-                decoration: style("User Name"),
-                keyboardType: TextInputType.name,
-                style: AppTextStyles.textStyle(context),
-              ),
-            ),
-            SizedBox(height: AppSize.s32.h),
             SizedBox(
               width: AppSize.s335.w,
               height: AppSize.s50.h,
@@ -89,23 +65,20 @@ class SignUpScreen extends StatelessWidget {
                 style: AppTextStyles.textStyle(context),
               ),
             ),
-            SizedBox(height: AppSize.s32.h),
-            SizedBox(
-              width: AppSize.s335.w,
-              height: AppSize.s50.h,
-              child: TextField(
-                decoration: style("Confirm Password"),
-                // keyboardType: TextInputType.visiblePassword,
-                obscuringCharacter: "※",
-                obscureText: true,
-
-                style: AppTextStyles.textStyle(context),
-              ),
-            ),
             Row(
               children: [
                 SizedBox(
                   width: AppSize.s24.w,
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Text(
+                    "forgot password?",
+                    style: AppTextStyles.forgotPasswordTextStyle(context),
+                  ),
+                ),
+                SizedBox(
+                  width: AppSize.s52.w,
                 ),
                 const Checkable(),
                 Text(
@@ -114,6 +87,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: AppSize.s30.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -174,13 +148,20 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: AppSize.s50.h),
+            SizedBox(height: AppSize.s116.h),
             CustomButton(
               color: AppColors.purpleColor,
               colorText: AppColors.whiteColor,
-              text: "SignUp",
+              text: "Login",
               onPressed: () {},
             ),
+            SizedBox(height: AppSize.s16.h),
+            CustomButton(
+              text: "Create new account",
+              onPressed: () {},
+              color: AppColors.lightPurpleColor.withOpacity(.7),
+              colorText: AppColors.purpleColor,
+            )
           ]),
         ),
       ),

@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     Future.delayed(const Duration(seconds: 3 ),
-        () => context.pushReplacementNamed(Routes.selectionScreenRoute));
+        () => context.pushReplacementNamed(Routes.onbordingScreenRoute));
 
     return ScreenUtilInit(
       designSize: const Size(430, 932),

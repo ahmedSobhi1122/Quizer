@@ -24,6 +24,10 @@ class SVGAssets {
   static const String mail = "${_basePath}mail.svg";
   static const String google = "${_basePath}google.svg";
   static const String facebook = "${_basePath}facebook.svg";
+  static const String onboarding1 = "${_basePath}onboarding_1.svg";
+  static const String onboarding2 = "${_basePath}onboarding_2.svg";
+  static const String onboarding3 = "${_basePath}onboarding_3.svg";
+
 }
 
 class LottieAssets {

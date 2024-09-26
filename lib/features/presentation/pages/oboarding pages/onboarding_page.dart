@@ -61,12 +61,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Gradient background
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  AppColors.purpleColor50, // Replace these with your gradient colors
+                  AppColors.purpleColor50,
                   AppColors.purpleColor30,
                   AppColors.purpleColor10,
                 ],

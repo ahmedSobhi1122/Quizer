@@ -29,21 +29,21 @@ TextStyle _getTextStyle(String fontFamily, double fontSize, FontWeight fontWeigh
 // light style
 
 TextStyle getLightStyle(
-    {fontFamily = FontConstants.primaryEnglishFont, fontSize = FontSize.f12, required Color color, List<Shadow>? shadows}) {
+    {fontFamily = FontConstants.primaryEnglishFont,required double fontSize , required Color color, List<Shadow>? shadows}) {
   return _getTextStyle(fontFamily, fontSize, FontWeightManager.light, color, shadows);
 }
 
 // regular style
 
 TextStyle getRegularStyle(
-    {fontFamily = FontConstants.primaryEnglishFont, fontSize = FontSize.f12, required Color color, List<Shadow>? shadows}) {
+    {fontFamily = FontConstants.primaryEnglishFont,required double fontSize, required Color color, List<Shadow>? shadows}) {
   return _getTextStyle(fontFamily, fontSize, FontWeightManager.regular, color, shadows);
 }
 
 // medium style
 
 TextStyle getMediumStyle(
-    {fontFamily = FontConstants.primaryEnglishFont, double fontSize = FontSize.f12, required Color color, List<Shadow>? shadows}) {
+    {fontFamily = FontConstants.primaryEnglishFont, required double fontSize, required Color color, List<Shadow>? shadows}) {
   return _getTextStyle(fontFamily, fontSize, FontWeightManager.medium, color, shadows);
 }
 
@@ -57,7 +57,7 @@ TextStyle getMediumStyle(
 // bold style
 
 TextStyle getBoldStyle(
-    {fontFamily = FontConstants.primaryEnglishFont, double fontSize = FontSize.f12, required Color color, List<Shadow>? shadows}) {
+    {fontFamily = FontConstants.primaryEnglishFont, required double fontSize, required Color color, List<Shadow>? shadows}) {
   return _getTextStyle(fontFamily, fontSize, FontWeightManager.bold, color, shadows);
 }
 
@@ -71,6 +71,6 @@ TextStyle getBoldStyle(
 // black style
 
 TextStyle getBlackStyle(
-    {fontFamily = FontConstants.primaryEnglishFont, double fontSize = FontSize.f12, required Color color, List<Shadow>? shadows}) {
+    {fontFamily = FontConstants.primaryEnglishFont, required double fontSize, required Color color, List<Shadow>? shadows}) {
   return _getTextStyle(fontFamily, fontSize, FontWeightManager.black, color, shadows);
 }

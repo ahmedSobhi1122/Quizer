@@ -11,8 +11,8 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 3),
-        () => context.pushReplacementNamed(Routes.selectionScreenRoute));
+    // Future.delayed(const Duration(seconds: 3),
+    //     () => context.pushReplacementNamed(Routes.selectionScreenRoute));
 
     return Scaffold(
       body: Container(
@@ -46,7 +46,7 @@ class SplashScreen extends StatelessWidget {
                       height: context.width * 0.326,
                     ),
                     const SizedBox(height: 20),
-                    const Text(
+                    Text(
                       'Quizzer',
                       style: TextStyle(
                           color: Colors.black,

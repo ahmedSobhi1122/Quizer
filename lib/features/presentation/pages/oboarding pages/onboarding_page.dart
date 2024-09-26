@@ -30,6 +30,8 @@ final List<OnboardingContent> contents = [
 ];
 
 class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
+
   @override
   _OnboardingScreenState createState() => _OnboardingScreenState();
 }

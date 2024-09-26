@@ -43,10 +43,10 @@ class AppTextStyles {
         fontSize: FontSize.f18,
       );
 
-  static TextStyle selectedBoxTextStyle(BuildContext context) =>
+  static TextStyle selectedBoxTextStyle(BuildContext context,Color color) =>
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blackColor,
+        color: color,
         fontSize: FontSize.f32,
       );
 

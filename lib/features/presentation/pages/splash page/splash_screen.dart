@@ -36,46 +36,27 @@ class SplashScreen extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              const Expanded(
-                flex: 1,
-                child: SizedBox.shrink(),
+              SizedBox(height: 218.h,),
+              SvgPicture.asset(
+                SVGAssets.logo,
+                width: context.width * 0.326,
+                height: context.width * 0.326,
               ),
-              Expanded(
-                flex: 2,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      SVGAssets.logo,
-                      width: context.width * 0.326,
-                      height: context.width * 0.326,
-                    ),
-                    SizedBox(height: AppSize.s20.h),
-                    Text(
-                      'Quizzer',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: FontSize.f22,
-                        fontFamily: FontConstants.primaryEnglishFont,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+              SizedBox(height: AppSize.s20.h),
+              Text(
+                'Quizzer',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: FontSize.f22,
+                  fontFamily: FontConstants.primaryEnglishFont,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Expanded(
-                flex: 1,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    SizedBox(height: 20.h),
-                    Lottie.asset(
-                      LottieAssets.loading,
-                      width: 100.w,
-                      height: 100.h,
-                    ),
-                  ],
-                ),
+              SizedBox(height: 218.h,),
+              Lottie.asset(
+                LottieAssets.loading,
+                width: 100.w,
+                height: 100.h,
               ),
             ],
           ),

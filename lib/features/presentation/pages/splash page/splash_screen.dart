@@ -7,7 +7,6 @@ import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/config/routes/screen_export.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -36,11 +35,11 @@ class SplashScreen extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              SizedBox(height: 218.h,),
+              SizedBox(height: AppSize.s218.h,),
               SvgPicture.asset(
                 SVGAssets.logo,
-                width: context.width * 0.326,
-                height: context.width * 0.326,
+                width: AppSize.s140.w,
+                height: AppSize.s140.w,
               ),
               SizedBox(height: AppSize.s20.h),
               Text(
@@ -55,8 +54,8 @@ class SplashScreen extends StatelessWidget {
               SizedBox(height: 218.h,),
               Lottie.asset(
                 LottieAssets.loading,
-                width: 100.w,
-                height: 100.h,
+                width: AppSize.s100.w,
+                height: AppSize.s100.h,
               ),
             ],
           ),

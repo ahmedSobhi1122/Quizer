@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class AppMargin {
   static const double m8 = 8.0;
   static const double m12 = 12.0;
@@ -31,19 +33,19 @@ class AppPadding {
 }
 
 class AppBorderRadius {
-  static const double defaultBorderRadius = 12.0;
-  static const double br4 = 4.0;
-  static const double br8 = 8.0;
-  static const double br13 = 13.0;
-  static const double br16 = 16.0;
-  static const double br20 = 20.0;
-  static const double br24 = 24.0;
-  static const double br32 = 32.0;
-  static const double br40 = 40.0;
-  static const double br48 = 48.0;
-  static const double br56 = 56.0;
-  static const double br64 = 64.0;
-  static const double br72 = 72.0;
+  static double defaultBorderRadius = 12.0.r;
+  static double br4 = 4.0.r;
+  static double br8 = 8.0.r;
+  static double br13 = 13.0.r;
+  static double br16 = 16.0.r;
+  static double br20 = 20.0.r;
+  static double br24 = 24.0.r;
+  static double br32 = 32.0.r;
+  static double br40 = 40.0.r;
+  static double br48 = 48.0.r;
+  static double br56 = 56.0.r;
+  static double br64 = 64.0.r;
+  static double br72 = 72.0.r;
 }
 
 class AppSize {
@@ -82,6 +84,7 @@ class AppSize {
   static const double s150 = 150.0;
   static const double s160 = 160.0;
   static const double s190 = 190.0;
+  static const double s218 = 218.0;
   static const double s226 = 226.0;
   static const double s230 = 230.0;
   static const double s240 = 240.0;

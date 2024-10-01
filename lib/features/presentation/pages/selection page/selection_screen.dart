@@ -49,7 +49,7 @@ class SelectionScreen extends StatelessWidget {
         const Selection(),
         SizedBox(height: AppSize.s226.h,),
         CustomButton(
-          color: AppColors.lightPurpleColor.withOpacity(.7),
+          color: AppColors.buttonPurpleColor,
           colorText: AppColors.purpleColor,
           text: "Next",
           onPressed: () => context.pushNamed(Routes.dataInfoScreenRoute),

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/config/routes/route_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'config/routes/router.dart' as router;
@@ -49,9 +50,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Quizer',
         theme: AppTheme.lightTheme(context),
-        themeMode: ThemeMode.light,
+        darkTheme: AppTheme.darkTheme(context),
+        themeMode: ThemeMode.dark,
         onGenerateRoute: router.RouteGenerator.getRoute,
-        //initialRoute: Routes.onbordingScreenRoute,
+        initialRoute: Routes.logInScreenRoute,
       ),
     );
   }

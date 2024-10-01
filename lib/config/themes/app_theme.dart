@@ -40,14 +40,14 @@ class AppTheme {
   static ThemeData darkTheme(BuildContext context) {
     return ThemeData(
       colorScheme: const ColorScheme.dark(
-        primary: AppColors.darkPurpleColor50,
+        primary: AppColors.darkPurpleColor10,
         secondary: AppColors.darkPurpleColor30,
-        tertiary: AppColors.darkPurpleColor10,
+        tertiary: AppColors.darkPurpleColor50,
       ),
       brightness: Brightness.dark,
       // fontFamily: "Plus Jakarta",
-      primarySwatch: AppColors.darkPrimaryMaterialColor,
-      primaryColor: AppColors.primaryColor,
+      primaryColorDark: AppColors.darkPrimaryMaterialColor,
+      primaryColor: AppColors.darkPrimaryColor,
       scaffoldBackgroundColor: AppColors.darkPurpleColor50,
       iconTheme: const IconThemeData(color: AppColors.whiteColor),
       textTheme: const TextTheme(

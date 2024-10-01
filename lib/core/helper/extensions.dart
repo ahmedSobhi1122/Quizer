@@ -28,6 +28,7 @@ extension MediaQueryValues on BuildContext {
 
 extension ColorTheme on BuildContext {
   Color get primaryColor => Theme.of(this).primaryColor;
+  Color get darkPrimaryColor => Theme.of(this).primaryColorDark;
   Color get primaryColorScheme => Theme.of(this).colorScheme.primary;
   Color get secondaryColorScheme => Theme.of(this).colorScheme.secondary;
   Color get tertiaryColorScheme => Theme.of(this).colorScheme.tertiary;

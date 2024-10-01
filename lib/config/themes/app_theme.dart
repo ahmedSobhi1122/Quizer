@@ -36,4 +36,32 @@ class AppTheme {
     );
   }
 
+  static ThemeData darkTheme(BuildContext context) {
+    return ThemeData(
+      colorScheme: const ColorScheme.dark(
+        primary: AppColors.darkPurpleColor50,
+        secondary: AppColors.darkPurpleColor30,
+        tertiary: AppColors.darkPurpleColor10,
+      ),
+      brightness: Brightness.dark,
+      // fontFamily: "Plus Jakarta",
+      primarySwatch: AppColors.darkPrimaryMaterialColor,
+      primaryColor: AppColors.primaryColor,
+      scaffoldBackgroundColor: AppColors.darkPurpleColor50,
+      iconTheme: const IconThemeData(color: AppColors.whiteColor),
+      textTheme: const TextTheme(
+        bodyMedium: TextStyle(color: AppColors.whiteColor),
+      ),
+      elevatedButtonTheme: elevatedButtonThemeData,
+      textButtonTheme: textButtonThemeData,
+      outlinedButtonTheme: outlinedButtonTheme(),
+      inputDecorationTheme: darkInputDecorationTheme,
+      checkboxTheme: checkboxThemeData.copyWith(
+        side: const BorderSide(color: AppColors.blackColor40),
+      ),
+      appBarTheme: appBarDarkTheme,
+      scrollbarTheme: scrollbarThemeData,
+      dataTableTheme: dataTableDarkThemeData,
+    );
+  }
 }

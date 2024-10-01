@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   //* main colors
   static const Color primaryColor = Color(0xFF7B61FF);
+  // static const Color darkprimaryColor = Color(0xFF322885);
 
 // On color 80, 60.... those means opacity
 
@@ -19,6 +20,21 @@ class AppColors {
     800: Color(0xFF5E45FF),
     900: Color(0xFF6C56DD),
   });
+
+  static const MaterialColor darkPrimaryMaterialColor =
+  MaterialColor(0xFF2D2A57, <int, Color>{
+    50: Color(0xFFE8E7F1),
+    100: Color(0xFFC6C3E0),
+    200: Color(0xFFA19ACD),
+    300: Color(0xFF7C72BA),
+    400: Color(0xFF6158AC),
+    500: Color(0xFF463F9E),
+    600: Color(0xFF413999),
+    700: Color(0xFF39308F),
+    800: Color(0xFF322885),
+    900: Color(0xFF141028),
+  });
+
 
   static const Color transparentColor = Colors.transparent;
 
@@ -55,6 +71,10 @@ class AppColors {
   static const Color purpleColor30 = Color(0xFFCDC4FB);
   static const Color purpleColor10 = Color(0xFFEEECF4);
   static const Color lightPurpleColor = Color(0xFFB7A8FF);
+
+  static const Color darkPurpleColor50 = Color(0xFF000000);
+  static const Color darkPurpleColor30 = Color(0xFF141028);
+  static const Color darkPurpleColor10 = Color(0xFF5F4DBE);
 
 
 

@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         darkTheme: AppTheme.darkTheme(context),
         themeMode: ThemeMode.dark,
         onGenerateRoute: router.RouteGenerator.getRoute,
-        initialRoute: Routes.logInScreenRoute,
+        // initialRoute: Routes.logInScreenRoute,
       ),
     );
   }

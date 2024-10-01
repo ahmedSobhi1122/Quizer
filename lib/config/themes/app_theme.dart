@@ -9,6 +9,7 @@ import 'theme_data.dart';
 class AppTheme {
   static ThemeData lightTheme(BuildContext context) {
     return ThemeData(
+      useMaterial3: true,
       colorScheme: const ColorScheme.light(
         primary: AppColors.purpleColor50,
         secondary: AppColors.purpleColor30,

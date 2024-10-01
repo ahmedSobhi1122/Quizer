@@ -5,16 +5,18 @@ import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_fonts.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
-
 import 'package:quizer/config/routes/screen_export.dart';
+import 'package:lottie/lottie.dart';
+import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Future.delayed(const Duration(seconds: 3),
-    //     () => context.pushReplacementNamed(Routes.onbordingScreenRoute));
+
+    Future.delayed(const Duration(seconds: 3),
+        () => context.pushReplacementNamed(Routes.onbordingScreenRoute));
 
     return Scaffold(
       body: Container(
@@ -52,24 +54,26 @@ class SplashScreen extends StatelessWidget {
                     Text(
                       'Quizzer',
                       style: TextStyle(
-                          color: Colors.black,
-                          fontSize: FontSize.f22,
-                          fontFamily: FontConstants.primaryEnglishFont,
-                          fontWeight: FontWeight.bold),
+                        color: Colors.black,
+                        fontSize: FontSize.f22,
+                        fontFamily: FontConstants.primaryEnglishFont,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
               ),
-              const Expanded(
+              Expanded(
                 flex: 1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    CircularProgressIndicator(
-                      valueColor:
-                          AlwaysStoppedAnimation<Color>(AppColors.purpleColor),
+                    SizedBox(height: 20.h),
+                    Lottie.asset(
+                      LottieAssets.loading,
+                      width: 100.w,
+                      height: 100.h,
                     ),
-                    SizedBox(height: 20),
                   ],
                 ),
               ),

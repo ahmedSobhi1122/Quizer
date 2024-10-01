@@ -26,9 +26,9 @@ class LoginScreen extends StatelessWidget {
             left: AppPadding.p24.w),
         decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
-            Theme.of(context).colorScheme.primary,
-            Theme.of(context).colorScheme.secondary,
-            Theme.of(context).colorScheme.tertiary,
+            context.primaryColorScheme,
+            context.secondaryColorScheme,
+            context.tertiaryColorScheme,
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
         ),
         child: SingleChildScrollView(

@@ -26,6 +26,13 @@ extension MediaQueryValues on BuildContext {
   double get bottom => MediaQuery.of(this).viewInsets.bottom;
 }
 
+extension ColorTheme on BuildContext {
+  Color get primaryColor => Theme.of(this).primaryColor;
+  Color get primaryColorScheme => Theme.of(this).colorScheme.primary;
+  Color get secondaryColorScheme => Theme.of(this).colorScheme.secondary;
+  Color get tertiaryColorScheme => Theme.of(this).colorScheme.tertiary;
+}
+
 extension StringExtension on String? {
   RegExp get isContainsLink {
     return RegExp(

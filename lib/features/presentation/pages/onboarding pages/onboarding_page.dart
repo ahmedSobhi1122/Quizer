@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quizer/config/routes/screen_export.dart';
+import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 
@@ -138,7 +140,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                   onPressed: () {
                     if (currentIndex == contents.length - 1) {
-                      Navigator.pushReplacementNamed(context, '/selection');
+                      context.pushReplacementNamed(Routes.logInScreenRoute);
                     } else {
                       _controller.nextPage(
                         duration: const Duration(milliseconds: 100),

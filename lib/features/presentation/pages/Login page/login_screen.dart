@@ -24,11 +24,11 @@ class LoginScreen extends StatelessWidget {
             top: AppPadding.p50.h,
             right: AppPadding.p24.w,
             left: AppPadding.p24.w),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
-            AppColors.purpleColor50,
-            AppColors.purpleColor30,
-            AppColors.purpleColor10,
+            Theme.of(context).colorScheme.primary,
+            Theme.of(context).colorScheme.secondary,
+            Theme.of(context).colorScheme.tertiary,
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
         ),
         child: SingleChildScrollView(

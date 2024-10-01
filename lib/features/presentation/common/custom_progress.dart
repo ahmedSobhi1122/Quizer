@@ -23,7 +23,7 @@ class CustomProgress extends StatelessWidget {
           ),
         ),
         Container(
-          width: AppSize.s240.w / progress.w,
+          width: AppSize.s240.w / progress,
           height: AppSize.s16.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppBorderRadius.br13.r),

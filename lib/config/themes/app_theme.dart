@@ -9,6 +9,11 @@ import 'theme_data.dart';
 class AppTheme {
   static ThemeData lightTheme(BuildContext context) {
     return ThemeData(
+      colorScheme: const ColorScheme.light(
+        primary: AppColors.purpleColor50,
+        secondary: AppColors.purpleColor30,
+        tertiary: AppColors.purpleColor10,
+      ),
       brightness: Brightness.light,
       // fontFamily: "Plus Jakarta",
       primarySwatch: AppColors.primaryMaterialColor,

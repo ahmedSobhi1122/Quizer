@@ -1,5 +1,7 @@
 
 
+import 'package:quizer/features/presentation/pages/profile%20page/profile_screen.dart';
+
 import 'screen_export.dart';
 
 class RouteGenerator {
@@ -32,6 +34,10 @@ class RouteGenerator {
       return MaterialPageRoute(
         builder: (context) => const DataInfoScreen(),
       );
+      case Routes.profileScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => const ProfileScreen(),
+        );
     //   case Routes.logInScreenRoute:
     //     return MaterialPageRoute(
     //       builder: (context) => LoginScreen(),

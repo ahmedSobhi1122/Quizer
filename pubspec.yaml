@@ -33,6 +33,7 @@ dependencies:
   sqflite:
   path:
   dio:
+  equatable:
   flutter_screenutil:
   flutter_svg:
   lottie:

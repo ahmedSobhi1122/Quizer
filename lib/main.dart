@@ -1,7 +1,16 @@
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/route_constants.dart';
+import 'package:quizer/core/resources/constants.dart';
+import 'package:quizer/features/data_sources/API/remote_data_source.dart';
+import 'package:quizer/features/data_sources/repository_impl/auth_repository.dart';
+import 'package:quizer/features/domain/usecases/login_usecase.dart';
+import 'package:quizer/features/domain/usecases/register_usecase.dart';
+import 'package:quizer/features/presentation/cubit/login_cubit.dart';
+import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'config/routes/router.dart' as router;
@@ -11,6 +20,16 @@ import 'core/resources/language_manager.dart';
 late final WidgetsBinding engine;
 
 void main() async {
+  var dio = Dio(
+    BaseOptions(
+      baseUrl: Constants.baseUrl,
+      receiveDataWhenStatusError: true,
+      connectTimeout: const Duration(seconds: 5),
+      receiveTimeout: const Duration(seconds: 5),
+    ),
+  );
+  RemoteDataSource remoteDataSource = RemoteDataSource(dio);
+  final authRepository = AuthRepositoryImpl(remoteDataSource);
   // WidgetsFlutterBinding.ensureInitialized();
   // await SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.portraitUp,
@@ -32,7 +51,11 @@ void main() async {
       startLocale: AppLanguages.startLocal,
       useOnlyLangCode: true,
       saveLocale: true,
-      child: const MyApp(),
+      child: MultiBlocProvider(providers: [
+        BlocProvider(create: (_) => LoginCubit(LoginUser(authRepository))),
+        BlocProvider(
+            create: (_) => RegisterCubit(RegisterUser(authRepository))),
+      ], child: const MyApp()),
     ),
   );
 }

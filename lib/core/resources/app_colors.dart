@@ -39,13 +39,12 @@ class AppColors {
   static const Color transparentColor = Colors.transparent;
 
   static const Color blackColor = Color(0xFF16161E);
-  static const Color blackColor80 = Color(0xFF45454B);
-  static const Color blackColor60 = Color(0xFF737378);
+  static const Color blackColor80 = Color(0xCC000000);
+  static const Color blackColor60 = Color(0x99000000);
   static const Color blackColor40 = Color(0xFFA2A2A5);
   static const Color blackColor20 = Color(0xFFD0D0D2);
   static const Color blackColor10 = Color(0xFFE8E8E9);
   static const Color blackColor5 = Color(0xFFF3F3F4);
-
   static const Color lightGrayColor = Color(0xFFD9D9D9);
 
   static const Color whiteColor = Color(0xFFF8F8F8);
@@ -76,6 +75,10 @@ class AppColors {
   static const Color darkPurpleColor50 = Color(0xFF000000);
   static const Color darkPurpleColor30 = Color(0xFF141028);
   static const Color darkPurpleColor10 = Color(0xFF5F4DBE);
+  static const Color gold = Color(0x80FDE096);
+  static const Color silver = Color(0x80CFCFCF);
+  static const Color bronze = Color(0x80B86B4A);
+  static const Color gray = Color(0x8095989A);
 
 
 

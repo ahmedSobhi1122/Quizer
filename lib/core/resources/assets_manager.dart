@@ -4,6 +4,16 @@ class ImageAssets {
   static const String _imagePath = "assets/images/";
 
   static const String logo = "${_imagePath}logo.png";
+  static const String profile = "${_imagePath}profile.png";
+  static const String avatar = "${_imagePath}avatar.png";
+  static const String gold_medal = "${_imagePath}gold-medal.png";
+  static const String silver_medal = "${_imagePath}silver-medal.png";
+  static const String bronze_medal = "${_imagePath}bronze-medal.png";
+  static const String reward1 = "${_imagePath}reward1.png";
+  static const String reward2 = "${_imagePath}reward2.png";
+  static const String reward3 = "${_imagePath}reward3.png";
+  static const String reward4 = "${_imagePath}reward4.png";
+  static const String reward5 = "${_imagePath}reward5.png";
   // static const String unknownUserImage = "${_imagePath}unknown_user.jpg";
 
 }

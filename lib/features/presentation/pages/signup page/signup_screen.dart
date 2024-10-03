@@ -179,7 +179,7 @@ class SignUpScreen extends StatelessWidget {
               color: AppColors.purpleColor,
               colorText: AppColors.whiteColor,
               text: "SignUp",
-              onPressed: () {},
+              onPressed: () {context.pushReplacementNamed(Routes.profileScreenRoute);},
             ),
           ]),
         ),

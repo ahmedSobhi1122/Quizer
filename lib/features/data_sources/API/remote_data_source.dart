@@ -1,21 +1,26 @@
 import 'package:dio/dio.dart';
 import 'package:quizer/core/resources/constants.dart';
-import 'package:quizer/features/data_sources/models/users.dart';
+import 'package:quizer/features/data_sources/models/user_login_model.dart';
+import 'package:quizer/features/data_sources/models/user_register_model.dart';
 
-class RemoteDataSource{
+class RemoteDataSource {
   late Dio dio;
-  
+
   RemoteDataSource(this.dio);
 
-  Future<void> registerUser(UserModel user) async {
+  Future<void> registerUser(UserRegisterModel user) async {
     try {
-      final response = await dio.post(
-        '${Constants.baseUrl}/register',
+      final response = await dio.request(
+        '${Constants.baseUrl}account/register/emailPassword',
         data: user.toJson(),
+        options: Options(
+          method: 'POST',
+        ),
       );
 
       if (response.statusCode == 200) {
         // successful
+
       } else {
         throw Exception('Failed to register user');
       }
@@ -24,12 +29,17 @@ class RemoteDataSource{
     }
   }
 
-  Future<void> loginUser(UserModel user) async {
+  Future<void> loginUser(UserLoginModel user) async {
+    // var headers = { 'Authorization' : 'Bearer ${Constants.token}'; };
     try {
-      final response = await dio.post(
-        '${Constants.baseUrl}/login',
+      final response = await dio.request(
+        '${Constants.baseUrl}account/login/emailPassword',
         data: user.toJson(),
+        options: Options(
+          method: 'POST',
+        ),
       );
+      // print(response.data);
       if (response.statusCode == 200) {
         // successful
       } else {

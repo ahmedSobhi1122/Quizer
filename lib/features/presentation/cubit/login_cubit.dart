@@ -4,7 +4,7 @@ import 'package:quizer/features/domain/usecases/login_usecase.dart';
 import 'package:quizer/features/presentation/state/login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  final LoginUser loginUserUseCase;
+  final LoginUserUseCase loginUserUseCase;
 
   LoginCubit(this.loginUserUseCase) : super(LoginInitial());
 

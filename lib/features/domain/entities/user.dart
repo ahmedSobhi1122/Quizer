@@ -3,15 +3,26 @@ class User {
   final String? lastName;
   final String? phoneNumber;
   final DateTime? birthDate;
-  final String email;
-  final String password;
+  final String? token;
+  final String? rank;
+  final int? firstPlaceCount;
+  final int? secondPlaceCount;
+  final int? thirdPlaceCount;
+  final String? description;
+  final String? email;
+  final String? password;
 
   User({
-    this.firstName,
-    this.lastName,
-    this.phoneNumber,
-    this.birthDate,
-    required this.email,
-    required this.password
-  });
+      this.firstPlaceCount,
+      this.secondPlaceCount,
+      this.thirdPlaceCount,
+      this.description,
+      this.firstName,
+      this.lastName,
+      this.phoneNumber,
+      this.birthDate,
+      this.token,
+      this.rank,
+      this.email,
+      this.password});
 }

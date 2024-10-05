@@ -1,6 +1,9 @@
 
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quizer/features/presentation/cubit/login_cubit.dart';
 import 'package:quizer/features/presentation/pages/profile%20page/profile_screen.dart';
+import '../../core/dependency_injection.dart';
 
 import 'screen_export.dart';
 
@@ -28,7 +31,9 @@ class RouteGenerator {
         );
       case Routes.logInScreenRoute:
         return MaterialPageRoute(
-            builder: (context) => const LoginScreen(),
+            builder: (context) => BlocProvider(
+                create: (context) =>  LoginCubit(sl()),
+                child: const LoginScreen()),
         );
     case Routes.dataInfoScreenRoute:
       return MaterialPageRoute(

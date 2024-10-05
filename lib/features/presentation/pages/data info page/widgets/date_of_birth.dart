@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/core/helper/validation.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
@@ -14,7 +15,7 @@ class DateOfBirth extends StatefulWidget {
 
 class _DateOfBirthState extends State<DateOfBirth> {
   TextEditingController dateInput = TextEditingController();
-
+  DateTime? pickedDate;
   @override
   void initState() {
     dateInput.text = "";
@@ -23,7 +24,8 @@ class _DateOfBirthState extends State<DateOfBirth> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: (value) => Validation.validateBirthDate(pickedDate),
       controller: dateInput,
       decoration: style(
         "Date Of Birth",
@@ -35,7 +37,7 @@ class _DateOfBirthState extends State<DateOfBirth> {
       style: AppTextStyles.textStyle(context),
       readOnly: true,
       onTap: () async {
-        DateTime? pickedDate = await showDatePicker(
+        pickedDate = await showDatePicker(
             context: context,
             initialDate: DateTime.now(),
             firstDate: DateTime(1950),
@@ -43,7 +45,7 @@ class _DateOfBirthState extends State<DateOfBirth> {
             lastDate: DateTime(2100));
 
         if (pickedDate != null) {
-          String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+          String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate!);
           setState(() {
             dateInput.text =
                 formattedDate; //set output date to TextField value.

@@ -30,9 +30,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   sqflite:
   path:
+  dio:
+  equatable:
+  get_it:
   flutter_screenutil:
   flutter_svg:
   lottie:

@@ -35,7 +35,7 @@ DataTableThemeData dataTableLightThemeData = DataTableThemeData(
   columnSpacing: 24,
   headingRowColor: MaterialStateProperty.all(Colors.black12),
   decoration: BoxDecoration(
-    borderRadius: const BorderRadius.all(Radius.circular(AppBorderRadius.defaultBorderRadius)),
+    borderRadius: BorderRadius.all(Radius.circular(AppBorderRadius.defaultBorderRadius)),
     border: Border.all(color: Colors.black12),
   ),
   dataTextStyle: const TextStyle(
@@ -49,7 +49,7 @@ DataTableThemeData dataTableDarkThemeData = DataTableThemeData(
   columnSpacing: 24,
   headingRowColor: MaterialStateProperty.all(Colors.white10),
   decoration: BoxDecoration(
-    borderRadius: const BorderRadius.all(Radius.circular(AppBorderRadius.defaultBorderRadius)),
+    borderRadius: BorderRadius.all(Radius.circular(AppBorderRadius.defaultBorderRadius)),
     border: Border.all(color: Colors.white10),
   ),
   dataTextStyle: const TextStyle(

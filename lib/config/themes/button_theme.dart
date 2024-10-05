@@ -10,7 +10,7 @@ ElevatedButtonThemeData elevatedButtonThemeData = ElevatedButtonThemeData(
     backgroundColor: AppColors.primaryColor,
     foregroundColor: Colors.white,
     minimumSize: const Size(double.infinity, 32),
-    shape: const RoundedRectangleBorder(
+    shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(AppBorderRadius.defaultBorderRadius)),
     ),
   ),

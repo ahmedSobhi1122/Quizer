@@ -25,7 +25,7 @@ class AppTextStyles {
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: color,
-        fontSize: FontSize.f20,
+        fontSize: FontSize.f22,
       );
 
   ///Selection
@@ -33,7 +33,7 @@ class AppTextStyles {
       getMediumStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.blackColor,
-        fontSize: FontSize.f28,
+        fontSize: FontSize.f32,
       );
 
   static TextStyle subHeaderSignupTextStyle(BuildContext context) =>
@@ -43,15 +43,36 @@ class AppTextStyles {
         fontSize: FontSize.f18,
       );
 
-  static TextStyle selectedBoxTextStyle(BuildContext context) =>
+  static TextStyle selectedBoxTextStyle(BuildContext context,Color color) =>
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blackColor,
+        color: color,
         fontSize: FontSize.f32,
+      );
+
+  ///SignUp
+  static TextStyle rememberMeTextStyle(BuildContext context) =>
+      getMediumStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor,
+        fontSize: FontSize.f14,
+      );
+
+  static TextStyle orTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.greyColor,
+        fontSize: FontSize.f14,
       );
 
   ///Login
 
+  static TextStyle forgotPasswordTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.purpleColor,
+        fontSize: FontSize.f14,
+      );
 
   ///Password
 

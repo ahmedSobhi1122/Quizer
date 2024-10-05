@@ -1,22 +1,53 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/screen_export.dart';
 import 'package:quizer/core/helper/extensions.dart';
+import 'package:quizer/core/helper/validation.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
+import 'package:quizer/features/presentation/common/button_back.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
 import 'package:quizer/features/presentation/common/custom_progress.dart';
+import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 import 'package:quizer/features/presentation/pages/data%20info%20page/widgets/date_of_birth.dart';
+import 'package:quizer/features/presentation/state/register_state.dart';
 
-class DataInfoScreen extends StatelessWidget {
+class DataInfoScreen extends StatefulWidget {
   const DataInfoScreen({super.key});
+
+  @override
+  State<DataInfoScreen> createState() => _DataInfoScreenState();
+}
+
+class _DataInfoScreenState extends State<DataInfoScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController firstNameController = TextEditingController();
+
+  final TextEditingController lastNameController = TextEditingController();
+
+  final TextEditingController phoneController = TextEditingController();
+
+
+  @override
+  void dispose() {
+    super.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    phoneController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-          width: context.width,
+      width: context.width,
       height: context.height,
-      padding: EdgeInsets.only(top: context.height * .032),
+      padding: EdgeInsets.only(
+          top: AppPadding.p50.h,
+          right: AppPadding.p24.w,
+          left: AppPadding.p24.w),
       decoration: const BoxDecoration(
         gradient: LinearGradient(colors: [
           AppColors.purpleColor50,
@@ -25,188 +56,93 @@ class DataInfoScreen extends StatelessWidget {
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
       ),
       child: SingleChildScrollView(
-        child: Column(children: [
-          Row(
-            children: [
-              const BackButton(),
-              SizedBox(
-                width: context.width * .12,
-              ),
-              const CustomProgress(
-                progress: 2,
-              ),
-            ],
-          ),
-          SizedBox(height: context.height * .025),
-          Text(
-            '''Create an account ✏️''',
-            style: AppTextStyles.headerSignupTextStyle(context),
-          ),
-          SizedBox(height: context.height * .01),
-          Text(
-            '''Please complete your profile''',
-            style: AppTextStyles.subHeaderSignupTextStyle(context),
-          ),
-          SizedBox(height: context.height * .0966),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            SizedBox(
-              width: context.width * .349,
-              child: TextField(
-                decoration: const InputDecoration(
-                  hintText: "First Name",
-                  hintStyle: TextStyle(color: AppColors.purpleColor50),
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: AppPadding.defaultPadding),
-                ),
-                style: AppTextStyles.textStyle(context),
-              ),
-            ),
-            SizedBox(width: context.width * .025),
-            SizedBox(
-              width: context.width * .349,
-              child: TextField(
-                decoration: const InputDecoration(
-                  hintText: "Last Name",
-                  hoverColor: AppColors.purpleColor,
-                  // border: InputBorder,
-                  hintStyle: TextStyle(color: AppColors.purpleColor50),
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: AppPadding.defaultPadding),
-                ),
-                style: AppTextStyles.textStyle(context),
-              ),
-            ),
-          ]),
-          SizedBox(height: context.height * .025),
-          SizedBox(
-            width: context.width * .732,
-            child: const DateOfBirth(),
-          ),
-          SizedBox(height: context.height * .025),
-          SizedBox(
-            width: context.width * .732,
-            child: TextField(
-              decoration: const InputDecoration(
-                hintText: "Phone Number",
-                hoverColor: AppColors.purpleColor,
-                // border: InputBorder,
-                hintStyle: TextStyle(color: AppColors.purpleColor50),
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: AppPadding.defaultPadding),
-              ),
-              keyboardType: TextInputType.phone,
-              style: AppTextStyles.textStyle(context),
-            ),
-          ),
-          SizedBox(height: context.height * .025),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: context.width * .25,
-                child: TextField(
-                  decoration: const InputDecoration(
-                    hintText: "Gender",
-                    hoverColor: AppColors.purpleColor,
-                    // border: InputBorder,
-                    hintStyle: TextStyle(color: AppColors.purpleColor50),
-                    contentPadding: EdgeInsets.symmetric(
-                        horizontal: AppPadding.defaultPadding),
+        child: BlocBuilder<RegisterCubit, RegisterState>(
+          builder: (context, state) {
+            return Column(children: [
+              Row(
+                children: [
+                  const CustomButtonBack(),
+                  SizedBox(
+                    width: AppSize.s28.w,
                   ),
-                  style: AppTextStyles.textStyle(context),
-                  readOnly: true,
+                  const CustomProgress(
+                    progress: 2,
+                  ),
+                ],
+              ),
+              SizedBox(height: AppSize.s40.h),
+              Text(
+                '''Create an account ✏️''',
+                style: AppTextStyles.headerSignupTextStyle(context),
+              ),
+              SizedBox(height: AppSize.s10.h),
+              Text(
+                '''Please complete your profile''',
+                style: AppTextStyles.subHeaderSignupTextStyle(context),
+              ),
+              SizedBox(height: AppSize.s90.h),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: AppSize.s335.w,
+                      child: TextFormField(
+                        controller: firstNameController,
+                        decoration: style("First Name"),
+                        style: AppTextStyles.textStyle(context),
+                        keyboardType: TextInputType.name,
+                        validator: (value) => Validation.validateName(value),
+                      ),
+                    ),
+                    SizedBox(height: AppSize.s32.h),
+                    SizedBox(
+                      width: AppSize.s335.w,
+                      child: TextFormField(
+                          controller: lastNameController,
+                          decoration: style("Last Name"),
+                          style: AppTextStyles.textStyle(context),
+                          keyboardType: TextInputType.name,
+                          validator: (value) =>
+                              Validation.validateName(value)),
+                    ),
+                    SizedBox(height: AppSize.s32.h),
+                    SizedBox(
+                      width: AppSize.s335.w,
+                      child: const DateOfBirth(),
+                    ),
+                    SizedBox(height: AppSize.s32.h),
+                    SizedBox(
+                      width: AppSize.s335.w,
+                      child: TextFormField(
+                          controller: phoneController,
+                          decoration: style("Phone Number"),
+                          keyboardType: TextInputType.phone,
+                          style: AppTextStyles.textStyle(context),
+                          validator: (value) =>
+                              Validation.validatePhoneNumber(value)),
+                    ),
+                    SizedBox(height: AppSize.s230.h),
+                    CustomButton(
+                      color: AppColors.lightPurpleColor.withOpacity(.7),
+                      colorText: AppColors.purpleColor,
+                      text: "Next",
+                      onPressed: () {
+                        // if (_formKey.currentState!.validate()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Processing Data')),
+                          );
+                          context.pushNamed(Routes.signUpScreenRoute);
+                        // }
+                      }
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(width: context.width * .22),
-              const GenderSelection(),
-            ],
-          ),
-          SizedBox(height: context.height * 0.172,),
-          CustomButton(
-            color: AppColors.lightPurpleColor.withOpacity(.7),
-            colorText: AppColors.purpleColor,
-            text: "Next",
-            onPressed: () =>context.pushNamed(Routes.signUpScreenRoute),
-          ),
-        ]),
+            ]);
+          },
+        ),
       ),
     ));
-  }
-}
-
-class GenderSelection extends StatefulWidget {
-  const GenderSelection({super.key});
-
-  @override
-  State<GenderSelection> createState() => _GenderSelectionState();
-}
-
-class _GenderSelectionState extends State<GenderSelection> {
-  int _isSelected = -1;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              if (_isSelected == -1) {
-                _isSelected = 0;
-              } else {
-                _isSelected = _isSelected == 0 ? 1 : 0;
-              }
-            });
-          },
-          child: Container(
-            width: context.width * .121,
-            // height: context.height,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppBorderRadius.br16),
-              color: _isSelected != 0
-                  ? AppColors.whiteColor
-                  : AppColors.purpleColor50,
-            ),
-            child: const Center(
-                child: Text(
-              "M",
-              style: TextStyle(
-                  color: AppColors.blueColor,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold),
-            )),
-          ),
-        ),
-        SizedBox(width: context.width * .025),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              if (_isSelected == -1) {
-                _isSelected = 1;
-              } else {
-                _isSelected = _isSelected == 1 ? 0 : 1;
-              }
-            });
-          },
-          child: Container(
-            width: context.width * .121,
-            // height: context.height,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppBorderRadius.br16),
-                color: _isSelected != 1
-                    ? AppColors.whiteColor
-                    : AppColors.purpleColor50),
-            child: const Center(
-                child: Text(
-              "F",
-              style: TextStyle(
-                  color: AppColors.errorColor,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold),
-            )),
-          ),
-        ),
-      ],
-    );
   }
 }

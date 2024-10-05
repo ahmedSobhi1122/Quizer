@@ -1,6 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/core/helper/validation.dart';
 import 'package:quizer/core/resources/app_colors.dart';
+import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 
 class DateOfBirth extends StatefulWidget {
@@ -12,36 +15,37 @@ class DateOfBirth extends StatefulWidget {
 
 class _DateOfBirthState extends State<DateOfBirth> {
   TextEditingController dateInput = TextEditingController();
-
+  DateTime? pickedDate;
   @override
   void initState() {
-    dateInput.text = ""; //set the initial value of text field
+    dateInput.text = "";
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: (value) => Validation.validateBirthDate(pickedDate),
       controller: dateInput,
-      decoration: const InputDecoration(
-        suffixIcon: Icon(Icons.calendar_today),
-        labelText: "Date Of Birth",
-        hoverColor: AppColors.purpleColor,
-        hintStyle: TextStyle(color: AppColors.purpleColor50),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+      decoration: style(
+        "Date Of Birth",
+        icon: const Icon(
+          Icons.calendar_today,
+          color: AppColors.purpleColor,
+        ),
       ),
       style: AppTextStyles.textStyle(context),
       readOnly: true,
       onTap: () async {
-        DateTime? pickedDate = await showDatePicker(
+        pickedDate = await showDatePicker(
             context: context,
             initialDate: DateTime.now(),
             firstDate: DateTime(1950),
-            //DateTime.now() - not to allow to choose before today.
+            //DateTime.now()
             lastDate: DateTime(2100));
 
         if (pickedDate != null) {
-          String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+          String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate!);
           setState(() {
             dateInput.text =
                 formattedDate; //set output date to TextField value.
@@ -51,3 +55,14 @@ class _DateOfBirthState extends State<DateOfBirth> {
     );
   }
 }
+
+InputDecoration style(String text, {Icon? icon}) {
+  return InputDecoration(
+    suffixIcon: icon,
+    labelText: text,
+    labelStyle: const TextStyle(color: AppColors.purpleColor),
+    contentPadding: EdgeInsets.all(AppPadding.defaultPadding.r),
+  );
+}
+
+

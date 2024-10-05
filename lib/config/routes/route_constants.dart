@@ -9,5 +9,5 @@ static const String signUpScreenRoute = "/signup";
 static const String passwordScreenRoute = "/password";
 static const String forgetPasswordScreenRoute="/forget_password";
 static const String OtpScreenRoute="/user_detection";
-
+  static const String profileScreenRoute = "/profile";
 }

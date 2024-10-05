@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   //* main colors
   static const Color primaryColor = Color(0xFF7B61FF);
+  static const Color darkPrimaryColor = Color(0xFF322885);
 
 // On color 80, 60.... those means opacity
 
@@ -20,19 +21,33 @@ class AppColors {
     900: Color(0xFF6C56DD),
   });
 
+  static const MaterialColor darkPrimaryMaterialColor =
+  MaterialColor(0xFF2D2A57, <int, Color>{
+    50: Color(0xFFE8E7F1),
+    100: Color(0xFFC6C3E0),
+    200: Color(0xFFA19ACD),
+    300: Color(0xFF7C72BA),
+    400: Color(0xFF6158AC),
+    500: Color(0xFF463F9E),
+    600: Color(0xFF413999),
+    700: Color(0xFF39308F),
+    800: Color(0xFF322885),
+    900: Color(0xFF141028),
+  });
+
+
   static const Color transparentColor = Colors.transparent;
 
   static const Color blackColor = Color(0xFF16161E);
-  static const Color blackColor80 = Color(0xFF45454B);
-  static const Color blackColor60 = Color(0xFF737378);
+  static const Color blackColor80 = Color(0xCC000000);
+  static const Color blackColor60 = Color(0x99000000);
   static const Color blackColor40 = Color(0xFFA2A2A5);
   static const Color blackColor20 = Color(0xFFD0D0D2);
   static const Color blackColor10 = Color(0xFFE8E8E9);
   static const Color blackColor5 = Color(0xFFF3F3F4);
-
   static const Color lightGrayColor = Color(0xFFD9D9D9);
 
-  static const Color whiteColor = Colors.white;
+  static const Color whiteColor = Color(0xFFF8F8F8);
   static const Color whiteColor80 = Color(0xFFCCCCCC);
   static const Color whiteColor60 = Color(0xFF999999);
   static const Color whiteColor40 = Color(0xFF666666);
@@ -55,6 +70,15 @@ class AppColors {
   static const Color purpleColor30 = Color(0xFFCDC4FB);
   static const Color purpleColor10 = Color(0xFFEEECF4);
   static const Color lightPurpleColor = Color(0xFFB7A8FF);
+  static const Color buttonPurpleColor = Color(0xFFd4d0f7);
+
+  static const Color darkPurpleColor50 = Color(0xFF000000);
+  static const Color darkPurpleColor30 = Color(0xFF141028);
+  static const Color darkPurpleColor10 = Color(0xFF5F4DBE);
+  static const Color gold = Color(0x80FDE096);
+  static const Color silver = Color(0x80CFCFCF);
+  static const Color bronze = Color(0x80B86B4A);
+  static const Color gray = Color(0x8095989A);
 
 
 

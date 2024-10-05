@@ -9,6 +9,12 @@ import 'theme_data.dart';
 class AppTheme {
   static ThemeData lightTheme(BuildContext context) {
     return ThemeData(
+      useMaterial3: true,
+      colorScheme: const ColorScheme.light(
+        primary: AppColors.purpleColor50,
+        secondary: AppColors.purpleColor30,
+        tertiary: AppColors.purpleColor10,
+      ),
       brightness: Brightness.light,
       // fontFamily: "Plus Jakarta",
       primarySwatch: AppColors.primaryMaterialColor,
@@ -31,4 +37,32 @@ class AppTheme {
     );
   }
 
+  static ThemeData darkTheme(BuildContext context) {
+    return ThemeData(
+      colorScheme: const ColorScheme.dark(
+        primary: AppColors.darkPurpleColor10,
+        secondary: AppColors.darkPurpleColor30,
+        tertiary: AppColors.darkPurpleColor50,
+      ),
+      brightness: Brightness.dark,
+      // fontFamily: "Plus Jakarta",
+      primaryColorDark: AppColors.darkPrimaryMaterialColor,
+      primaryColor: AppColors.darkPrimaryColor,
+      scaffoldBackgroundColor: AppColors.darkPurpleColor50,
+      iconTheme: const IconThemeData(color: AppColors.whiteColor),
+      textTheme: const TextTheme(
+        bodyMedium: TextStyle(color: AppColors.whiteColor),
+      ),
+      elevatedButtonTheme: elevatedButtonThemeData,
+      textButtonTheme: textButtonThemeData,
+      outlinedButtonTheme: outlinedButtonTheme(),
+      inputDecorationTheme: darkInputDecorationTheme,
+      checkboxTheme: checkboxThemeData.copyWith(
+        side: const BorderSide(color: AppColors.blackColor40),
+      ),
+      appBarTheme: appBarDarkTheme,
+      scrollbarTheme: scrollbarThemeData,
+      dataTableTheme: dataTableDarkThemeData,
+    );
+  }
 }

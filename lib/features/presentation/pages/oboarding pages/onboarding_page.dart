@@ -1,9 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 
+import '../../../../config/routes/route_constants.dart';
 
+
+// Custom Button widget
+class CustomButton extends StatelessWidget {
+  final Color color;
+  final Color colorText;
+  final String text;
+  final VoidCallback onPressed;
+
+  const CustomButton({
+    required this.color,
+    required this.colorText,
+    required this.text,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: color,
+        foregroundColor: colorText,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+      onPressed: onPressed,
+      child: Text(text),
+    );
+  }
+}
+
+// OnboardingContent model class
 class OnboardingContent {
   final String image;
   final String title;
@@ -16,7 +50,7 @@ class OnboardingContent {
   });
 }
 
-
+// Declare the contents for the onboarding screens
 final List<OnboardingContent> contents = [
   OnboardingContent(
     image: SVGAssets.onboarding1,
@@ -61,6 +95,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Scaffold(
       body: Stack(
         children: [
+          // Background gradient
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -108,7 +143,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           Text(
                             contents[i].description,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                               color: Colors.black87,
                             ),
@@ -119,6 +154,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   },
                 ),
               ),
+              // Dots indicator
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
@@ -126,33 +162,37 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       (index) => buildDot(index, context),
                 ),
               ),
-              Container(
-                height: 60,
-                margin: const EdgeInsets.all(40),
-                width: double.infinity,
-                child: ElevatedButton(
-                  child: Text(
-                    currentIndex == contents.length - 1 ? "Continue" : "Next",
-                  ),
-                  onPressed: () {
-                    if (currentIndex == contents.length - 1) {
-                      Navigator.pushReplacementNamed(context, '/selection');
-                    } else {
-                      _controller.nextPage(
-                        duration: const Duration(milliseconds: 100),
-                        curve: Curves.bounceIn,
-                      );
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).primaryColor,
-                    foregroundColor: Colors.white, // Text color
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+              const SizedBox(height: 20), // Add spacing between dots and buttons
+              // If we're on the last screen, show two buttons
+              currentIndex == contents.length - 1
+                  ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                child: Column(
+                  children: [
+                    // "Get Started!" custom button
+                    CustomButton(
+                      color: AppColors.lightPurpleColor.withOpacity(.7),
+                      colorText: Colors.white, // Text color is now white
+                      text: "Get Started!",
+                      onPressed: () {
+                        context.pushNamed(Routes.forgetPasswordScreenRoute); // Navigate to home
+                      },
                     ),
-                  ),
+                    const SizedBox(height: 20), // Spacing between buttons
+                    // "Already have an account?" custom button
+                    CustomButton(
+                      color: AppColors.purpleColor50, // Dark purple background
+                      colorText: Colors.white, // White text
+                      text: "Already have an account?",
+                      onPressed: () {
+                        context.pushNamed(Routes.dataInfoScreenRoute); // Navigate to login
+                      },
+                    ),
+                  ],
                 ),
-              ),
+              )
+              // For other screens, no button will be shown
+                  : const SizedBox(), // Show an empty container when it's not the last screen
             ],
           ),
         ],
@@ -160,6 +200,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
+  // Dots indicator for the onboarding screens
   Container buildDot(int index, BuildContext context) {
     return Container(
       height: 10,

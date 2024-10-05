@@ -1,5 +1,8 @@
 
 
+import 'package:quizer/features/presentation/pages/forget%20password%20pages/forget%20password.dart';
+
+import '../../features/presentation/pages/forget password pages/OtpScreen.dart';
 import '../../features/presentation/pages/oboarding pages/onboarding_page.dart';
 import 'screen_export.dart';
 
@@ -25,10 +28,15 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (context) =>const SignUpScreen(),
         );
-    case Routes.dataInfoScreenRoute:
-      return MaterialPageRoute(
-        builder: (context) => const DataInfoScreen(),
-      );
+
+      case Routes.forgetPasswordScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => ForgetPasswordScreen(),
+        );
+      case Routes.OtpScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => OtpScreen(),
+        );
     //   case Routes.logInScreenRoute:
     //     return MaterialPageRoute(
     //       builder: (context) => LoginScreen(),

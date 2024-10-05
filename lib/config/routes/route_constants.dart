@@ -7,4 +7,7 @@ static const String logInScreenRoute = "/login";
 static const String dataInfoScreenRoute = "/dataInfo";
 static const String signUpScreenRoute = "/signup";
 static const String passwordScreenRoute = "/password";
+static const String forgetPasswordScreenRoute="/forget_password";
+static const String OtpScreenRoute="/user_detection";
+
 }

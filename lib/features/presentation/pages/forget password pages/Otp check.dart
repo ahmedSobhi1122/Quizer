@@ -50,12 +50,12 @@ class _OtpCheckScreenState extends State<OtpCheckScreen> {
               ),// Progress Row
               Row(
                 children: [
-                  const CustomButtonBack(),
+                   CustomButtonBack(onPressed:()=>context.pop()),
                   SizedBox(
                     width: AppSize.s28.w,
                   ),
                   const CustomProgress(
-                    progress: 2,
+                    end: 2,
                   ),
                 ],
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart'; // Adjust the import according to your project structure
 import 'package:quizer/core/resources/text_styles.dart'; // Adjust the import according to your project structure
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart'; // Import your custom button
@@ -81,12 +82,13 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
               ),
               Row(
                 children: [
-                  const CustomButtonBack(),
+                   CustomButtonBack( onPressed:()=>context.pop()),
                   SizedBox(
                     width: AppSize.s28.w,
                   ),
                   const CustomProgress(
-                    progress: 1,
+                    start:2,
+                    end: 1,
                   ),
                 ],
               ),

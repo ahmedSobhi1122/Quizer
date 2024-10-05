@@ -15,6 +15,7 @@ class AuthRepositoryImpl implements AuthRepository {
       firstName: user.firstName,
       lastName: user.lastName,
       phoneNumber: user.phoneNumber,
+      birthDate: user.birthDate,
       email: user.email,
       password: user.password,
     );

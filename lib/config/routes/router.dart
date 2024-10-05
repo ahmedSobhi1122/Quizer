@@ -1,14 +1,8 @@
-
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../core/dependency_injection.dart';
-import '../../features/presentation/cubit/login_cubit.dart';
+import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 import '../../features/presentation/pages/forget password pages/Otp check.dart';
 import '../../features/presentation/pages/forget password pages/OtpScreen.dart';
 import '../../features/presentation/pages/forget password pages/forget password.dart';
 import '../../features/presentation/pages/forget password pages/new password.dart';
-import '../../features/presentation/pages/profile page/profile_screen.dart';
 import 'screen_export.dart';
 
 class RouteGenerator {
@@ -18,7 +12,7 @@ class RouteGenerator {
     switch (settings.name) {
       case Routes.onbordingScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => OnboardingScreen(),
+          builder: (context) => const OnboardingScreen(),
         );
       case Routes.selectionScreenRoute:
         return MaterialPageRoute(
@@ -31,7 +25,7 @@ class RouteGenerator {
 
       case Routes.signUpScreenRoute:
         return MaterialPageRoute(
-            builder: (context) =>const SignUpScreen(),
+            builder: (context) => const SignUpScreen(),
         );
 
       case Routes.forgetPasswordScreenRoute:
@@ -44,14 +38,17 @@ class RouteGenerator {
         );
       case Routes.logInScreenRoute:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                create: (context) =>  LoginCubit(sl()),
-                child: const LoginScreen()),
+          builder: (context) => BlocProvider(
+              create: (context) => sl<LoginCubit>(),
+              child: const LoginScreen()),
         );
-    case Routes.dataInfoScreenRoute:
-      return MaterialPageRoute(
-        builder: (context) => const DataInfoScreen(),
-      );
+      case Routes.dataInfoScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => sl<RegisterCubit>(),
+            child: const DataInfoScreen(),
+          ),
+        );
       case Routes.profileScreenRoute:
         return MaterialPageRoute(
           builder: (context) => const ProfileScreen(),

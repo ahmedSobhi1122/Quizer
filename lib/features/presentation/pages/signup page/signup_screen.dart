@@ -8,6 +8,7 @@ import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/core/resources/text_styles.dart';
+import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/button_back.dart';
 import 'package:quizer/features/presentation/common/checkable.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
@@ -24,53 +25,51 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final _formKey = GlobalKey<FormState>();
-
-  final TextEditingController emailController = TextEditingController();
-
-  final TextEditingController passwordController = TextEditingController();
-
-  final TextEditingController confirmPasswordController = TextEditingController();
-
-  @override
-  void dispose() {
-    super.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    confirmPasswordController.dispose();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   context.read<RegisterCubit>().emailController = TextEditingController();
+  //   context.read<RegisterCubit>().passwordController = TextEditingController();
+  //   context.read<RegisterCubit>().confirmPasswordController = TextEditingController();
+  // }
+  //
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   context.read<RegisterCubit>().birthDateController.dispose();
+  //   context.read<RegisterCubit>().passwordController.dispose();
+  //   context.read<RegisterCubit>().emailController.dispose();
+  //   context.read<RegisterCubit>().lastNameController.dispose();
+  //   context.read<RegisterCubit>().firstNameController.dispose();
+  //   context.read<RegisterCubit>().confirmPasswordController.dispose();
+  //   context.read<RegisterCubit>().phoneNumberController.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: context.width,
-        height: context.height,
-        padding: EdgeInsets.only(
-            top: AppPadding.p50.h,
-            right: AppPadding.p24.w,
-            left: AppPadding.p24.w),
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(colors: [
-            AppColors.purpleColor50,
-            AppColors.purpleColor30,
-            AppColors.purpleColor10,
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-        ),
+      body: Background(
+        paddingRight: AppSize.s24,
+        paddingLeft: AppSize.s24,
+        paddingTop: AppSize.s50,
         child: SingleChildScrollView(
           child: BlocBuilder<RegisterCubit, RegisterState>(
             builder: (context, state) {
               return Form(
-                key: _formKey,
+                key: context.read<RegisterCubit>().formKeyRegister,
                 child: Column(children: [
                   Row(
                     children: [
-                      const CustomButtonBack(),
+                      CustomButtonBack(
+                        onPressed: () => context
+                            .pushReplacementNamed(Routes.dataInfoScreenRoute),
+                      ),
                       SizedBox(
                         width: AppSize.s28.w,
                       ),
                       const CustomProgress(
-                        progress: 1,
+                        start: 2,
+                        end: 1,
                       ),
                     ],
                   ),
@@ -88,39 +87,59 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(
                     width: AppSize.s335.w,
                     child: TextFormField(
-                      controller: emailController,
+                      controller: context.read<RegisterCubit>().emailController,
                       decoration: style("Email"),
                       validator: (value) => Validation.validateEmail(value),
                       keyboardType: TextInputType.emailAddress,
                       style: AppTextStyles.textStyle(context),
+                      focusNode: context.read<RegisterCubit>().emailFocusNode,
+                      textInputAction: TextInputAction.next,
+                      onFieldSubmitted: (_) => FocusScope.of(context)
+                          .requestFocus(
+                              context.read<RegisterCubit>().passwordFocusNode),
                     ),
                   ),
                   SizedBox(height: AppSize.s32.h),
                   SizedBox(
                     width: AppSize.s335.w,
                     child: TextFormField(
-                      controller: passwordController,
+                      controller:
+                          context.read<RegisterCubit>().passwordController,
                       decoration: style("Password"),
                       validator: (value) => Validation.validatePassword(value),
                       keyboardType: TextInputType.visiblePassword,
                       obscuringCharacter: "※",
                       obscureText: true,
-
                       style: AppTextStyles.textStyle(context),
+                      focusNode:
+                          context.read<RegisterCubit>().passwordFocusNode,
+                      textInputAction: TextInputAction.next,
+                      onFieldSubmitted: (_) => FocusScope.of(context)
+                          .requestFocus(context
+                              .read<RegisterCubit>()
+                              .confirmPasswordFocusNode),
                     ),
                   ),
                   SizedBox(height: AppSize.s32.h),
                   SizedBox(
                     width: AppSize.s335.w,
                     child: TextFormField(
-                      controller: confirmPasswordController,
+                      controller: context
+                          .read<RegisterCubit>()
+                          .confirmPasswordController,
                       decoration: style("Confirm Password"),
-                      validator: (value) => Validation.validateConfirmPassword(passwordController.text,value),
+                      validator: (value) => Validation.validateConfirmPassword(
+                          context.read<RegisterCubit>().passwordController.text,
+                          value),
                       keyboardType: TextInputType.visiblePassword,
                       obscuringCharacter: "※",
                       obscureText: true,
-
                       style: AppTextStyles.textStyle(context),
+                      focusNode: context
+                          .read<RegisterCubit>()
+                          .confirmPasswordFocusNode,
+                      textInputAction: TextInputAction.next,
+                      onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
                     ),
                   ),
                   Row(
@@ -200,13 +219,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     color: AppColors.purpleColor,
                     colorText: AppColors.whiteColor,
                     text: "SignUp",
-                    onPressed: () {
-                      // if(_formKey.currentState!.validate()) {
+                    onPressed: () async {
+                      if (context
+                          .read<RegisterCubit>()
+                          .formKeyRegister
+                          .currentState!
+                          .validate()) {
+                        await context.read<RegisterCubit>().register();
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processing Data')),
                         );
                         context.pushReplacementNamed(Routes.profileScreenRoute);
-                      // }
+                      }
                     },
                   ),
                 ]),

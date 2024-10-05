@@ -5,37 +5,13 @@ import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 
 import '../../../../config/routes/route_constants.dart';
+import '../../common/custom_button_with_shadow.dart';
 
 
 // Custom Button widget
-class CustomButton extends StatelessWidget {
-  final Color color;
-  final Color colorText;
-  final String text;
-  final VoidCallback onPressed;
 
-  const CustomButton({
-    required this.color,
-    required this.colorText,
-    required this.text,
-    required this.onPressed,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: color,
-        foregroundColor: colorText,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-      ),
-      onPressed: onPressed,
-      child: Text(text),
-    );
-  }
-}
+
 
 // OnboardingContent model class
 class OnboardingContent {

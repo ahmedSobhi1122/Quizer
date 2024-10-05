@@ -74,6 +74,12 @@ class AppTextStyles {
         fontSize: FontSize.f14,
       );
 
-  ///Password
+  ///otp
+  static TextStyle otpTextStyle(BuildContext context) =>
+      getMediumStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.purpleColor50,
+        fontSize: FontSize.f32,
+      );
 
 }

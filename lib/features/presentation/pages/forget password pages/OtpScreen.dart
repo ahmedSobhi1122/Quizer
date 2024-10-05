@@ -7,6 +7,8 @@ import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
 
+import '../../../../config/routes/route_constants.dart';
+
 class OtpScreen extends StatelessWidget {
   const OtpScreen({super.key});
 
@@ -36,21 +38,21 @@ class OtpScreen extends StatelessWidget {
               SizedBox(height: context.height * 0.1),
               // Title
               Text(
-                'OTP',
+                'OTP 🔐',
                 style: AppTextStyles.headerSignupTextStyle(context),
               ),
                SizedBox(height: AppSize.s8.h),
               // Avatar from SVG
               Container(
-                width: 100,
-                height: 100,
+                height: AppSize.s120.h,
+                width: AppSize.s120.w,
                 child: SvgPicture.asset('assets/svg/Avatar.svg'),
               ),
               const SizedBox(height: 8),
               // User Name
               Text(
                 'Tarek Tarek',
-                style: AppTextStyles.subHeaderSignupTextStyle(context),
+                style: AppTextStyles.otpTextStyle(context),
               ),
               const Spacer(), // Pushes the buttons to the bottom
               // Dark Purple Button
@@ -58,8 +60,9 @@ class OtpScreen extends StatelessWidget {
                 text: "Get OTP",
                 onPressed: () {
                   // Handle OTP retrieval
+                  context.pushNamed(Routes.otpcheckScreenRoute);
                 },
-                color: AppColors.purpleColor30, // Dark Purple
+                color: AppColors.purpleColor50, // Dark Purple
                 colorText: AppColors.whiteColor,
               ),
               const SizedBox(height: 20),
@@ -69,7 +72,7 @@ class OtpScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                color: AppColors.purpleColor50, // Light Purple
+                color: AppColors.purpleColor30, // Light Purple
                 colorText: AppColors.whiteColor,
               ),
             ],

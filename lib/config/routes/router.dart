@@ -1,6 +1,14 @@
 
 
-import '../../features/presentation/pages/oboarding pages/onboarding_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../core/dependency_injection.dart';
+import '../../features/presentation/cubit/login_cubit.dart';
+import '../../features/presentation/pages/forget password pages/Otp check.dart';
+import '../../features/presentation/pages/forget password pages/OtpScreen.dart';
+import '../../features/presentation/pages/forget password pages/forget password.dart';
+import '../../features/presentation/pages/forget password pages/new password.dart';
+import '../../features/presentation/pages/profile page/profile_screen.dart';
 import 'screen_export.dart';
 
 class RouteGenerator {
@@ -47,6 +55,14 @@ class RouteGenerator {
       case Routes.profileScreenRoute:
         return MaterialPageRoute(
           builder: (context) => const ProfileScreen(),
+        );
+      case Routes.otpcheckScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) =>  OtpCheckScreen(),
+        );
+      case Routes.NewPasswordScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) =>  NewPasswordScreen(),
         );
     //   case Routes.logInScreenRoute:
     //     return MaterialPageRoute(

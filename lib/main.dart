@@ -58,12 +58,13 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
+
         title: 'Quizer',
         theme: AppTheme.lightTheme(context),
         darkTheme: AppTheme.darkTheme(context),
         themeMode: ThemeMode.light,
         onGenerateRoute: router.RouteGenerator.getRoute,
-        initialRoute: Routes.logInScreenRoute,
+        initialRoute: Routes.forgetPasswordScreenRoute,
       ),
     );
   }

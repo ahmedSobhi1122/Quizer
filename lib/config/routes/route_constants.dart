@@ -10,4 +10,8 @@ static const String passwordScreenRoute = "/password";
 static const String forgetPasswordScreenRoute="/forget_password";
 static const String OtpScreenRoute="/user_detection";
   static const String profileScreenRoute = "/profile";
+  static const String otpcheckScreenRoute="/otp_check";
+
+  static const String NewPasswordScreenRoute="/new_password";
+
 }

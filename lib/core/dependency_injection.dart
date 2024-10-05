@@ -19,14 +19,12 @@ Future<void> init() async {
   var dio = await DioFactory().getDio();
   sl.registerLazySingleton<Dio>(() => dio);
 
+  sl.registerLazySingleton<AppPrefs>(() => AppPrefsImpl(sharedPreferences));
   sl.registerLazySingleton<RemoteDataSource>(() => RemoteDataSource(sl()));
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl()));
-  sl.registerLazySingleton<AppPrefs>(() => AppPrefsImpl(sharedPreferences));
   sl.registerLazySingleton<LoginUserUseCase>(() => LoginUserUseCase(sl()));
   sl.registerLazySingleton<RegisterUserUseCase>(() => RegisterUserUseCase(sl()));
 
   sl.registerLazySingleton<RegisterCubit>(() => RegisterCubit(sl()));
   sl.registerLazySingleton<LoginCubit>(() => LoginCubit(sl()));
-
-
 }

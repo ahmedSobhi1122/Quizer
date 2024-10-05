@@ -63,7 +63,7 @@ class Validation {
       return 'Phone number is required';
     }
 
-    final phoneRegex = RegExp(r'^(01|\+201)\d{8}$');
+    final phoneRegex = RegExp(r'^(01|\+201)\d{9}$');
     if (!phoneRegex.hasMatch(value)) {
       return 'Invalid phone number'; // Phone number must start with 01 or +201 and contain 8 digits after
     }

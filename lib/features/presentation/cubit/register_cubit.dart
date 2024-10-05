@@ -27,6 +27,13 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   RegisterCubit(this.registerUserUseCase) : super(RegisterInitial());
 
+  @override
+  void emit(RegisterState state) {
+      if(!isClosed){
+        super.emit(state);
+      }
+  }
+
   Future<void> register() async {
     emit(RegisterLoading());
     try {

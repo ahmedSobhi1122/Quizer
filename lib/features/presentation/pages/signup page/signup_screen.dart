@@ -219,13 +219,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     color: AppColors.purpleColor,
                     colorText: AppColors.whiteColor,
                     text: "SignUp",
-                    onPressed: () {
-                      // if(context.read<RegisterCubit>().formKeyRegister.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data')),
-                      );
-                      context.pushReplacementNamed(Routes.profileScreenRoute);
-                      // }
+                    onPressed: () async {
+                      if (context
+                          .read<RegisterCubit>()
+                          .formKeyRegister
+                          .currentState!
+                          .validate()) {
+                        await context.read<RegisterCubit>().register();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Processing Data')),
+                        );
+                        context.pushReplacementNamed(Routes.profileScreenRoute);
+                      }
                     },
                   ),
                 ]),

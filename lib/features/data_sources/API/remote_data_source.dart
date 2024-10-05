@@ -9,6 +9,9 @@ class RemoteDataSource {
   RemoteDataSource(this.dio);
 
   Future<void> registerUser(UserRegisterModel user) async {
+
+    print(1);
+    print(user.toJson().fields);
     try {
       final response = await dio.request(
         '${Constants.baseUrl}account/register/emailPassword',
@@ -18,6 +21,7 @@ class RemoteDataSource {
         ),
       );
 
+      print("error:                                 ${response.statusMessage} ,  ${response.data} , ${response.statusCode}");
       if (response.statusCode == 200) {
         // successful
 
@@ -25,6 +29,8 @@ class RemoteDataSource {
         throw Exception('Failed to register user');
       }
     } catch (error) {
+      print(2);
+      print(error);
       throw Exception('Error during registration: $error');
     }
   }

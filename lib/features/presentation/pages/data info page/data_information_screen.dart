@@ -127,13 +127,12 @@ class _DataInfoScreenState extends State<DataInfoScreen> {
                       colorText: AppColors.purpleColor,
                       text: "Next",
                       onPressed: () {
-                        // if (context.read<RegisterCubit>().formKeyInfo.currentState!.validate()) {
+                        if (context.read<RegisterCubit>().formKeyInfo.currentState!.validate()) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processing Data')),
                         );
-                        context.read<RegisterCubit>().register();
-                        context.pushReplacementNamed(Routes.signUpScreenRoute);
-                        // }
+                        context.pushNamed(Routes.signUpScreenRoute);
+                        }
                       },
                     ),
                   ],

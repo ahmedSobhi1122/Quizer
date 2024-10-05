@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
 
 import 'package:quizer/config/routes/route_constants.dart';
+import 'package:quizer/features/presentation/common/background.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -14,21 +15,15 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: context.width,
-        height: context.height,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            context.primaryColorScheme,
-            context.secondaryColorScheme,
-            context.tertiaryColorScheme,
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-        ),
+      body: Background(
+        paddingRight: AppSize.s0,
+        paddingLeft: AppSize.s0,
+        paddingTop: AppSize.s0,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                 height: 380.h,
                 child: Stack(
                   children: [
@@ -40,7 +35,7 @@ class ProfileScreen extends StatelessWidget {
                               fit: BoxFit.cover),
                         )),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: AppPadding.p16,vertical: AppPadding.p38),
+                      padding: EdgeInsets.symmetric(horizontal: AppPadding.p16.w,vertical: AppPadding.p38.h),
 
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,12 +45,12 @@ class ProfileScreen extends StatelessWidget {
                               BackButton(
                                 onPressed: (){context.pushReplacementNamed(Routes.signUpScreenRoute);},
                               ),
-                              Spacer(),
+                              const Spacer(),
                               IconButton(
                                 onPressed: () {
                                   print("Edit profile");
                                 },
-                                icon: Icon(Icons.edit),
+                                icon: const Icon(Icons.edit),
                               ),
                             ],
                           ),
@@ -241,7 +236,7 @@ class ProfileScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                        "Achivements",
+                        "Achievements",
                         style: TextStyle(
                         fontSize: FontSize.f24,
                         color: AppColors.blackColor80,
@@ -249,7 +244,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 20.h,),
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,

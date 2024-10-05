@@ -1,4 +1,3 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/screen_export.dart';
 import 'package:quizer/core/helper/extensions.dart';
@@ -6,6 +5,7 @@ import 'package:quizer/core/helper/validation.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
+import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/button_back.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
 import 'package:quizer/features/presentation/common/custom_progress.dart';
@@ -21,52 +21,29 @@ class DataInfoScreen extends StatefulWidget {
 }
 
 class _DataInfoScreenState extends State<DataInfoScreen> {
-  final _formKey = GlobalKey<FormState>();
-
-  final TextEditingController firstNameController = TextEditingController();
-
-  final TextEditingController lastNameController = TextEditingController();
-
-  final TextEditingController phoneController = TextEditingController();
-
-
-  @override
-  void dispose() {
-    super.dispose();
-    firstNameController.dispose();
-    lastNameController.dispose();
-    phoneController.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      width: context.width,
-      height: context.height,
-      padding: EdgeInsets.only(
-          top: AppPadding.p50.h,
-          right: AppPadding.p24.w,
-          left: AppPadding.p24.w),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(colors: [
-          AppColors.purpleColor50,
-          AppColors.purpleColor30,
-          AppColors.purpleColor10,
-        ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-      ),
+        body: Background(
+      paddingRight: AppSize.s24,
+      paddingLeft: AppSize.s24,
+      paddingTop: AppSize.s50,
       child: SingleChildScrollView(
         child: BlocBuilder<RegisterCubit, RegisterState>(
           builder: (context, state) {
             return Column(children: [
               Row(
                 children: [
-                  const CustomButtonBack(),
+                  CustomButtonBack(
+                    onPressed: () => context
+                        .pushReplacementNamed(Routes.selectionScreenRoute),
+                  ),
                   SizedBox(
                     width: AppSize.s28.w,
                   ),
                   const CustomProgress(
-                    progress: 2,
+                    start: 3,
+                    end: 2,
                   ),
                 ],
               ),
@@ -82,29 +59,44 @@ class _DataInfoScreenState extends State<DataInfoScreen> {
               ),
               SizedBox(height: AppSize.s90.h),
               Form(
-                key: _formKey,
+                key: context.read<RegisterCubit>().formKeyInfo,
                 child: Column(
                   children: [
                     SizedBox(
                       width: AppSize.s335.w,
                       child: TextFormField(
-                        controller: firstNameController,
+                        controller:
+                            context.read<RegisterCubit>().firstNameController,
                         decoration: style("First Name"),
                         style: AppTextStyles.textStyle(context),
                         keyboardType: TextInputType.name,
                         validator: (value) => Validation.validateName(value),
+                        focusNode:
+                            context.read<RegisterCubit>().firstNameFocusNode,
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) => FocusScope.of(context)
+                            .requestFocus(context
+                                .read<RegisterCubit>()
+                                .lastNameFocusNode),
                       ),
                     ),
                     SizedBox(height: AppSize.s32.h),
                     SizedBox(
                       width: AppSize.s335.w,
                       child: TextFormField(
-                          controller: lastNameController,
-                          decoration: style("Last Name"),
-                          style: AppTextStyles.textStyle(context),
-                          keyboardType: TextInputType.name,
-                          validator: (value) =>
-                              Validation.validateName(value)),
+                        controller:
+                            context.read<RegisterCubit>().lastNameController,
+                        decoration: style("Last Name"),
+                        style: AppTextStyles.textStyle(context),
+                        keyboardType: TextInputType.name,
+                        validator: (value) => Validation.validateName(value),
+                        focusNode:
+                            context.read<RegisterCubit>().lastNameFocusNode,
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) => FocusScope.of(context)
+                            .requestFocus(
+                                context.read<RegisterCubit>().dobFocusNode),
+                      ),
                     ),
                     SizedBox(height: AppSize.s32.h),
                     SizedBox(
@@ -115,26 +107,34 @@ class _DataInfoScreenState extends State<DataInfoScreen> {
                     SizedBox(
                       width: AppSize.s335.w,
                       child: TextFormField(
-                          controller: phoneController,
-                          decoration: style("Phone Number"),
-                          keyboardType: TextInputType.phone,
-                          style: AppTextStyles.textStyle(context),
-                          validator: (value) =>
-                              Validation.validatePhoneNumber(value)),
+                        controller:
+                            context.read<RegisterCubit>().phoneNumberController,
+                        decoration: style("Phone Number"),
+                        keyboardType: TextInputType.phone,
+                        style: AppTextStyles.textStyle(context),
+                        validator: (value) =>
+                            Validation.validatePhoneNumber(value),
+                        focusNode:
+                            context.read<RegisterCubit>().phoneNumberFocusNode,
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) =>
+                            FocusScope.of(context).unfocus(),
+                      ),
                     ),
-                    SizedBox(height: AppSize.s230.h),
+                    SizedBox(height: AppSize.s160.h),
                     CustomButton(
                       color: AppColors.lightPurpleColor.withOpacity(.7),
                       colorText: AppColors.purpleColor,
                       text: "Next",
                       onPressed: () {
-                        // if (_formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processing Data')),
-                          );
-                          context.pushNamed(Routes.signUpScreenRoute);
+                        // if (context.read<RegisterCubit>().formKeyInfo.currentState!.validate()) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Processing Data')),
+                        );
+                        context.read<RegisterCubit>().register();
+                        context.pushReplacementNamed(Routes.signUpScreenRoute);
                         // }
-                      }
+                      },
                     ),
                   ],
                 ),

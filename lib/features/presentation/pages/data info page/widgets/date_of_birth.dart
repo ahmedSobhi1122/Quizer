@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/core/helper/validation.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
+import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 
 class DateOfBirth extends StatefulWidget {
   const DateOfBirth({super.key});
@@ -14,11 +16,11 @@ class DateOfBirth extends StatefulWidget {
 }
 
 class _DateOfBirthState extends State<DateOfBirth> {
-  TextEditingController dateInput = TextEditingController();
   DateTime? pickedDate;
+
   @override
   void initState() {
-    dateInput.text = "";
+    context.read<RegisterCubit>().birthDateController.text = "";
     super.initState();
   }
 
@@ -26,7 +28,7 @@ class _DateOfBirthState extends State<DateOfBirth> {
   Widget build(BuildContext context) {
     return TextFormField(
       validator: (value) => Validation.validateBirthDate(pickedDate),
-      controller: dateInput,
+      controller: context.read<RegisterCubit>().birthDateController,
       decoration: style(
         "Date Of Birth",
         icon: const Icon(
@@ -35,6 +37,10 @@ class _DateOfBirthState extends State<DateOfBirth> {
         ),
       ),
       style: AppTextStyles.textStyle(context),
+      focusNode: context.read<RegisterCubit>().dobFocusNode,
+      textInputAction: TextInputAction.next,
+      onFieldSubmitted: (_) => FocusScope.of(context)
+          .requestFocus(context.read<RegisterCubit>().phoneNumberFocusNode),
       readOnly: true,
       onTap: () async {
         pickedDate = await showDatePicker(
@@ -47,8 +53,8 @@ class _DateOfBirthState extends State<DateOfBirth> {
         if (pickedDate != null) {
           String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate!);
           setState(() {
-            dateInput.text =
-                formattedDate; //set output date to TextField value.
+            context.read<RegisterCubit>().birthDateController.text =
+                formattedDate;
           });
         } else {}
       },
@@ -64,5 +70,3 @@ InputDecoration style(String text, {Icon? icon}) {
     contentPadding: EdgeInsets.all(AppPadding.defaultPadding.r),
   );
 }
-
-

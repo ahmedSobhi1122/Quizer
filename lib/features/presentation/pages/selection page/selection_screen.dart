@@ -5,6 +5,7 @@ import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
+import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/button_back.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
 import 'package:quizer/features/presentation/common/custom_progress.dart';
@@ -16,27 +17,22 @@ class SelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      padding: EdgeInsets.only(
-          top: AppPadding.p50.h,
-          right: AppPadding.p24.w,
-          left: AppPadding.p24.w),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(colors: [
-          AppColors.purpleColor50,
-          AppColors.purpleColor30,
-          AppColors.purpleColor10,
-        ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-      ),
+        body: Background(
+          paddingRight: AppSize.s24,
+          paddingLeft: AppSize.s24,
+          paddingTop: AppSize.s50,
       child: Column(children: [
         Row(
           children: [
-            const CustomButtonBack(),
+            CustomButtonBack(
+              onPressed: () => context.pop(),
+            ),
             SizedBox(
               width: AppSize.s28.w,
             ),
             const CustomProgress(
-              progress: 3,
+              start: 0.0,
+              end: 3,
             ),
           ],
         ),

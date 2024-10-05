@@ -1,9 +1,4 @@
-
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quizer/features/presentation/cubit/login_cubit.dart';
-import 'package:quizer/features/presentation/pages/profile%20page/profile_screen.dart';
-import '../../core/dependency_injection.dart';
+import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 
 import 'screen_export.dart';
 
@@ -22,45 +17,51 @@ class RouteGenerator {
         );
       case Routes.splashScreenRoute:
         return MaterialPageRoute(
-            builder: (context) =>const SplashScreen(),
+          builder: (context) => const SplashScreen(),
         );
 
       case Routes.signUpScreenRoute:
         return MaterialPageRoute(
-            builder: (context) => const SignUpScreen(),
+          builder: (context) => BlocProvider.value(
+            value: sl<RegisterCubit>(),
+            child: const SignUpScreen(),
+          ),
         );
       case Routes.logInScreenRoute:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                create: (context) =>  LoginCubit(sl()),
-                child: const LoginScreen()),
+          builder: (context) => BlocProvider(
+              create: (context) => sl<LoginCubit>(),
+              child: const LoginScreen()),
         );
-    case Routes.dataInfoScreenRoute:
-      return MaterialPageRoute(
-        builder: (context) => const DataInfoScreen(),
-      );
+      case Routes.dataInfoScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => sl<RegisterCubit>(),
+            child: const DataInfoScreen(),
+          ),
+        );
       case Routes.profileScreenRoute:
         return MaterialPageRoute(
           builder: (context) => const ProfileScreen(),
         );
-    //   case Routes.logInScreenRoute:
-    //     return MaterialPageRoute(
-    //       builder: (context) => LoginScreen(),
-    //     );
-    //   case Routes.passwordScreenRoute:
-    //     return MaterialPageRoute(
-    //       builder: (context) => PasswordScreen(),
-    //     );
-    //   // case signUpScreenRoute:
-    //   //   return MaterialPageRoute(
-    //   //     builder: (context) => const SignUpScreen(),
-    //   //   );
+      //   case Routes.logInScreenRoute:
+      //     return MaterialPageRoute(
+      //       builder: (context) => LoginScreen(),
+      //     );
+      //   case Routes.passwordScreenRoute:
+      //     return MaterialPageRoute(
+      //       builder: (context) => PasswordScreen(),
+      //     );
+      //   // case signUpScreenRoute:
+      //   //   return MaterialPageRoute(
+      //   //     builder: (context) => const SignUpScreen(),
+      //   //   );
       default:
         return unDefinedRoute();
     }
   }
 
-   static Route<dynamic> unDefinedRoute() {
+  static Route<dynamic> unDefinedRoute() {
     return MaterialPageRoute(
       builder: (_) => Scaffold(
         appBar: AppBar(

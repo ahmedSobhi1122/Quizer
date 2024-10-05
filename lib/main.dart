@@ -40,8 +40,8 @@ void main() async {
       useOnlyLangCode: true,
       saveLocale: true,
       child: MultiBlocProvider(providers: [
-        BlocProvider(create: (_) => LoginCubit(sl())),
-        BlocProvider(create: (_) => RegisterCubit(sl())),
+        BlocProvider(create: (_) => sl<LoginCubit>()),
+        BlocProvider(create: (_) => sl<RegisterCubit>()),
       ], child: const MyApp()),
     ),
   );

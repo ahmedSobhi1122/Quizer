@@ -8,6 +8,7 @@ import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/core/resources/text_styles.dart';
+import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/checkable.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
 import 'package:quizer/features/presentation/cubit/login_cubit.dart';
@@ -22,32 +23,14 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController emailInput = TextEditingController();
-  TextEditingController passwordInput = TextEditingController();
-
-  @override
-  void initState() {
-    BlocProvider.of<LoginCubit>(context);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: context.width,
-        height: context.height,
-        padding: EdgeInsets.only(
-            top: AppPadding.p50.h,
-            right: AppPadding.p24.w,
-            left: AppPadding.p24.w),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            context.primaryColorScheme,
-            context.secondaryColorScheme,
-            context.tertiaryColorScheme,
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-        ),
+      body: Background(
+        paddingRight: AppSize.s24,
+        paddingLeft: AppSize.s24,
+        paddingTop: AppSize.s50,
         child: BlocBuilder<LoginCubit, LoginState>(
             builder: (BuildContext context, LoginState state) {
           return SingleChildScrollView(
@@ -67,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: AppSize.s335.w,
                 height: AppSize.s50.h,
                 child: TextField(
-                  controller: emailInput,
+                  controller: context.read<LoginCubit>().emailController,
                   decoration: style("Email"),
                   keyboardType: TextInputType.emailAddress,
                   style: AppTextStyles.textStyle(context),
@@ -78,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: AppSize.s335.w,
                 height: AppSize.s50.h,
                 child: TextField(
-                  controller: passwordInput,
+                  controller: context.read<LoginCubit>().passwordController,
                   decoration: style("Password"),
                   // keyboardType: TextInputType.visiblePassword,
                   obscuringCharacter: "※",
@@ -176,10 +159,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 colorText: AppColors.whiteColor,
                 text: "Login",
                 onPressed: () {
-                  if (emailInput.text.isNotEmpty &&
-                      passwordInput.text.isNotEmpty) {
-                     BlocProvider.of<LoginCubit>(context)
-                        .login(emailInput.text, passwordInput.text);
+                  if (context
+                          .read<LoginCubit>()
+                          .emailController
+                          .text
+                          .isNotEmpty &&
+                      context
+                          .read<LoginCubit>()
+                          .passwordController
+                          .text
+                          .isNotEmpty) {
+                    BlocProvider.of<LoginCubit>(context).login();
                     print(state);
                   }
                 },

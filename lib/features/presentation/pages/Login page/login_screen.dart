@@ -121,7 +121,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      context.read<LoginCubit>().loginWithFacebook();
+                    },
                     child: Container(
                       padding: EdgeInsets.all(AppPadding.defaultPadding.r),
                       width: AppSize.s66.w,
@@ -138,7 +140,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: AppSize.s120.w,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      context.read<LoginCubit>().loginWithGoogle();
+                    },
                     child: Container(
                       padding: EdgeInsets.all(AppPadding.defaultPadding.r),
                       width: AppSize.s66.w,

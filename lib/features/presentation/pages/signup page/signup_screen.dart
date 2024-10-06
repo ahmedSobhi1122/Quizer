@@ -182,7 +182,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          context.read<RegisterCubit>().registerWithFacebook();
+                          print(state);
+                        },
                         child: Container(
                           padding: EdgeInsets.all(AppPadding.defaultPadding.r),
                           width: AppSize.s66.w,
@@ -199,7 +202,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         width: AppSize.s120.w,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {context.read<RegisterCubit>().registerWithGoogle();},
                         child: Container(
                           padding: EdgeInsets.all(AppPadding.defaultPadding.r),
                           width: AppSize.s66.w,

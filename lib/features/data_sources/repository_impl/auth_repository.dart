@@ -3,6 +3,8 @@ import 'package:quizer/features/data_sources/models/user_login_model.dart';
 import 'package:quizer/features/data_sources/models/user_register_model.dart';
 import 'package:quizer/features/domain/entities/user.dart';
 import 'package:quizer/features/domain/repository/auth_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+
 
 class AuthRepositoryImpl implements AuthRepository {
   final RemoteDataSource remoteDataSource;
@@ -29,5 +31,15 @@ class AuthRepositoryImpl implements AuthRepository {
       password: user.password,
     );
     return await remoteDataSource.loginUser(userModel);
+  }
+
+  @override
+  Future<firebase_auth.User?> authWithGoogle() async {
+    return await remoteDataSource.signInWithGoogle();
+  }
+
+  @override
+  Future<firebase_auth.User?> authWithFacebook() async {
+    return await remoteDataSource.signInWithFacebook();
   }
 }

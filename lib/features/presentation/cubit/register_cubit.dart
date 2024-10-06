@@ -1,11 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quizer/features/domain/entities/user.dart';
+import 'package:quizer/features/domain/usecases/facebook_auth_usecase.dart';
+import 'package:quizer/features/domain/usecases/google_auth_usecase.dart';
 import 'package:quizer/features/domain/usecases/register_usecase.dart';
 import 'package:quizer/features/presentation/state/register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   final RegisterUserUseCase registerUserUseCase;
+  final GoogleAuthUserUseCase googleAuthUserUseCase;
+  final FacebookAuthUserUseCase facebookAuthUserUseCase;
 
   final formKeyInfo = GlobalKey<FormState>();
   final formKeyRegister = GlobalKey<FormState>();
@@ -25,7 +29,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   final FocusNode passwordFocusNode = FocusNode();
   final FocusNode confirmPasswordFocusNode = FocusNode();
 
-  RegisterCubit(this.registerUserUseCase) : super(RegisterInitial());
+  RegisterCubit(this.registerUserUseCase, this.googleAuthUserUseCase, this.facebookAuthUserUseCase) : super(RegisterInitial());
 
   @override
   void emit(RegisterState state) {
@@ -46,6 +50,27 @@ class RegisterCubit extends Cubit<RegisterState> {
         password: passwordController.text,
       );
       await registerUserUseCase.call(user);
+      emit(RegisterSuccess());
+    } catch (error) {
+      emit(RegisterFailure(error.toString()));
+    }
+  }
+
+  Future<void> registerWithGoogle() async {
+    emit(RegisterLoading());
+    try {
+      await googleAuthUserUseCase.call();
+      emit(RegisterSuccess());
+    } catch (error) {
+      emit(RegisterFailure(error.toString()));
+    }
+  }
+
+  Future<void> registerWithFacebook() async {
+    emit(RegisterLoading());
+    try {
+      var p = await facebookAuthUserUseCase.call();
+      print(" ${p?.providerData},");
       emit(RegisterSuccess());
     } catch (error) {
       emit(RegisterFailure(error.toString()));

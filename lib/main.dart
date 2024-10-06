@@ -1,6 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/route_constants.dart';
 import 'package:quizer/core/dependency_injection.dart';
@@ -25,6 +28,20 @@ void main() async {
   // ]);
   engine = WidgetsFlutterBinding.ensureInitialized();
   await init();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyC1MrvfXPMxvlbzzvHtVEaLw901uQ8uGgA",
+      appId: "1:186960525300:android:a9c27f232440f6c4a66ba1",
+      messagingSenderId: "186960525300",
+      projectId: "quiz-3ce17",
+    ),
+  );
+  await FacebookAuth.instance.webAndDesktopInitialize(
+    appId: "544727748098711",
+    cookie: true,
+    xfbml: true,
+    version: "v12.0",
+  );
   await EasyLocalization.ensureInitialized();
 
   // Bloc.observer = MyBlocObserver();
@@ -39,10 +56,7 @@ void main() async {
       startLocale: AppLanguages.startLocal,
       useOnlyLangCode: true,
       saveLocale: true,
-      child: MultiBlocProvider(providers: [
-        BlocProvider(create: (_) => sl<LoginCubit>()),
-        BlocProvider(create: (_) => sl<RegisterCubit>()),
-      ], child: const MyApp()),
+      child: const MyApp(),
     ),
   );
 }
@@ -64,7 +78,7 @@ class MyApp extends StatelessWidget {
         darkTheme: AppTheme.darkTheme(context),
         themeMode: ThemeMode.light,
         onGenerateRoute: router.RouteGenerator.getRoute,
-        initialRoute: Routes.forgetPasswordScreenRoute,
+        initialRoute: Routes.logInScreenRoute,
       ),
     );
   }

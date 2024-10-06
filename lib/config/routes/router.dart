@@ -10,22 +10,35 @@ class RouteGenerator {
 
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.splashScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => const SplashScreen(),
+        );
+
       case Routes.onbordingScreenRoute:
         return MaterialPageRoute(
           builder: (context) => const OnboardingScreen(),
         );
+
       case Routes.selectionScreenRoute:
         return MaterialPageRoute(
           builder: (context) => const SelectionScreen(),
         );
-      case Routes.splashScreenRoute:
+
+      case Routes.dataInfoScreenRoute:
         return MaterialPageRoute(
-            builder: (context) =>const SplashScreen(),
+          builder: (context) => BlocProvider(
+            create: (context) => sl<RegisterCubit>(),
+            child: const DataInfoScreen(),
+          ),
         );
 
       case Routes.signUpScreenRoute:
         return MaterialPageRoute(
-            builder: (context) => const SignUpScreen(),
+          builder: (context) => BlocProvider<RegisterCubit>.value(
+            value: sl<RegisterCubit>(),
+            child: const SignUpScreen(),
+          ),
         );
 
       case Routes.forgetPasswordScreenRoute:
@@ -42,43 +55,37 @@ class RouteGenerator {
               create: (context) => sl<LoginCubit>(),
               child: const LoginScreen()),
         );
-      case Routes.dataInfoScreenRoute:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => sl<RegisterCubit>(),
-            child: const DataInfoScreen(),
-          ),
-        );
+
       case Routes.profileScreenRoute:
         return MaterialPageRoute(
           builder: (context) => const ProfileScreen(),
         );
       case Routes.otpcheckScreenRoute:
         return MaterialPageRoute(
-          builder: (context) =>  OtpCheckScreen(),
+          builder: (context) => OtpCheckScreen(),
         );
       case Routes.NewPasswordScreenRoute:
         return MaterialPageRoute(
-          builder: (context) =>  NewPasswordScreen(),
+          builder: (context) => NewPasswordScreen(),
         );
-    //   case Routes.logInScreenRoute:
-    //     return MaterialPageRoute(
-    //       builder: (context) => LoginScreen(),
-    //     );
-    //   case Routes.passwordScreenRoute:
-    //     return MaterialPageRoute(
-    //       builder: (context) => PasswordScreen(),
-    //     );
-    //   // case signUpScreenRoute:
-    //   //   return MaterialPageRoute(
-    //   //     builder: (context) => const SignUpScreen(),
-    //   //   );
+      //   case Routes.logInScreenRoute:
+      //     return MaterialPageRoute(
+      //       builder: (context) => LoginScreen(),
+      //     );
+      //   case Routes.passwordScreenRoute:
+      //     return MaterialPageRoute(
+      //       builder: (context) => PasswordScreen(),
+      //     );
+      //   // case signUpScreenRoute:
+      //   //   return MaterialPageRoute(
+      //   //     builder: (context) => const SignUpScreen(),
+      //   //   );
       default:
         return unDefinedRoute();
     }
   }
 
-   static Route<dynamic> unDefinedRoute() {
+  static Route<dynamic> unDefinedRoute() {
     return MaterialPageRoute(
       builder: (_) => Scaffold(
         appBar: AppBar(

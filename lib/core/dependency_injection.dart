@@ -5,6 +5,8 @@ import 'package:quizer/features/data_sources/API/remote_data_source.dart';
 import 'package:quizer/features/data_sources/local/app_prefs.dart';
 import 'package:quizer/features/data_sources/repository_impl/auth_repository.dart';
 import 'package:quizer/features/domain/repository/auth_repository.dart';
+import 'package:quizer/features/domain/usecases/facebook_auth_usecase.dart';
+import 'package:quizer/features/domain/usecases/google_auth_usecase.dart';
 import 'package:quizer/features/domain/usecases/login_usecase.dart';
 import 'package:quizer/features/domain/usecases/register_usecase.dart';
 import 'package:quizer/features/presentation/cubit/login_cubit.dart';
@@ -24,7 +26,9 @@ Future<void> init() async {
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl()));
   sl.registerLazySingleton<LoginUserUseCase>(() => LoginUserUseCase(sl()));
   sl.registerLazySingleton<RegisterUserUseCase>(() => RegisterUserUseCase(sl()));
+  sl.registerLazySingleton<GoogleAuthUserUseCase>(() => GoogleAuthUserUseCase(sl()));
+  sl.registerLazySingleton<FacebookAuthUserUseCase>(() => FacebookAuthUserUseCase(sl()));
 
-  sl.registerLazySingleton<RegisterCubit>(() => RegisterCubit(sl()));
-  sl.registerLazySingleton<LoginCubit>(() => LoginCubit(sl()));
+  sl.registerLazySingleton<RegisterCubit>(() => RegisterCubit(sl(),sl(),sl()));
+  sl.registerLazySingleton<LoginCubit>(() => LoginCubit(sl(),sl(),sl()));
 }

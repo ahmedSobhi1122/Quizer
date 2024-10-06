@@ -107,6 +107,10 @@ class ProfileScreen extends StatelessWidget {
                                     padding: EdgeInsets.symmetric(horizontal: AppPadding.p8,vertical: AppPadding.p2),
                                     decoration: BoxDecoration(
                                       color: Colors.grey[300],
+                                      border: Border.all(
+                                        color: Colors.deepOrange,
+                                        width: 1,
+                                      ),
                                       borderRadius: BorderRadius.circular(50),
                                     ),
                                     child: Center(

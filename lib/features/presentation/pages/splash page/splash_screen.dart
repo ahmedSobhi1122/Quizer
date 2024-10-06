@@ -1,5 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_fonts.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
@@ -13,8 +14,8 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    // Future.delayed(const Duration(seconds: 3),
-    //     () => context.pushReplacementNamed(Routes.onbordingScreenRoute));
+    Future.delayed(const Duration(seconds: 3),
+        () => context.pushReplacementNamed(Routes.onbordingScreenRoute));
 
     return Scaffold(
       body: Background(

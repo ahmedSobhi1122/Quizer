@@ -13,4 +13,7 @@ class Routes {
   static const String profileScreenRoute = "/profile";
   static const String otpCheckScreenRoute = "/otp_check";
   static const String newPasswordScreenRoute = "/new_password";
+  static const String quizSettingScreenRoute="/quiz_setting";
+  static const String createQuestionScreenRoute="/create_question";
+
 }

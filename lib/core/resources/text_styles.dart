@@ -82,4 +82,11 @@ class AppTextStyles {
         fontSize: FontSize.f32,
       );
 
+  static TextStyle otpTextFieldTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor,
+        fontSize: FontSize.f24,
+      );
+
 }

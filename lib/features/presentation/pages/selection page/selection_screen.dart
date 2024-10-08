@@ -16,40 +16,41 @@ class SelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Background(
-      paddingRight: AppSize.s24,
-      paddingLeft: AppSize.s24,
-      paddingTop: AppSize.s50,
-      child: Column(children: [
-        CustomAppBar(
-          onPressed: () => context.pop(),
-          start: 0.0,
-          end: 3,
-        ),
-        SizedBox(height: AppSize.s40.h),
-        Text(
-          '''What type of account would you like to create? ''',
-          style: AppTextStyles.headerSignupTextStyle(context),
-        ),
-        SizedBox(height: AppSize.s60.h),
-        const Selection(),
-        SizedBox(
-          height: AppSize.s226.h,
-        ),
-        CustomButton(
-          color: AppColors.buttonPurpleColor,
-          colorText: AppColors.purpleColor,
-          text: "Next",
-          onPressed: () {
-            if (context.read<RegisterCubit>().userRole == UserRole.ADMIN) {
-              context.message("Please select one of the options above");
-            } else {
-              context.read<RegisterCubit>().userRole = UserRole.STUDENT;
-              context.pushNamed(Routes.dataInfoScreenRoute);
-            }
-          },
-        ),
-      ]),
-    ));
+      body: Background(
+        paddingRight: AppSize.s24,
+        paddingLeft: AppSize.s24,
+        paddingTop: AppSize.s50,
+        child: Column(children: [
+          CustomAppBar(
+            onPressed: () => context.pop(),
+            start: 0.0,
+            end: 3,
+          ),
+          SizedBox(height: AppSize.s40.h),
+          Text(
+            '''What type of account would you like to create? ''',
+            style: AppTextStyles.headerSignupTextStyle(context),
+          ),
+          SizedBox(height: AppSize.s60.h),
+          const Selection(),
+          SizedBox(
+            height: AppSize.s226.h,
+          ),
+          CustomButton(
+            color: AppColors.buttonPurpleColor,
+            colorText: AppColors.purpleColor,
+            text: "Next",
+            onPressed: () {
+              if (context.read<RegisterCubit>().userRole == UserRole.ADMIN) {
+                context.message("Please select one of the options above");
+              } else {
+                context.read<RegisterCubit>().userRole = UserRole.STUDENT;
+                context.pushNamed(Routes.dataInfoScreenRoute);
+              }
+            },
+          ),
+        ]),
+      ),
+    );
   }
 }

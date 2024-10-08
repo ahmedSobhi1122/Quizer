@@ -68,7 +68,6 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
-
         title: 'Quizer',
         theme: AppTheme.lightTheme(context),
         darkTheme: AppTheme.darkTheme(context),

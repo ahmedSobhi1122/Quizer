@@ -19,15 +19,18 @@ class LoginCubit extends Cubit<LoginState> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  List<TextEditingController> otpController = List.generate(4, (index) => TextEditingController());
+  List<TextEditingController> otpController =
+      List.generate(4, (index) => TextEditingController());
+  final List<FocusNode> otpFocusNode =
+      List.generate(4, (index) => FocusNode());
 
   LoginCubit(
-      this.loginUserUseCase,
-      this.googleAuthUserUseCase,
-      this.facebookAuthUserUseCase,
-      this.userExistUserUseCase,
-      this.getOTPUseCase)
-      : super(LoginInitial());
+    this.loginUserUseCase,
+    this.googleAuthUserUseCase,
+    this.facebookAuthUserUseCase,
+    this.userExistUserUseCase,
+    this.getOTPUseCase,
+  ) : super(LoginInitial());
 
   Future<void> login() async {
     emit(LoginLoading());

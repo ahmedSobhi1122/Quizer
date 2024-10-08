@@ -1,3 +1,6 @@
+import 'package:quizer/features/presentation/pages/create%20question%20page/create_question_screen.dart';
+import 'package:quizer/features/presentation/pages/quiz%20setting%20page/quiz_setting_screen.dart';
+
 import 'screen_export.dart';
 
 class RouteGenerator {
@@ -81,6 +84,14 @@ class RouteGenerator {
       case Routes.profileScreenRoute:
         return MaterialPageRoute(
           builder: (context) => const ProfileScreen(),
+        );
+      case Routes.quizSettingScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => QuizSettingScreen(),
+        );
+      case Routes.createQuestionScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => CreateQuestionScreen(),
         );
 
       default:

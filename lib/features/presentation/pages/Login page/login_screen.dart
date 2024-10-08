@@ -23,7 +23,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +75,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: AppSize.s24.w,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      context.pushNamed(Routes.forgetPasswordScreenRoute);
+                    },
                     child: Text(
                       "forgot password?",
                       style: AppTextStyles.forgotPasswordTextStyle(context),

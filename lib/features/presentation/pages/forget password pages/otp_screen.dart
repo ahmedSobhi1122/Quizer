@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // Import for SVG handling
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quizer/config/routes/screen_export.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
+import 'package:quizer/features/presentation/state/login_state.dart';
 
-import '../../../../config/routes/route_constants.dart';
 
 class OtpScreen extends StatelessWidget {
   const OtpScreen({super.key});
@@ -41,14 +41,14 @@ class OtpScreen extends StatelessWidget {
                 'OTP 🔐',
                 style: AppTextStyles.headerSignupTextStyle(context),
               ),
-               SizedBox(height: AppSize.s8.h),
+              SizedBox(height: AppSize.s8.h),
               // Avatar from SVG
-              Container(
-                height: AppSize.s120.h,
-                width: AppSize.s120.w,
+              CircleAvatar(
+                radius: AppSize.s60.r,
+                backgroundColor: AppColors.transparentColor,
                 child: SvgPicture.asset('assets/svg/Avatar.svg'),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: AppSize.s16.h),
               // User Name
               Text(
                 'Tarek Tarek',
@@ -56,14 +56,21 @@ class OtpScreen extends StatelessWidget {
               ),
               const Spacer(), // Pushes the buttons to the bottom
               // Dark Purple Button
-              CustomButton(
-                text: "Get OTP",
-                onPressed: () {
-                  // Handle OTP retrieval
-                  context.pushNamed(Routes.otpcheckScreenRoute);
+              BlocListener<LoginCubit, LoginState>(
+                listener: (context, state) {
+                  if(state is LoginSuccess) {
+                    context.pushNamed(Routes.otpCheckScreenRoute);
+                  }
                 },
-                color: AppColors.purpleColor50, // Dark Purple
-                colorText: AppColors.whiteColor,
+                child: CustomButton(
+                  text: "Get OTP",
+                  onPressed: () async {
+                    await context.read<LoginCubit>().getOTP();
+                    context.pushNamed(Routes.otpCheckScreenRoute);
+                  },
+                  color: AppColors.purpleColor50, // Dark Purple
+                  colorText: AppColors.whiteColor,
+                ),
               ),
               const SizedBox(height: 20),
               // Light Purple Button

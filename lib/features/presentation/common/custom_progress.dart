@@ -5,10 +5,10 @@ import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 
 class CustomProgress extends StatefulWidget {
-  final double start;
-  final double end;
+  final double? start;
+  final double? end;
 
-  const CustomProgress({super.key, this.end = 100, this.start = 100});
+  const CustomProgress({super.key, this.end, this.start});
 
   @override
   State<CustomProgress> createState() => _CustomProgressState();
@@ -20,14 +20,14 @@ class _CustomProgressState extends State<CustomProgress> {
   @override
   void initState() {
     super.initState();
-    _width = (widget.start == 0) ? 0 : AppSize.s240.w / widget.start;
+    _width = (widget.start == 0) ? 0 : AppSize.s240.w / (widget.start??100);
   }
 
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 500), () {
       setState(() {
-        _width = AppSize.s240.w / widget.end;
+        _width = AppSize.s240.w / (widget.end??100);
       });
     });
     return Stack(

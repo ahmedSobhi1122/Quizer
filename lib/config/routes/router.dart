@@ -1,8 +1,3 @@
-import 'package:quizer/features/presentation/cubit/register_cubit.dart';
-import '../../features/presentation/pages/forget password pages/Otp check.dart';
-import '../../features/presentation/pages/forget password pages/OtpScreen.dart';
-import '../../features/presentation/pages/forget password pages/forget password.dart';
-import '../../features/presentation/pages/forget password pages/new password.dart';
 import 'screen_export.dart';
 
 class RouteGenerator {
@@ -22,7 +17,10 @@ class RouteGenerator {
 
       case Routes.selectionScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => const SelectionScreen(),
+          builder: (context) => BlocProvider<RegisterCubit>.value(
+            value: sl<RegisterCubit>(),
+            child: const SelectionScreen(),
+          ),
         );
 
       case Routes.dataInfoScreenRoute:
@@ -41,14 +39,6 @@ class RouteGenerator {
           ),
         );
 
-      case Routes.forgetPasswordScreenRoute:
-        return MaterialPageRoute(
-          builder: (context) => ForgetPasswordScreen(),
-        );
-      case Routes.OtpScreenRoute:
-        return MaterialPageRoute(
-          builder: (context) => OtpScreen(),
-        );
       case Routes.logInScreenRoute:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -56,30 +46,43 @@ class RouteGenerator {
               child: const LoginScreen()),
         );
 
+      case Routes.forgetPasswordScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<LoginCubit>.value(
+            value: sl<LoginCubit>(),
+            child: const ForgetPasswordScreen(),
+          ),
+        );
+
+      case Routes.otpScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<LoginCubit>.value(
+            value: sl<LoginCubit>(),
+            child: const OtpScreen(),
+          ),
+        );
+
+      case Routes.otpCheckScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<LoginCubit>.value(
+            value: sl<LoginCubit>(),
+            child: const OtpCheckScreen(),
+          ),
+        );
+
+      case Routes.newPasswordScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<LoginCubit>.value(
+            value: sl<LoginCubit>(),
+            child: const NewPasswordScreen(),
+          ),
+        );
+
       case Routes.profileScreenRoute:
         return MaterialPageRoute(
           builder: (context) => const ProfileScreen(),
         );
-      case Routes.otpcheckScreenRoute:
-        return MaterialPageRoute(
-          builder: (context) => OtpCheckScreen(),
-        );
-      case Routes.NewPasswordScreenRoute:
-        return MaterialPageRoute(
-          builder: (context) => NewPasswordScreen(),
-        );
-      //   case Routes.logInScreenRoute:
-      //     return MaterialPageRoute(
-      //       builder: (context) => LoginScreen(),
-      //     );
-      //   case Routes.passwordScreenRoute:
-      //     return MaterialPageRoute(
-      //       builder: (context) => PasswordScreen(),
-      //     );
-      //   // case signUpScreenRoute:
-      //   //   return MaterialPageRoute(
-      //   //     builder: (context) => const SignUpScreen(),
-      //   //   );
+
       default:
         return unDefinedRoute();
     }

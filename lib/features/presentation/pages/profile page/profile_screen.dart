@@ -154,7 +154,7 @@ class ProfileScreen extends StatelessWidget {
                               height: 60.h,
                               width: 60.w,
                               child: Image.asset(
-                                ImageAssets.gold_medal
+                                ImageAssets.goldMedal
                               ),
                             ),
                             SizedBox(height: 10.h,),
@@ -185,7 +185,7 @@ class ProfileScreen extends StatelessWidget {
                               height: 60.h,
                               width: 60.w,
                               child: Image.asset(
-                                  ImageAssets.silver_medal
+                                  ImageAssets.silverMedal
                               ),
                             ),
                             SizedBox(height: 10.h,),
@@ -216,7 +216,7 @@ class ProfileScreen extends StatelessWidget {
                               height: 60.h,
                               width: 60.w,
                               child: Image.asset(
-                                  ImageAssets.bronze_medal
+                                  ImageAssets.bronzeMedal
                               ),
                             ),
                             SizedBox(height: 10.h,),

@@ -9,7 +9,6 @@ import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/button_back.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
 import 'package:quizer/features/presentation/common/custom_progress.dart';
-import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 import 'package:quizer/features/presentation/pages/data%20info%20page/widgets/date_of_birth.dart';
 import 'package:quizer/features/presentation/state/register_state.dart';
 
@@ -35,8 +34,7 @@ class _DataInfoScreenState extends State<DataInfoScreen> {
               Row(
                 children: [
                   CustomButtonBack(
-                    onPressed: () => context
-                        .pushReplacementNamed(Routes.selectionScreenRoute),
+                    onPressed: () => context.pop(),
                   ),
                   SizedBox(
                     width: AppSize.s28.w,

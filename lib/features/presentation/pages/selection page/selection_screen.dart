@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quizer/config/routes/route_constants.dart';
+import 'package:quizer/config/routes/screen_export.dart';
+import 'package:quizer/core/constants/enum.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/common/background.dart';
-import 'package:quizer/features/presentation/common/button_back.dart';
+import 'package:quizer/features/presentation/common/custom_app_bar.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
-import 'package:quizer/features/presentation/common/custom_progress.dart';
 import 'package:quizer/features/presentation/pages/selection%20page/widget/selected_container.dart';
 
 class SelectionScreen extends StatelessWidget {
@@ -18,23 +17,14 @@ class SelectionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Background(
-          paddingRight: AppSize.s24,
-          paddingLeft: AppSize.s24,
-          paddingTop: AppSize.s50,
+      paddingRight: AppSize.s24,
+      paddingLeft: AppSize.s24,
+      paddingTop: AppSize.s50,
       child: Column(children: [
-        Row(
-          children: [
-            CustomButtonBack(
-              onPressed: () => context.pop(),
-            ),
-            SizedBox(
-              width: AppSize.s28.w,
-            ),
-            const CustomProgress(
-              start: 0.0,
-              end: 3,
-            ),
-          ],
+        CustomAppBar(
+          onPressed: () => context.pop(),
+          start: 0.0,
+          end: 3,
         ),
         SizedBox(height: AppSize.s40.h),
         Text(
@@ -43,15 +33,23 @@ class SelectionScreen extends StatelessWidget {
         ),
         SizedBox(height: AppSize.s60.h),
         const Selection(),
-        SizedBox(height: AppSize.s226.h,),
+        SizedBox(
+          height: AppSize.s226.h,
+        ),
         CustomButton(
           color: AppColors.buttonPurpleColor,
           colorText: AppColors.purpleColor,
           text: "Next",
-          onPressed: () => context.pushNamed(Routes.dataInfoScreenRoute),
+          onPressed: () {
+            if (context.read<RegisterCubit>().userRole == UserRole.ADMIN) {
+              context.message("Please select one of the options above");
+            } else {
+              context.read<RegisterCubit>().userRole = UserRole.STUDENT;
+              context.pushNamed(Routes.dataInfoScreenRoute);
+            }
+          },
         ),
       ]),
     ));
   }
 }
-

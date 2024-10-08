@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/config/routes/screen_export.dart';
+import 'package:quizer/core/constants/enum.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
@@ -92,10 +95,12 @@ class _SelectionState extends State<Selection> {
                 isClicked = -1;
                 _fillColor1 = AppColors.transparentColor;
                 _fillColor2 = AppColors.transparentColor;
+                context.read<RegisterCubit>().userRole = UserRole.ADMIN;
               } else {
                 isClicked = 0;
                 _fillColor1 = AppColors.purpleColor.withOpacity(.2);
                 _fillColor2 = AppColors.transparentColor;
+                context.read<RegisterCubit>().userRole = UserRole.STUDENT;
               }
             });
           },
@@ -118,10 +123,12 @@ class _SelectionState extends State<Selection> {
                 isClicked = -1;
                 _fillColor1 = AppColors.transparentColor;
                 _fillColor2 = AppColors.transparentColor;
+                context.read<RegisterCubit>().userRole = UserRole.ADMIN;
               } else {
                 isClicked = 1;
                 _fillColor1 = AppColors.transparentColor;
                 _fillColor2 = AppColors.warningColor.withOpacity(.2);
+                context.read<RegisterCubit>().userRole = UserRole.TEACHER;
               }
             });
           },

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quizer/core/constants/enum.dart';
 import 'package:quizer/features/domain/entities/user.dart';
 import 'package:quizer/features/domain/usecases/facebook_auth_usecase.dart';
 import 'package:quizer/features/domain/usecases/google_auth_usecase.dart';
@@ -7,12 +8,13 @@ import 'package:quizer/features/domain/usecases/register_usecase.dart';
 import 'package:quizer/features/presentation/state/register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
-  final RegisterUserUseCase registerUserUseCase;
-  final GoogleAuthUserUseCase googleAuthUserUseCase;
-  final FacebookAuthUserUseCase facebookAuthUserUseCase;
+  final RegisterUseCase registerUserUseCase;
+  final GoogleAuthUseCase googleAuthUserUseCase;
+  final FacebookAuthUseCase facebookAuthUserUseCase;
 
   final formKeyInfo = GlobalKey<FormState>();
   final formKeyRegister = GlobalKey<FormState>();
+  late UserRole userRole = UserRole.values.first;
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController birthDateController = TextEditingController();
@@ -42,6 +44,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(RegisterLoading());
     try {
       final user = User(
+        type: userRole,
         firstName: firstNameController.text,
         lastName: lastNameController.text,
         phoneNumber: phoneNumberController.text,

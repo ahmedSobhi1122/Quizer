@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:quizer/features/domain/repository/auth_repository.dart';
 
-class GoogleAuthUserUseCase {
+class GoogleAuthUseCase {
   final AuthRepository repository;
 
-  GoogleAuthUserUseCase(this.repository);
+  GoogleAuthUseCase(this.repository);
 
-  Future<User?> call() async {
-    return await repository.authWithGoogle();
-  }
+  Future<User?> call() async => await repository.authWithGoogle();
 }

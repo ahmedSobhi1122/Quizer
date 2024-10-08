@@ -4,6 +4,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quizer/core/resources/constants.dart';
 import 'package:quizer/features/data_sources/models/user_login_model.dart';
+import 'package:quizer/features/data_sources/models/user_profile_model.dart';
 import 'package:quizer/features/data_sources/models/user_register_model.dart';
 
 class RemoteDataSource {
@@ -17,7 +18,7 @@ class RemoteDataSource {
     // print(user.toJson().fields);
     try {
       final response = await dio.request(
-        '${Constants.baseUrl}account/register/emailPassword',
+        '${Constants.baseUrl}account/register',
         data: user.toJson(),
         options: Options(
           method: 'POST',
@@ -42,7 +43,7 @@ class RemoteDataSource {
     // var headers = { 'Authorization' : 'Bearer ${Constants.token}'; };
     try {
       final response = await dio.request(
-        '${Constants.baseUrl}account/login/emailPassword',
+        '${Constants.baseUrl}account/login',
         data: user.toJson(),
         options: Options(
           method: 'POST',
@@ -86,9 +87,8 @@ class RemoteDataSource {
   Future<User?> signInWithFacebook() async {
     print(1);
     try {
-      final LoginResult result = await FacebookAuth.instance.login(
-        permissions: ['public_profile', 'email']
-      );
+      final LoginResult result =
+          await FacebookAuth.instance.login(permissions: ['email']);
 
       print(2);
       if (result.status == LoginStatus.success) {
@@ -99,6 +99,14 @@ class RemoteDataSource {
 
         UserCredential userCredential =
             await FirebaseAuth.instance.signInWithCredential(credential);
+        // Optionally, fetch user data from Facebook
+        final userData = await FacebookAuth.instance.getUserData(
+          fields: "email,name,picture",
+        );
+
+        // Here, you can access the user's email
+        String? email = userData['email'];
+        print("email : $email");
 
         return userCredential.user;
       } else if (result.status == LoginStatus.cancelled) {
@@ -112,5 +120,124 @@ class RemoteDataSource {
     }
 
     return null;
+  }
+
+  ///get OTP
+  Future<void> getOTP(String email) async {
+    try {
+      final response = await dio.request(
+        '${Constants.baseUrl}email/setOTP',
+        data: FormData.fromMap({
+          'email': email,
+        }),
+        options: Options(
+          method: 'POST',
+        ),
+      );
+      // print(response.data);
+      if (response.statusCode == 200) {
+        // successful
+      } else {
+        throw Exception('Failed to log in');
+      }
+    } catch (error) {
+      throw Exception('Error during login: $error');
+    }
+  }
+
+  ///verify OTP
+  Future<void> verifyOTP(String email, String otp) async {
+    try {
+      final response = await dio.request(
+        '${Constants.baseUrl}email/verifyOTP',
+        data: FormData.fromMap({
+          'email': email,
+          'otp': otp,
+        }),
+        options: Options(
+          method: 'GET',
+        ),
+      );
+      // print(response.data);
+      if (response.statusCode == 200) {
+        // successful
+      } else {
+        throw Exception('Failed to log in');
+      }
+    } catch (error) {
+      throw Exception('Error during login: $error');
+    }
+  }
+
+  ///rest password
+  Future<void> resetPassword(String email, String newPassword) async {
+    try {
+      final response = await dio.request(
+        '${Constants.baseUrl}account/resetPassword',
+        data: FormData.fromMap({
+          'email': email,
+          'newPassword': newPassword,
+        }),
+        options: Options(
+          method: 'POST',
+        ),
+      );
+      // print(response.data);
+      if (response.statusCode == 200) {
+        // successful
+      } else {
+        throw Exception('Failed to log in');
+      }
+    } catch (error) {
+      throw Exception('Error during login: $error');
+    }
+  }
+
+  ///user exist
+  Future<bool> userExist(String email) async {
+    try {
+      final response = await dio.request(
+        '${Constants.baseUrl}account/userExist',
+        data: FormData.fromMap({
+          'email': email,
+        }),
+        options: Options(
+          method: 'GET',
+        ),
+      );
+      print(response.data);
+      if (response.statusCode == 200) {
+        // successful
+        return response.data;
+      } else {
+        throw Exception('Failed to email');
+      }
+    } catch (error) {
+      throw Exception('Error during get user: $error');
+    }
+  }
+
+  ///get profile
+  Future<ProfileModel> getProfile(String email) async {
+    ProfileModel user = ProfileModel(email: email);
+    try {
+      final response = await dio.request(
+        '${Constants.baseUrl}account/getProfile',
+        data: user.toJson(),
+        options: Options(
+          method: 'GET',
+        ),
+      );
+      // print(response.data);
+      if (response.statusCode == 200) {
+        // successful
+        user = ProfileModel.fromJson(response.data);
+        return user;
+      } else {
+        throw Exception('Failed to log in');
+      }
+    } catch (error) {
+      throw Exception('Error during login: $error');
+    }
   }
 }

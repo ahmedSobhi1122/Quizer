@@ -1,20 +1,17 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quizer/config/routes/screen_export.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/helper/validation.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
-import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/common/background.dart';
-import 'package:quizer/features/presentation/common/button_back.dart';
 import 'package:quizer/features/presentation/common/checkable.dart';
+import 'package:quizer/features/presentation/common/custom_app_bar.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
-import 'package:quizer/features/presentation/common/custom_progress.dart';
-import 'package:quizer/features/presentation/cubit/register_cubit.dart';
+import 'package:quizer/features/presentation/common/loading.dart';
 import 'package:quizer/features/presentation/pages/data%20info%20page/widgets/date_of_birth.dart';
+import 'package:quizer/features/presentation/pages/signup%20page/widgets/social.dart';
 import 'package:quizer/features/presentation/state/register_state.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -48,30 +45,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Background(
-        paddingRight: AppSize.s24,
-        paddingLeft: AppSize.s24,
-        paddingTop: AppSize.s50,
-        child: SingleChildScrollView(
-          child: BlocBuilder<RegisterCubit, RegisterState>(
-            builder: (context, state) {
-              return Form(
+      body: Stack(
+        children: [
+          Background(
+            paddingRight: AppSize.s24,
+            paddingLeft: AppSize.s24,
+            paddingTop: AppSize.s50,
+            child: SingleChildScrollView(
+              child: Form(
                 key: context.read<RegisterCubit>().formKeyRegister,
                 child: Column(children: [
-                  Row(
-                    children: [
-                      CustomButtonBack(
-                        onPressed: () => context
-                            .pushReplacementNamed(Routes.dataInfoScreenRoute),
-                      ),
-                      SizedBox(
-                        width: AppSize.s28.w,
-                      ),
-                      const CustomProgress(
-                        start: 2,
-                        end: 1,
-                      ),
-                    ],
+                  CustomAppBar(
+                    onPressed: () => context.pop(),
+                    start: 2,
+                    end: 1,
                   ),
                   SizedBox(height: AppSize.s40.h),
                   Text(
@@ -178,70 +165,57 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
                   SizedBox(height: AppSize.s24.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          context.read<RegisterCubit>().registerWithFacebook();
-                          print(state);
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(AppPadding.defaultPadding.r),
-                          width: AppSize.s66.w,
-                          height: AppSize.s66.h,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.purpleColor30),
-                            borderRadius: BorderRadius.circular(AppSize.s16.r),
-                            color: AppColors.whiteColor,
-                          ),
-                          child: SvgPicture.asset(SVGAssets.facebook),
-                        ),
-                      ),
-                      SizedBox(
-                        width: AppSize.s120.w,
-                      ),
-                      InkWell(
-                        onTap: () {context.read<RegisterCubit>().registerWithGoogle();},
-                        child: Container(
-                          padding: EdgeInsets.all(AppPadding.defaultPadding.r),
-                          width: AppSize.s66.w,
-                          height: AppSize.s66.h,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.purpleColor30),
-                            borderRadius: BorderRadius.circular(AppSize.s16.r),
-                            color: AppColors.whiteColor,
-                          ),
-                          child: SvgPicture.asset(SVGAssets.google),
-                        ),
-                      ),
-                    ],
-                  ),
+                  const Social(),
                   SizedBox(height: AppSize.s50.h),
-                  CustomButton(
-                    color: AppColors.purpleColor,
-                    colorText: AppColors.whiteColor,
-                    text: "SignUp",
-                    onPressed: () async {
-                      if (context
-                          .read<RegisterCubit>()
-                          .formKeyRegister
-                          .currentState!
-                          .validate()) {
-                        await context.read<RegisterCubit>().register();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Processing Data')),
-                        );
+                  BlocListener<RegisterCubit, RegisterState>(
+                    listener: (context, state) {
+                      if (state is RegisterSuccess) {
                         context.pushReplacementNamed(Routes.profileScreenRoute);
-                      }
+                        context.message("Register Success");
+                        }
                     },
+                    child: CustomButton(
+                      color: AppColors.purpleColor,
+                      colorText: AppColors.whiteColor,
+                      text: "SignUp",
+                      onPressed: () async {
+                        if (context
+                            .read<RegisterCubit>()
+                            .formKeyRegister
+                            .currentState!
+                            .validate()) {
+                          await context.read<RegisterCubit>().register();
+                        }
+                      },
+                    ),
                   ),
                 ]),
-              );
+              ),
+            ),
+          ),
+          BlocBuilder<RegisterCubit, RegisterState>(
+            builder: (context, state) {
+              print(state);
+              if (state is RegisterLoading) {
+                return Container(
+                  height: context.height,
+                  width: context.width,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.5),
+                  ),
+                  child: const Center(
+                    child: Loading(),
+                  ),
+                );
+              } else {
+                return const SizedBox.shrink();
+              }
             },
           ),
-        ),
+        ],
       ),
     );
   }
 }
+
+

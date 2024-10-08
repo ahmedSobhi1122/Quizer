@@ -76,9 +76,9 @@ class AppTextStyles {
 
   ///otp
   static TextStyle otpTextStyle(BuildContext context) =>
-      getMediumStyle(
+      getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.purpleColor50,
+        color: AppColors.blackColor,
         fontSize: FontSize.f32,
       );
 

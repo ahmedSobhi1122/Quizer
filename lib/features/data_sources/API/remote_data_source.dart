@@ -146,13 +146,13 @@ class RemoteDataSource {
   }
 
   ///verify OTP
-  Future<void> verifyOTP(String email, String otp) async {
+  Future<void> verifyOTP(String email, String code) async {
     try {
       final response = await dio.request(
         '${Constants.baseUrl}email/verifyOTP',
         data: FormData.fromMap({
           'email': email,
-          'otp': otp,
+          'otp': code,
         }),
         options: Options(
           method: 'GET',

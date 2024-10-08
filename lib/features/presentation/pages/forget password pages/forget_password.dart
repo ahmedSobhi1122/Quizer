@@ -38,7 +38,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   ),
                   SizedBox(height: AppSize.s310.h),
                   Form(
-                    key: context.read<LoginCubit>().formKey,
+                    key: context.read<LoginCubit>().forgetPasswordFormKey,
                     child: Column(
                       children: [
                         Container(
@@ -72,7 +72,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                             onPressed: () async {
                               if (context
                                   .read<LoginCubit>()
-                                  .formKey
+                                  .forgetPasswordFormKey
                                   .currentState!
                                   .validate()) {
                                 await context

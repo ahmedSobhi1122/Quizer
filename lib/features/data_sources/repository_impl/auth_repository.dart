@@ -13,6 +13,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<void> register(User user) async => await remoteDataSource.registerUser(
         UserRegisterModel(
+          type: user.type,
           firstName: user.firstName,
           lastName: user.lastName,
           phoneNumber: user.phoneNumber,
@@ -43,5 +44,10 @@ class AuthRepositoryImpl implements AuthRepository {
       await remoteDataSource.userExist(email);
 
   @override
-  Future<void> getOTP(String email) async => await remoteDataSource.getOTP(email);
+  Future<void> getOTP(String email) async =>
+      await remoteDataSource.getOTP(email);
+
+  @override
+  Future<void> verifyOTP(String email, String code) async =>
+      await remoteDataSource.verifyOTP(email, code);
 }

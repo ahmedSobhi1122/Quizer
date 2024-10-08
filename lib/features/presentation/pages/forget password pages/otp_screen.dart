@@ -5,6 +5,7 @@ import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
+import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
 import 'package:quizer/features/presentation/state/login_state.dart';
 
@@ -15,20 +16,10 @@ class OtpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              AppColors.purpleColor50,
-              AppColors.purpleColor30,
-              AppColors.purpleColor10,
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+      body: Background(
+        paddingRight: AppSize.s24,
+        paddingLeft: AppSize.s24,
+        paddingTop: AppSize.s0,
         child: Padding(
           padding: const EdgeInsets.all(AppPadding.defaultPadding),
           child: Column(

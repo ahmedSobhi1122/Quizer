@@ -4,6 +4,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quizer/core/resources/constants.dart';
 import 'package:quizer/features/data_sources/models/user_login_model.dart';
+import 'package:quizer/features/data_sources/models/user_otp_profile_model.dart';
 import 'package:quizer/features/data_sources/models/user_profile_model.dart';
 import 'package:quizer/features/data_sources/models/user_register_model.dart';
 
@@ -16,7 +17,7 @@ class RemoteDataSource {
   Future<void> registerUser(UserRegisterModel user) async {
     // print(1);
     // print(user.toJson().fields);
-    try {
+    // try {
       final response = await dio.request(
         '${Constants.baseUrl}account/register',
         data: user.toJson(),
@@ -25,17 +26,17 @@ class RemoteDataSource {
         ),
       );
 
-      // print("print:                                 ${response.statusMessage} ,  ${response.data} , ${response.statusCode}");
+      print("print:                                 ${response.statusMessage} ,  ${response.data} , ${response.statusCode}");
       if (response.statusCode == 200) {
         // successful
       } else {
         throw Exception('Failed to register user');
       }
-    } catch (error) {
-      // print(2);
-      // print(error);
-      throw Exception('Error during registration: $error');
-    }
+    // } catch (error) {
+    //   // print(2);
+    //   // print(error);
+    //   throw Exception('Error during registration: $error');
+    // }
   }
 
   ///login by email and password
@@ -202,7 +203,7 @@ class RemoteDataSource {
           'email': email,
         }),
         options: Options(
-          method: 'GET',
+          method: 'POST',
         ),
       );
       print(response.data);
@@ -214,6 +215,30 @@ class RemoteDataSource {
       }
     } catch (error) {
       throw Exception('Error during get user: $error');
+    }
+  }
+
+  ///otp profile
+  Future<OTPProfileModel> otpProfile(String email) async {
+    OTPProfileModel user = OTPProfileModel(email: email);
+    try {
+      final response = await dio.request(
+        '${Constants.baseUrl}account/otpProfile',
+        data: user.toJson(),
+        options: Options(
+          method: 'GET',
+        ),
+      );
+      print(response.data);
+      if (response.statusCode == 200) {
+        // successful
+        user = OTPProfileModel.fromJson(response.data);
+        return user;
+      } else {
+        throw Exception('User Not Found');
+      }
+    } catch (error) {
+      throw Exception('Error during get otp profile: $error');
     }
   }
 

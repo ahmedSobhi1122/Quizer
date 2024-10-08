@@ -5,6 +5,7 @@ import 'package:quizer/features/domain/usecases/facebook_auth_usecase.dart';
 import 'package:quizer/features/domain/usecases/get_otp_usecase.dart';
 import 'package:quizer/features/domain/usecases/google_auth_usecase.dart';
 import 'package:quizer/features/domain/usecases/login_usecase.dart';
+import 'package:quizer/features/domain/usecases/otp_profile_usecase.dart';
 import 'package:quizer/features/domain/usecases/user_exist_usecase.dart';
 import 'package:quizer/features/domain/usecases/verify_otp_usecase.dart';
 import 'package:quizer/features/presentation/state/login_state.dart';
@@ -16,6 +17,7 @@ class LoginCubit extends Cubit<LoginState> {
   final UserExistUseCase userExistUserUseCase;
   final GetOTPUseCase getOTPUseCase;
   final VerifyOtpUseCase verifyOtpUseCase;
+  final OtpProfileUseCase otpProfileUseCase;
 
   final forgetPasswordFormKey = GlobalKey<FormState>();
   final verifyOtpFormKey = GlobalKey<FormState>();
@@ -33,6 +35,7 @@ class LoginCubit extends Cubit<LoginState> {
     this.userExistUserUseCase,
     this.getOTPUseCase,
     this.verifyOtpUseCase,
+    this.otpProfileUseCase,
   ) : super(LoginInitial());
 
   Future<void> login() async {
@@ -100,6 +103,17 @@ class LoginCubit extends Cubit<LoginState> {
       var otp = otpController.map((e) => e.text).join();
       await verifyOtpUseCase.call(emailController.text, otp);
       emit(LoginSuccess());
+    } catch (error) {
+      emit(LoginFailure(error.toString()));
+    }
+  }
+
+  Future<void> otpProfile() async {
+    emit(LoginLoading());
+    try {
+      User user = (await otpProfileUseCase.call(emailController.text));
+      emit(LoginSuccess());
+      emit(LoginDataOTPProfileLoaded(user));
     } catch (error) {
       emit(LoginFailure(error.toString()));
     }

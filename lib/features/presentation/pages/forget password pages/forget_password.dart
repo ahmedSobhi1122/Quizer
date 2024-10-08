@@ -65,6 +65,9 @@ class ForgetPasswordScreen extends StatelessWidget {
                           listener: (context, state) {
                             if (state is LoginSuccess) {
                               context.pushNamed(Routes.otpScreenRoute);
+                              context.message("success");
+                            } else if (state is LoginFailure) {
+                              context.message("user not found");
                             }
                           },
                           child: CustomButton(
@@ -75,10 +78,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                                   .forgetPasswordFormKey
                                   .currentState!
                                   .validate()) {
-                                await context
-                                    .read<LoginCubit>()
-                                    .checkUserExist();
-                                context.pushNamed(Routes.otpScreenRoute);
+                                await context.read<LoginCubit>().otpProfile();
                               }
                             },
                             color: AppColors.purpleColor,
@@ -105,16 +105,7 @@ class ForgetPasswordScreen extends StatelessWidget {
           builder: (context, state) {
             print(state);
             if (state is LoginLoading) {
-              return Container(
-                height: context.height,
-                width: context.width,
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.5),
-                ),
-                child: const Center(
-                  child: Loading(),
-                ),
-              );
+              return const Loading();
             } else {
               return const SizedBox.shrink();
             }

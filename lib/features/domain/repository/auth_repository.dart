@@ -9,5 +9,5 @@ abstract class AuthRepository {
   Future<firebase_auth.User?> authWithFacebook();
   Future<void> getOTP(String email);
   Future<void> verifyOTP(String email,String code);
-
+  Future<User> otpProfile(String email);
 }

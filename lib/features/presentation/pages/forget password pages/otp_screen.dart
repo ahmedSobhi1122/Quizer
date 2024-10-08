@@ -1,14 +1,15 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:quizer/config/routes/screen_export.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
+import 'package:quizer/core/resources/assets_manager.dart';
+import 'package:quizer/core/resources/constants.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
 import 'package:quizer/features/presentation/state/login_state.dart';
-
 
 class OtpScreen extends StatelessWidget {
   const OtpScreen({super.key});
@@ -23,8 +24,6 @@ class OtpScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(AppPadding.defaultPadding),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: context.height * 0.1),
               // Title
@@ -34,22 +33,46 @@ class OtpScreen extends StatelessWidget {
               ),
               SizedBox(height: AppSize.s8.h),
               // Avatar from SVG
-              CircleAvatar(
-                radius: AppSize.s60.r,
-                backgroundColor: AppColors.transparentColor,
-                child: SvgPicture.asset('assets/svg/Avatar.svg'),
-              ),
-              SizedBox(height: AppSize.s16.h),
-              // User Name
-              Text(
-                'Tarek Tarek',
-                style: AppTextStyles.otpTextStyle(context),
+              BlocBuilder<LoginCubit, LoginState>(
+                builder: (context, state) {
+                  if (state is LoginSuccess) {
+                    context.pushNamed(Routes.otpCheckScreenRoute);
+                  } else if (state is LoginFailure) {
+                    context.message(state.error);
+                  } else if (state is LoginDataOTPProfileLoaded) {
+                    return Column(
+                      children: [
+                        CircleAvatar(
+                          radius: AppSize.s60.r,
+                          backgroundImage: NetworkImage(
+                            Constants.baseUrl.replaceAll("/api/", "") +
+                                state.user.profileImage!,
+                          ),
+                          backgroundColor: AppColors.transparentColor,
+                        ),
+                        SizedBox(height: AppSize.s16.h),
+                        // User Name
+                        Text(
+                          "${state.user.firstName!} ${state.user.lastName!}",
+                          style: AppTextStyles.otpTextStyle(context),
+                        ),
+                      ],
+                    );
+                  } else {
+                    return Lottie.asset(
+                      LottieAssets.loading,
+                      width: AppSize.s100.w,
+                      height: AppSize.s100.h,
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
               ),
               const Spacer(), // Pushes the buttons to the bottom
               // Dark Purple Button
               BlocListener<LoginCubit, LoginState>(
                 listener: (context, state) {
-                  if(state is LoginSuccess) {
+                  if (state is LoginSuccess) {
                     context.pushNamed(Routes.otpCheckScreenRoute);
                   }
                 },
@@ -57,7 +80,7 @@ class OtpScreen extends StatelessWidget {
                   text: "Get OTP",
                   onPressed: () async {
                     await context.read<LoginCubit>().getOTP();
-                    context.pushNamed(Routes.otpCheckScreenRoute);
+
                   },
                   color: AppColors.purpleColor50, // Dark Purple
                   colorText: AppColors.whiteColor,

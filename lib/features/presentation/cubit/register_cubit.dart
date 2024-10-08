@@ -31,13 +31,15 @@ class RegisterCubit extends Cubit<RegisterState> {
   final FocusNode passwordFocusNode = FocusNode();
   final FocusNode confirmPasswordFocusNode = FocusNode();
 
-  RegisterCubit(this.registerUserUseCase, this.googleAuthUserUseCase, this.facebookAuthUserUseCase) : super(RegisterInitial());
+  RegisterCubit(this.registerUserUseCase, this.googleAuthUserUseCase,
+      this.facebookAuthUserUseCase)
+      : super(RegisterInitial());
 
   @override
   void emit(RegisterState state) {
-      if(!isClosed){
-        super.emit(state);
-      }
+    if (!isClosed) {
+      super.emit(state);
+    }
   }
 
   Future<void> register() async {
@@ -52,6 +54,14 @@ class RegisterCubit extends Cubit<RegisterState> {
         email: emailController.text,
         password: passwordController.text,
       );
+      // print("${user.type}");
+      // print("${user.firstName}");
+      // print("${user.lastName}");
+      // print("${user.birthDate}");
+      // print("${user.phoneNumber}");
+      // print("${user.email}");
+      // print("${user.password}");
+
       await registerUserUseCase.call(user);
       emit(RegisterSuccess());
     } catch (error) {

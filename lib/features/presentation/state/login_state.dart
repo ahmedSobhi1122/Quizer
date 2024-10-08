@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:quizer/features/domain/entities/user.dart';
 
 abstract class LoginState extends Equatable {
   @override
@@ -8,6 +9,15 @@ abstract class LoginState extends Equatable {
 class LoginInitial extends LoginState {}
 
 class LoginLoading extends LoginState {}
+
+class LoginDataOTPProfileLoaded extends LoginState {
+  final User user;
+
+  LoginDataOTPProfileLoaded(this.user);
+
+  @override
+  List<Object?> get props => [user.firstName, user.lastName, user.profileImage];
+}
 
 class LoginSuccess extends LoginState {}
 

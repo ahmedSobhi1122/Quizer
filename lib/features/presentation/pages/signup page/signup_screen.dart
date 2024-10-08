@@ -172,7 +172,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if (state is RegisterSuccess) {
                         context.pushReplacementNamed(Routes.profileScreenRoute);
                         context.message("Register Success");
-                        }
+                        } else if (state is RegisterFailure){
+                        context.message(state.error);
+                      } else {
+
+                      }
                     },
                     child: CustomButton(
                       color: AppColors.purpleColor,
@@ -197,16 +201,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             builder: (context, state) {
               print(state);
               if (state is RegisterLoading) {
-                return Container(
-                  height: context.height,
-                  width: context.width,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
-                  ),
-                  child: const Center(
-                    child: Loading(),
-                  ),
-                );
+                return const Loading();
               } else {
                 return const SizedBox.shrink();
               }

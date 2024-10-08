@@ -60,7 +60,6 @@ class OtpCheckScreen extends StatelessWidget {
                               controller:
                                   context.read<LoginCubit>().otpController[index],
                               textAlign: TextAlign.center,
-                              keyboardType: TextInputType.number,
                               maxLength: 1,
                               focusNode:
                                   context.read<LoginCubit>().otpFocusNode[index],
@@ -104,6 +103,7 @@ class OtpCheckScreen extends StatelessWidget {
                       BlocListener<LoginCubit, LoginState>(
                         listener: (context, state) {
                           if (state is LoginSuccess) {
+                            context.message("الف مبروك");
                             context.pushNamed(Routes.newPasswordScreenRoute);
                           }
                         },
@@ -132,16 +132,7 @@ class OtpCheckScreen extends StatelessWidget {
             builder: (context, state) {
               print(state);
               if (state is LoginLoading) {
-                return Container(
-                  height: context.height,
-                  width: context.width,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
-                  ),
-                  child: const Center(
-                    child: Loading(),
-                  ),
-                );
+                return const Loading();
               } else {
                 return const SizedBox.shrink();
               }

@@ -1,3 +1,4 @@
+import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
 import 'package:quizer/features/presentation/pages/create%20question%20page/create_question_screen.dart';
 import 'package:quizer/features/presentation/pages/quiz%20setting%20page/quiz_setting_screen.dart';
 
@@ -51,32 +52,32 @@ class RouteGenerator {
 
       case Routes.forgetPasswordScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider<LoginCubit>.value(
-            value: sl<LoginCubit>(),
+          builder: (context) => BlocProvider<ForgetPasswordCubit>(
+            create: (context) => sl<ForgetPasswordCubit>(),
             child: const ForgetPasswordScreen(),
           ),
         );
 
       case Routes.otpScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider<LoginCubit>.value(
-            value: sl<LoginCubit>(),
+          builder: (context) => BlocProvider<ForgetPasswordCubit>.value(
+            value: sl<ForgetPasswordCubit>(),
             child: const OtpScreen(),
           ),
         );
 
       case Routes.otpCheckScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider<LoginCubit>.value(
-            value: sl<LoginCubit>(),
+          builder: (context) => BlocProvider<ForgetPasswordCubit>.value(
+            value: sl<ForgetPasswordCubit>(),
             child: const OtpCheckScreen(),
           ),
         );
 
       case Routes.newPasswordScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider<LoginCubit>.value(
-            value: sl<LoginCubit>(),
+          builder: (context) => BlocProvider<ForgetPasswordCubit>.value(
+            value: sl<ForgetPasswordCubit>(),
             child: const NewPasswordScreen(),
           ),
         );

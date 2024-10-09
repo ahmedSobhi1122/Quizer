@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:quizer/config/routes/route_constants.dart';
+import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
@@ -68,6 +69,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
+                    DataIntent.pushEmail(context.read<LoginCubit>().emailController.text);
                     context.pushNamed(Routes.forgetPasswordScreenRoute);
                   },
                   child: Text(

@@ -61,4 +61,8 @@ class AuthRepositoryImpl implements AuthRepository {
       profileImage: user.profileImage,
     );
   }
+
+  @override
+  Future<void> resetPassword(String email, String newPassword) async =>
+      await remoteDataSource.resetPassword(email, newPassword);
 }

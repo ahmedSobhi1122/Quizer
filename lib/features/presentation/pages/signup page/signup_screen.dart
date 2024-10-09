@@ -125,7 +125,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       focusNode: context
                           .read<RegisterCubit>()
                           .confirmPasswordFocusNode,
-                      textInputAction: TextInputAction.next,
+                      textInputAction: TextInputAction.done,
                       onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
                     ),
                   ),
@@ -171,9 +171,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     listener: (context, state) {
                       if (state is RegisterSuccess) {
                         context.pushReplacementNamed(Routes.profileScreenRoute);
-                        context.message("Register Success");
+                        context.message(message: "Register Success");
                         } else if (state is RegisterFailure){
-                        context.message(state.error);
+                        context.message(message: state.error);
                       } else {
 
                       }

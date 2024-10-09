@@ -11,8 +11,10 @@ import 'package:quizer/features/domain/usecases/google_auth_usecase.dart';
 import 'package:quizer/features/domain/usecases/login_usecase.dart';
 import 'package:quizer/features/domain/usecases/otp_profile_usecase.dart';
 import 'package:quizer/features/domain/usecases/register_usecase.dart';
+import 'package:quizer/features/domain/usecases/reset_password_usecase.dart';
 import 'package:quizer/features/domain/usecases/user_exist_usecase.dart';
 import 'package:quizer/features/domain/usecases/verify_otp_usecase.dart';
+import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
 import 'package:quizer/features/presentation/cubit/login_cubit.dart';
 import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,7 +38,9 @@ Future<void> init() async {
   sl.registerLazySingleton<GoogleAuthUseCase>(() => GoogleAuthUseCase(sl()));
   sl.registerLazySingleton<FacebookAuthUseCase>(() => FacebookAuthUseCase(sl()));
   sl.registerLazySingleton<OtpProfileUseCase>(() => OtpProfileUseCase(sl()));
+  sl.registerLazySingleton<ResetPasswordUseCase>(() => ResetPasswordUseCase(sl()));
 
   sl.registerLazySingleton<RegisterCubit>(() => RegisterCubit(sl(),sl(),sl()));
-  sl.registerLazySingleton<LoginCubit>(() => LoginCubit(sl(),sl(),sl(),sl(),sl(),sl(),sl()));
+  sl.registerLazySingleton<LoginCubit>(() => LoginCubit(sl(),sl(),sl()));
+  sl.registerLazySingleton<ForgetPasswordCubit>(() => ForgetPasswordCubit(sl(),sl(),sl(),sl(),sl()));
 }

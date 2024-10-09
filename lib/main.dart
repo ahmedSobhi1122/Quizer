@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
         darkTheme: AppTheme.darkTheme(context),
         themeMode: ThemeMode.light,
         onGenerateRoute: router.RouteGenerator.getRoute,
-        initialRoute: Routes.quizSettingScreenRoute,
+        initialRoute: Routes.newPasswordScreenRoute,
       ),
     );
   }

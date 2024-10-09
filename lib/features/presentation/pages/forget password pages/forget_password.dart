@@ -1,5 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/screen_export.dart';
+import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
@@ -7,13 +8,24 @@ import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
 import 'package:quizer/features/presentation/common/loading.dart';
-import 'package:quizer/features/presentation/state/login_state.dart';
+import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
+import 'package:quizer/features/presentation/state/forget_password_state.dart';
 import '../../../../core/helper/validation.dart';
 import '../data info page/widgets/date_of_birth.dart';
 
-class ForgetPasswordScreen extends StatelessWidget {
+class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
 
+  @override
+  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
+}
+
+class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ForgetPasswordCubit>().emailController.text = DataIntent.popEmail()??"";
+  }
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -38,7 +50,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   ),
                   SizedBox(height: AppSize.s310.h),
                   Form(
-                    key: context.read<LoginCubit>().forgetPasswordFormKey,
+                    key: context.read<ForgetPasswordCubit>().forgetPasswordFormKey,
                     child: Column(
                       children: [
                         Container(
@@ -51,7 +63,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                             width: AppSize.s335.w,
                             child: TextFormField(
                               controller:
-                                  context.read<LoginCubit>().emailController,
+                                  context.read<ForgetPasswordCubit>().emailController,
                               decoration: style("Email"),
                               validator: (value) =>
                                   Validation.validateEmail(value),
@@ -61,24 +73,24 @@ class ForgetPasswordScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: AppSize.s224.h),
-                        BlocListener<LoginCubit, LoginState>(
+                        BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
                           listener: (context, state) {
-                            if (state is LoginSuccess) {
+                            if (state is ForgetPasswordDataOTPProfileLoaded) {
                               context.pushNamed(Routes.otpScreenRoute);
-                              context.message("success");
-                            } else if (state is LoginFailure) {
-                              context.message("user not found");
+                              context.message(message: "success",);
+                            } else if (state is ForgetPasswordFailure) {
+                              context.message(message: "user not found");
                             }
                           },
                           child: CustomButton(
                             text: "Confirm",
                             onPressed: () async {
                               if (context
-                                  .read<LoginCubit>()
+                                  .read<ForgetPasswordCubit>()
                                   .forgetPasswordFormKey
                                   .currentState!
                                   .validate()) {
-                                await context.read<LoginCubit>().otpProfile();
+                                await context.read<ForgetPasswordCubit>().checkUserExist();
                               }
                             },
                             color: AppColors.purpleColor,
@@ -101,10 +113,10 @@ class ForgetPasswordScreen extends StatelessWidget {
           ),
         ),
         // Loading screen overlay
-        BlocBuilder<LoginCubit, LoginState>(
+        BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
           builder: (context, state) {
             print(state);
-            if (state is LoginLoading) {
+            if (state is ForgetPasswordLoading) {
               return const Loading();
             } else {
               return const SizedBox.shrink();

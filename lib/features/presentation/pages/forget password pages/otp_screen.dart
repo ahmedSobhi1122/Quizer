@@ -9,10 +9,22 @@ import 'package:quizer/core/resources/constants.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
-import 'package:quizer/features/presentation/state/login_state.dart';
+import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
+import 'package:quizer/features/presentation/state/forget_password_state.dart';
 
-class OtpScreen extends StatelessWidget {
+class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
+
+  @override
+  State<OtpScreen> createState() => _OtpScreenState();
+}
+
+class _OtpScreenState extends State<OtpScreen> {
+  @override
+  void initState() async {
+    super.initState();
+    await context.read<ForgetPasswordCubit>().otpProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +45,13 @@ class OtpScreen extends StatelessWidget {
               ),
               SizedBox(height: AppSize.s8.h),
               // Avatar from SVG
-              BlocBuilder<LoginCubit, LoginState>(
+              BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
                 builder: (context, state) {
-                  if (state is LoginSuccess) {
+                  if (state is ForgetPasswordSuccess) {
                     context.pushNamed(Routes.otpCheckScreenRoute);
-                  } else if (state is LoginFailure) {
-                    context.message(state.error);
-                  } else if (state is LoginDataOTPProfileLoaded) {
+                  } else if (state is ForgetPasswordFailure) {
+                    context.message(message: state.error);
+                  } else if (state is ForgetPasswordDataOTPProfileLoaded) {
                     return Column(
                       children: [
                         CircleAvatar(
@@ -70,23 +82,22 @@ class OtpScreen extends StatelessWidget {
               ),
               const Spacer(), // Pushes the buttons to the bottom
               // Dark Purple Button
-              BlocListener<LoginCubit, LoginState>(
+              BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
                 listener: (context, state) {
-                  if (state is LoginSuccess) {
+                  if (state is ForgetPasswordSuccess) {
                     context.pushNamed(Routes.otpCheckScreenRoute);
                   }
                 },
                 child: CustomButton(
                   text: "Get OTP",
                   onPressed: () async {
-                    await context.read<LoginCubit>().getOTP();
-
+                    await context.read<ForgetPasswordCubit>().getOTP();
                   },
                   color: AppColors.purpleColor50, // Dark Purple
                   colorText: AppColors.whiteColor,
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               // Light Purple Button
               CustomButton(
                 text: "Not your account?",

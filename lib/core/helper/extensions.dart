@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizer/core/resources/app_colors.dart';
 
 extension Navigation on BuildContext {
   pop() => Navigator.of(this).pop();
@@ -30,9 +31,20 @@ extension MediaQueryValues on BuildContext {
 }
 
 extension SnakBar on BuildContext {
-  void message(String message) => ScaffoldMessenger.of(this).showSnackBar(
+  void message({
+    required String message,
+    Color? color,
+    Color? textColor,
+    Duration? duration,
+  }) =>
+      ScaffoldMessenger.of(this).showSnackBar(
         SnackBar(
-          content: Text(message),
+          content: Text(
+            message,
+            style: TextStyle(color: textColor ?? AppColors.whiteColor),
+          ),
+          backgroundColor: color ?? AppColors.blackColor,
+          duration: duration ?? const Duration(seconds: 2),
         ),
       );
 }

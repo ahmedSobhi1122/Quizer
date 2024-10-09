@@ -42,7 +42,7 @@ class SelectionScreen extends StatelessWidget {
             text: "Next",
             onPressed: () {
               if (context.read<RegisterCubit>().userRole == UserRole.ADMIN) {
-                context.message("Please select one of the options above");
+                context.message(message: "Please select one of the options above");
               } else {
                 context.read<RegisterCubit>().userRole = UserRole.STUDENT;
                 context.pushNamed(Routes.dataInfoScreenRoute);

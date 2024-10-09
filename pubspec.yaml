@@ -32,6 +32,7 @@ dependencies:
     sdk: flutter
   sqflite:
   image_picker:
+  win32:
   path:
   dio:
   equatable:

@@ -9,7 +9,8 @@ import 'package:quizer/core/resources/app_values.dart';
 class ImageUploadField extends StatefulWidget {
   final double height;
   final String hint;
-  const ImageUploadField({Key? key, required this.height, required this.hint}) : super(key: key);
+  final BoxFit fitter;
+  const ImageUploadField({Key? key, required this.height, required this.hint, required this.fitter}) : super(key: key);
   @override
   _ImageUploadFieldState createState() => _ImageUploadFieldState();
 }
@@ -77,7 +78,7 @@ class _ImageUploadFieldState extends State<ImageUploadField> {
                     opacity: 0.8,
                     child: Image.memory(
                       _webImage!,
-                      fit: BoxFit.contain,
+                      fit: widget.fitter,
                     ),
                   ),
                 ),
@@ -91,7 +92,7 @@ class _ImageUploadFieldState extends State<ImageUploadField> {
                     icon: Icon(
                       Icons.add_a_photo,
                       color: Colors.grey[700],
-                      size: 60.r,
+                      size: .5 *widget.height,
                     )
                 ),
               )

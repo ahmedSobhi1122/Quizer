@@ -38,18 +38,36 @@ class QuizSettingScreen extends StatelessWidget {
                 SizedBox(
                   height: AppSize.s40.h,
                 ),
-                ImageUploadField(height: 200,hint: "Quiz Image!",),
+                const ImageUploadField(height: 200,hint: "Quiz Image!",fitter: BoxFit.contain,),
                 SizedBox(
                   height: AppSize.s20.h,
                 ),
-                CustomDropdown(
+                const CustomDropdown(
                   items: [
-                    "objec 1",
-                    "objec 2",
-                    "objec 3",
-                    "objec 4",
-                    "objec 5",
-                    "objec 6"
+                    "Category 1",
+                    "Category 2",
+                    "Category 3",
+                    "Category 4",
+                    "Category 5",
+                    "Category 6",
+                    "Category 7",
+                    "Category 8",
+                    "Category 9",
+                    "Category 10",
+                    "Category 11",
+                    "Category 12",
+                    "Category 13",
+                    "Category 14",
+                    "Category 15",
+                    "Category 16",
+                    "Category 17",
+                    "Category 18",
+                    "Category 19",
+                    "Category 20",
+                    "Category 21",
+                    "Category 22",
+                    "Category 23",
+                    "Category 24",
                   ],
                   hint: "Select Quiz Category",
                 ),
@@ -57,6 +75,11 @@ class QuizSettingScreen extends StatelessWidget {
                   height: AppSize.s20.h,
                 ),
                 TextField(
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.whiteColor40,
+                    fontSize: AppSize.s16,
+                  ),
                   decoration: InputDecoration(
                     labelText: "Quiz Title",
                     labelStyle: const TextStyle(
@@ -85,7 +108,7 @@ class QuizSettingScreen extends StatelessWidget {
                   height: AppSize.s20.h,
                 ),
                 Container(
-                  height: 200,
+                  height: 200.h,
                   decoration: BoxDecoration(
                     color: Colors.white60,
                     borderRadius: BorderRadius.circular(10.r),
@@ -99,9 +122,9 @@ class QuizSettingScreen extends StatelessWidget {
                       fontSize: AppSize.s16,
                     ),
                     decoration: InputDecoration(
-                      hintText: "Description",
+                      labelText: "Description",
                       fillColor: Colors.white30,
-                      hintStyle: TextStyle(
+                      labelStyle: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: AppColors.whiteColor40,
                         fontSize: AppSize.s16,

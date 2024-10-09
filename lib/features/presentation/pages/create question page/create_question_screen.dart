@@ -11,7 +11,58 @@ import '../../common/button_back.dart';
 import '../../common/custom_button_with_shadow.dart';
 import '../../common/custom_progress.dart';
 
-class CreateQuestionScreen extends StatelessWidget {
+class CreateQuestionScreen extends StatefulWidget {
+  @override
+  State<CreateQuestionScreen> createState() => _CreateQuestionScreenState();
+}
+
+class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
+  final TextEditingController _questionController = TextEditingController();
+  final TextEditingController _answerController = TextEditingController();
+  final List<String> _answers = [];
+  final int _maxAnswers = 4;
+  Map<int,List<String>> _questionMap = {};
+  int? _selectedAnswerIndex; // Track the selected answer index
+  int _questionIndex=0; // Track the selected answer index
+
+  void _addAnswer() {
+    if (_answers.length < _maxAnswers && _answerController.text.isNotEmpty&& !_answers.contains(_answerController.text)) {
+      setState(() {
+        _answers.add(_answerController.text);
+        _answerController.clear();
+      });
+    }
+  }
+
+  void _selectAnswer(int index) {
+    setState(() {
+      _selectedAnswerIndex = index; // Update the selected index
+    });
+  }
+
+  void _addMore() {
+    if (_questionController.text.isNotEmpty && _answers.isNotEmpty) {
+      // Save the question and answers to the map
+      setState(() {
+        _questionMap[_questionIndex] = List.from(_answers); // Add a copy of answers
+        _questionIndex++; // Increment the question index for the next question
+        // Clear the current inputs
+        _answers.clear();
+        _questionController.clear();
+      });
+
+      // Optionally, show a Snackbar to indicate the question has been saved
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Question saved! You can add a new one.')),
+      );
+    } else {
+      // Optionally, show a Snackbar if the question or answers are empty
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please enter a question and at least one answer.')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,144 +73,232 @@ class CreateQuestionScreen extends StatelessWidget {
           paddingTop: AppSize.s20,
           child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        CustomButtonBack(
-                          onPressed: () => context
-                              .pushReplacementNamed(Routes.quizSettingScreenRoute),
-                        ),
-                        SizedBox(
-                          width: AppSize.s28.w,
-                        ),
-                        const CustomProgress(
-                          start: 0,
-                          end: 3,
-                        ),
-                      ],
-                    ),
-                    Center(
-                      child: Text(
-                        "Question Data",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: AppSize.s22.sp,
-                          color: AppColors.blackColor80,
-                        ),
-                      ),
+                    CustomButtonBack(
+                      onPressed: () => context
+                          .pushReplacementNamed(Routes.quizSettingScreenRoute),
                     ),
                     SizedBox(
-                      height: AppSize.s40.h,
+                      width: AppSize.s28.w,
                     ),
-                    Container(
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.white60,
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
-                      child: TextField(
-                        maxLines: null,
-                        expands: true,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.whiteColor40,
-                          fontSize: AppSize.s20,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: "Question description like\nWhat is your name ?",
-                          hintStyle: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.whiteColor40,
-                            fontSize: AppSize.s28,
-                          ),
-                        ),
-                      ),
+                    const CustomProgress(
+                      start: 0,
+                      end: 3,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          "250/500",
-                          style: TextStyle(
-                              color: Colors.grey[700], fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: AppSize.s20.h,
-                    ),
-                    ImageUploadField(height: 100.h,hint: "Question image!",),
-                    SizedBox(
-                      height: AppSize.s20.h,
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: "Quiz Title",
-                        labelStyle: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.whiteColor40,
-                          fontSize: AppSize.s16,
-                        ),
-                        fillColor: Colors.white60,
-                        suffixIcon: Icon(
-                          Icons.title,
-                          color: Colors.grey[700],
-                        ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          "20/30",
-                          style: TextStyle(
-                              color: Colors.grey[700], fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: AppSize.s20.h,
-                    ),
-                    CustomButton(
-                      color: AppColors.purpleColor,
-                      colorText: AppColors.whiteColor,
-                      text: "Add answer",
-                      onPressed: () {
-
-                      },
-                    ),
-                    SizedBox(
-                      height: AppSize.s50.h,
-                    ),
-                    Row(children: [
-                      Expanded(
-                        child: CustomButton(
-                          text: "Add More",
-                          onPressed: () {context.pop();},
-                          color: AppColors.lightPurpleColor.withOpacity(.7),
-                          colorText: AppColors.purpleColor,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 50.w,
-                      ),
-                      Expanded(
-                        child: CustomButton(
-                          color: AppColors.purpleColor,
-                          colorText: AppColors.whiteColor,
-                          text: "Finish",
-                          onPressed: () {
-
-                          },
-                        ),
-                      )
-                    ])
                   ],
                 ),
-              )),
+                Center(
+                  child: Text(
+                    "Question Data",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: AppSize.s22.sp,
+                      color: AppColors.blackColor80,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: AppSize.s40.h,
+                ),
+                Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    // color: Colors.white60,
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
+                  child: TextField(
+                    controller: _questionController,
+                    maxLines: null,
+                    expands: true,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.whiteColor40,
+                      fontSize: AppSize.s20,
+                    ),
+                    decoration: InputDecoration(
+                      fillColor: Colors.white60,
+                      hintText:
+                          "Question description like\nWhat is your name ?",
+                      hintStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.whiteColor40,
+                        fontSize: AppSize.s28,
+                      ),
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      "250/500",
+                      style: TextStyle(
+                          color: Colors.grey[700], fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: AppSize.s20.h,
+                ),
+                ImageUploadField(
+                  height: 100.h,
+                  hint: "Question image!",
+                  fitter: BoxFit.cover,
+                ),
+                SizedBox(
+                  height: AppSize.s20.h,
+                ),
+                TextField(
+                  controller: _answerController,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.whiteColor40,
+                    fontSize: AppSize.s16,
+                  ),
+                  decoration: InputDecoration(
+                    labelText: "new answer",
+                    labelStyle: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.whiteColor40,
+                      fontSize: AppSize.s16,
+                    ),
+                    fillColor: Colors.white60,
+                    suffixIcon: Icon(
+                      Icons.title,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      '${_answers.length}/$_maxAnswers',
+                      style: TextStyle(
+                          color: Colors.grey[700], fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: AppSize.s20.h,
+                ),
+                CustomButton(
+                  color: AppColors.purpleColor,
+                  colorText: AppColors.whiteColor,
+                  text: "Add answer",
+                  onPressed: () {
+                    _addAnswer();
+                  },
+                ),
+                SizedBox(
+                  height: AppSize.s20.h,
+                ),
+                Container(
+                  height: _answers.length*65.h,
+                  width: double.infinity,
+                  child: Expanded(
+                    child: ListView.builder(
+                      physics:const ScrollPhysics(),
+                      itemCount: _answers.length,
+                      itemBuilder: (context, index) {
+                        return Dismissible(
+                          key: Key(_answers[index]),
+                          direction: DismissDirection.horizontal,
+                          background: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.red.withOpacity(.9),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+
+                            alignment: Alignment.centerRight,
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: const Icon(Icons.delete, color: Colors.white),
+                          ),
+                          onDismissed: (direction) {
+                            setState(() {
+                              _answers.removeAt(index);
+                            });
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('${_answers[index]} removed')),
+                            );
+                          },
+                          child: GestureDetector(
+
+                            onTap: () => _selectAnswer(index),
+                            child: Container(
+                              margin: EdgeInsets.symmetric(vertical: 4),
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: _selectedAnswerIndex == index
+                                    ? Colors.green[100]
+                                    : Colors.grey[200],
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: _selectedAnswerIndex == index
+                                      ? Colors.green
+                                      : Colors.transparent,
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    _answers[index],
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  Icon(
+                                    _selectedAnswerIndex == index
+                                        ? Icons.check_circle
+                                        : Icons.circle,
+                                    color: _selectedAnswerIndex == index
+                                        ? Colors.green
+                                        : Colors.grey,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+
+                Row(children: [
+                  Expanded(
+                    child: CustomButton(
+                      text: "Add More",
+                      onPressed: () {
+                        _addMore();
+                      },
+                      color: AppColors.lightPurpleColor.withOpacity(.7),
+                      colorText: AppColors.purpleColor,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 50.w,
+                  ),
+                  Expanded(
+                    child: CustomButton(
+                      color: AppColors.purpleColor,
+                      colorText: AppColors.whiteColor,
+                      text: "Finish",
+                      onPressed: () {},
+                    ),
+                  )
+                ])
+              ],
+            ),
+          )),
         ),
       ),
     );

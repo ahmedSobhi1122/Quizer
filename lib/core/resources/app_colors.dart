@@ -75,6 +75,7 @@ class AppColors {
   static const Color darkPurpleColor50 = Color(0xFF000000);
   static const Color darkPurpleColor30 = Color(0xFF141028);
   static const Color darkPurpleColor10 = Color(0xFF5F4DBE);
+  static const Color orange = Color(0xFFFF5722);
   static const Color gold = Color(0x80FDE096);
   static const Color silver = Color(0x80CFCFCF);
   static const Color bronze = Color(0x80B86B4A);
@@ -83,9 +84,12 @@ class AppColors {
 
 
 
+
   static const Color successColor = Color(0xFF2ED573);
   static const Color warningColor = Color(0xFFFFBE21);
   static const Color errorColor = Color(0xFFEA5B5B);
+
+
 
 
   // static const Color yellow = Color(0xfff5d100);

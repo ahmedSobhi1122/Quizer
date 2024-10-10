@@ -15,5 +15,6 @@ class Routes {
   static const String newPasswordScreenRoute = "/new_password";
   static const String quizSettingScreenRoute="/quiz_setting";
   static const String createQuestionScreenRoute="/create_question";
+  static const String settingScreenRoute="/setting";
 
 }

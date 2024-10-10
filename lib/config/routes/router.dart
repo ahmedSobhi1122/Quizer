@@ -1,6 +1,7 @@
 import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
 import 'package:quizer/features/presentation/pages/create%20question%20page/create_question_screen.dart';
 import 'package:quizer/features/presentation/pages/quiz%20setting%20page/quiz_setting_screen.dart';
+import 'package:quizer/features/presentation/pages/setting%20page/setting_screen.dart';
 
 import 'screen_export.dart';
 
@@ -93,6 +94,10 @@ class RouteGenerator {
       case Routes.createQuestionScreenRoute:
         return MaterialPageRoute(
           builder: (context) => CreateQuestionScreen(),
+        );
+      case Routes.settingScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => SettingScreen(),
         );
 
       default:

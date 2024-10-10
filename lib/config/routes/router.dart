@@ -1,4 +1,6 @@
 import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
+import 'package:quizer/features/presentation/cubit/home_cubit.dart';
+import 'package:quizer/features/presentation/pages/Home%20Page/home_page.dart';
 import 'package:quizer/features/presentation/pages/create%20question%20page/create_question_screen.dart';
 import 'package:quizer/features/presentation/pages/quiz%20setting%20page/quiz_setting_screen.dart';
 import 'package:quizer/features/presentation/pages/setting%20page/setting_screen.dart';
@@ -82,6 +84,14 @@ class RouteGenerator {
             child: const NewPasswordScreen(),
           ),
         );
+
+      case Routes.homeScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) => BlocProvider<HomeCubit>(
+          create: (context) => sl<HomeCubit>(),
+          child: const HomePage(),
+        ),
+      );
 
       case Routes.profileScreenRoute:
         return MaterialPageRoute(

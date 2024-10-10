@@ -16,5 +16,6 @@ class Routes {
   static const String quizSettingScreenRoute="/quiz_setting";
   static const String createQuestionScreenRoute="/create_question";
   static const String settingScreenRoute="/setting";
+  static const String homeScreenRoute="/home";
 
 }

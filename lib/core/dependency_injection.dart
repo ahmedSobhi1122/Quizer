@@ -19,6 +19,8 @@ import 'package:quizer/features/presentation/cubit/login_cubit.dart';
 import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../features/presentation/cubit/home_cubit.dart';
+
 final sl = GetIt.instance;
 
 Future<void> init() async {
@@ -42,5 +44,6 @@ Future<void> init() async {
 
   sl.registerLazySingleton<RegisterCubit>(() => RegisterCubit(sl(),sl(),sl()));
   sl.registerLazySingleton<LoginCubit>(() => LoginCubit(sl(),sl(),sl()));
+  sl.registerLazySingleton<HomeCubit>(() => HomeCubit());
   sl.registerLazySingleton<ForgetPasswordCubit>(() => ForgetPasswordCubit(sl(),sl(),sl(),sl(),sl()));
 }

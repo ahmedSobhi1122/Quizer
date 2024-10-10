@@ -13,10 +13,12 @@ enum Themes { Light, Dark }
 
 enum Languages { English, Arabic, French }
 
+enum States { On, Off }
+
 class _SettingScreenState extends State<SettingScreen> {
   String language = 'English';
   String theme = 'Light';
-  bool isNotification = true;
+  String notification = 'On';
 
   void _deleteDialog() {
     showDialog(
@@ -116,6 +118,34 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
+  void _notificationDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Notification State'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                title: Text(States.On.name),
+                onTap: () {
+                  _chooseNotification(States.On.name);
+                },
+              ),
+              ListTile(
+                title: Text(States.Off.name),
+                onTap: () {
+                  _chooseNotification(States.Off.name);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   void _aboutDialog() {
     showDialog(
         context: context,
@@ -130,6 +160,41 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ));
+  }
+
+  void _logoutDialog() {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Center(
+            child: Text(
+              'Logout',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          content: const Text('Are you sure you want to Logout?'),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.green),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text(
+                    'Logout',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ));
   }
 
   void _chooseTheme(String theme) {
@@ -152,191 +217,174 @@ class _SettingScreenState extends State<SettingScreen> {
     });
   }
 
-  void _logoutDialog() {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: const Center(
-                child: Text(
-                  'Logout',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-              content: const Text('Are you sure you want to Logout?'),
-              actions: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text(
-                        'Cancel',
-                        style: TextStyle(color: Colors.green),
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text(
-                        'Logout',
-                        style: TextStyle(color: Colors.red),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ));
+  void _chooseNotification(String notification) {
+    Navigator.of(context).pop();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('You selected $notification')),
+    );
+    setState(() {
+      this.notification = notification;
+    });
   }
+
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(AppPadding.p12),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Setting",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    fontSize: AppSize.s32,
-                  ),
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(AppPadding.p16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Setting",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: AppSize.s32,
                 ),
-                SizedBox(height: 20.h),
-                const Text(
-                  "Account",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    fontSize: AppSize.s22,
-                  ),
+              ),
+              SizedBox(height: 20.h),
+              const Text(
+                "Account",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: AppSize.s22,
                 ),
-                SizedBox(height: 10.h),
-                ListTile(
-                  title: Text("Edit Personal Info"),
-                  trailing: Icon(Icons.arrow_forward_ios),
-                  onTap: () {
-                    print("Edit Personal Info");
-                    context.pushNamed(Routes.profileScreenRoute);
-                  },
+              ),
+              SizedBox(height: 10.h),
+              ListTile(
+                title: Text("Edit Personal Info"),
+                trailing: Icon(Icons.arrow_forward_ios),
+                onTap: () {
+                  print("Edit Personal Info");
+                  context.pushNamed(Routes.profileScreenRoute);
+                },
+              ),
+              SizedBox(height: 10.h),
+              ListTile(
+                textColor: Colors.red,
+                title: Text("Delete Account"),
+                trailing: Icon(Icons.arrow_forward_ios),
+                onTap: () {
+                  _deleteDialog();
+                  print("Delete Account");
+                },
+              ),
+              SizedBox(height: 20.h),
+              const Text(
+                "General",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: AppSize.s22,
                 ),
-                SizedBox(height: 10.h),
-                ListTile(
-                  textColor: Colors.red,
-                  title: Text("Delete Account"),
-                  trailing: Icon(Icons.arrow_forward_ios),
-                  onTap: () {
-                    _deleteDialog();
-                    print("Delete Account");
-                  },
-                ),
-                SizedBox(height: 20.h),
-                const Text(
-                  "General",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    fontSize: AppSize.s22,
-                  ),
-                ),
-                SizedBox(height: 10.h),
-                ListTile(
-                  title: Text("Theme"),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        theme,
-                        style: const TextStyle(
-                          fontSize: AppSize.s14,
-                        ),
+              ),
+              SizedBox(height: 10.h),
+              ListTile(
+                title: Text("Theme"),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      theme,
+                      style: const TextStyle(
+                        fontSize: AppSize.s14,
                       ),
-                      SizedBox(
-                        width: 10.w,
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    Icon(Icons.arrow_forward_ios)
+                  ],
+                ),
+                onTap: () {
+                  print("Theme");
+                  _themeDialog();
+                },
+              ),
+              SizedBox(height: 10.h),
+              ListTile(
+                title: Text("Language"),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      language,
+                      style: const TextStyle(
+                        fontSize: AppSize.s14,
                       ),
-                      Icon(Icons.arrow_forward_ios)
-                    ],
-                  ),
-                  onTap: () {
-                    print("Theme");
-                    _themeDialog();
-                  },
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    Icon(Icons.arrow_forward_ios)
+                  ],
                 ),
-                SizedBox(height: 10.h),
-                ListTile(
-                  title: Text("Language"),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        language,
-                        style: const TextStyle(
-                          fontSize: AppSize.s14,
-                        ),
+                onTap: () {
+                  print("Language");
+                  _languageDialog();
+                },
+              ),
+              SizedBox(height: 10.h),
+              ListTile(
+                title: const Text("Notification"),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      notification,
+                      style: const TextStyle(
+                        fontSize: AppSize.s14,
                       ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      Icon(Icons.arrow_forward_ios)
-                    ],
-                  ),
-                  onTap: () {
-                    print("Language");
-                    _languageDialog();
-                  },
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    Icon(Icons.arrow_forward_ios)
+                  ],
                 ),
-                SizedBox(height: 10.h),
-                ListTile(
-                  title: const Text("Notification"),
-                  trailing: Switch(
-                    value: isNotification,
-                    onChanged: (bool value) {
-                      setState(() {
-                        isNotification = value;
-                      });
-                    },
-                  ),
-                  onTap: () {
-                    print("Notification");
-                  },
+                onTap: () {
+                  _notificationDialog();
+                  print("Notification");
+                },
+              ),
+              SizedBox(height: 20.h),
+              const Text(
+                "About",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: AppSize.s22,
                 ),
-                SizedBox(height: 20.h),
-                const Text(
-                  "About",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    fontSize: AppSize.s22,
-                  ),
-                ),
-                SizedBox(height: 10.h),
-                ListTile(
-                  title: const Text("About Quizzo"),
-                  trailing: Icon(Icons.arrow_forward_ios),
-                  onTap: () {
-                    print("About");
-                    _aboutDialog();
-                  },
-                ),
-                Divider(
-                  height: 50.h,
-                  thickness: 1,
-                  color: Colors.grey,
-                ),
-                ListTile(
-                  title: const Text("Logout"),
-                  trailing: const Icon(Icons.logout),
-                  splashColor: Colors.red[400],
-                  onTap: () {
-                    print("Logout");
-                    _logoutDialog();
-                  },
-                ),
-              ],
-            ),
+              ),
+              SizedBox(height: 10.h),
+              ListTile(
+                title: const Text("About Quizzo"),
+                trailing: Icon(Icons.arrow_forward_ios),
+                onTap: () {
+                  print("About");
+                  _aboutDialog();
+                },
+              ),
+              Spacer(),
+              Divider(
+                height: 50.h,
+                thickness: 1,
+                color: Colors.grey,
+              ),
+              ListTile(
+                title: const Text("Logout"),
+                trailing: const Icon(Icons.logout),
+                splashColor: Colors.red[400],
+                onTap: () {
+                  print("Logout");
+                  _logoutDialog();
+                },
+              ),
+            ],
           ),
         ),
       ),

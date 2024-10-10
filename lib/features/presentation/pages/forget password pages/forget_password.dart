@@ -75,9 +75,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         SizedBox(height: AppSize.s224.h),
                         BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
                           listener: (context, state) {
-                            if (state is ForgetPasswordDataOTPProfileLoaded) {
-                              context.pushNamed(Routes.otpScreenRoute);
+                            if (state is ForgetPasswordSuccess) {
                               context.message(message: "success",);
+                              context.pushNamed(Routes.otpScreenRoute);
                             } else if (state is ForgetPasswordFailure) {
                               context.message(message: "user not found");
                             }

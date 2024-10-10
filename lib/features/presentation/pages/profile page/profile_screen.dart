@@ -16,9 +16,6 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Background(
-        paddingRight: AppSize.s0,
-        paddingLeft: AppSize.s0,
-        paddingTop: AppSize.s0,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +67,7 @@ class ProfileScreen extends StatelessWidget {
                                   backgroundColor: Colors.white, // Avatar image
                                   child: CircleAvatar(
                                     radius: 63.r,
-                                    backgroundImage: AssetImage(ImageAssets.avatar),
+                                    backgroundImage: const AssetImage(ImageAssets.avatar),
                                   ),
                                 ),
                                 Positioned(
@@ -88,7 +85,7 @@ class ProfileScreen extends StatelessWidget {
                               ],
                             ),
                             Container(
-                              padding: EdgeInsets.all(AppPadding.p12),
+                              padding: const EdgeInsets.all(AppPadding.p12),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.end,
@@ -104,7 +101,7 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                   SizedBox(height: 10.h,),
                                   Container(
-                                    padding: EdgeInsets.symmetric(horizontal: AppPadding.p8,vertical: AppPadding.p2),
+                                    padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8,vertical: AppPadding.p2),
                                     decoration: BoxDecoration(
                                       color: Colors.grey[300],
                                       border: Border.all(
@@ -181,7 +178,7 @@ class ProfileScreen extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
+                            SizedBox(
                               height: 60.h,
                               width: 60.w,
                               child: Image.asset(
@@ -212,7 +209,7 @@ class ProfileScreen extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
+                            SizedBox(
                               height: 60.h,
                               width: 60.w,
                               child: Image.asset(

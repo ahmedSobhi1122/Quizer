@@ -253,16 +253,15 @@ class RemoteDataSource {
           method: 'GET',
         ),
       );
-      // print(response.data);
       if (response.statusCode == 200) {
         // successful
         user = ProfileModel.fromJson(response.data);
         return user;
       } else {
-        throw Exception('Failed to log in');
+        throw Exception('Failed to get data profile');
       }
     } catch (error) {
-      throw Exception('Error during login: $error');
+      throw Exception('Error during get profile: $error');
     }
   }
 }

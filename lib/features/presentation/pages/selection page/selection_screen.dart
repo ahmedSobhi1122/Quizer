@@ -20,36 +20,39 @@ class SelectionScreen extends StatelessWidget {
         paddingRight: AppSize.s24,
         paddingLeft: AppSize.s24,
         paddingTop: AppSize.s50,
-        child: Column(children: [
-          CustomAppBar(
-            onPressed: () => context.pop(),
-            start: 0.0,
-            end: 3,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const CustomAppBar(
+                start: 0.0,
+                end: 3 / 2,
+              ),
+              SizedBox(height: AppSize.s40.h),
+              Text(
+                '''What type of account would you like to create? ''',
+                style: AppTextStyles.headerSignupTextStyle(context),
+              ),
+              SizedBox(height: AppSize.s60.h),
+              const Selection(),
+              SizedBox(height: AppSize.s226.h),
+              CustomButton(
+                color: AppColors.buttonPurpleColor,
+                colorText: AppColors.purpleColor,
+                text: "Next",
+                onPressed: () {
+                  if (context.read<RegisterCubit>().userRole ==
+                      UserRole.ADMIN) {
+                    context.message(
+                        message: "Please select one of the options above");
+                  } else {
+                    context.read<RegisterCubit>().userRole = UserRole.STUDENT;
+                    context.pushNamed(Routes.dataInfoScreenRoute);
+                  }
+                },
+              ),
+            ],
           ),
-          SizedBox(height: AppSize.s40.h),
-          Text(
-            '''What type of account would you like to create? ''',
-            style: AppTextStyles.headerSignupTextStyle(context),
-          ),
-          SizedBox(height: AppSize.s60.h),
-          const Selection(),
-          SizedBox(
-            height: AppSize.s226.h,
-          ),
-          CustomButton(
-            color: AppColors.buttonPurpleColor,
-            colorText: AppColors.purpleColor,
-            text: "Next",
-            onPressed: () {
-              if (context.read<RegisterCubit>().userRole == UserRole.ADMIN) {
-                context.message(message: "Please select one of the options above");
-              } else {
-                context.read<RegisterCubit>().userRole = UserRole.STUDENT;
-                context.pushNamed(Routes.dataInfoScreenRoute);
-              }
-            },
-          ),
-        ]),
+        ),
       ),
     );
   }

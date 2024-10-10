@@ -89,7 +89,7 @@ class RouteGenerator {
         );
       case Routes.quizSettingScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => QuizSettingScreen(),
+          builder: (context) => const QuizSettingScreen(),
         );
       case Routes.createQuestionScreenRoute:
         return MaterialPageRoute(
@@ -97,7 +97,7 @@ class RouteGenerator {
         );
       case Routes.settingScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => SettingScreen(),
+          builder: (context) => const SettingScreen(),
         );
 
       default:

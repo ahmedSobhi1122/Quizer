@@ -42,7 +42,7 @@ class OtpCheckScreen extends StatelessWidget {
                 SizedBox(height: 8.h),
                 // OTP Info
                 Text(
-                  'OTP is sent to your email:\n as1234@gmail.com',
+                  'OTP is sent to your email:\n${context.read<ForgetPasswordCubit>().emailController.text}',
                   textAlign: TextAlign.center,
                   style: AppTextStyles.subHeaderSignupTextStyle(context),
                 ),
@@ -55,6 +55,7 @@ class OtpCheckScreen extends StatelessWidget {
                       SizedBox(height: AppSize.s260.h),
                       BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
                         listener: (context, state) {
+                          print(state);
                           if (state is ForgetPasswordSuccess) {
                             context.message(message: "الف مبروك");
                             context.pushNamed(Routes.newPasswordScreenRoute);

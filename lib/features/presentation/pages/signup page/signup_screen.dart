@@ -22,26 +22,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   context.read<RegisterCubit>().emailController = TextEditingController();
-  //   context.read<RegisterCubit>().passwordController = TextEditingController();
-  //   context.read<RegisterCubit>().confirmPasswordController = TextEditingController();
-  // }
-  //
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   context.read<RegisterCubit>().birthDateController.dispose();
-  //   context.read<RegisterCubit>().passwordController.dispose();
-  //   context.read<RegisterCubit>().emailController.dispose();
-  //   context.read<RegisterCubit>().lastNameController.dispose();
-  //   context.read<RegisterCubit>().firstNameController.dispose();
-  //   context.read<RegisterCubit>().confirmPasswordController.dispose();
-  //   context.read<RegisterCubit>().phoneNumberController.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,10 +35,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Form(
                 key: context.read<RegisterCubit>().formKeyRegister,
                 child: Column(children: [
-                  CustomAppBar(
-                    onPressed: () => context.pop(),
-                    start: 2,
-                    end: 1,
+                  const CustomAppBar(
+                    start: 0.0,
+                    end: 3 / 1,
                   ),
                   SizedBox(height: AppSize.s40.h),
                   Text(
@@ -170,25 +149,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   BlocListener<RegisterCubit, RegisterState>(
                     listener: (context, state) {
                       if (state is RegisterSuccess) {
-                        context.pushReplacementNamed(Routes.profileScreenRoute);
-                        context.message(message: "Register Success");
-                        } else if (state is RegisterFailure){
+                      } else if (state is RegisterFailure) {
                         context.message(message: state.error);
-                      } else {
-
-                      }
+                      } else {}
                     },
                     child: CustomButton(
                       color: AppColors.purpleColor,
                       colorText: AppColors.whiteColor,
-                      text: "SignUp",
+                      text: "Next",
                       onPressed: () async {
                         if (context
                             .read<RegisterCubit>()
                             .formKeyRegister
                             .currentState!
                             .validate()) {
-                          await context.read<RegisterCubit>().register();
+                          context
+                              .pushReplacementNamed(Routes.selectionScreenRoute);
+                          // context.message(message: "Register Success");
                         }
                       },
                     ),
@@ -212,5 +189,3 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 }
-
-

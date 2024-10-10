@@ -6,9 +6,8 @@ import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/common/background.dart';
-import 'package:quizer/features/presentation/common/button_back.dart';
+import 'package:quizer/features/presentation/common/custom_app_bar.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
-import 'package:quizer/features/presentation/common/custom_progress.dart';
 import 'package:quizer/features/presentation/pages/data%20info%20page/widgets/date_of_birth.dart';
 import 'package:quizer/features/presentation/state/register_state.dart';
 
@@ -31,19 +30,9 @@ class _DataInfoScreenState extends State<DataInfoScreen> {
         child: BlocBuilder<RegisterCubit, RegisterState>(
           builder: (context, state) {
             return Column(children: [
-              Row(
-                children: [
-                  CustomButtonBack(
-                    onPressed: () => context.pop(),
-                  ),
-                  SizedBox(
-                    width: AppSize.s28.w,
-                  ),
-                  const CustomProgress(
-                    start: 3,
-                    end: 2,
-                  ),
-                ],
+              const CustomAppBar(
+                start: 3 / 2,
+                end: 1,
               ),
               SizedBox(height: AppSize.s40.h),
               Text(
@@ -120,18 +109,31 @@ class _DataInfoScreenState extends State<DataInfoScreen> {
                       ),
                     ),
                     SizedBox(height: AppSize.s160.h),
-                    CustomButton(
-                      color: AppColors.lightPurpleColor.withOpacity(.7),
-                      colorText: AppColors.purpleColor,
-                      text: "Next",
-                      onPressed: () {
-                        if (context.read<RegisterCubit>().formKeyInfo.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Processing Data')),
-                        );
-                        context.pushNamed(Routes.signUpScreenRoute);
+                    BlocListener<RegisterCubit, RegisterState>(
+                      listener: (context, state) {
+                        if (state is RegisterSuccess) {
+                          // context.pushNamed(Routes.signUpScreenRoute);
+                          context.message(message: "success");
                         }
                       },
+                      child: CustomButton(
+                        color: AppColors.lightPurpleColor.withOpacity(.7),
+                        colorText: AppColors.purpleColor,
+                        text: "Next",
+                        onPressed: () async {
+                          if (context
+                              .read<RegisterCubit>()
+                              .formKeyInfo
+                              .currentState!
+                              .validate()) {
+                            // ScaffoldMessenger.of(context).showSnackBar(
+                            //   const SnackBar(content: Text('Processing Data')),
+                            // );
+                            context.pushNamed(Routes.signUpScreenRoute);
+                            await context.read<RegisterCubit>().register();
+                          }
+                        },
+                      ),
                     ),
                   ],
                 ),

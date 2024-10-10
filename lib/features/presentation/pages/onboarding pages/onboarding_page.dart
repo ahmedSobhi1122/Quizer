@@ -1,7 +1,6 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quizer/config/routes/screen_export.dart';
 import 'package:quizer/core/helper/extensions.dart';
-import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 
@@ -64,9 +63,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: Stack(
         children: [
           Background(
-            paddingRight: AppSize.s0,
-            paddingLeft: AppSize.s0,
-            paddingTop: AppSize.s0,
             child: Column(
               children: [
                 Expanded(
@@ -100,7 +96,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             Text(
                               contents[i].description,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 18,
                                 color: Colors.black87,
                               ),
@@ -123,9 +119,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   margin: const EdgeInsets.all(40),
                   width: double.infinity,
                   child: ElevatedButton(
-                    child: Text(
-                      currentIndex == contents.length - 1 ? "Continue" : "Next",
-                    ),
                     onPressed: () {
                       if (currentIndex == contents.length - 1) {
                         context.pushReplacementNamed(Routes.logInScreenRoute);
@@ -142,6 +135,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
+                    ),
+                    child: Text(
+                      currentIndex == contents.length - 1 ? "Continue" : "Next",
                     ),
                   ),
                 ),

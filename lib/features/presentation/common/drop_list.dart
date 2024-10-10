@@ -41,10 +41,10 @@ class _CustomDropdownState extends State<CustomDropdown> {
       child: Center(
         child: DropdownButton<String>(
           isExpanded: true,
-          underline: SizedBox.shrink(),
+          underline: const SizedBox.shrink(),
           dropdownColor: Colors.white60,
-          icon: Icon(Icons.arrow_drop_down),
-          style: TextStyle(
+          icon: const Icon(Icons.arrow_drop_down),
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
           ) ,
           value: _selectedValue,
@@ -64,7 +64,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
               value: item,
               child: Text(
                   item,
-                style: TextStyle(
+                style: const TextStyle(
                   color: AppColors.darkPurpleColor30,
                 ),
               ),

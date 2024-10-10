@@ -21,12 +21,14 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
   final TextEditingController _answerController = TextEditingController();
   final List<String> _answers = [];
   final int _maxAnswers = 4;
-  Map<int,List<String>> _questionMap = {};
+  Map<int, List<String>> _questionMap = {};
   int? _selectedAnswerIndex; // Track the selected answer index
-  int _questionIndex=0; // Track the selected answer index
+  int _questionIndex = 0; // Track the selected answer index
 
   void _addAnswer() {
-    if (_answers.length < _maxAnswers && _answerController.text.isNotEmpty&& !_answers.contains(_answerController.text)) {
+    if (_answers.length < _maxAnswers &&
+        _answerController.text.isNotEmpty &&
+        !_answers.contains(_answerController.text)) {
       setState(() {
         _answers.add(_answerController.text);
         _answerController.clear();
@@ -44,7 +46,8 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
     if (_questionController.text.isNotEmpty && _answers.isNotEmpty) {
       // Save the question and answers to the map
       setState(() {
-        _questionMap[_questionIndex] = List.from(_answers); // Add a copy of answers
+        _questionMap[_questionIndex] =
+            List.from(_answers); // Add a copy of answers
         _questionIndex++; // Increment the question index for the next question
         // Clear the current inputs
         _answers.clear();
@@ -52,14 +55,11 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
       });
 
       // Optionally, show a Snackbar to indicate the question has been saved
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Question saved! You can add a new one.')),
-      );
+      context.message(message: 'Question saved! You can add a new one.');
     } else {
       // Optionally, show a Snackbar if the question or answers are empty
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please enter a question and at least one answer.')),
-      );
+      context.message(
+          message: 'Please enter a question and at least one answer.');
     }
   }
 
@@ -115,12 +115,12 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                     controller: _questionController,
                     maxLines: null,
                     expands: true,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: AppColors.whiteColor40,
                       fontSize: AppSize.s20,
                     ),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       fillColor: Colors.white60,
                       hintText:
                           "Question description like\nWhat is your name ?",
@@ -180,8 +180,7 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                     Text(
                       '${_answers.length}/$_maxAnswers',
                       style: TextStyle(
-                          color: Colors.grey[700], fontWeight: FontWeight.bold
-                      ),
+                          color: Colors.grey[700], fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -199,12 +198,12 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                 SizedBox(
                   height: AppSize.s20.h,
                 ),
-                Container(
-                  height: _answers.length*65.h,
+                SizedBox(
+                  height: _answers.length * 65.h,
                   width: double.infinity,
                   child: Expanded(
                     child: ListView.builder(
-                      physics:const ScrollPhysics(),
+                      physics: const ScrollPhysics(),
                       itemCount: _answers.length,
                       itemBuilder: (context, index) {
                         return Dismissible(
@@ -215,10 +214,10 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                               color: Colors.red.withOpacity(.9),
                               borderRadius: BorderRadius.circular(10),
                             ),
-
                             alignment: Alignment.centerRight,
                             padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: const Icon(Icons.delete, color: Colors.white),
+                            child:
+                                const Icon(Icons.delete, color: Colors.white),
                           ),
                           onDismissed: (direction) {
                             setState(() {
@@ -226,15 +225,15 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                             });
 
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('${_answers[index]} removed')),
+                              SnackBar(
+                                  content: Text('${_answers[index]} removed')),
                             );
                           },
                           child: GestureDetector(
-
                             onTap: () => _selectAnswer(index),
                             child: Container(
-                              margin: EdgeInsets.symmetric(vertical: 4),
-                              padding: EdgeInsets.all(10),
+                              margin: const EdgeInsets.symmetric(vertical: 4),
+                              padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                 color: _selectedAnswerIndex == index
                                     ? Colors.green[100]
@@ -247,7 +246,8 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                                 ),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     _answers[index],
@@ -272,7 +272,6 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                     ),
                   ),
                 ),
-
                 Row(children: [
                   Expanded(
                     child: CustomButton(

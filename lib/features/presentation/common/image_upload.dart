@@ -9,7 +9,7 @@ class ImageUploadField extends StatefulWidget {
   final double height;
   final String hint;
   final BoxFit fitter;
-  const ImageUploadField({Key? key, required this.height, required this.hint, required this.fitter}) : super(key: key);
+  const ImageUploadField({super.key, required this.height, required this.hint, required this.fitter});
 
   @override
   _ImageUploadFieldState createState() => _ImageUploadFieldState();
@@ -45,13 +45,13 @@ class _ImageUploadFieldState extends State<ImageUploadField> {
               children: [
                 Text(
                   widget.hint,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: AppSize.s20,
                     fontWeight: FontWeight.bold,
                     color: AppColors.whiteColor40
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 IconButton(
                     onPressed: () {
                       _pickImage();
@@ -66,7 +66,7 @@ class _ImageUploadFieldState extends State<ImageUploadField> {
           )
               : Stack(
             children: [
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),

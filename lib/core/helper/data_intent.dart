@@ -1,8 +1,9 @@
 class DataIntent {
   DataIntent._();
 //------------------------------------
- //login
+ //login to forget password
   static String? _email;
+
   static void pushEmail(String email) => _email = email;
 
   static String? popEmail() {
@@ -10,6 +11,9 @@ class DataIntent {
     _email = null;
     return value;
   }
-
 //------------------------------------
+
+
+
+
 }

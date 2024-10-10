@@ -27,7 +27,7 @@ class _CustomProgressState extends State<CustomProgress> {
   Widget build(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 500), () {
       setState(() {
-        _width = AppSize.s240.w / (widget.end??100);
+        _width = (widget.end == 0) ? 0 : AppSize.s240.w / (widget.end??100);
       });
     });
     return Stack(
@@ -46,6 +46,7 @@ class _CustomProgressState extends State<CustomProgress> {
           duration: const Duration(milliseconds: 500),
           width: _width,
           height: AppSize.s16.h,
+          curve: Curves.easeInOut,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppBorderRadius.br13.r),
             gradient: const LinearGradient(colors: [

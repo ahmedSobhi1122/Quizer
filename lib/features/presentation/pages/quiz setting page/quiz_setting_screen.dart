@@ -11,6 +11,8 @@ import '../../../../config/routes/route_constants.dart';
 import '../../common/custom_button_with_shadow.dart';
 
 class QuizSettingScreen extends StatelessWidget {
+  const QuizSettingScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

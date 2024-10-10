@@ -5,15 +5,17 @@ import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/config/routes/route_constants.dart';
 
 class SettingScreen extends StatefulWidget {
+  const SettingScreen({super.key});
+
   @override
   State<SettingScreen> createState() => _SettingScreenState();
 }
 
-enum Themes { Light, Dark }
+enum Themes { LIGHT, DARK }
 
-enum Languages { English, Arabic, French }
+enum Languages { ENGLISH, ARABIC, FRENCH }
 
-enum States { On, Off }
+enum States { ON, OFF }
 
 class _SettingScreenState extends State<SettingScreen> {
   String language = 'English';
@@ -24,8 +26,8 @@ class _SettingScreenState extends State<SettingScreen> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Center(
-                child: const Text(
+              title: const Center(
+                child: Text(
                   'Delete Account',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
@@ -61,26 +63,26 @@ class _SettingScreenState extends State<SettingScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Select a Language'),
+          title: const Text('Select a Language'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                title: Text(Languages.English.name),
+                title: Text(Languages.ENGLISH.name),
                 onTap: () {
-                  _chooseLanguage(Languages.English.name);
+                  _chooseLanguage(Languages.ENGLISH.name);
                 },
               ),
               ListTile(
-                title: Text(Languages.Arabic.name),
+                title: Text(Languages.ARABIC.name),
                 onTap: () {
-                  _chooseLanguage(Languages.Arabic.name);
+                  _chooseLanguage(Languages.ARABIC.name);
                 },
               ),
               ListTile(
-                title: Text(Languages.French.name),
+                title: Text(Languages.FRENCH.name),
                 onTap: () {
-                  _chooseLanguage(Languages.French.name);
+                  _chooseLanguage(Languages.FRENCH.name);
                 },
               ),
             ],
@@ -95,20 +97,20 @@ class _SettingScreenState extends State<SettingScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Select a Theme'),
+          title: const Text('Select a Theme'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                title: Text(Themes.Light.name),
+                title: Text(Themes.LIGHT.name),
                 onTap: () {
-                  _chooseTheme(Themes.Light.name);
+                  _chooseTheme(Themes.LIGHT.name);
                 },
               ),
               ListTile(
-                title: Text(Themes.Dark.name),
+                title: Text(Themes.DARK.name),
                 onTap: () {
-                  _chooseTheme(Themes.Dark.name);
+                  _chooseTheme(Themes.DARK.name);
                 },
               ),
             ],
@@ -123,20 +125,20 @@ class _SettingScreenState extends State<SettingScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Notification State'),
+          title: const Text('Notification State'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                title: Text(States.On.name),
+                title: Text(States.ON.name),
                 onTap: () {
-                  _chooseNotification(States.On.name);
+                  _chooseNotification(States.ON.name);
                 },
               ),
               ListTile(
-                title: Text(States.Off.name),
+                title: Text(States.OFF.name),
                 onTap: () {
-                  _chooseNotification(States.Off.name);
+                  _chooseNotification(States.OFF.name);
                 },
               ),
             ],
@@ -233,7 +235,7 @@ class _SettingScreenState extends State<SettingScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(AppPadding.p16),
+          padding: EdgeInsets.all(AppPadding.p16.r),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -256,8 +258,8 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
               SizedBox(height: 10.h),
               ListTile(
-                title: Text("Edit Personal Info"),
-                trailing: Icon(Icons.arrow_forward_ios),
+                title: const Text("Edit Personal Info"),
+                trailing: const Icon(Icons.arrow_forward_ios),
                 onTap: () {
                   print("Edit Personal Info");
                   context.pushNamed(Routes.profileScreenRoute);
@@ -266,8 +268,8 @@ class _SettingScreenState extends State<SettingScreen> {
               SizedBox(height: 10.h),
               ListTile(
                 textColor: Colors.red,
-                title: Text("Delete Account"),
-                trailing: Icon(Icons.arrow_forward_ios),
+                title: const Text("Delete Account"),
+                trailing: const Icon(Icons.arrow_forward_ios),
                 onTap: () {
                   _deleteDialog();
                   print("Delete Account");
@@ -284,7 +286,7 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
               SizedBox(height: 10.h),
               ListTile(
-                title: Text("Theme"),
+                title: const Text("Theme"),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -297,7 +299,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     SizedBox(
                       width: 10.w,
                     ),
-                    Icon(Icons.arrow_forward_ios)
+                    const Icon(Icons.arrow_forward_ios)
                   ],
                 ),
                 onTap: () {
@@ -307,7 +309,7 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
               SizedBox(height: 10.h),
               ListTile(
-                title: Text("Language"),
+                title: const Text("Language"),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -320,7 +322,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     SizedBox(
                       width: 10.w,
                     ),
-                    Icon(Icons.arrow_forward_ios)
+                    const Icon(Icons.arrow_forward_ios)
                   ],
                 ),
                 onTap: () {
@@ -343,7 +345,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     SizedBox(
                       width: 10.w,
                     ),
-                    Icon(Icons.arrow_forward_ios)
+                    const Icon(Icons.arrow_forward_ios)
                   ],
                 ),
                 onTap: () {
@@ -363,13 +365,13 @@ class _SettingScreenState extends State<SettingScreen> {
               SizedBox(height: 10.h),
               ListTile(
                 title: const Text("About Quizzo"),
-                trailing: Icon(Icons.arrow_forward_ios),
+                trailing: const Icon(Icons.arrow_forward_ios),
                 onTap: () {
                   print("About");
                   _aboutDialog();
                 },
               ),
-              Spacer(),
+              const Spacer(),
               Divider(
                 height: 50.h,
                 thickness: 1,

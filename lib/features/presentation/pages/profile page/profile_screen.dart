@@ -8,6 +8,7 @@ import 'package:quizer/core/resources/assets_manager.dart';
 
 import 'package:quizer/config/routes/route_constants.dart';
 import 'package:quizer/features/presentation/common/background.dart';
+import 'package:quizer/features/presentation/common/custom_appbar_rank.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -60,29 +61,13 @@ class ProfileScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(AppPadding.p16),
                         child: Row(
                           children: [
-                            Stack(
-                              children: [
-                                CircleAvatar(
-                                  radius: 65.r,
-                                  backgroundColor: Colors.white, // Avatar image
-                                  child: CircleAvatar(
-                                    radius: 63.r,
-                                    backgroundImage: const AssetImage(ImageAssets.avatar),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 8,
-                                  right: 9,
-                                  child: CircleAvatar(
-                                    radius: 10.r,
-                                    backgroundColor: Colors.white,
-                                    child: CircleAvatar(
-                                      radius: 8.r,
-                                      backgroundColor: Colors.green,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            CircleAvatar(
+                              radius: 65.r,
+                              backgroundColor: Colors.white, // Avatar image
+                              child: CircleAvatar(
+                                radius: 63.r,
+                                backgroundImage: const AssetImage(ImageAssets.avatar),
+                              ),
                             ),
                             Container(
                               padding: const EdgeInsets.all(AppPadding.p12),
@@ -100,27 +85,7 @@ class ProfileScreen extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(height: 10.h,),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8,vertical: AppPadding.p2),
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey[300],
-                                      border: Border.all(
-                                        color: Colors.deepOrange,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(50),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "Expert",
-                                        style: TextStyle(
-                                            color: AppColors.blackColor80,
-                                            fontSize: FontSize.f15,
-                                            fontWeight: FontWeight.w600
-                                        ),
-                                      ),
-                                    ),
-                                  )
+                                  const CustomAppBarRank()
                                 ],
                               ),
                             ),
@@ -135,6 +100,7 @@ class ProfileScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(AppPadding.p16),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                       Container(
                         height: 115.h,
@@ -166,7 +132,6 @@ class ProfileScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Spacer(),
                       Container(
                         height: 115.h,
                         width: 115.w,
@@ -197,7 +162,6 @@ class ProfileScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Spacer(),
                       Container(
                         height: 115.h,
                         width: 115.w,

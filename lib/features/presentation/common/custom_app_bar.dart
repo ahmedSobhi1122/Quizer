@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/features/presentation/common/button_back.dart';
 import 'package:quizer/features/presentation/common/custom_progress.dart';
@@ -24,7 +25,7 @@ class CustomAppBar extends StatelessWidget {
         CustomButtonBack(
           onPressed: onPressed ??
               () => SchedulerBinding.instance.addPostFrameCallback((_) {
-                    Navigator.pop(context);
+                    context.pop();
                   }),
         ),
         SizedBox(

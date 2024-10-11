@@ -19,9 +19,7 @@ class AppTextStyles {
 
 
   ///Button
-
-
-  static TextStyle customButtonTextStyle(BuildContext context, {Color? color}) =>
+  static TextStyle customButtonTextStyle(BuildContext context,Color color) =>
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: color??AppColors.blackColor,
@@ -75,7 +73,6 @@ class AppTextStyles {
       );
 
   ///Login
-
   static TextStyle forgotPasswordTextStyle(BuildContext context) =>
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
@@ -96,6 +93,56 @@ class AppTextStyles {
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.blackColor,
         fontSize: FontSize.f24,
+      );
+
+  ///home
+  static TextStyle homeNameTextStyle(BuildContext context) =>
+      getRegularStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.whiteColor,
+        fontSize: FontSize.f16,
+      );
+  static TextStyle homeRankTextStyle(BuildContext context) =>
+      getRegularStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.whiteColor,
+        fontSize: FontSize.f11,
+      );
+  static TextStyle homePointsTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.whiteColor,
+        fontSize: FontSize.f14,
+      );
+  static TextStyle homeDailyTaskHeaderTextStyle(BuildContext context) =>
+      getBlackStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor,
+        fontSize: FontSize.f20,
+      );
+  static TextStyle homeDailyTaskTitleTextStyle(BuildContext context) =>
+      getRegularStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor,
+        fontSize: FontSize.f16,
+      );
+  static TextStyle homeDailyTaskSubTitleTextStyle(BuildContext context) =>
+      getLightStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor,
+        fontSize: FontSize.f14,
+      );
+  static TextStyle homeTitlesTextStyle(BuildContext context) =>
+      getBlackStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor,
+        fontSize: FontSize.f14,
+      );
+  static TextStyle homeSubTitlesTextStyle(BuildContext context) =>
+      getBlackStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.deepDarkPurple,
+        fontSize: FontSize.f14,
       );
 
 }

@@ -264,4 +264,5 @@ class RemoteDataSource {
       throw Exception('Error during get profile: $error');
     }
   }
+
 }

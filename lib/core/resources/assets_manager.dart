@@ -14,6 +14,7 @@ class ImageAssets {
   static const String reward3 = "${_imagePath}reward3.png";
   static const String reward4 = "${_imagePath}reward4.png";
   static const String reward5 = "${_imagePath}reward5.png";
+  static const String cringe = "${_imagePath}Cringe.jpg";
   // static const String unknownUserImage = "${_imagePath}unknown_user.jpg";
 
 }
@@ -37,6 +38,7 @@ class SVGAssets {
   static const String onboarding1 = "${_basePath}onboarding_1.svg";
   static const String onboarding2 = "${_basePath}onboarding_2.svg";
   static const String onboarding3 = "${_basePath}onboarding_3.svg";
+  static const String lightning = "${_basePath}lightning.svg";
 
 }
 

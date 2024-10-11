@@ -1,5 +1,5 @@
 import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
-import 'package:quizer/features/presentation/cubit/home_cubit.dart';
+import 'package:quizer/features/presentation/cubit/profile_cubit.dart';
 import 'package:quizer/features/presentation/pages/Home%20Page/home_page.dart';
 import 'package:quizer/features/presentation/pages/create%20question%20page/create_question_screen.dart';
 import 'package:quizer/features/presentation/pages/quiz%20setting%20page/quiz_setting_screen.dart';
@@ -95,18 +95,20 @@ class RouteGenerator {
 
       ///home
       case Routes.homeScreenRoute:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider<HomeCubit>(
-            create: (context) => sl<HomeCubit>(),
-            child: const HomePage(),
-          ),
-        );
-////////////////////////////////////////////////////////////////////////////////
+      return MaterialPageRoute(
+        builder: (context) => BlocProvider<ProfileCubit>(
+          create: (context) => sl<ProfileCubit>(),
+          child: const HomePage(),
+        ),
+      );
 
       ///profile
       case Routes.profileScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => const ProfileScreen(),
+          builder: (context) => BlocProvider<ProfileCubit>.value(
+            value: sl<ProfileCubit>(),
+            child: const ProfileScreen(),
+          ),
         );
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -114,10 +116,12 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => const QuizSettingScreen(),
         );
+
       case Routes.createQuestionScreenRoute:
         return MaterialPageRoute(
           builder: (context) => CreateQuestionScreen(),
         );
+
       case Routes.settingScreenRoute:
         return MaterialPageRoute(
           builder: (context) => const SettingScreen(),

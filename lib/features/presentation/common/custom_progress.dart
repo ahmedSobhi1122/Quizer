@@ -7,8 +7,20 @@ import 'package:quizer/core/resources/app_values.dart';
 class CustomProgress extends StatefulWidget {
   final double? start;
   final double? end;
+  final Color borderColor;
+  final Color backgroundColor;
+  final List<Color> foregroundGradientColors;
 
-  const CustomProgress({super.key, this.end, this.start});
+  const CustomProgress(
+      {super.key,
+      this.end,
+      this.start,
+      this.borderColor = AppColors.whiteColor,
+      this.backgroundColor = AppColors.lightGreyColor,
+      this.foregroundGradientColors = const [
+        AppColors.lightPurpleColor,
+        AppColors.primaryColor,
+      ]});
 
   @override
   State<CustomProgress> createState() => _CustomProgressState();
@@ -20,14 +32,14 @@ class _CustomProgressState extends State<CustomProgress> {
   @override
   void initState() {
     super.initState();
-    _width = (widget.start == 0) ? 0 : AppSize.s240.w / (widget.start??100);
+    _width = (widget.start == 0) ? 0 : AppSize.s240.w / (widget.start ?? 100);
   }
 
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 500), () {
       setState(() {
-        _width = (widget.end == 0) ? 0 : AppSize.s240.w / (widget.end??100);
+        _width = (widget.end == 0) ? 0 : AppSize.s240.w / (widget.end ?? 100);
       });
     });
     return Stack(
@@ -37,9 +49,9 @@ class _CustomProgressState extends State<CustomProgress> {
           height: AppSize.s16.h,
           decoration: BoxDecoration(
             border: Border.all(
-                style: BorderStyle.solid, color: AppColors.whiteColor),
+                style: BorderStyle.solid, color: widget.borderColor),
             borderRadius: BorderRadius.circular(AppBorderRadius.br13.r),
-            color: AppColors.lightGreyColor,
+            color: widget.backgroundColor,
           ),
         ),
         AnimatedContainer(
@@ -49,10 +61,7 @@ class _CustomProgressState extends State<CustomProgress> {
           curve: Curves.easeInOut,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppBorderRadius.br13.r),
-            gradient: const LinearGradient(colors: [
-              AppColors.lightPurpleColor,
-              AppColors.primaryColor,
-            ], begin: Alignment.centerLeft, end: Alignment.centerRight),
+            gradient:  LinearGradient(colors: widget.foregroundGradientColors, begin: Alignment.centerLeft, end: Alignment.centerRight),
           ),
         ),
       ],

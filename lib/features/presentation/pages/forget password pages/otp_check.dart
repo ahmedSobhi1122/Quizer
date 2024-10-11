@@ -47,37 +47,28 @@ class OtpCheckScreen extends StatelessWidget {
                   style: AppTextStyles.subHeaderSignupTextStyle(context),
                 ),
                 SizedBox(height: AppSize.s210.h),
-                Form(
-                  key: context.read<ForgetPasswordCubit>().verifyOtpFormKey,
-                  child: Column(
-                    children: [
-                      const OTPCode(),
-                      SizedBox(height: AppSize.s260.h),
-                      BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
-                        listener: (context, state) {
-                          print(state);
-                          if (state is ForgetPasswordSuccess) {
-                            context.message(message: "الف مبروك");
-                            context.pushNamed(Routes.newPasswordScreenRoute);
-                          }
-                        },
-                        child: CustomButton(
-                          text: "Verify",
-                          onPressed: () {
-                            if (context
-                                .read<ForgetPasswordCubit>()
-                                .verifyOtpFormKey
-                                .currentState!
-                                .validate()) {
-                              context.read<ForgetPasswordCubit>().verifyOTP();
-                            }
-                          },
-                          color: AppColors.purpleColor50, // Dark Purple
-                          colorText: AppColors.whiteColor,
-                        ),
+                Column(
+                  children: [
+                    const OTPCode(),
+                    SizedBox(height: AppSize.s260.h),
+                    BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
+                      listener: (context, state) {
+                        print(state);
+                        if (state is ForgetPasswordSuccess) {
+                          context.message(message: "الف مبروك");
+                          context.pushNamed(Routes.newPasswordScreenRoute);
+                        } else if(state is ForgetPasswordFailure) {
+                          context.message(message: "OTP is incorrect");
+                        }
+                      },
+                      child: CustomButton(
+                        text: "Verify",
+                        onPressed: () async =>await context.read<ForgetPasswordCubit>().verifyOTP(),
+                        color: AppColors.purpleColor50, // Dark Purple
+                        colorText: AppColors.whiteColor,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),

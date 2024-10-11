@@ -33,7 +33,6 @@ class _OtpScreenState extends State<OtpScreen> {
       body: Background(
         paddingRight: AppSize.s24,
         paddingLeft: AppSize.s24,
-        paddingTop: AppSize.s0,
         child: Padding(
           padding: const EdgeInsets.all(AppPadding.defaultPadding),
           child: SingleChildScrollView(
@@ -49,10 +48,8 @@ class _OtpScreenState extends State<OtpScreen> {
                 BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
                   builder: (context, state) {
                     print(state);
-                    if (state is ForgetPasswordSuccess) {
-                      context.pushNamed(Routes.otpCheckScreenRoute);
-                    } else if (state is ForgetPasswordFailure) {
-                      context.message(message: state.error);
+                    if (state is ForgetPasswordFailure) {
+                      return Text(state.error);
                     } else if (state is ForgetPasswordDataOTPProfileLoaded) {
                       return Column(
                         children: [
@@ -79,7 +76,6 @@ class _OtpScreenState extends State<OtpScreen> {
                         height: AppSize.s100.h,
                       );
                     }
-                    return const SizedBox.shrink();
                   },
                 ),
                 SizedBox(height: AppSize.s360.h,),
@@ -94,15 +90,13 @@ class _OtpScreenState extends State<OtpScreen> {
                   },
                   child: CustomButton(
                     text: "Get OTP",
-                    onPressed: () async {
-                      await context.read<ForgetPasswordCubit>().getOTP();
-                    },
+                    onPressed: () async =>
+                      await context.read<ForgetPasswordCubit>().getOTP(),
                     color: AppColors.purpleColor50, // Dark Purple
                     colorText: AppColors.whiteColor,
                   ),
                 ),
                 SizedBox(height: 20.h),
-                // Light Purple Button
                 CustomButton(
                   text: "Not your account?",
                   onPressed: () {

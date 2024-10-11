@@ -97,8 +97,8 @@ class NewPasswordScreen extends StatelessWidget {
               },
               child: CustomButton(
                 text: 'Reset Password',
-                onPressed: () {
-                  context.read<ForgetPasswordCubit>().resetPassword();
+                onPressed: () async {
+                  await context.read<ForgetPasswordCubit>().resetPassword();
                 },
                 color: AppColors.purpleColor50, // Use your color resource
                 colorText: AppColors.whiteColor, // Text color

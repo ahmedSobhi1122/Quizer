@@ -8,6 +8,7 @@ import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 
+
 class DateOfBirth extends StatefulWidget {
   const DateOfBirth({super.key});
 
@@ -43,6 +44,7 @@ class _DateOfBirthState extends State<DateOfBirth> {
           .requestFocus(context.read<RegisterCubit>().phoneNumberFocusNode),
       readOnly: true,
       onTap: () async {
+        print("---------------------------3");
         pickedDate = await showDatePicker(
             context: context,
             initialDate: DateTime.now(),
@@ -50,13 +52,17 @@ class _DateOfBirthState extends State<DateOfBirth> {
             //DateTime.now()
             lastDate: DateTime(2100));
 
+        print("---------------------------1");
+        print(pickedDate);
         if (pickedDate != null) {
-          String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate!);
+          String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate!).toString();
           setState(() {
             context.read<RegisterCubit>().birthDateController.text =
                 formattedDate;
           });
-        } else {}
+          print(pickedDate);
+        }
+        print("---------------------------2");
       },
     );
   }

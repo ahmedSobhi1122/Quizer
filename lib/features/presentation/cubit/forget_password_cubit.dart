@@ -16,7 +16,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   final ResetPasswordUseCase resetPasswordUseCase;
 
   final forgetPasswordFormKey = GlobalKey<FormState>();
-  final verifyOtpFormKey = GlobalKey<FormState>();
+  // final verifyOtpFormKey = GlobalKey<FormState>();
 
   TextEditingController emailController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
@@ -39,6 +39,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   Future<void> checkUserExist() async {
     emit(ForgetPasswordLoading());
     try {
+      emit(ForgetPasswordInitial());
       var p = await userExistUserUseCase.call(emailController.text);
       print("email: ${emailController.text} is exist: ${p},");
       if (p) {
@@ -77,6 +78,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   Future<void> verifyOTP() async {
     emit(ForgetPasswordLoading());
     try {
+      emit(ForgetPasswordInitial());
       var otp = otpController.map((e) => e.text).join();
       await verifyOtpUseCase.call(emailController.text, otp);
       emit(ForgetPasswordSuccess());

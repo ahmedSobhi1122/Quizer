@@ -35,6 +35,7 @@ dependencies:
   win32:
   path:
   dio:
+  intl:
   equatable:
   get_it:
   flutter_screenutil:

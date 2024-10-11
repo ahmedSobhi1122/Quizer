@@ -11,6 +11,24 @@ class RegisterLoading extends RegisterState {}
 
 class RegisterSuccess extends RegisterState {}
 
+class RegisterPasswordVisibilityChanged extends RegisterState {
+  final bool isPasswordVisible;
+
+  RegisterPasswordVisibilityChanged(this.isPasswordVisible);
+
+  @override
+  List<Object?> get props => [isPasswordVisible];
+}
+
+class RegisterConfirmPasswordVisibilityChanged extends RegisterState {
+  final bool isConfirmPasswordVisible;
+
+  RegisterConfirmPasswordVisibilityChanged(this.isConfirmPasswordVisible);
+
+  @override
+  List<Object?> get props => [isConfirmPasswordVisible];
+}
+
 class RegisterFailure extends RegisterState {
   final String error;
 

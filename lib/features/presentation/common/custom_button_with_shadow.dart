@@ -39,7 +39,7 @@ class CustomButton extends StatelessWidget {
           ),
           child: Text(
             text,
-            style: AppTextStyles.customButtonTextStyle(context, colorText),
+            style: AppTextStyles.customButtonTextStyle(context, color: colorText),
           ),
         ),
       ),

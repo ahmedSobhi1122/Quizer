@@ -24,17 +24,22 @@ class SelectionScreen extends StatelessWidget {
           child: Column(
             children: [
               const CustomAppBar(
-                start: 0.0,
+                start: 3 / 1,
                 end: 3 / 2,
               ),
               SizedBox(height: AppSize.s40.h),
               Text(
-                '''What type of account would you like to create? ''',
+                '''What type of account would''',
                 style: AppTextStyles.headerSignupTextStyle(context),
               ),
-              SizedBox(height: AppSize.s60.h),
+              Text(
+                '''you like to create?''',
+                textAlign: TextAlign.center,
+                style: AppTextStyles.headerSignupTextStyle(context),
+              ),
+              SizedBox(height: AppSize.s100.h),
               const Selection(),
-              SizedBox(height: AppSize.s226.h),
+              SizedBox(height: AppSize.s210.h),
               CustomButton(
                 color: AppColors.buttonPurpleColor,
                 colorText: AppColors.purpleColor,

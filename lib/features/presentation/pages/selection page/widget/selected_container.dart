@@ -94,7 +94,7 @@ class _SelectionState extends State<Selection> {
                 _fillColor2 = AppColors.transparentColor;
                 context.read<RegisterCubit>().userRole = UserRole.ADMIN;
                 width1 = AppSize.s96.w;
-                width2 = AppSize.s350.w;
+                width2 = AppSize.s96.w;
               } else {
                 isClicked = 0;
                 _fillColor1 = AppColors.purpleColor;
@@ -138,7 +138,7 @@ class _SelectionState extends State<Selection> {
                 _fillColor1 = AppColors.transparentColor;
                 _fillColor2 = AppColors.transparentColor;
                 context.read<RegisterCubit>().userRole = UserRole.ADMIN;
-                width1 = AppSize.s350.w;
+                width1 = AppSize.s96.w;
                 width2 = AppSize.s96.w;
               } else {
                 isClicked = 1;

@@ -31,6 +31,9 @@ class RegisterCubit extends Cubit<RegisterState> {
   final FocusNode passwordFocusNode = FocusNode();
   final FocusNode confirmPasswordFocusNode = FocusNode();
 
+  bool isPasswordVisible = false;
+  bool isConfirmPasswordVisible = false;
+
   RegisterCubit(this.registerUserUseCase, this.googleAuthUserUseCase,
       this.facebookAuthUserUseCase)
       : super(RegisterInitial());
@@ -88,5 +91,17 @@ class RegisterCubit extends Cubit<RegisterState> {
     } catch (error) {
       emit(RegisterFailure(error.toString()));
     }
+  }
+
+
+  void togglePasswordVisibility() {
+    isPasswordVisible = !isPasswordVisible;
+    emit(RegisterPasswordVisibilityChanged(isPasswordVisible));
+  }
+
+  void toggleConfirmPasswordVisibility() {
+    isConfirmPasswordVisible = !isConfirmPasswordVisible;
+    emit(RegisterConfirmPasswordVisibilityChanged(
+        isConfirmPasswordVisible));
   }
 }

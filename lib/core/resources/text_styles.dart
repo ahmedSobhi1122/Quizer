@@ -21,19 +21,28 @@ class AppTextStyles {
   ///Button
 
 
-  static TextStyle customButtonTextStyle(BuildContext context,Color color) =>
+  static TextStyle customButtonTextStyle(BuildContext context, {Color? color}) =>
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: color,
+        color: color??AppColors.blackColor,
         fontSize: FontSize.f22,
       );
+
+  static TextStyle socialButtonTextStyle(BuildContext context, {Color? color}) =>
+      getRegularStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: color??AppColors.blackColor,
+        fontSize: FontSize.f14,
+      );
+
+
 
   ///Selection
   static TextStyle headerSignupTextStyle(BuildContext context) =>
       getMediumStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.blackColor,
-        fontSize: FontSize.f32,
+        fontSize: FontSize.f28,
       );
 
   static TextStyle subHeaderSignupTextStyle(BuildContext context) =>

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/core/helper/validation.dart';
 import 'package:quizer/core/resources/app_colors.dart';
+import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
 
@@ -24,6 +26,8 @@ class PasswordField extends StatelessWidget {
       style: AppTextStyles.textStyle(context),
       decoration: InputDecoration(
         labelText: 'Password',
+        labelStyle: const TextStyle(color: AppColors.purpleColor),
+        contentPadding: EdgeInsets.all(AppPadding.defaultPadding.r),
         border: const OutlineInputBorder(),
         suffixIcon: IconButton(
           icon: Icon(
@@ -61,6 +65,8 @@ class ConfirmPasswordField extends StatelessWidget {
       obscuringCharacter: "※",
       decoration: InputDecoration(
         labelText: 'Confirm Password',
+        labelStyle: const TextStyle(color: AppColors.purpleColor),
+        contentPadding: EdgeInsets.all(AppPadding.defaultPadding.r),
         border: const OutlineInputBorder(),
         suffixIcon: IconButton(
           icon: Icon(

@@ -55,11 +55,20 @@ class _OtpScreenState extends State<OtpScreen> {
                         children: [
                           CircleAvatar(
                             radius: AppSize.s60.r,
-                            backgroundImage: NetworkImage(
-                              Constants.baseUrl.replaceAll("/api/", "") +
-                                  state.user.profileImage!,
-                            ),
+                            backgroundImage: state.user.profileImage != null
+                                ? NetworkImage(
+                                    Constants.baseUrl.replaceAll("/api/", "") +
+                                        state.user.profileImage!,
+                                  )
+                                : null,
                             backgroundColor: AppColors.transparentColor,
+                            child: state.user.profileImage == null
+                                ? Lottie.asset(
+                                    LottieAssets.loading,
+                                    width: AppSize.s100.w,
+                                    height: AppSize.s100.h,
+                                  )
+                                : null,
                           ),
                           SizedBox(height: AppSize.s16.h),
                           // User Name
@@ -78,20 +87,22 @@ class _OtpScreenState extends State<OtpScreen> {
                     }
                   },
                 ),
-                SizedBox(height: AppSize.s360.h,),
+                SizedBox(
+                  height: AppSize.s360.h,
+                ),
                 BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
                   listener: (context, state) {
                     print("otp screen $state");
                     if (state is ForgetPasswordSuccess) {
                       context.pushNamed(Routes.otpCheckScreenRoute);
-                    } else{
+                    } else {
                       const Loading();
                     }
                   },
                   child: CustomButton(
                     text: "Get OTP",
                     onPressed: () async =>
-                      await context.read<ForgetPasswordCubit>().getOTP(),
+                        await context.read<ForgetPasswordCubit>().getOTP(),
                     color: AppColors.purpleColor50, // Dark Purple
                     colorText: AppColors.whiteColor,
                   ),

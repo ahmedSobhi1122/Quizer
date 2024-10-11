@@ -24,8 +24,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<ForgetPasswordCubit>().emailController.text = DataIntent.popEmail()??"";
+    context.read<ForgetPasswordCubit>().emailController.text =
+        DataIntent.popEmail() ?? "";
   }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -50,20 +52,24 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   ),
                   SizedBox(height: AppSize.s310.h),
                   Form(
-                    key: context.read<ForgetPasswordCubit>().forgetPasswordFormKey,
+                    key: context
+                        .read<ForgetPasswordCubit>()
+                        .forgetPasswordFormKey,
                     child: Column(
                       children: [
                         Container(
                           width: context.width * 0.85,
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.3),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius:
+                                BorderRadius.circular(AppBorderRadius.br10),
                           ),
                           child: SizedBox(
                             width: AppSize.s335.w,
                             child: TextFormField(
-                              controller:
-                                  context.read<ForgetPasswordCubit>().emailController,
+                              controller: context
+                                  .read<ForgetPasswordCubit>()
+                                  .emailController,
                               decoration: style("Email"),
                               validator: (value) =>
                                   Validation.validateEmail(value),
@@ -75,11 +81,17 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         SizedBox(height: AppSize.s224.h),
                         BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
                           listener: (context, state) {
-                            if (state is ForgetPasswordSuccess) {
-                              context.message(message: "success",);
-                              context.pushNamed(Routes.otpScreenRoute);
-                            } else if (state is ForgetPasswordFailure) {
-                              context.message(message: "user not found");
+                            final route = ModalRoute.of(context);
+                            final isCurrentRoute = route?.isCurrent ?? false;
+                            if (isCurrentRoute) {
+                              if (state is ForgetPasswordSuccess) {
+                                context.message(
+                                  message: "success",
+                                );
+                                context.pushNamed(Routes.otpScreenRoute);
+                              } else if (state is ForgetPasswordFailure) {
+                                context.message(message: "user not found");
+                              }
                             }
                           },
                           child: CustomButton(
@@ -90,7 +102,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                   .forgetPasswordFormKey
                                   .currentState!
                                   .validate()) {
-                                await context.read<ForgetPasswordCubit>().checkUserExist();
+                                await context
+                                    .read<ForgetPasswordCubit>()
+                                    .checkUserExist();
                               }
                             },
                             color: AppColors.purpleColor,
@@ -112,7 +126,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             ),
           ),
         ),
-        // Loading screen overlay
         BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
           builder: (context, state) {
             print(state);

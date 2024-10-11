@@ -21,6 +21,10 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+  late final String firstName;
+  late final String lastName;
+  late final String image;
+
   @override
   void initState() {
     super.initState();
@@ -30,97 +34,108 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Background(
-        paddingRight: AppSize.s24,
-        paddingLeft: AppSize.s24,
-        child: Padding(
-          padding: const EdgeInsets.all(AppPadding.defaultPadding),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: context.height * 0.1),
-                Text(
-                  'OTP 🔐',
-                  style: AppTextStyles.headerSignupTextStyle(context),
-                ),
-                SizedBox(height: AppSize.s8.h),
-                // Avatar from SVG
-                BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
-                  builder: (context, state) {
-                    print(state);
-                    if (state is ForgetPasswordFailure) {
-                      return Text(state.error);
-                    } else if (state is ForgetPasswordDataOTPProfileLoaded) {
-                      return Column(
-                        children: [
-                          CircleAvatar(
-                            radius: AppSize.s60.r,
-                            backgroundImage: state.user.profileImage != null
-                                ? NetworkImage(
-                                    Constants.baseUrl.replaceAll("/api/", "") +
-                                        state.user.profileImage!,
-                                  )
-                                : null,
-                            backgroundColor: AppColors.transparentColor,
-                            child: state.user.profileImage == null
-                                ? Lottie.asset(
-                                    LottieAssets.loading,
-                                    width: AppSize.s100.w,
-                                    height: AppSize.s100.h,
-                                  )
-                                : null,
-                          ),
-                          SizedBox(height: AppSize.s16.h),
-                          // User Name
-                          Text(
-                            "${state.user.firstName!} ${state.user.lastName!}",
-                            style: AppTextStyles.otpTextStyle(context),
-                          ),
-                        ],
-                      );
-                    } else {
-                      return Lottie.asset(
-                        LottieAssets.loading,
-                        width: AppSize.s100.w,
-                        height: AppSize.s100.h,
-                      );
-                    }
-                  },
-                ),
-                SizedBox(
-                  height: AppSize.s360.h,
-                ),
-                BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
-                  listener: (context, state) {
-                    print("otp screen $state");
-                    if (state is ForgetPasswordSuccess) {
-                      context.pushNamed(Routes.otpCheckScreenRoute);
-                    } else {
-                      const Loading();
-                    }
-                  },
-                  child: CustomButton(
-                    text: "Get OTP",
-                    onPressed: () async =>
-                        await context.read<ForgetPasswordCubit>().getOTP(),
-                    color: AppColors.purpleColor50, // Dark Purple
+      body: Stack(children: [
+        Background(
+          paddingRight: AppSize.s24,
+          paddingLeft: AppSize.s24,
+          child: Padding(
+            padding: const EdgeInsets.all(AppPadding.defaultPadding),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: context.height * 0.1),
+                  Text(
+                    'OTP 🔐',
+                    style: AppTextStyles.headerSignupTextStyle(context),
+                  ),
+                  SizedBox(height: AppSize.s8.h),
+                  // Avatar from SVG
+                  BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
+                    builder: (context, state) {
+                      print(state);
+                      if (state is ForgetPasswordDataOTPProfileLoaded) {
+                        firstName = state.user.firstName!;
+                        lastName = state.user.lastName!;
+                        image = state.user.profileImage!;
+                      }
+
+                      if (state is ForgetPasswordFailure) {
+                        return Text(state.error);
+                      } else if (state is ForgetPasswordDataOTPProfileLoaded ||
+                          state is ForgetPasswordSuccess) {
+                        return Column(
+                          children: [
+                            CircleAvatar(
+                              radius: AppSize.s60.r,
+                              backgroundImage: NetworkImage(
+                                Constants.baseUrl.replaceAll("/api/", "") +
+                                    image,
+                              ),
+                              backgroundColor: AppColors.transparentColor,
+                            ),
+                            SizedBox(height: AppSize.s16.h),
+                            Text(
+                              "$firstName $lastName",
+                              style: AppTextStyles.otpTextStyle(context),
+                            ),
+                          ],
+                        );
+                      } else {
+                        return Lottie.asset(
+                          LottieAssets.loading,
+                          width: AppSize.s100.w,
+                          height: AppSize.s100.h,
+                        );
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    height: AppSize.s360.h,
+                  ),
+                  BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
+                    listener: (context, state) {
+                      final route = ModalRoute.of(context);
+                      final isCurrentRoute = route?.isCurrent ?? false;
+                      if (isCurrentRoute) {
+                        print("otp screen $state");
+                        if (state is ForgetPasswordSuccess) {
+                          context.pushNamed(Routes.otpCheckScreenRoute);
+                        } else {}
+                      }
+                    },
+                    child: CustomButton(
+                      text: "Get OTP",
+                      onPressed: () async {
+                        await context.read<ForgetPasswordCubit>().getOTP();
+                      },
+                      color: AppColors.purpleColor50, // Dark Purple
+                      colorText: AppColors.whiteColor,
+                    ),
+                  ),
+                  SizedBox(height: 20.h),
+                  CustomButton(
+                    text: "Not your account?",
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    color: AppColors.purpleColor30, // Light Purple
                     colorText: AppColors.whiteColor,
                   ),
-                ),
-                SizedBox(height: 20.h),
-                CustomButton(
-                  text: "Not your account?",
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  color: AppColors.purpleColor30, // Light Purple
-                  colorText: AppColors.whiteColor,
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
-      ),
+        BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
+          builder: (context, state) {
+            if (state is ForgetPasswordLoading) {
+              return const Loading();
+            } else {
+              return const SizedBox.shrink();
+            }
+          },
+        ),
+      ]),
     );
   }
 }

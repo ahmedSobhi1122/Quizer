@@ -77,22 +77,26 @@ class NewPasswordScreen extends StatelessWidget {
             ),
             BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
               listener: (context, state) {
-                if (state is ForgetPasswordSuccess) {
-                  context.message(
-                    message: 'Password saved successfully!',
-                    color: AppColors.successColor,
-                  );
-                  context.pushNamedAndRemoveUntil(
-                    '/login',
-                    predicate: (Route<dynamic> route) {
-                      return false;
-                    },
-                  );
-                } else if (state is ForgetPasswordFailure) {
-                  context.message(
-                    message: state.error,
-                    color: AppColors.errorColor,
-                  );
+                final route = ModalRoute.of(context);
+                final isCurrentRoute = route?.isCurrent ?? false;
+                if (isCurrentRoute) {
+                  if (state is ForgetPasswordSuccess) {
+                    context.message(
+                      message: 'Password saved successfully!',
+                      color: AppColors.successColor,
+                    );
+                    context.pushNamedAndRemoveUntil(
+                      '/login',
+                      predicate: (Route<dynamic> route) {
+                        return false;
+                      },
+                    );
+                  } else if (state is ForgetPasswordFailure) {
+                    context.message(
+                      message: state.error,
+                      color: AppColors.errorColor,
+                    );
+                  }
                 }
               },
               child: CustomButton(

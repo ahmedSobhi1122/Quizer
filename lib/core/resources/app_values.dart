@@ -37,6 +37,7 @@ class AppBorderRadius {
   static double defaultBorderRadius = 12.0.r;
   static double br4 = 4.0.r;
   static double br8 = 8.0.r;
+  static double br10 = 10.0.r;
   static double br13 = 13.0.r;
   static double br16 = 16.0.r;
   static double br20 = 20.0.r;

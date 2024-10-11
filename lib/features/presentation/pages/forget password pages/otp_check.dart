@@ -53,17 +53,24 @@ class OtpCheckScreen extends StatelessWidget {
                     SizedBox(height: AppSize.s260.h),
                     BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
                       listener: (context, state) {
-                        print(state);
-                        if (state is ForgetPasswordSuccess) {
-                          context.message(message: "الف مبروك");
-                          context.pushNamed(Routes.newPasswordScreenRoute);
-                        } else if(state is ForgetPasswordFailure) {
-                          context.message(message: "OTP is incorrect");
+                        final route = ModalRoute.of(context);
+                        final isCurrentRoute = route?.isCurrent ?? false;
+                        if (isCurrentRoute) {
+                          print(state);
+                          if (state is ForgetPasswordSuccess) {
+                            context.message(message: "الف مبروك");
+                            context.pushNamed(Routes.newPasswordScreenRoute);
+                          } else if (state is ForgetPasswordFailure) {
+                            context.message(message: "OTP is incorrect");
+                          }
                         }
                       },
                       child: CustomButton(
                         text: "Verify",
-                        onPressed: () async =>await context.read<ForgetPasswordCubit>().verifyOTP(),
+                        onPressed: () async
+                        {
+                          await context.read<ForgetPasswordCubit>().verifyOTP();
+                        },
                         color: AppColors.purpleColor50, // Dark Purple
                         colorText: AppColors.whiteColor,
                       ),

@@ -12,49 +12,47 @@ class CustomHomeAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return           // This Is The Appbar
-      Padding(
-        padding: EdgeInsets.only(top: AppPadding.p50.h),
-        child: Column(
-          children: [
-            Background(
-              myhHeight: AppSize.s110.h,
-              paddingLeft: AppPadding.p24,
-              paddingRight: AppPadding.p24,
-              colors: const [
-                AppColors.appbar_top,
-                AppColors.appbar_bottom,
-                AppColors.under_appbar_shadow,
+    return // This Is The Appbar
+      Column(
+        children: [
+          Background(
+            myhHeight: AppSize.s160.h,
+            paddingTop: AppPadding.p38,
+            paddingLeft: AppPadding.p24,
+            paddingRight: AppPadding.p24,
+            colors: const [
+              AppColors.appbar_top,
+              AppColors.appbar_bottom,
+              AppColors.under_appbar_shadow,
+            ],
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomAppbarProfile(),
+                CustomHomeAppbarPoints(),
               ],
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CustomAppbarProfile(),
-                  CustomHomeAppbarPoints(),
-                ],
-              ),
             ),
-            Container(
-              height: AppSize.s12.h,
-              decoration:
-              const BoxDecoration(color: AppColors.under_appbar_shadow, boxShadow: [
-                BoxShadow(
-                  color: AppColors.under_appbar_shadow,
-                  blurRadius: 10,
-                  spreadRadius: 6,
-                  offset: Offset(0, 5),
-                ),
-                BoxShadow(
-                  color: AppColors.under_appbar_shadow,
-                  blurRadius: 10,
-                  spreadRadius: 10,
-                  offset: Offset(0, 5),
-                ),
-              ]),
-            )
-          ],
-        ),
+          ),
+          Container(
+            height: AppSize.s12.h,
+            decoration:
+            const BoxDecoration(color: AppColors.under_appbar_shadow, boxShadow: [
+              BoxShadow(
+                color: AppColors.under_appbar_shadow,
+                blurRadius: 10,
+                spreadRadius: 6,
+                offset: Offset(0, 5),
+              ),
+              BoxShadow(
+                color: AppColors.under_appbar_shadow,
+                blurRadius: 10,
+                spreadRadius: 10,
+                offset: Offset(0, 5),
+              ),
+            ]),
+          )
+        ],
       );
   }
 }

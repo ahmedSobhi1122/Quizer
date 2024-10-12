@@ -9,8 +9,10 @@ import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 
 class Social extends StatelessWidget {
+  final void Function()? onTapFacebook;
+  final void Function()? onTapGoogle;
   const Social({
-    super.key,
+    super.key, this.onTapFacebook, this.onTapGoogle,
   });
 
   @override
@@ -21,13 +23,13 @@ class Social extends StatelessWidget {
         CustomButtonSocial(
           text: "Login with Facebook",
           icon: SvgPicture.asset(SVGAssets.facebook),
-          onTap: () => context.read<RegisterCubit>().registerWithFacebook(),
+          onTap: onTapFacebook?? () => context.read<RegisterCubit>().registerWithFacebook(),
         ),
         SizedBox(height: AppSize.s20.h),
         CustomButtonSocial(
           text: "Login with Google",
           icon: SvgPicture.asset(SVGAssets.google),
-          onTap: () => context.read<RegisterCubit>().registerWithGoogle(),
+          onTap: onTapGoogle?? () => context.read<RegisterCubit>().registerWithGoogle(),
         ),
       ],
     );

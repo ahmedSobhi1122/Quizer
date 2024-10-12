@@ -20,7 +20,8 @@ class PasswordField extends StatelessWidget {
     return SizedBox(
       width: AppSize.s335.w,
       child: TextFormField(
-        controller: context.read<RegisterCubit>().passwordController,
+        controller:
+        context.read<RegisterCubit>().passwordController,
         obscureText: !context.read<RegisterCubit>().isPasswordVisible,
         validator: (value) => Validation.validatePassword(value),
         keyboardType: TextInputType.visiblePassword,

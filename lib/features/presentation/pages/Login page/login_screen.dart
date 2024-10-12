@@ -17,6 +17,9 @@ import 'package:quizer/features/presentation/cubit/login_cubit.dart';
 import 'package:quizer/features/presentation/pages/data%20info%20page/widgets/date_of_birth.dart';
 import 'package:quizer/features/presentation/state/login_state.dart';
 
+import '../../../../core/helper/validation.dart';
+import '../signup page/widgets/social.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -34,7 +37,8 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   SizedBox(height: AppSize.s80.h),
                   Text(
-                    '''Login ✏️''',
+                    '''Login''',
+                    textAlign: TextAlign.left,
                     style: AppTextStyles.headerSignupTextStyle(context),
                   ),
                   SizedBox(height: AppSize.s10.h),
@@ -45,7 +49,6 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(height: AppSize.s70.h),
                   SizedBox(
                     width: AppSize.s335.w,
-                    height: AppSize.s50.h,
                     child: TextField(
                       controller: context.read<LoginCubit>().emailController,
                       decoration: style("Email"),
@@ -56,16 +59,39 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(height: AppSize.s32.h),
                   SizedBox(
                     width: AppSize.s335.w,
-                    height: AppSize.s50.h,
-                    child: TextField(
-                      controller: context.read<LoginCubit>().passwordController,
-                      decoration: style("Password"),
-                      // keyboardType: TextInputType.visiblePassword,
-                      obscuringCharacter: "※",
-                      obscureText: true,
-
-                      style: AppTextStyles.textStyle(context),
-                    ),
+                    child: BlocBuilder<LoginCubit, LoginState>(
+                        builder: (context, state) {
+                      return TextFormField(
+                        controller:
+                            context.read<LoginCubit>().passwordController,
+                        obscureText:
+                            !context.read<LoginCubit>().isPasswordVisible,
+                        validator: (value) =>
+                            Validation.validatePassword(value),
+                        keyboardType: TextInputType.visiblePassword,
+                        obscuringCharacter: "※",
+                        style: AppTextStyles.textStyle(context),
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          labelStyle:
+                              const TextStyle(color: AppColors.purpleColor),
+                          contentPadding:
+                              EdgeInsets.all(AppPadding.defaultPadding.r),
+                          border: const OutlineInputBorder(),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              context.read<LoginCubit>().isPasswordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: AppColors.purpleColor50,
+                            ),
+                            onPressed: () => context
+                                .read<LoginCubit>()
+                                .togglePasswordVisibility(),
+                          ),
+                        ),
+                      );
+                    }),
                   ),
                   Row(
                     children: [
@@ -118,47 +144,13 @@ class LoginScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: AppSize.s24.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          context.read<LoginCubit>().loginWithFacebook();
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(AppPadding.defaultPadding.r),
-                          width: AppSize.s66.w,
-                          height: AppSize.s66.h,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.purpleColor30),
-                            borderRadius: BorderRadius.circular(AppSize.s16.r),
-                            color: AppColors.whiteColor,
-                          ),
-                          child: SvgPicture.asset(SVGAssets.facebook),
-                        ),
-                      ),
-                      SizedBox(
-                        width: AppSize.s120.w,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          context.read<LoginCubit>().loginWithGoogle();
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(AppPadding.defaultPadding.r),
-                          width: AppSize.s66.w,
-                          height: AppSize.s66.h,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.purpleColor30),
-                            borderRadius: BorderRadius.circular(AppSize.s16.r),
-                            color: AppColors.whiteColor,
-                          ),
-                          child: SvgPicture.asset(SVGAssets.google),
-                        ),
-                      ),
-                    ],
+                  Social(
+                    onTapFacebook: () =>
+                        context.read<LoginCubit>().loginWithFacebook(),
+                    onTapGoogle: () =>
+                        context.read<LoginCubit>().loginWithGoogle(),
                   ),
-                  SizedBox(height: AppSize.s116.h),
+                  SizedBox(height: AppSize.s50.h),
                   BlocListener<LoginCubit, LoginState>(
                     listener: (context, state) {
                       if (state is LoginSuccess) {
@@ -190,7 +182,8 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(height: AppSize.s16.h),
                   CustomButton(
                     text: "Create new account",
-                    onPressed: () => context.pushNamed(Routes.signUpScreenRoute),
+                    onPressed: () =>
+                        context.pushNamed(Routes.signUpScreenRoute),
                     color: AppColors.lightPurpleColor.withOpacity(.7),
                     colorText: AppColors.purpleColor,
                   )

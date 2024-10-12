@@ -7,6 +7,8 @@ class Background extends StatelessWidget {
   final Widget child;
 
   final double? paddingLeft, paddingRight, paddingTop;
+  final double? myWidth, myhHeight;
+  final List<Color>? colors;
 
   const Background({
     super.key,
@@ -14,21 +16,28 @@ class Background extends StatelessWidget {
     this.paddingLeft = AppPadding.zero,
     this.paddingRight = AppPadding.zero,
     this.paddingTop = AppPadding.zero,
+    this.myWidth,
+    this.myhHeight,
+    this.colors,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: context.width,
-      height: context.height,
+      width: myWidth ?? context.width,
+      height: myhHeight ?? context.height,
       padding: EdgeInsets.only(
           top: paddingTop!.h, right: paddingRight!.w, left: paddingLeft!.w),
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [
-          context.primaryColorScheme,
-          context.secondaryColorScheme,
-          context.tertiaryColorScheme,
-        ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+        gradient: LinearGradient(
+            colors: colors ??
+                [
+                  context.primaryColorScheme,
+                  context.secondaryColorScheme,
+                  context.tertiaryColorScheme,
+                ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter),
       ),
       child: child,
     );

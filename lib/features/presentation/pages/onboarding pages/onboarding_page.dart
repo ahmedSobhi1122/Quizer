@@ -1,8 +1,12 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quizer/config/routes/screen_export.dart';
-import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/features/presentation/common/background.dart';
+import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
+
+import '../../../../core/resources/app_colors.dart';
+import '../../../../core/resources/app_values.dart';
 
 class OnboardingContent {
   final String image;
@@ -19,17 +23,17 @@ class OnboardingContent {
 final List<OnboardingContent> contents = [
   OnboardingContent(
     image: SVGAssets.onboarding1,
-    title: 'Welcome to Our App',
+    title: '',
     description: 'Discover amazing features and enjoy the experience.',
   ),
   OnboardingContent(
     image: SVGAssets.onboarding2,
-    title: 'Stay Connected',
+    title: '',
     description: 'Connect with people around the world easily.',
   ),
   OnboardingContent(
     image: SVGAssets.onboarding3,
-    title: 'Get Started Now!',
+    title: '',
     description: 'Join us today and enjoy all the benefits.',
   ),
 ];
@@ -114,33 +118,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     (index) => buildDot(index, context),
                   ),
                 ),
-                Container(
-                  height: 60,
-                  margin: const EdgeInsets.all(40),
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (currentIndex == contents.length - 1) {
-                        context.pushReplacementNamed(Routes.logInScreenRoute);
-                      } else {
-                        _controller.nextPage(
-                          duration: const Duration(milliseconds: 100),
-                          curve: Curves.bounceIn,
-                        );
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).primaryColor,
-                      foregroundColor: Colors.white, // Text color
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    child: Text(
-                      currentIndex == contents.length - 1 ? "Continue" : "Next",
-                    ),
-                  ),
-                ),
+                SizedBox(height: AppSize.s40.h),
+                currentIndex == contents.length - 1 ? const BuildButton() : const SizedBox.shrink(),
+                SizedBox(height: AppSize.s40.h),
               ],
             ),
           ),
@@ -161,3 +141,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 }
+
+class BuildButton extends StatelessWidget {
+  const BuildButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        CustomButton(text: "Get Started!", onPressed: (){}, color: AppColors.purpleColor, colorText: AppColors.whiteColor),
+        SizedBox(height: AppSize.s10.h),
+        CustomButton(text: "Already have an account?", onPressed: (){}, color: AppColors.buttonPurpleColor, colorText: AppColors.purpleColor),
+      ]
+    );
+  }
+}
+
+

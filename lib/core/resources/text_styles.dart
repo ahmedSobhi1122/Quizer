@@ -19,7 +19,7 @@ class AppTextStyles {
 
 
   ///Button
-  static TextStyle customButtonTextStyle(BuildContext context,Color color) =>
+  static TextStyle customButtonTextStyle(BuildContext context, {Color? color}) =>
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: color??AppColors.blackColor,
@@ -143,6 +143,12 @@ class AppTextStyles {
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.deepDarkPurple,
         fontSize: FontSize.f14,
+      );
+  static TextStyle homeGameCardTitleTextStyle(BuildContext context) =>
+      getBlackStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor,
+        fontSize: FontSize.f10,
       );
 
 }

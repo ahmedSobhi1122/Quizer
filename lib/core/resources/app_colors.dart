@@ -92,6 +92,9 @@ class AppColors {
   static const Color warningColor = Color(0xFFFFBE21);
   static const Color errorColor = Color(0xFFEA5B5B);
 
+  static const Color appbar_top = Color(0xff8a72f9);
+  static const Color appbar_bottom = Color(0xff9b86fa);
+  static const Color under_appbar_shadow = Color(0xffa391fb);
 
 
 
@@ -115,7 +118,6 @@ class AppColors {
   // static const Color lightPrimary = Color(0xCCd17d11); // color with 80% opacity
   // static const Color grey1 = Color(0xff707070);
   // static const Color grey2 = Color(0xff797979);
-
 
 
 

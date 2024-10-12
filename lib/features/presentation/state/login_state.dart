@@ -10,6 +10,15 @@ class LoginInitial extends LoginState {}
 
 class LoginLoading extends LoginState {}
 
+class LoginPasswordVisibilityChanged extends LoginState {
+  final bool isPasswordVisible;
+
+  LoginPasswordVisibilityChanged(this.isPasswordVisible);
+
+  @override
+  List<Object?> get props => [isPasswordVisible];
+}
+
 class LoginDataOTPProfileLoaded extends LoginState {
   final User user;
 

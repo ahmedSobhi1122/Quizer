@@ -34,7 +34,7 @@ class CustomAppbarProfile extends StatelessWidget {
               child:  FittedBox(
                 fit: BoxFit.contain,
                 child: CircleAvatar(
-                  radius: AppSize.s30.r,
+                  radius: AppBorderRadius.br32.r,
                   backgroundColor: AppColors.warningColor,
                   backgroundImage: const AssetImage('assets/images/avatar.png'), // TODO change Image
                 ),
@@ -46,7 +46,7 @@ class CustomAppbarProfile extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: AppPadding.p12.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
                 padding: EdgeInsets.only(bottom: AppPadding.p12.h),

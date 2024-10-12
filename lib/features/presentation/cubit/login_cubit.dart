@@ -10,6 +10,7 @@ class LoginCubit extends Cubit<LoginState> {
   final LoginUseCase loginUserUseCase;
   final GoogleAuthUseCase googleAuthUserUseCase;
   final FacebookAuthUseCase facebookAuthUserUseCase;
+  bool isPasswordVisible = false;
 
 
   TextEditingController emailController = TextEditingController();
@@ -53,5 +54,11 @@ class LoginCubit extends Cubit<LoginState> {
     } catch (error) {
       emit(LoginFailure(error.toString()));
     }
+  }
+
+
+  void togglePasswordVisibility() {
+    isPasswordVisible = !isPasswordVisible;
+    emit(LoginPasswordVisibilityChanged(isPasswordVisible));
   }
 }

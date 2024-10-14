@@ -22,8 +22,8 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
   final List<String> _answers = [];
   final int _maxAnswers = 4;
   Map<int, List<String>> _questionMap = {};
-  int? _selectedAnswerIndex; // Track the selected answer index
-  int _questionIndex = 0; // Track the selected answer index
+  int? _selectedAnswerIndex;
+  int _questionIndex = 0;
 
   void _addAnswer() {
     if (_answers.length < _maxAnswers &&
@@ -38,26 +38,24 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
 
   void _selectAnswer(int index) {
     setState(() {
-      _selectedAnswerIndex = index; // Update the selected index
+      _selectedAnswerIndex = index;
     });
   }
 
   void _addMore() {
     if (_questionController.text.isNotEmpty && _answers.isNotEmpty) {
-      // Save the question and answers to the map
+
       setState(() {
         _questionMap[_questionIndex] =
-            List.from(_answers); // Add a copy of answers
-        _questionIndex++; // Increment the question index for the next question
-        // Clear the current inputs
+            List.from(_answers);
+        _questionIndex++;
+
         _answers.clear();
         _questionController.clear();
       });
 
-      // Optionally, show a Snackbar to indicate the question has been saved
       context.message(message: 'Question saved! You can add a new one.');
     } else {
-      // Optionally, show a Snackbar if the question or answers are empty
       context.message(
           message: 'Please enter a question and at least one answer.');
     }
@@ -73,7 +71,7 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
           paddingTop: AppSize.s20,
           child: SingleChildScrollView(
               child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(AppPadding.p8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

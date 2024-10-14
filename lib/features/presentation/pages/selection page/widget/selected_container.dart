@@ -16,7 +16,7 @@ class SelectedContainer extends StatelessWidget {
   final Color color;
   final Color? fillColor;
 
-  final Icon icon;
+  final Icon  icon;
   final String content;
 
   @override

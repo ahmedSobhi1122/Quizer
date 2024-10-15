@@ -12,12 +12,14 @@ class MainImage extends StatelessWidget {
     super.key,
     required this.imageUrl,
     this.width = AppSize.s100,
+    this.height = AppSize.s100,
     this.backgroundColor,
     this.borderColor,
   });
 
   final String imageUrl;
   final double width;
+  final double height;
   final Color? backgroundColor;
   final Color? borderColor;
 
@@ -25,7 +27,7 @@ class MainImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      height: width,
+      height: height,
       decoration: BoxDecoration(
         color: backgroundColor ?? AppColors.whiteColor,
         shape: BoxShape.circle,

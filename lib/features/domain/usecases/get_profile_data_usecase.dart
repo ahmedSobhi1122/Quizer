@@ -7,5 +7,5 @@ class GetProfileDataUseCase {
 
   GetProfileDataUseCase(this.repository);
 
-  Future<User> call(String email) async => await repository.getProfile(email);
+  Future<User> call(String id,String token) async => await repository.getProfile(id,token);
 }

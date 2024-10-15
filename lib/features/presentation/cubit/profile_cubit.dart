@@ -9,14 +9,15 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   ProfileCubit(this.getProfileDataUseCase) : super(ProfileInitial());
 
-  Future<Object> getProfile(String email) async {
+  Future<Object> getProfile(String id, String token) async {
     emit(ProfileLoading());
     try {
-      final User result = await getProfileDataUseCase(email);
-      print(result);
+      final User result = await getProfileDataUseCase(id, token);
+      // print(result);
       emit(ProfileSuccess(result));
       return result;
     } catch (e) {
+      print(e.toString());
       emit(ProfileFailure(e.toString()));
       return User();
     }

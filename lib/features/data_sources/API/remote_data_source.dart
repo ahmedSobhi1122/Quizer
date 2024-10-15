@@ -19,23 +19,23 @@ class RemoteDataSource {
     print(1);
     // print(user.toJson().fields);
     // try {
-      final response = await dio.request(
-        '${Constants.baseUrl}auth/emailPassword/register',
-        data: user.toJson(),
-        options: Options(
-          method: 'POST',
-        ),
-      );
+    final response = await dio.request(
+      '${Constants.baseUrl}auth/emailPassword/register',
+      data: user.toJson(),
+      options: Options(
+        method: 'POST',
+      ),
+    );
 
-      print(
-          "print:                                ${response.statusMessage} ,  ${response.data["data"]} , ${response.statusCode}");
-      if (response.statusCode == 200) {
-        // successful
-        return UserRegisterModel.fromJson(response.data["data"]);
-      } else {
-        print("message : " + response.data["message"]);
-        throw Exception(response.data["message"]);
-      }
+    print(
+        "print:                                ${response.statusMessage} ,  ${response.data["data"]} , ${response.statusCode}");
+    if (response.statusCode == 200) {
+      // successful
+      return UserRegisterModel.fromJson(response.data["data"]);
+    } else {
+      print("message : " + response.data["message"]);
+      throw Exception(response.data["message"]);
+    }
     // } catch (error) {
     //   // print(2);
     //   print(error);
@@ -277,25 +277,26 @@ class RemoteDataSource {
   }
 
   ///get profile
-  Future<ProfileModel> getProfile(String email) async {
-    ProfileModel user = ProfileModel(email: email);
-    try {
-      final response = await dio.request(
-        '${Constants.baseUrl}account/getProfile',
-        data: user.toJson(),
-        options: Options(
-          method: 'GET',
-        ),
-      );
-      if (response.statusCode == 200) {
-        // successful
-        user = ProfileModel.fromJson(response.data["data"]);
-        return user;
-      } else {
-        throw Exception(response.data["message"]);
-      }
-    } catch (error) {
-      throw Exception('Error during get profile: $error');
+  Future<ProfileModel> getProfile(String id, String token) async {
+    ProfileModel user = ProfileModel(id: id, token: token);
+    // try {
+    final response = await dio.request(
+      '${Constants.baseUrl}account/getProfile',
+      data: user.toJson(),
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+        method: 'POST',
+      ),
+    );
+    if (response.statusCode == 200) {
+      // successful
+      user = ProfileModel.fromJson(response.data["data"]);
+      return user;
+    } else {
+      throw Exception(response.data["message"]);
     }
+    // } catch (error) {
+    //   throw Exception('Error during get profile: $error');
+    // }
   }
 }

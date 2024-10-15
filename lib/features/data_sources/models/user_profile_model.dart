@@ -2,8 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:quizer/core/constants/enum.dart';
 
 class ProfileModel {
-  final UserRole? type;
+  final UserRole? userRole;
   final String? firstName;
+  final String? id;
+  final String? token;
   final String? lastName;
   final Rank? rank;
   final int? firstPlaceCount;
@@ -15,8 +17,10 @@ class ProfileModel {
   final String? email;
 
   ProfileModel({
+    this.token,
+    this.id,
     this.email,
-    this.type,
+    this.userRole,
     this.firstName,
     this.lastName,
     this.rank,
@@ -29,19 +33,33 @@ class ProfileModel {
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
-      type: json['userRole'] == null ? null : UserRole.values[json['userRole']],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      rank: json['rank'] == null ? null : Rank.values[json['rank']],
-      firstPlaceCount: json['firstPlaceCount'],
-      secondPlaceCount: json['secondPlaceCount'],
-      thirdPlaceCount: json['thirdPlaceCount'],
-      description: json['description'],
-    profileImage: json['profileImage'],
-      coverImage: json['coverImage'],
-    );
+        firstName: json['firstName'],
+        lastName: json['lastName'],
+        rank: json['rank'] == null ? null : getRankFromInt(json['rank']),
+        firstPlaceCount: json['firstPlaceCount'],
+        secondPlaceCount: json['secondPlaceCount'],
+        thirdPlaceCount: json['thirdPlaceCount'],
+        description: json['description'],
+        profileImage: json['profileImage'],
+        coverImage: json['coverImage'],
+      );
 
-  FormData toJson() => FormData.fromMap({'email': email});
-
+  FormData toJson() => FormData.fromMap({'userID': id});
 }
 
+Rank getRankFromInt(int rank) {
+  switch (rank) {
+    case 0:
+      return Rank.NEWBIE;
+    case 1:
+      return Rank.APPRENTICE;
+    case 2:
+      return Rank.CHALLENGER;
+    case 3:
+      return Rank.EXPERT;
+    case 4:
+      return Rank.MASTER_MIND;
+    default:
+      throw Exception('Invalid rank value');
+  }
+}

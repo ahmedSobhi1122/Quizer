@@ -1,5 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/screen_export.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
@@ -90,8 +91,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       }
                     },
                     child: CustomButton(
-                      color: AppColors.buttonPurpleColor,
-                      colorText: AppColors.purpleColor,
+                      color: MyTheme.secondaryButtonColor,
+                      colorText: MyTheme.secondaryButtonTextColor,
                       text: "Next",
                       onPressed: () async {
                         if (formKeyRegister.currentState!.validate()) {

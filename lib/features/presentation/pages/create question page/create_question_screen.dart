@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
@@ -97,7 +98,7 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: AppSize.s22.sp,
-                      color: AppColors.blackColor80,
+                      color: MyTheme.textColor,
                     ),
                   ),
                 ),
@@ -111,12 +112,13 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                     borderRadius: BorderRadius.circular(10.r),
                   ),
                   child: TextField(
+                    maxLength: 500,
                     controller: _questionController,
                     maxLines: null,
                     expands: true,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: AppColors.whiteColor40,
+                      color: MyTheme.textColor,
                       fontSize: AppSize.s20,
                     ),
                     decoration: const InputDecoration(
@@ -125,21 +127,16 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                           "Question description like\nWhat is your name ?",
                       hintStyle: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: AppColors.whiteColor40,
+                        color: MyTheme.textColor,
                         fontSize: AppSize.s28,
+                      ),
+                      counterStyle: TextStyle(
+                        color: MyTheme.textColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: AppSize.s20,
                       ),
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "250/500",
-                      style: TextStyle(
-                          color: Colors.grey[700], fontWeight: FontWeight.bold),
-                    ),
-                  ],
                 ),
                 SizedBox(
                   height: AppSize.s20.h,
@@ -158,14 +155,14 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                   controller: _answerController,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: AppColors.whiteColor40,
+                    color: MyTheme.textColor,
                     fontSize: AppSize.s16,
                   ),
                   decoration: InputDecoration(
                     labelText: "new answer",
                     labelStyle: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: AppColors.whiteColor40,
+                      color: MyTheme.textColor,
                       fontSize: AppSize.s16,
                     ),
                     fillColor: Colors.white60,
@@ -181,7 +178,7 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                     Text(
                       '${_answers.length}/$_maxAnswers',
                       style: TextStyle(
-                          color: Colors.grey[700], fontWeight: FontWeight.bold),
+                          color: MyTheme.textColor, fontWeight: FontWeight.bold,fontSize: AppSize.s20),
                     ),
                   ],
                 ),
@@ -189,8 +186,8 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                   height: AppSize.s20.h,
                 ),
                 CustomButton(
-                  color: AppColors.purpleColor,
-                  colorText: AppColors.whiteColor,
+                  color: MyTheme.primaryButtonColor,
+                  colorText: MyTheme.primaryButtonTextColor,
                   text: "Add answer",
                   onPressed: () {
                     _addAnswer();
@@ -280,8 +277,8 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                       onPressed: () {
                         _addMore();
                       },
-                      color: AppColors.lightPurpleColor.withOpacity(.7),
-                      colorText: AppColors.purpleColor,
+                      color: MyTheme.secondaryButtonColor,
+                      colorText: MyTheme.secondaryButtonTextColor,
                     ),
                   ),
                   SizedBox(
@@ -289,8 +286,8 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                   ),
                   Expanded(
                     child: CustomButton(
-                      color: AppColors.purpleColor,
-                      colorText: AppColors.whiteColor,
+                      color: MyTheme.primaryButtonColor,
+                      colorText: MyTheme.primaryButtonTextColor,
                       text: "Finish",
                       onPressed: () {},
                     ),

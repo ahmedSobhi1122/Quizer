@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizer/config/themes/theme.dart';
 
 import 'app_colors.dart';
 import 'app_fonts.dart';
@@ -36,14 +37,14 @@ class AppTextStyles {
   static TextStyle headerSignupTextStyle(BuildContext context) =>
       getMediumStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blackColor,
+        color: MyTheme.textColor,
         fontSize: FontSize.f28,
       );
 
   static TextStyle subHeaderSignupTextStyle(BuildContext context) =>
       getRegularStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blackColor.withOpacity(.5),
+        color: MyTheme.textColor.withOpacity(.5),
         fontSize: FontSize.f18,
       );
 
@@ -57,7 +58,7 @@ class AppTextStyles {
   ///SignUp
   static TextStyle rememberMeTextStyle(BuildContext context) => getMediumStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blackColor,
+        color: MyTheme.textColor,
         fontSize: FontSize.f14,
       );
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/app_fonts.dart';
@@ -64,7 +65,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           children: [
                             CircleAvatar(
                               radius: 65.r,
-                              backgroundColor: Colors.white, // Avatar image
+                              backgroundColor: MyTheme.textColor, // Avatar image
                               child: CircleAvatar(
                                 radius: 63.r,
                                 child: ClipRRect(
@@ -91,7 +92,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       "Name",
                       style: TextStyle(
                           fontSize: FontSize.f24,
-                          color: AppColors.blackColor80,
+                          color: MyTheme.textColor,
                           fontWeight: FontWeight.bold
                       ),
                     ),
@@ -102,7 +103,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         controller: nameController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10.r),
                           ),
                         ),
                         maxLength: 30,
@@ -119,7 +120,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       "About",
                       style: TextStyle(
                           fontSize: FontSize.f24,
-                          color: AppColors.blackColor80,
+                          color: MyTheme.textColor,
                           fontWeight: FontWeight.bold
                       ),
                     ),
@@ -130,7 +131,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         controller: aboutController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10.r),
                           ),
                         ),
                         maxLength: 500,
@@ -161,8 +162,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         Expanded(
                           child: CustomButton(
-                            color: AppColors.purpleColor,
-                            colorText: AppColors.whiteColor,
+                            color: MyTheme.primaryButtonColor,
+                            colorText: MyTheme.primaryButtonTextColor,
                             text: "Finish",
                             onPressed: () {
                               Navigator.pop(context);

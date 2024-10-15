@@ -1,5 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/screen_export.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
@@ -68,8 +69,8 @@ class OtpCheckScreen extends StatelessWidget {
                     {
                       await context.read<ForgetPasswordCubit>().verifyOTP();
                     },
-                    color: AppColors.purpleColor50, // Dark Purple
-                    colorText: AppColors.whiteColor,
+                    color: MyTheme.primaryButtonColor, // Dark Purple
+                    colorText: MyTheme.primaryButtonTextColor,
                   ),
                 ),
               ],

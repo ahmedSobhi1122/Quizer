@@ -7,6 +7,8 @@ import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
 
+import '../../../../../config/themes/theme.dart';
+
 class PasswordField extends StatelessWidget {
   bool isPasswordVisible;
 
@@ -26,13 +28,13 @@ class PasswordField extends StatelessWidget {
       style: AppTextStyles.textStyle(context),
       decoration: InputDecoration(
         labelText: 'Password',
-        labelStyle: const TextStyle(color: AppColors.purpleColor),
+        labelStyle: const TextStyle(color: MyTheme.disabledColor),
         contentPadding: EdgeInsets.all(AppPadding.defaultPadding.r),
         border: const OutlineInputBorder(),
         suffixIcon: IconButton(
           icon: Icon(
             isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-            color: AppColors.purpleColor50, // Adjust color as needed
+            color: Colors.black45, // Adjust color as needed
           ),
           onPressed: () =>
               context.read<ForgetPasswordCubit>().togglePasswordVisibility(),
@@ -65,13 +67,13 @@ class ConfirmPasswordField extends StatelessWidget {
       obscuringCharacter: "※",
       decoration: InputDecoration(
         labelText: 'Confirm Password',
-        labelStyle: const TextStyle(color: AppColors.purpleColor),
+        labelStyle: const TextStyle(color: MyTheme.disabledColor),
         contentPadding: EdgeInsets.all(AppPadding.defaultPadding.r),
         border: const OutlineInputBorder(),
         suffixIcon: IconButton(
           icon: Icon(
             isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-            color: AppColors.purpleColor50, // Adjust color as needed
+            color: Colors.black45, // Adjust color as needed
           ),
           onPressed: () => context
               .read<ForgetPasswordCubit>()

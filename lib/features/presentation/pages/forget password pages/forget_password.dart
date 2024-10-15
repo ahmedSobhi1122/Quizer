@@ -1,5 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/screen_export.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
@@ -107,8 +108,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                     .checkUserExist();
                               }
                             },
-                            color: AppColors.purpleColor,
-                            colorText: AppColors.whiteColor,
+                            color: MyTheme.primaryButtonColor,
+                            colorText: MyTheme.primaryButtonTextColor,
                           ),
                         ),
                       ],
@@ -118,8 +119,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   CustomButton(
                     text: "Back",
                     onPressed: () => context.pop(),
-                    color: AppColors.purpleColor30,
-                    colorText: AppColors.purpleColor,
+                    color: MyTheme.secondaryButtonColor,
+                    colorText: MyTheme.secondaryButtonTextColor,
                   ),
                 ],
               ),

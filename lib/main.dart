@@ -5,8 +5,10 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/route_constants.dart';
 import 'package:quizer/core/dependency_injection.dart';
+import 'package:themed/themed.dart';
 import 'config/routes/router.dart' as router;
 import 'config/themes/app_theme.dart';
+import 'config/themes/theme.dart';
 import 'core/resources/language_manager.dart';
 
 late final WidgetsBinding engine;
@@ -57,8 +59,18 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState(){
+    Themed.currentTheme = DarkTheme;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,16 +78,47 @@ class MyApp extends StatelessWidget {
       designSize: const Size(430, 932),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (context, child) => MaterialApp(
-
-        debugShowCheckedModeBanner: false,
-        title: 'Quizer',
-        theme: AppTheme.lightTheme(context),
-        darkTheme: AppTheme.darkTheme(context),
-        themeMode: ThemeMode.light,
-        onGenerateRoute: router.RouteGenerator.getRoute,
-        initialRoute: Routes.logInScreenRoute,
+      builder: (context, child) => Themed(
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Quizer',
+          theme: AppTheme.lightTheme(context),
+          darkTheme: AppTheme.darkTheme(context),
+          themeMode: ThemeMode.light,
+          onGenerateRoute: router.RouteGenerator.getRoute,
+          initialRoute: Routes.otpScreenRoute,
+        ),
       ),
     );
   }
 }
+
+
+// Container(
+// height: 180.h,
+// child: Row(children: [
+// Expanded(
+// child: CustomButton(
+// text: "Cancel",
+// onPressed: () {
+//
+// },
+// color: AppColors.softRed.withOpacity(.2),
+// colorText: AppColors.softRed.withOpacity(1),
+// borderColor: Colors.red,
+// ),
+// ),
+// SizedBox(
+// width: 50.w,
+// ),
+// Expanded(
+// child: CustomButton(
+// color: AppColors.purpleColor,
+// colorText: AppColors.whiteColor,
+// text: "Finish",
+// onPressed: () {},
+// ),
+// )
+// ]
+// ),
+// ),

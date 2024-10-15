@@ -17,7 +17,7 @@ class DataIntent {
   }
 //------------------------------------
 
-  //login data
+  //login data or register data
   static User? _dataUser;
 
   static void pushDataUser(User dataUser) => _dataUser = dataUser;

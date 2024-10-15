@@ -1,15 +1,12 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
 import 'package:quizer/config/routes/screen_export.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
-import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/core/resources/constants.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
-import 'package:quizer/features/presentation/common/loading.dart';
 import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
 import 'package:quizer/features/presentation/state/forget_password_state.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -129,15 +126,15 @@ class _OtpScreenState extends State<OtpScreen> {
             ),
           ),
         ),
-        BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
-          builder: (context, state) {
-            if (state is ForgetPasswordLoading) {
-              return const Loading();
-            } else {
-              return const SizedBox.shrink();
-            }
-          },
-        ),
+        // BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
+        //   builder: (context, state) {
+        //     if (state is ForgetPasswordLoading) {
+        //       return const Loading();
+        //     } else {
+        //       return const SizedBox.shrink();
+        //     }
+        //   },
+        // ),
       ]),
     );
   }

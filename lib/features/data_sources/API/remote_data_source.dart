@@ -28,7 +28,7 @@ class RemoteDataSource {
       );
 
       print(
-          "print:                                 ${response.statusMessage} ,  ${response.data["data"]} , ${response.statusCode}");
+          "print:                                ${response.statusMessage} ,  ${response.data["data"]} , ${response.statusCode}");
       if (response.statusCode == 200) {
         // successful
         return UserRegisterModel.fromJson(response.data["data"]);
@@ -212,12 +212,12 @@ class RemoteDataSource {
           method: 'POST',
         ),
       );
-      print(response.data);
+      print(response.data["data"]);
       if (response.statusCode == 200) {
         // successful
-        return response.data;
+        return response.data["data"];
       } else {
-        throw Exception('Failed to email');
+        throw Exception(response.data["message"]);
       }
     } catch (error) {
       throw Exception('Error during get user: $error');
@@ -232,7 +232,7 @@ class RemoteDataSource {
         '${Constants.baseUrl}account/otpProfile',
         data: user.toJson(),
         options: Options(
-          method: 'GET',
+          method: 'POST',
         ),
       );
       print(response.data);

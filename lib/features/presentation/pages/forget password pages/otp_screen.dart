@@ -1,6 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/screen_export.dart';
 import 'package:quizer/core/helper/extensions.dart';
+import 'package:quizer/core/helper/image_handler.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/constants/constants.dart';
@@ -56,19 +57,14 @@ class _OtpScreenState extends State<OtpScreen> {
                         lastName = state.user.lastName!;
                         image = state.user.profileImage!;
                       }
-
                       if (state is ForgetPasswordFailure) {
                         return Text(state.error);
                       } else if (state is ForgetPasswordDataOTPProfileLoaded ||
                           state is ForgetPasswordSuccess) {
                         return Column(
                           children: [
-                            CircleAvatar(
-                              radius: AppSize.s60.r,
-                              backgroundImage: NetworkImage(
-                                Constants.url + image,
-                              ),
-                              backgroundColor: AppColors.transparentColor,
+                            MainImage(
+                              imageUrl: Constants.url + image,
                             ),
                             SizedBox(height: AppSize.s16.h),
                             Text(
@@ -80,9 +76,13 @@ class _OtpScreenState extends State<OtpScreen> {
                       } else {
                         return Skeletonizer(
                           enabled: true,
-                          child: CircleAvatar(
-                            radius: AppSize.s60.r,
-                            backgroundColor: AppColors.transparentColor,
+                          child: Container(
+                            height: AppSize.s100.h,
+                            width: AppSize.s100.h,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.whiteColor,
+                            ),
                           ),
                         );
                       }

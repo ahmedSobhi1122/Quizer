@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:quizer/core/constants/enum.dart';
+import 'package:quizer/features/data_sources/models/user_register_model.dart';
 
 class UserLoginModel {
   final String? email;
@@ -20,7 +21,7 @@ class UserLoginModel {
   factory UserLoginModel.fromJson(Map<String, dynamic> json) {
     return UserLoginModel(
       token: json['token'],
-      userRole: json['userRole'],
+      userRole: getUserRoleFromInt(json['userRole']),
       id: json['id'],
     );
   }

@@ -54,7 +54,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   children: [
                     Container(
                         height: 290.h,
-                      child: ImageUploadField(fitter: BoxFit.cover,defualtImage: _coverImage,),
+                      child: ImageUploadField(fitter: BoxFit.cover,defaultImage: _coverImage,),
                     ),
                     Positioned(
                       bottom: -5.h,
@@ -69,7 +69,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 radius: 63.r,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100.r),
-                                    child: ImageUploadField(fitter: BoxFit.cover,defualtImage: _profileImage,)
+                                    child: ImageUploadField(fitter: BoxFit.cover,defaultImage: _profileImage,)
                                 ),
                               ),
                             ),

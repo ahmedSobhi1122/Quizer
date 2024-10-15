@@ -47,6 +47,7 @@ class AppBorderRadius {
   static double br40 = 40.0.r;
   static double br48 = 48.0.r;
   static double br56 = 56.0.r;
+  static double br60 = 60.0.r;
   static double br64 = 64.0.r;
   static double br72 = 72.0.r;
   static double br100 = 100.0.r;

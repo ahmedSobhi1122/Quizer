@@ -55,7 +55,7 @@ Future<void> init() async {
 
   /// Cubits
   sl.registerLazySingleton<RegisterCubit>(() => RegisterCubit(sl(),sl(),sl()));
-  sl.registerLazySingleton<LoginCubit>(() => LoginCubit(sl(),sl(),sl(),sl()));
+  sl.registerFactory<LoginCubit>(() => LoginCubit(sl(),sl(),sl(),sl()));
   sl.registerLazySingleton<ProfileCubit>(() => ProfileCubit(sl()));
   sl.registerLazySingleton<HomeCubit>(() => HomeCubit(sl()));
   sl.registerLazySingleton<ForgetPasswordCubit>(() => ForgetPasswordCubit(sl(),sl(),sl(),sl(),sl()));

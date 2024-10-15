@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:quizer/core/resources/app_colors.dart';
 import 'dart:io';
 
 import 'package:quizer/core/resources/app_values.dart';
@@ -10,8 +9,8 @@ class ImageUploadField extends StatefulWidget {
   final double height;
   String hint;
   final BoxFit fitter;
-  final String defualtImage;
-  ImageUploadField({super.key,this.height = 10, this.hint = "", required this.fitter,this.defualtImage = ImageAssets.image});
+  final String defaultImage;
+  ImageUploadField({super.key,this.height = 10, this.hint = "", required this.fitter,this.defaultImage = ImageAssets.image});
 
   @override
   _ImageUploadFieldState createState() => _ImageUploadFieldState();
@@ -56,7 +55,7 @@ class _ImageUploadFieldState extends State<ImageUploadField> {
                     borderRadius: BorderRadius.circular(20),
                     child: Opacity(
                       opacity: 0.8,
-                      child: _image==null? Image.asset(widget.defualtImage,
+                      child: _image==null? Image.asset(widget.defaultImage,
                       fit: BoxFit.cover,):Image.file(
                         _image!,
                         fit: widget.fitter,

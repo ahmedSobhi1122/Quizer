@@ -9,6 +9,8 @@ import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 import 'package:quizer/features/presentation/pages/signup%20page/widgets/password_field.dart';
 import 'package:quizer/features/presentation/state/register_state.dart';
 
+import '../../../../../config/themes/theme.dart';
+
 class Fields extends StatelessWidget {
   final GlobalKey<FormState> formKeyRegister;
   const Fields({
@@ -27,7 +29,7 @@ class Fields extends StatelessWidget {
               controller: context.read<RegisterCubit>().emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
-                labelStyle: const TextStyle(color: AppColors.purpleColor),
+                labelStyle: const TextStyle(color: MyTheme.disabledColor),
                 contentPadding: EdgeInsets.all(AppPadding.defaultPadding.r),
                 border: const OutlineInputBorder(),
               ),

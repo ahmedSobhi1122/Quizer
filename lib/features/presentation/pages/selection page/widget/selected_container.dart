@@ -1,5 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/screen_export.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/constants/enum.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
@@ -58,8 +59,8 @@ class SelectedContainer extends StatelessWidget {
             style: AppTextStyles.selectedBoxTextStyle(
                 context,
                 fillColor == AppColors.transparentColor
-                    ? AppColors.blackColor
-                    : AppColors.whiteColor),
+                    ? MyTheme.textColor
+                    : MyTheme.reverseColor),
           )
         ],
       ),
@@ -97,7 +98,7 @@ class _SelectionState extends State<Selection> {
                 width2 = AppSize.s96.w;
               } else {
                 isClicked = 0;
-                _fillColor1 = AppColors.purpleColor;
+                _fillColor1 = MyTheme.studentSelectColor;
                 _fillColor2 = AppColors.transparentColor;
                 context.read<RegisterCubit>().userRole = UserRole.STUDENT;
                 width1 = AppSize.s350.w;
@@ -119,10 +120,10 @@ class _SelectionState extends State<Selection> {
               ),
               SelectedContainer(
                   content: "Student",
-                  color: AppColors.purpleColor,
+                  color: MyTheme.studentSelectColor,
                   icon: Icon(
                     Icons.person,
-                    color: AppColors.whiteColor,
+                    color: MyTheme.textColor,
                     size: AppSize.s36.r,
                   ),
                   fillColor: _fillColor1),
@@ -143,7 +144,7 @@ class _SelectionState extends State<Selection> {
               } else {
                 isClicked = 1;
                 _fillColor1 = AppColors.transparentColor;
-                _fillColor2 = AppColors.warningColor;
+                _fillColor2 = MyTheme.teacherSelectColor;
                 context.read<RegisterCubit>().userRole = UserRole.TEACHER;
                 width1 = AppSize.s96.w;
                 width2 = AppSize.s350.w;
@@ -163,7 +164,7 @@ class _SelectionState extends State<Selection> {
               ),
               SelectedContainer(
                 content: "Teacher",
-                color: AppColors.warningColor,
+                color: MyTheme.teacherSelectColor,
                 icon: Icon(
                   Icons.person,
                   color: AppColors.whiteColor,

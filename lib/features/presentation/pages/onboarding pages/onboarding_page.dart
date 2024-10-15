@@ -6,6 +6,7 @@ import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
 
+import '../../../../config/themes/theme.dart';
 import '../../../../core/resources/app_colors.dart';
 import '../../../../core/resources/app_values.dart';
 
@@ -94,7 +95,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               style: const TextStyle(
                                 fontSize: 35,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                color: MyTheme.textColor,
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -103,7 +104,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 fontSize: 18,
-                                color: Colors.black87,
+                                color: MyTheme.textColor,
                               ),
                             ),
                           ],
@@ -139,7 +140,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       margin: const EdgeInsets.only(right: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Theme.of(context).primaryColor,
+        color: MyTheme.textColor,
       ),
     );
   }
@@ -156,16 +157,16 @@ class BuildButton extends StatelessWidget {
           onPressed: () {
             context.pushReplacementNamed(Routes.signUpScreenRoute);
           },
-          color: AppColors.purpleColor,
-          colorText: AppColors.whiteColor),
+          color: MyTheme.primaryButtonColor,
+          colorText: MyTheme.primaryButtonTextColor),
       SizedBox(height: AppSize.s10.h),
       CustomButton(
           text: "Already have an account?",
           onPressed: () {
             context.pushReplacementNamed(Routes.logInScreenRoute);
           },
-          color: AppColors.buttonPurpleColor,
-          colorText: AppColors.purpleColor),
+          color: MyTheme.secondaryButtonColor,
+          colorText: MyTheme.secondaryButtonTextColor),
     ]);
   }
 }

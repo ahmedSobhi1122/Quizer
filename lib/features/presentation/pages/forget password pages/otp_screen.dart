@@ -1,5 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/screen_export.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/helper/image_handler.dart';
 import 'package:quizer/core/resources/app_colors.dart';
@@ -107,8 +108,8 @@ class _OtpScreenState extends State<OtpScreen> {
                       onPressed: () async {
                         await context.read<ForgetPasswordCubit>().getOTP();
                       },
-                      color: AppColors.purpleColor50, // Dark Purple
-                      colorText: AppColors.whiteColor,
+                      color: MyTheme.primaryButtonColor, // Dark Purple
+                      colorText: MyTheme.primaryButtonTextColor,
                     ),
                   ),
                   SizedBox(height: 20.h),
@@ -117,8 +118,8 @@ class _OtpScreenState extends State<OtpScreen> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    color: AppColors.purpleColor30, // Light Purple
-                    colorText: AppColors.whiteColor,
+                    color: MyTheme.secondaryButtonColor, // Light Purple
+                    colorText: MyTheme.secondaryButtonTextColor,
                   ),
                 ],
               ),

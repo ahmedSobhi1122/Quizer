@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/route_constants.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/helper/validation.dart';
 import 'package:quizer/core/resources/app_colors.dart';
@@ -85,8 +86,8 @@ class Fields extends StatelessWidget {
               }
             },
             child: CustomButton(
-              color: AppColors.lightPurpleColor.withOpacity(.7),
-              colorText: AppColors.purpleColor,
+              color: MyTheme.secondaryButtonColor,
+              colorText: MyTheme.secondaryButtonTextColor,
               text: "Sign Up",
               onPressed: () async {
                 if (formKeyInfo.currentState!.validate()) {

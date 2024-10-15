@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_values.dart';
 
@@ -32,9 +33,9 @@ class Background extends StatelessWidget {
         gradient: LinearGradient(
             colors: colors ??
                 [
-                  context.primaryColorScheme,
-                  context.secondaryColorScheme,
-                  context.tertiaryColorScheme,
+                  MyTheme.backgroundColor1,
+                  MyTheme.backgroundColor2,
+                  MyTheme.backgroundColor3,
                 ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter),

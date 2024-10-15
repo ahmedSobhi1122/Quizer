@@ -8,6 +8,8 @@ import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 
+import '../../../../../config/themes/theme.dart';
+
 
 class DateOfBirth extends StatefulWidget {
   const DateOfBirth({super.key});
@@ -72,7 +74,7 @@ InputDecoration style(String text, {Icon? icon}) {
   return InputDecoration(
     suffixIcon: icon,
     labelText: text,
-    labelStyle: const TextStyle(color: AppColors.purpleColor),
+    labelStyle: const TextStyle(color: MyTheme.disabledColor),
     contentPadding: EdgeInsets.all(AppPadding.defaultPadding.r),
   );
 }

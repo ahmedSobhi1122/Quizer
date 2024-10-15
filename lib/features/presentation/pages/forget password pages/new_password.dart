@@ -1,5 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/screen_export.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/text_styles.dart';
@@ -104,8 +105,8 @@ class NewPasswordScreen extends StatelessWidget {
                 onPressed: () async {
                   await context.read<ForgetPasswordCubit>().resetPassword();
                 },
-                color: AppColors.purpleColor50, // Use your color resource
-                colorText: AppColors.whiteColor, // Text color
+                color: MyTheme.primaryButtonColor, // Use your color resource
+                colorText: MyTheme.primaryButtonTextColor, // Text color
               ),
             ),
           ],

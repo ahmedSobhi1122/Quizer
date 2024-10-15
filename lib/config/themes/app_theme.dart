@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:quizer/config/themes/theme.dart';
 import '../../core/resources/app_colors.dart';
 import 'button_theme.dart';
 import 'checkbox_themedata.dart';
@@ -11,25 +12,25 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: const ColorScheme.light(
-        primary: AppColors.purpleColor50,
-        secondary: AppColors.purpleColor30,
-        tertiary: AppColors.purpleColor10,
+        primary: MyTheme.backgroundColor1,
+        secondary: MyTheme.backgroundColor2,
+        tertiary: MyTheme.backgroundColor3,
       ),
       brightness: Brightness.light,
       // fontFamily: "Plus Jakarta",
       primarySwatch: AppColors.primaryMaterialColor,
-      primaryColor: AppColors.primaryColor,
-      scaffoldBackgroundColor: Colors.white,
-      iconTheme: const IconThemeData(color: AppColors.blackColor),
+      primaryColor: MyTheme.backgroundColor1,
+      scaffoldBackgroundColor: MyTheme.backgroundColor,
+      iconTheme: const IconThemeData(color: MyTheme.textColor),
       textTheme: const TextTheme(
-        bodyMedium: TextStyle(color: AppColors.blackColor40),
+        bodyMedium: TextStyle(color: MyTheme.textColor),
       ),
       elevatedButtonTheme: elevatedButtonThemeData,
       textButtonTheme: textButtonThemeData,
       outlinedButtonTheme: outlinedButtonTheme(),
       inputDecorationTheme: lightInputDecorationTheme,
       checkboxTheme: checkboxThemeData.copyWith(
-        side: const BorderSide(color: AppColors.blackColor40),
+        side: const BorderSide(color: MyTheme.textColor),
       ),
       appBarTheme: appBarLightTheme,
       scrollbarTheme: scrollbarThemeData,

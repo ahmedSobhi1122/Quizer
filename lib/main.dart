@@ -5,8 +5,10 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/route_constants.dart';
 import 'package:quizer/core/dependency_injection.dart';
+import 'package:themed/themed.dart';
 import 'config/routes/router.dart' as router;
 import 'config/themes/app_theme.dart';
+import 'config/themes/theme.dart';
 import 'core/resources/language_manager.dart';
 
 late final WidgetsBinding engine;
@@ -57,8 +59,18 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState(){
+    Themed.currentTheme = DarkTheme;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +86,7 @@ class MyApp extends StatelessWidget {
         darkTheme: AppTheme.darkTheme(context),
         themeMode: ThemeMode.light,
         onGenerateRoute: router.RouteGenerator.getRoute,
-        initialRoute: Routes.profileScreenRoute,
+        initialRoute: Routes.logInScreenRoute,
       ),
     );
   }

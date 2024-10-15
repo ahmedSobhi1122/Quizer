@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:quizer/core/resources/app_colors.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/resources/app_fonts.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
@@ -46,7 +46,7 @@ class _LogoState extends State<Logo> {
         Text(
           'Quizzer',
           style: TextStyle(
-            color: AppColors.blackColor,
+            color: MyTheme.textColor,
             fontSize: FontSize.f22,
             fontFamily: FontConstants.primaryEnglishFont,
             fontWeight: FontWeight.bold,

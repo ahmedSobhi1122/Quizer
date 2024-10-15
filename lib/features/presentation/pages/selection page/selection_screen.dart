@@ -1,5 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/screen_export.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/constants/enum.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
@@ -41,8 +42,8 @@ class SelectionScreen extends StatelessWidget {
               const Selection(),
               SizedBox(height: AppSize.s210.h),
               CustomButton(
-                color: AppColors.buttonPurpleColor,
-                colorText: AppColors.purpleColor,
+                color: MyTheme.secondaryButtonColor,
+                colorText: MyTheme.secondaryButtonTextColor,
                 text: "Next",
                 onPressed: () {
                   if (context.read<RegisterCubit>().userRole ==

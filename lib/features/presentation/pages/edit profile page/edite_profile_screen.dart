@@ -28,6 +28,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   String _coverImage = ImageAssets.profile;
 
+
   final nameController = TextEditingController();
 
   final aboutController = TextEditingController();
@@ -79,7 +80,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 10.h,),
+              SizedBox(height: 30.h,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
                 child: Column(
@@ -104,6 +105,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
+                        maxLength: 30,
                         maxLines: 1,
                         style: TextStyle(
                             fontSize: FontSize.f18,
@@ -112,6 +114,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 30.h,),
                     Text(
                       "About",
                       style: TextStyle(
@@ -120,6 +123,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           fontWeight: FontWeight.bold
                       ),
                     ),
+                    SizedBox(height: 10.h,),
                     Container(
                       height: 200.h,
                       child: TextField(
@@ -129,6 +133,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
+                        maxLength: 500,
                         maxLines: 15,
                         style: TextStyle(
                             fontSize: FontSize.f18,
@@ -138,13 +143,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                     ),
                     Container(
-                      height: 180.h,
+                      height: 120.h,
                       child: Row(children: [
                         Expanded(
                           child: CustomButton(
                             text: "Cancel",
                             onPressed: () {
-
+                              Navigator.pop(context);
                             },
                             color: AppColors.softRed,
                             colorText: Colors.red.withOpacity(.7),
@@ -159,7 +164,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             color: AppColors.purpleColor,
                             colorText: AppColors.whiteColor,
                             text: "Finish",
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
                           ),
                         )
                       ]

@@ -2,7 +2,7 @@ import 'package:quizer/features/domain/entities/user.dart';
 
 abstract class AuthRepository {
   Future<void> register(User user);
-  Future<void> login(User user);
+  Future<User> login(User user);
   Future<bool> userExist(String email);
   Future<User?> authWithGoogle();
   Future<User?> authWithFacebook();

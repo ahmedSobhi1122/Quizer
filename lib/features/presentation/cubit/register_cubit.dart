@@ -49,7 +49,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(RegisterLoading());
     try {
       final user = User(
-        type: userRole,
+        userRole: userRole,
         firstName: firstNameController.text,
         lastName: lastNameController.text,
         phoneNumber: phoneNumberController.text,

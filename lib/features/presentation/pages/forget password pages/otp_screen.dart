@@ -12,6 +12,7 @@ import 'package:quizer/features/presentation/common/custom_button_with_shadow.da
 import 'package:quizer/features/presentation/common/loading.dart';
 import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
 import 'package:quizer/features/presentation/state/forget_password_state.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -81,10 +82,12 @@ class _OtpScreenState extends State<OtpScreen> {
                           ],
                         );
                       } else {
-                        return Lottie.asset(
-                          LottieAssets.loading,
-                          width: AppSize.s100.w,
-                          height: AppSize.s100.h,
+                        return Skeletonizer(
+                          enabled: true,
+                          child: CircleAvatar(
+                            radius: AppSize.s60.r,
+                            backgroundColor: AppColors.transparentColor,
+                          ),
                         );
                       }
                     },

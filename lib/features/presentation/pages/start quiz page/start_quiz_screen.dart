@@ -29,7 +29,7 @@ class StartQuizScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(vertical: AppPadding.p32.h),
               child: const DisplayRate(
-                rating: 3.5,
+                rating: 1.5,
               ),
             ),
             const Description(),

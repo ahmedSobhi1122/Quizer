@@ -41,7 +41,7 @@ class RemoteDataSource {
   }
 
   ///login by email and password
-  Future<void> loginUser(UserLoginModel user) async {
+  Future<UserLoginModel> loginUser(UserLoginModel user) async {
     // var headers = { 'Authorization' : 'Bearer ${Constants.token}'; };
     try {
       final response = await dio.request(
@@ -54,6 +54,7 @@ class RemoteDataSource {
       // print(response.data);
       if (response.statusCode == 200) {
         // successful
+        return UserLoginModel.fromJson(response.data);
       } else {
         throw Exception('Failed to log in');
       }

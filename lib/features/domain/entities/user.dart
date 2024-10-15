@@ -1,7 +1,8 @@
 import 'package:quizer/core/constants/enum.dart';
 
 class User {
-  final UserRole? type;
+  final String? id;
+  final UserRole? userRole;
   final Rank? rank;
   final String? token;
   final String? email;
@@ -19,7 +20,8 @@ class User {
   final int? points;
 
   User({
-    this.type,
+    this.id,
+    this.userRole,
     this.coverImage,
     this.profileImage,
     this.points,

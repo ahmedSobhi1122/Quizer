@@ -6,5 +6,5 @@ class LoginUseCase {
 
   LoginUseCase(this.repository);
 
-  Future<void> call(User user) async => await repository.login(user);
+  Future<User> call(User user) async => await repository.login(user);
 }

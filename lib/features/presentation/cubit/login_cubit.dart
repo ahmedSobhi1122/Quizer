@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/features/domain/entities/user.dart';
 import 'package:quizer/features/domain/usecases/facebook_auth_usecase.dart';
 import 'package:quizer/features/domain/usecases/google_auth_usecase.dart';
@@ -31,7 +32,8 @@ class LoginCubit extends Cubit<LoginState> {
         email: emailController.text,
         password: passwordController.text,
       );
-      await loginUserUseCase.call(user);
+      final dataUser = await loginUserUseCase.call(user);
+      DataIntent.pushDataUser(dataUser);
       emit(LoginSuccess());
     } catch (error) {
       emit(LoginFailure(error.toString()));
@@ -41,7 +43,7 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> authWithGoogle() async {
     emit(LoginLoading());
     try {
-      var p = await googleAuthUserUseCase.call();
+      var userGoogle = await googleAuthUserUseCase.call();
       emit(LoginSuccess());
     } catch (error) {
       emit(LoginFailure(error.toString()));

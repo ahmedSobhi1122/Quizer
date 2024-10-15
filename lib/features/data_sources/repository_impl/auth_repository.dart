@@ -14,7 +14,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<void> register(User user) async => await remoteDataSource.registerUser(
         UserRegisterModel(
-          type: user.type,
+          type: user.userRole,
           firstName: user.firstName,
           lastName: user.lastName,
           phoneNumber: user.phoneNumber,
@@ -25,12 +25,19 @@ class AuthRepositoryImpl implements AuthRepository {
       );
 
   @override
-  Future<void> login(User user) async => await remoteDataSource.loginUser(
-        UserLoginModel(
-          email: user.email,
-          password: user.password,
-        ),
-      );
+  Future<User> login(User user) async {
+    UserLoginModel userLogin = await remoteDataSource.loginUser(
+      UserLoginModel(
+        email: user.email,
+        password: user.password,
+      ),
+    );
+    return User(
+      id: userLogin.id,
+      userRole: userLogin.userRole,
+      token: userLogin.token,
+    );
+  }
 
   @override
   Future<User?> authWithGoogle() async {
@@ -39,6 +46,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return null;
     } else {
       return User(
+        id: user.uid,
         email: user.email,
         firstName: user.displayName!.split(' ')[0],
         lastName: user.displayName!.split(' ')[1],

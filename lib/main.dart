@@ -74,8 +74,38 @@ class MyApp extends StatelessWidget {
         darkTheme: AppTheme.darkTheme(context),
         themeMode: ThemeMode.light,
         onGenerateRoute: router.RouteGenerator.getRoute,
-        initialRoute: Routes.startQuizScreenRoute,
+        initialRoute: Routes.editProfileScreenRoute,
       ),
     );
   }
 }
+
+
+// Container(
+// height: 180.h,
+// child: Row(children: [
+// Expanded(
+// child: CustomButton(
+// text: "Cancel",
+// onPressed: () {
+//
+// },
+// color: AppColors.softRed.withOpacity(.2),
+// colorText: AppColors.softRed.withOpacity(1),
+// borderColor: Colors.red,
+// ),
+// ),
+// SizedBox(
+// width: 50.w,
+// ),
+// Expanded(
+// child: CustomButton(
+// color: AppColors.purpleColor,
+// colorText: AppColors.whiteColor,
+// text: "Finish",
+// onPressed: () {},
+// ),
+// )
+// ]
+// ),
+// ),

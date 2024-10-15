@@ -3,6 +3,7 @@ import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/image_upload.dart';
 
@@ -143,10 +144,12 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                 SizedBox(
                   height: AppSize.s20.h,
                 ),
-                ImageUploadField(
+                Container(
                   height: 100.h,
-                  hint: "Question image!",
-                  fitter: BoxFit.cover,
+                  child: ImageUploadField(
+                    hint: "Question image!",
+                    fitter: BoxFit.cover,
+                  ),
                 ),
                 SizedBox(
                   height: AppSize.s20.h,

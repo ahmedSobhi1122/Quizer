@@ -10,7 +10,9 @@ class ImageUploadField extends StatefulWidget {
   final double height;
   final String hint;
   final BoxFit fitter;
-  const ImageUploadField({Key? key, required this.height, required this.hint, required this.fitter}) : super(key: key);
+
+  const ImageUploadField({Key? key,this.height = 10,this.hint = "", required this.fitter}) : super(key: key);
+
   @override
   _ImageUploadFieldState createState() => _ImageUploadFieldState();
 }
@@ -29,6 +31,11 @@ class _ImageUploadFieldState extends State<ImageUploadField> {
           _webImage = imageBytes;
         });
       } else {
+        // Handle for mobile (Android/iOS)
+        final imageBytes = await pickedFile.readAsBytes();
+        setState(() {
+          _webImage = imageBytes;
+        });
       }
     }
   }
@@ -37,66 +44,77 @@ class _ImageUploadFieldState extends State<ImageUploadField> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          width: double.infinity,
-          height: widget.height,
-          decoration: BoxDecoration(
+        Expanded(
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
               color: Colors.white60,
-              borderRadius: BorderRadius.circular(10)),
-          child: _webImage == null? Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                Text(
-                  widget.hint,
-                  style: const TextStyle(
-                    fontSize: AppSize.s20,
-                    fontWeight: FontWeight.bold,
-                      color: AppColors.whiteColor40
-                  ),
-                ),
-                const Spacer(),
-                IconButton(
-                    onPressed: () {
-                      _pickImage();
-                    },
-                    icon: Icon(
-                      Icons.add_a_photo,
-                      color: Colors.grey[700],
-                    )
-                )
-              ],
+              borderRadius: BorderRadius.circular(10),
             ),
-          )
-          : Stack(
-            children: [
-              SizedBox(
-                width: double.infinity,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.r),
-                  child: Opacity(
-                    opacity: 0.8,
-                    child: Image.memory(
-                      _webImage!,
-                      fit: widget.fitter,
+            child: _webImage == null
+                ? Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            bottom: 70.h,
+                            top: 70.h,
+                            child: Text(
+                              widget.hint,
+                              style: const TextStyle(
+                                fontSize: AppSize.s20,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.whiteColor40,
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: IconButton(
+                              onPressed: _pickImage,
+                              icon: Icon(
+                                Icons.add_a_photo,
+                                color: Colors.grey[700],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+                : Stack(
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.r),
+                    child: Opacity(
+                      opacity: 0.8,
+                      child: Image.memory(
+                        _webImage!,
+                        fit: widget.fitter,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Center(
-                child: IconButton(
-                    onPressed: () {
-                      _pickImage();
-                      print("hello");
-                    },
+                Center(
+                  child: IconButton(
+                    onPressed: _pickImage,
                     icon: Icon(
                       Icons.add_a_photo,
                       color: Colors.grey[700],
-                      size: .5 *widget.height,
-                    )
+                      size: widget.height * 0.5, // Ensure it's proportional
+                    ),
+                  ),
                 ),
-              )
-            ],
+              ],
+            ),
           ),
         ),
       ],

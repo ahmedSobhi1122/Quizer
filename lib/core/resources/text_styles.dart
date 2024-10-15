@@ -147,6 +147,12 @@ class AppTextStyles {
         color: AppColors.blackColor,
         fontSize: FontSize.f10,
       );
+  static TextStyle homeCategoryTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor,
+        fontSize: FontSize.f12,
+      );
 
   ///Start quiz
   static TextStyle statQuizTitleTextStyle(BuildContext context) =>

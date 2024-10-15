@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:quizer/core/resources/constants.dart';
+import 'package:quizer/core/constants/constants.dart';
 
 // const String APPLICATION_JSON = "application/json";
 // const String CONTENT_TYPE = "content-type";

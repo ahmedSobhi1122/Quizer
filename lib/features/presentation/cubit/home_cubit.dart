@@ -9,17 +9,15 @@ class HomeCubit extends Cubit<HomeState> {
 
   HomeCubit(this.getHomeProfileDataUseCase) : super(HomeInitial());
 
-  Future<User> getHome(String userID) async {
-    emit(HomeLoading());
+  Future<void> getHomeProfileData(String userID) async {
+    emit(HomeProfileDataLoading(true));
     try {
       final result = await getHomeProfileDataUseCase(userID);
       print(result);
-      emit(HomeSuccess(result));
-      return result;
+      emit(HomeProfileDataSuccess(result, false));
     }
     catch (e) {
       emit(HomeFailure(e.toString()));
-      return User();
     }
   }
 }

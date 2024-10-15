@@ -1,4 +1,5 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/core/constants/enum.dart';
 
 import '../../../../../config/routes/screen_export.dart';
 import '../../../../../core/resources/app_colors.dart';
@@ -8,13 +9,19 @@ import 'custom_appbar_points.dart';
 import 'custom_appbar_profile.dart';
 
 class CustomHomeAppbar extends StatelessWidget {
-  const CustomHomeAppbar({super.key});
+  final String? imageUrl;
+  final String? name;
+  final int? points;
+  final String? rank;
+  const
+  CustomHomeAppbar({super.key, required this.imageUrl, required this.name, required this.points, required this.rank});
 
   @override
   Widget build(BuildContext context) {
     return // This Is The Appbar
       Column(
         children: [
+          /// AppBar
           Background(
             myhHeight: AppSize.s160.h,
             paddingTop: AppPadding.p38,
@@ -25,15 +32,16 @@ class CustomHomeAppbar extends StatelessWidget {
               AppColors.appbar_bottom,
               AppColors.under_appbar_shadow,
             ],
-            child: const Row(
+            child:  Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CustomAppbarProfile(),
-                CustomHomeAppbarPoints(),
+                CustomAppbarProfile(imageUrl: imageUrl,name: name, rank: rank),
+                CustomHomeAppbarPoints(points: points!,),
               ],
             ),
           ),
+          /// Blurred Underline
           Container(
             height: AppSize.s12.h,
             decoration:

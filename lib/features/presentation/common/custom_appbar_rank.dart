@@ -7,7 +7,8 @@ import '../../../core/resources/app_values.dart';
 import '../../../core/resources/text_styles.dart';
 
 class CustomAppBarRank extends StatelessWidget {
-  const CustomAppBarRank({super.key});
+  final String? rank;
+  const CustomAppBarRank({super.key, required this.rank});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class CustomAppBarRank extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: AppPadding.p2.h,horizontal: AppPadding.p12.w),
-        child: Text("Newbie", style: AppTextStyles.homeRankTextStyle(context)),
+        child: Text(rank!, style: AppTextStyles.homeRankTextStyle(context)),
       ),
     );
   }

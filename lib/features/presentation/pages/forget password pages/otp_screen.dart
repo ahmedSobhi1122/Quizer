@@ -4,8 +4,6 @@ import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/constants/constants.dart';
-import 'package:quizer/core/resources/assets_manager.dart';
-import 'package:quizer/core/constants/constants.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';

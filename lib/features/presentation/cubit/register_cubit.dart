@@ -85,8 +85,8 @@ class RegisterCubit extends Cubit<RegisterState> {
   Future<void> registerWithFacebook() async {
     emit(RegisterLoading());
     try {
-      var p = await facebookAuthUserUseCase.call();
-      print(" ${p?.providerData},");
+      var user = await facebookAuthUserUseCase.call();
+      // print(" ${user?.providerData},");
       emit(RegisterSuccess());
     } catch (error) {
       emit(RegisterFailure(error.toString()));

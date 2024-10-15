@@ -33,15 +33,16 @@ class _CustomProgressState extends State<CustomProgress> {
   void initState() {
     super.initState();
     _width = (widget.start == 0) ? 0 : AppSize.s240.w / (widget.start ?? 100);
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+        _width = (widget.end == 0) ? 0 : AppSize.s240.w / (widget.end ?? 100);
+        print("setState");
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(milliseconds: 500), () {
-      setState(() {
-        _width = (widget.end == 0) ? 0 : AppSize.s240.w / (widget.end ?? 100);
-      });
-    });
     return Stack(
       children: [
         Container(

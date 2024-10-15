@@ -1,5 +1,5 @@
-import 'package:quizer/features/domain/entities/user.dart';
 
+import '../entities/user.dart';
 import '../repository/account_repository.dart';
 
 class GetProfileDataUseCase {

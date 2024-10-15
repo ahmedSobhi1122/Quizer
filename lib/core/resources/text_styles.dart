@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
@@ -10,30 +9,28 @@ class AppTextStyles {
   AppTextStyles._();
 
   ///TextField
-  static TextStyle textStyle(BuildContext context) =>
-      getMediumStyle(
+  static TextStyle textStyle(BuildContext context) => getMediumStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.blackColor,
         fontSize: FontSize.f20,
       );
 
-
   ///Button
-  static TextStyle customButtonTextStyle(BuildContext context, {Color? color}) =>
+  static TextStyle customButtonTextStyle(BuildContext context,
+          {Color? color}) =>
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: color??AppColors.blackColor,
+        color: color ?? AppColors.blackColor,
         fontSize: FontSize.f22,
       );
 
-  static TextStyle socialButtonTextStyle(BuildContext context, {Color? color}) =>
+  static TextStyle socialButtonTextStyle(BuildContext context,
+          {Color? color}) =>
       getRegularStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: color??AppColors.blackColor,
+        color: color ?? AppColors.blackColor,
         fontSize: FontSize.f14,
       );
-
-
 
   ///Selection
   static TextStyle headerSignupTextStyle(BuildContext context) =>
@@ -50,7 +47,7 @@ class AppTextStyles {
         fontSize: FontSize.f18,
       );
 
-  static TextStyle selectedBoxTextStyle(BuildContext context,Color color) =>
+  static TextStyle selectedBoxTextStyle(BuildContext context, Color color) =>
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: color,
@@ -58,15 +55,13 @@ class AppTextStyles {
       );
 
   ///SignUp
-  static TextStyle rememberMeTextStyle(BuildContext context) =>
-      getMediumStyle(
+  static TextStyle rememberMeTextStyle(BuildContext context) => getMediumStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.blackColor,
         fontSize: FontSize.f14,
       );
 
-  static TextStyle orTextStyle(BuildContext context) =>
-      getBoldStyle(
+  static TextStyle orTextStyle(BuildContext context) => getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.greyColor,
         fontSize: FontSize.f14,
@@ -81,69 +76,71 @@ class AppTextStyles {
       );
 
   ///otp
-  static TextStyle otpTextStyle(BuildContext context) =>
-      getBoldStyle(
+  static TextStyle otpTextStyle(BuildContext context) => getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.blackColor,
         fontSize: FontSize.f32,
       );
 
-  static TextStyle otpTextFieldTextStyle(BuildContext context) =>
-      getBoldStyle(
+  static TextStyle otpTextFieldTextStyle(BuildContext context) => getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.blackColor,
         fontSize: FontSize.f24,
       );
 
   ///home
-  static TextStyle homeNameTextStyle(BuildContext context) =>
-      getRegularStyle(
+  static TextStyle homeNameTextStyle(BuildContext context) => getRegularStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.whiteColor,
         fontSize: FontSize.f16,
       );
-  static TextStyle homeRankTextStyle(BuildContext context) =>
-      getRegularStyle(
+
+  static TextStyle homeRankTextStyle(BuildContext context) => getRegularStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.whiteColor,
         fontSize: FontSize.f11,
       );
-  static TextStyle homePointsTextStyle(BuildContext context) =>
-      getBoldStyle(
+
+  static TextStyle homePointsTextStyle(BuildContext context) => getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.whiteColor,
         fontSize: FontSize.f14,
       );
+
   static TextStyle homeDailyTaskHeaderTextStyle(BuildContext context) =>
       getBlackStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.blackColor,
         fontSize: FontSize.f20,
       );
+
   static TextStyle homeDailyTaskTitleTextStyle(BuildContext context) =>
       getRegularStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.blackColor,
         fontSize: FontSize.f16,
       );
+
   static TextStyle homeDailyTaskSubTitleTextStyle(BuildContext context) =>
       getLightStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.blackColor,
         fontSize: FontSize.f14,
       );
-  static TextStyle homeTitlesTextStyle(BuildContext context) =>
-      getBlackStyle(
+
+  static TextStyle homeTitlesTextStyle(BuildContext context) => getBlackStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.blackColor,
         fontSize: FontSize.f14,
       );
+
   static TextStyle homeSubTitlesTextStyle(BuildContext context) =>
       getBlackStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.deepDarkPurple,
         fontSize: FontSize.f14,
       );
+
   static TextStyle homeGameCardTitleTextStyle(BuildContext context) =>
       getBlackStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
@@ -151,4 +148,51 @@ class AppTextStyles {
         fontSize: FontSize.f10,
       );
 
+  ///Start quiz
+  static TextStyle statQuizTitleTextStyle(BuildContext context) =>
+      getBlackStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor,
+        fontSize: FontSize.f32,
+      );
+
+  static TextStyle statQuizTitleSectionTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor,
+        fontSize: FontSize.f32,
+      );
+
+  static TextStyle statQuizSubtitleSectionTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.greyColor,
+        fontSize: FontSize.f16,
+      );
+
+  static TextStyle statQuizTitleInformationTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor,
+        fontSize: FontSize.f20,
+      );
+
+  static TextStyle statQuizInformationTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.purpleColor,
+        fontSize: FontSize.f18,
+      );
+  static TextStyle statQuizNameTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.whiteColor,
+        fontSize: FontSize.f14,
+      );
+  static TextStyle statQuizNumberTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor,
+        fontSize: FontSize.f10,
+      );
 }

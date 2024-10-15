@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'dart:io';
 
@@ -67,7 +68,8 @@ class _ImageUploadFieldState extends State<ImageUploadField> {
               : Stack(
             children: [
               SizedBox(
-                width: double.infinity,
+                width: context.width,
+                // height: widget.height,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Opacity(

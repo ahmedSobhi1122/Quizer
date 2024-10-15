@@ -23,13 +23,13 @@ class Social extends StatelessWidget {
         CustomButtonSocial(
           text: "Login with Facebook",
           icon: SvgPicture.asset(SVGAssets.facebook),
-          onTap: onTapFacebook?? () => context.read<RegisterCubit>().registerWithFacebook(),
+          onTap: onTapFacebook?? () async => await context.read<RegisterCubit>().registerWithFacebook(),
         ),
         SizedBox(height: AppSize.s20.h),
         CustomButtonSocial(
           text: "Login with Google",
           icon: SvgPicture.asset(SVGAssets.google),
-          onTap: onTapGoogle?? () => context.read<RegisterCubit>().registerWithGoogle(),
+          onTap: onTapGoogle?? () async => await context.read<RegisterCubit>().registerWithGoogle(),
         ),
       ],
     );

@@ -14,6 +14,7 @@ import 'package:quizer/features/presentation/common/checkable.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
 import 'package:quizer/features/presentation/common/loading.dart';
 import 'package:quizer/features/presentation/cubit/login_cubit.dart';
+import 'package:quizer/features/presentation/pages/Login%20page/widgets/or_line.dart';
 import 'package:quizer/features/presentation/pages/data%20info%20page/widgets/date_of_birth.dart';
 import 'package:quizer/features/presentation/state/login_state.dart';
 
@@ -36,119 +37,32 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: AppSize.s80.h),
-                  Text(
-                    '''Login''',
-                    textAlign: TextAlign.left,
-                    style: AppTextStyles.headerSignupTextStyle(context),
-                  ),
-                  SizedBox(height: AppSize.s10.h),
-                  Text(
-                    '''Please Enter your email & password''',
-                    style: AppTextStyles.subHeaderSignupTextStyle(context),
-                  ),
+                  const Header(),
                   SizedBox(height: AppSize.s70.h),
-                  SizedBox(
-                    width: AppSize.s335.w,
-                    child: TextField(
-                      controller: context.read<LoginCubit>().emailController,
-                      decoration: style("Email"),
-                      keyboardType: TextInputType.emailAddress,
-                      style: AppTextStyles.textStyle(context),
-                    ),
-                  ),
+                  const Email(),
                   SizedBox(height: AppSize.s32.h),
-                  SizedBox(
-                    width: AppSize.s335.w,
-                    child: BlocBuilder<LoginCubit, LoginState>(
-                        builder: (context, state) {
-                      return TextFormField(
-                        controller:
-                            context.read<LoginCubit>().passwordController,
-                        obscureText:
-                            !context.read<LoginCubit>().isPasswordVisible,
-                        validator: (value) =>
-                            Validation.validatePassword(value),
-                        keyboardType: TextInputType.visiblePassword,
-                        obscuringCharacter: "※",
-                        style: AppTextStyles.textStyle(context),
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          labelStyle:
-                              const TextStyle(color: AppColors.purpleColor),
-                          contentPadding:
-                              EdgeInsets.all(AppPadding.defaultPadding.r),
-                          border: const OutlineInputBorder(),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              context.read<LoginCubit>().isPasswordVisible
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: AppColors.purpleColor50,
-                            ),
-                            onPressed: () => context
-                                .read<LoginCubit>()
-                                .togglePasswordVisibility(),
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
+                  const Password(),
                   Row(
                     children: [
                       SizedBox(
                         width: AppSize.s24.w,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          DataIntent.pushEmail(
-                              context.read<LoginCubit>().emailController.text);
-                          context.pushNamed(Routes.forgetPasswordScreenRoute);
-                        },
-                        child: Text(
-                          "forgot password?",
-                          style: AppTextStyles.forgotPasswordTextStyle(context),
-                        ),
-                      ),
+                      const ForgetPassword(),
                       SizedBox(
                         width: AppSize.s52.w,
                       ),
                       const Checkable(),
-                      Text(
-                        "Remember me",
-                        style: AppTextStyles.rememberMeTextStyle(context),
-                      ),
                     ],
                   ),
                   SizedBox(height: AppSize.s30.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: AppSize.s140.w,
-                        height: AppSize.s1_5.h,
-                        color: AppColors.lightGreyColor,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: AppPadding.defaultPadding.w),
-                        child: Text(
-                          "OR",
-                          style: AppTextStyles.orTextStyle(context),
-                        ),
-                      ),
-                      Container(
-                        width: AppSize.s140.w,
-                        height: AppSize.s1_5.h,
-                        color: AppColors.lightGreyColor,
-                      ),
-                    ],
-                  ),
+                  const OrLine(),
                   SizedBox(height: AppSize.s24.h),
                   Social(
-                    onTapFacebook: () =>
-                        context.read<LoginCubit>().loginWithFacebook(),
-                    onTapGoogle: () =>
-                        context.read<LoginCubit>().loginWithGoogle(),
+                    onTapFacebook: () async {
+                      bool? ok = await context.read<LoginCubit>().authWithFacebook();
+                    },
+                    onTapGoogle: () async =>
+                        await context.read<LoginCubit>().authWithGoogle(),
                   ),
                   SizedBox(height: AppSize.s50.h),
                   BlocListener<LoginCubit, LoginState>(
@@ -184,7 +98,7 @@ class LoginScreen extends StatelessWidget {
                     text: "Create new account",
                     onPressed: () =>
                         context.pushNamed(Routes.signUpScreenRoute),
-                    color: AppColors.lightPurpleColor.withOpacity(.7),
+                    color: AppColors.buttonPurpleColor,
                     colorText: AppColors.purpleColor,
                   )
                 ],
@@ -204,5 +118,112 @@ class LoginScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class ForgetPassword extends StatelessWidget {
+  const ForgetPassword({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        DataIntent.pushEmail(
+            context.read<LoginCubit>().emailController.text);
+        context.pushNamed(Routes.forgetPasswordScreenRoute);
+      },
+      child: Text(
+        "forgot password?",
+        style: AppTextStyles.forgotPasswordTextStyle(context),
+      ),
+    );
+  }
+}
+
+class Password extends StatelessWidget {
+  const Password({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: AppSize.s335.w,
+      child: BlocBuilder<LoginCubit, LoginState>(
+          builder: (context, state) {
+        return TextFormField(
+          controller:
+              context.read<LoginCubit>().passwordController,
+          obscureText:
+              !context.read<LoginCubit>().isPasswordVisible,
+          validator: (value) =>
+              Validation.validatePassword(value),
+          keyboardType: TextInputType.visiblePassword,
+          obscuringCharacter: "※",
+          style: AppTextStyles.textStyle(context),
+          decoration: InputDecoration(
+            labelText: 'Password',
+            labelStyle:
+                const TextStyle(color: AppColors.purpleColor),
+            contentPadding:
+                EdgeInsets.all(AppPadding.defaultPadding.r),
+            border: const OutlineInputBorder(),
+            suffixIcon: IconButton(
+              icon: Icon(
+                context.read<LoginCubit>().isPasswordVisible
+                    ? Icons.visibility
+                    : Icons.visibility_off,
+                color: AppColors.purpleColor50,
+              ),
+              onPressed: () => context
+                  .read<LoginCubit>()
+                  .togglePasswordVisibility(),
+            ),
+          ),
+        );
+      }),
+    );
+  }
+}
+
+class Email extends StatelessWidget {
+  const Email({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: AppSize.s335.w,
+      child: TextField(
+        controller: context.read<LoginCubit>().emailController,
+        decoration: style("Email"),
+        keyboardType: TextInputType.emailAddress,
+        style: AppTextStyles.textStyle(context),
+      ),
+    );
+  }
+}
+
+class Header extends StatelessWidget {
+  const Header({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      Text(
+        'Login',
+        style: AppTextStyles.headerSignupTextStyle(context),
+      ),
+      SizedBox(height: AppSize.s10.h),
+      Text(
+        'Please Enter your email & password',
+        style: AppTextStyles.subHeaderSignupTextStyle(context),
+      ),
+    ],);
   }
 }

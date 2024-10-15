@@ -41,7 +41,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     try {
       emit(ForgetPasswordInitial());
       var p = await userExistUserUseCase.call(emailController.text);
-      print("email: ${emailController.text} is exist: ${p},");
+      print("email: ${emailController.text} is exist: $p,");
       if (p) {
         emit(ForgetPasswordSuccess());
       } else {

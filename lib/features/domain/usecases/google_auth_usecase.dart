@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:quizer/features/domain/entities/user.dart';
 import 'package:quizer/features/domain/repository/auth_repository.dart';
 
 class GoogleAuthUseCase {

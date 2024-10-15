@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quizer/features/domain/entities/user.dart';
 import 'package:quizer/features/domain/usecases/get_profile_data_usecase.dart';
 
-import '../../domain/entities/user.dart';
 import '../state/profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
@@ -9,10 +9,10 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   ProfileCubit(this.getProfileDataUseCase) : super(ProfileInitial());
 
-  Future<User> getProfile(String email) async {
+  Future<Object> getProfile(String email) async {
     emit(ProfileLoading());
     try {
-      final result = await getProfileDataUseCase(email);
+      final User result = await getProfileDataUseCase(email);
       print(result);
       emit(ProfileSuccess(result));
       return result;

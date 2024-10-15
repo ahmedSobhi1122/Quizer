@@ -76,6 +76,7 @@ class RemoteDataSource {
 
         UserCredential userCredential =
             await FirebaseAuth.instance.signInWithCredential(credential);
+        //TODO :  send data to server
         return userCredential.user;
       }
     } catch (error) {
@@ -108,6 +109,8 @@ class RemoteDataSource {
         // Here, you can access the user's email
         String? email = userData['email'];
         print("email : $email");
+
+        //TODO :  send data to server
 
         return userCredential.user;
       } else if (result.status == LoginStatus.cancelled) {

@@ -33,12 +33,36 @@ class AuthRepositoryImpl implements AuthRepository {
       );
 
   @override
-  Future<firebase_auth.User?> authWithGoogle() async =>
-      await remoteDataSource.signInWithGoogle();
+  Future<User?> authWithGoogle() async {
+    firebase_auth.User? user = await remoteDataSource.signInWithGoogle();
+    if (user == null) {
+      return null;
+    } else {
+      return User(
+        email: user.email,
+        firstName: user.displayName!.split(' ')[0],
+        lastName: user.displayName!.split(' ')[1],
+        profileImage: user.photoURL,
+        phoneNumber: user.phoneNumber,
+      );
+    }
+  }
 
   @override
-  Future<firebase_auth.User?> authWithFacebook() async =>
-      await remoteDataSource.signInWithFacebook();
+  Future<User?> authWithFacebook() async {
+    firebase_auth.User? user = await remoteDataSource.signInWithFacebook();
+    if (user == null) {
+      return null;
+    } else {
+      return User(
+        email: user.email,
+        firstName: user.displayName!.split(' ')[0],
+        lastName: user.displayName!.split(' ')[1],
+        profileImage: user.photoURL,
+        phoneNumber: user.phoneNumber,
+      );
+    }
+  }
 
   @override
   Future<bool> userExist(String email) async =>

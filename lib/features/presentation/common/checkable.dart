@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizer/core/resources/app_colors.dart';
+import 'package:quizer/core/resources/text_styles.dart';
 
 class Checkable extends StatefulWidget {
   const Checkable({super.key});
@@ -13,13 +14,21 @@ class _CheckableState extends State<Checkable> {
 
   @override
   Widget build(BuildContext context) {
-    return Checkbox(
-        activeColor: AppColors.purpleColor,
-        value: check,
-        onChanged: (val) {
-          setState(() {
-            check = val;
-          });
-        });
+    return Row(
+      children: [
+        Checkbox(
+            activeColor: AppColors.purpleColor,
+            value: check,
+            onChanged: (val) {
+              setState(() {
+                check = val;
+              });
+            }),
+        Text(
+          "Remember me",
+          style: AppTextStyles.rememberMeTextStyle(context),
+        ),
+      ],
+    );
   }
 }

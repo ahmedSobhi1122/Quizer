@@ -28,6 +28,8 @@ class LoginDataOTPProfileLoaded extends LoginState {
   List<Object?> get props => [user.firstName, user.lastName, user.profileImage];
 }
 
+class LoginUserNotFound extends LoginState {}
+
 class LoginSuccess extends LoginState {}
 
 class LoginFailure extends LoginState {

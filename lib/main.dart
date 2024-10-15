@@ -66,16 +66,16 @@ class MyApp extends StatelessWidget {
       designSize: const Size(430, 932),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (context, child) => MaterialApp(
-
-        debugShowCheckedModeBanner: false,
-        title: 'Quizer',
-        theme: AppTheme.lightTheme(context),
-        darkTheme: AppTheme.darkTheme(context),
-        themeMode: ThemeMode.light,
-        onGenerateRoute: router.RouteGenerator.getRoute,
-        initialRoute: Routes.homeScreenRoute,
-      ),
+      builder: (context, child) =>
+          MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Quizer',
+              theme: AppTheme.lightTheme(context),
+              darkTheme: AppTheme.darkTheme(context),
+              themeMode: ThemeMode.light,
+              onGenerateRoute: router.RouteGenerator.getRoute,
+              initialRoute: Routes.startQuizScreenRoute,
+          ),
     );
   }
 }

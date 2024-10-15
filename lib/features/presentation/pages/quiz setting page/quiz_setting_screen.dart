@@ -40,7 +40,8 @@ class QuizSettingScreen extends StatelessWidget {
                 SizedBox(
                   height: AppSize.s40.h,
                 ),
-                const ImageUploadField(height: 200,hint: "Quiz Image!",fitter: BoxFit.contain,),
+                ImageUploadField(
+                    height: 200.h, hint: "Quiz Image!", fitter: BoxFit.cover),
                 SizedBox(
                   height: AppSize.s20.h,
                 ),
@@ -149,12 +150,14 @@ class QuizSettingScreen extends StatelessWidget {
                 ),
                 Row(children: [
                   Expanded(
-                      child: CustomButton(
-                          text: "Cancel",
-                          onPressed: () {context.pop();},
-                        color: AppColors.lightPurpleColor.withOpacity(.7),
-                        colorText: AppColors.purpleColor,
-                      ),
+                    child: CustomButton(
+                      text: "Cancel",
+                      onPressed: () {
+                        context.pop();
+                      },
+                      color: AppColors.lightPurpleColor.withOpacity(.7),
+                      colorText: AppColors.purpleColor,
+                    ),
                   ),
                   SizedBox(
                     width: 50.w,
@@ -165,7 +168,8 @@ class QuizSettingScreen extends StatelessWidget {
                       colorText: AppColors.whiteColor,
                       text: "Next",
                       onPressed: () {
-                        context.pushReplacementNamed(Routes.createQuestionScreenRoute);
+                        context.pushReplacementNamed(
+                            Routes.createQuestionScreenRoute);
                       },
                     ),
                   )

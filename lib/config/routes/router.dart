@@ -115,7 +115,7 @@ class RouteGenerator {
 
       case Routes.quizSettingScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => const QuizSettingScreen(),
+          builder: (context) => QuizSettingScreen(),
         );
 
       case Routes.createQuestionScreenRoute:

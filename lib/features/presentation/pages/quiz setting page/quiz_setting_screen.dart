@@ -6,12 +6,49 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/image_upload.dart';
 import 'package:quizer/features/presentation/common/drop_list.dart';
+import 'package:quizer/config/routes/route_constants.dart';
+import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
 
-import '../../../../config/routes/route_constants.dart';
-import '../../common/custom_button_with_shadow.dart';
+class QuizSettingScreen extends StatefulWidget {
+  @override
+  State<QuizSettingScreen> createState() => _QuizSettingScreenState();
+}
 
-class QuizSettingScreen extends StatelessWidget {
-  const QuizSettingScreen({super.key});
+class _QuizSettingScreenState extends State<QuizSettingScreen> {
+  final List<int> _times = [5, 10, 15, 20, 25, 30,];
+  final List<String> _category = ['football', 'science', 'math', 'history', 'geography'];
+  int _selectedIndex = -1;
+  Widget timeItem(int index) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      child: Container(
+        width: 50.w,
+        margin: EdgeInsets.symmetric(horizontal: 8.w),
+        decoration: BoxDecoration(
+          color: _selectedIndex == index ? AppColors.darkPurpleColor10 : Colors.grey[300],
+          borderRadius: BorderRadius.circular(10.r),
+          border: Border.all(
+            color: _selectedIndex == index ? AppColors.lightPurpleColor : Colors.grey,
+            width: 2,
+          )
+        ),
+        child: Center(
+          child: Text(
+            "${_times[index%_times.length]}",
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: AppSize.s20,
+              fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +60,7 @@ class QuizSettingScreen extends StatelessWidget {
           paddingTop: AppSize.s20,
           child: SingleChildScrollView(
               child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(AppPadding.p8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -41,37 +78,15 @@ class QuizSettingScreen extends StatelessWidget {
                   height: AppSize.s40.h,
                 ),
                 ImageUploadField(
-                    height: 200.h, hint: "Quiz Image!", fitter: BoxFit.cover),
+                  height: 200.h,
+                  hint: "Quiz Image!",
+                  fitter: BoxFit.contain,
+                ),
                 SizedBox(
                   height: AppSize.s20.h,
                 ),
-                const CustomDropdown(
-                  items: [
-                    "Category 1",
-                    "Category 2",
-                    "Category 3",
-                    "Category 4",
-                    "Category 5",
-                    "Category 6",
-                    "Category 7",
-                    "Category 8",
-                    "Category 9",
-                    "Category 10",
-                    "Category 11",
-                    "Category 12",
-                    "Category 13",
-                    "Category 14",
-                    "Category 15",
-                    "Category 16",
-                    "Category 17",
-                    "Category 18",
-                    "Category 19",
-                    "Category 20",
-                    "Category 21",
-                    "Category 22",
-                    "Category 23",
-                    "Category 24",
-                  ],
+                CustomDropdown(
+                  items: _category,
                   hint: "Select Quiz Category",
                 ),
                 SizedBox(
@@ -106,6 +121,37 @@ class QuizSettingScreen extends StatelessWidget {
                           color: Colors.grey[700], fontWeight: FontWeight.bold),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: AppSize.s20.h,
+                ),
+                Text(
+                    "Quiz time (minute)",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[700],
+                    fontSize: AppSize.s16
+                  ),
+                ),
+                SizedBox(
+                  height: AppSize.s20.h,
+                ),
+                Center(
+                  child: Container(
+                    height: 50.w,
+                    width: 325.w,
+                    padding: EdgeInsets.symmetric(horizontal: AppPadding.p5,vertical: AppPadding.p5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.r),
+                      color: Colors.black12,
+
+                    ),
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _times.length * 1000,
+                      itemBuilder: (context, index) =>timeItem(index % _times.length),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: AppSize.s20.h,
@@ -182,3 +228,5 @@ class QuizSettingScreen extends StatelessWidget {
     );
   }
 }
+
+

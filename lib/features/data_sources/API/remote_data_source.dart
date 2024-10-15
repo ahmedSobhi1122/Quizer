@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quizer/core/resources/constants.dart';
+import 'package:quizer/features/data_sources/models/user_home_profile_model.dart';
 import 'package:quizer/features/data_sources/models/user_login_model.dart';
 import 'package:quizer/features/data_sources/models/user_otp_profile_model.dart';
 import 'package:quizer/features/data_sources/models/user_profile_model.dart';
@@ -242,6 +243,36 @@ class RemoteDataSource {
       }
     } catch (error) {
       throw Exception('Error during get otp profile: $error');
+    }
+  }
+
+  ///home profile
+  Future<HomeProfileModel> homeProfile(String userID) async {
+    HomeProfileModel user = HomeProfileModel(userID: userID);
+    try {
+      final response = await dio.request(
+        '${Constants.baseUrl}account/homeProfile',
+        data: user.toJson(),
+        options: Options(
+          method: 'POST',
+        ),
+      );
+      var responseData = response.data["data"];
+      var responseMessage = response.data["message"];
+      print(responseMessage);
+      print(responseData);
+
+      if (response.statusCode == 200) {
+        // successful
+        user = HomeProfileModel.fromJson(responseData);
+        return user;
+      }
+      else {
+        throw Exception('Error: $responseMessage');
+      }
+    }
+    catch (error) {
+      throw Exception('Error during get data profile: $error');
     }
   }
 

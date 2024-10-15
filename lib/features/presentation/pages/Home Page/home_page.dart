@@ -4,6 +4,8 @@ import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/pages/Home%20Page/Widgets/custom_home_categories.dart';
 
+import '../../../../core/dependency_injection.dart';
+import '../../../domain/usecases/get_home_profile_data_usecase.dart';
 import 'Widgets/custom_clickable_titles.dart';
 import 'Widgets/custom_daily_task.dart';
 import 'Widgets/custom_home_appbar.dart';
@@ -26,31 +28,50 @@ class _HomePageState extends State<HomePage> {
             paddingRight: AppPadding.p24,
             paddingLeft: AppPadding.p24,
             paddingTop: AppPadding.p50,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: AppSize.s160.h),
-                  const CustomDailyTask(),
-                  SizedBox(height: AppSize.s43.h),
-                  CustomClickableTitles(
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: SizedBox(height: AppSize.s160.h),
+                ),
+                const SliverToBoxAdapter(
+                  child: CustomDailyTask(),
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: AppSize.s43.h),
+                ),
+                SliverToBoxAdapter(
+                  child: CustomClickableTitles(
                     title: "Categories",
                     clickable: "View All",
-                    clickableOnTap: () => print(
-                        "I view all categories"), // TODO add function here
+                    clickableOnTap: () async
+                    {
+                      final GetHomeProfileUseCase getHomeProfileUseCase = GetHomeProfileUseCase(sl());
+                      await getHomeProfileUseCase.call("92aecb4b-1dcf-4606-8982-653e1799c474");
+                    }, // TODO add function here
                   ),
-                  SizedBox(height: AppSize.s12.h),
-                  const CustomHomeCategories(),
-                  SizedBox(height: AppSize.s43.h),
-                  CustomClickableTitles(
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: AppSize.s12.h),
+                ),
+                const SliverToBoxAdapter(
+                  child: CustomHomeCategories(),
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: AppSize.s43.h),
+                ),
+                SliverToBoxAdapter(
+                  child: CustomClickableTitles(
                     title: "More Games",
                     clickable: "View All",
                     clickableOnTap: () =>
                         print("I view all quizzes"), // TODO add function here
                   ),
-                  SizedBox(height: AppSize.s12.h),
-                   const CustomHomeMoreGames(),
-                ],
-              ),
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: AppSize.s12.h),
+                ),
+                const CustomHomeMoreGames(),
+              ],
             ),
           ),
           const CustomHomeAppbar()

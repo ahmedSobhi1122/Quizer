@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/config/routes/route_constants.dart';
+import 'package:quizer/core/constants/enum.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -10,12 +11,6 @@ class SettingScreen extends StatefulWidget {
   @override
   State<SettingScreen> createState() => _SettingScreenState();
 }
-
-enum Themes { LIGHT, DARK }
-
-enum Languages { ENGLISH, ARABIC, FRENCH }
-
-enum States { ON, OFF }
 
 class _SettingScreenState extends State<SettingScreen> {
   String language = 'English';

@@ -20,10 +20,7 @@ class CustomHomeMoreGames extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
-      physics: gridPhysics,
+    return SliverGrid.builder(
       gridDelegate: gridDelegate,
       itemCount: 20,
       itemBuilder: (context, index) {
@@ -65,7 +62,7 @@ class CustomGame extends StatelessWidget {
           Flexible(
             flex: 1,
             child: Padding(
-              padding: EdgeInsets.all(AppPadding.p8.r),
+              padding: EdgeInsets.only(top: AppPadding.p8.h,left: AppPadding.p8.w,right: AppPadding.p8.w,bottom: AppPadding.p12.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -115,7 +112,6 @@ class CustomInfo extends StatelessWidget {
     );
   }
 }
-
 
 class CustomInfoComponent extends StatelessWidget {
   final String data;

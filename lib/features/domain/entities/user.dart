@@ -16,11 +16,13 @@ class User {
   final int? thirdPlaceCount;
   final String? profileImage;
   final int? secondPlaceCount;
+  final int? points;
 
   User({
     this.type,
     this.coverImage,
     this.profileImage,
+    this.points,
     this.firstPlaceCount,
     this.secondPlaceCount,
     this.thirdPlaceCount,

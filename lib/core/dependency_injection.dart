@@ -8,6 +8,7 @@ import 'package:quizer/features/data_sources/repository_impl/auth_repository.dar
 import 'package:quizer/features/domain/repository/account_repository.dart';
 import 'package:quizer/features/domain/repository/auth_repository.dart';
 import 'package:quizer/features/domain/usecases/facebook_auth_usecase.dart';
+import 'package:quizer/features/domain/usecases/get_home_profile_data_usecase.dart';
 import 'package:quizer/features/domain/usecases/get_otp_usecase.dart';
 import 'package:quizer/features/domain/usecases/google_auth_usecase.dart';
 import 'package:quizer/features/domain/usecases/login_usecase.dart';
@@ -22,6 +23,7 @@ import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../features/domain/usecases/get_profile_data_usecase.dart';
+import '../features/presentation/cubit/home_cubit.dart';
 import '../features/presentation/cubit/profile_cubit.dart';
 
 final sl = GetIt.instance;
@@ -40,6 +42,7 @@ Future<void> init() async {
 
   /// UseCases
   sl.registerLazySingleton<GetProfileDataUseCase>(() => GetProfileDataUseCase(sl()));
+  sl.registerLazySingleton<GetHomeProfileUseCase>(() => GetHomeProfileUseCase(sl()));
   sl.registerLazySingleton<LoginUseCase>(() => LoginUseCase(sl()));
   sl.registerLazySingleton<GetOTPUseCase>(() => GetOTPUseCase(sl()));
   sl.registerLazySingleton<RegisterUseCase>(() => RegisterUseCase(sl()));
@@ -54,5 +57,6 @@ Future<void> init() async {
   sl.registerLazySingleton<RegisterCubit>(() => RegisterCubit(sl(),sl(),sl()));
   sl.registerLazySingleton<LoginCubit>(() => LoginCubit(sl(),sl(),sl(),sl()));
   sl.registerLazySingleton<ProfileCubit>(() => ProfileCubit(sl()));
+  sl.registerLazySingleton<HomeCubit>(() => HomeCubit(sl()));
   sl.registerLazySingleton<ForgetPasswordCubit>(() => ForgetPasswordCubit(sl(),sl(),sl(),sl(),sl()));
 }

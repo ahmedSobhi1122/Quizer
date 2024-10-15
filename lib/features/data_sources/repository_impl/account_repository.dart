@@ -8,6 +8,20 @@ class AccountRepositoryImpl implements AccountRepository {
   AccountRepositoryImpl(this.remoteDataSource);
 
   @override
+  Future<User> homeProfile(String userID) async
+  {
+    final user = await remoteDataSource.homeProfile(userID);
+    return User
+      (
+        firstName:  user.firstName,
+        lastName: user.lastName,
+        rank: user.rank,
+        points: user.points,
+        profileImage: user.profileImage,
+      );
+  }
+
+  @override
   Future<User> getProfile(String email) async
   {
     final user = await remoteDataSource.getProfile(email);

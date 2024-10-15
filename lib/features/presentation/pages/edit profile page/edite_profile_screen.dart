@@ -144,7 +144,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           child: CustomButton(
                             text: "Cancel",
                             onPressed: () {
-
+                              Navigator.pop(context);
                             },
                             color: AppColors.softRed,
                             colorText: Colors.red.withOpacity(.7),
@@ -159,7 +159,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             color: AppColors.purpleColor,
                             colorText: AppColors.whiteColor,
                             text: "Finish",
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
                           ),
                         )
                       ]

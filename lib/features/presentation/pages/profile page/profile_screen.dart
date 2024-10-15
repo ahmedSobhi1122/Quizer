@@ -46,6 +46,7 @@ class ProfileScreen extends StatelessWidget {
                               const Spacer(),
                               IconButton(
                                 onPressed: () {
+                                  Navigator.pushNamed(context, Routes.editProfileScreenRoute);
                                   print("Edit profile");
                                 },
                                 icon: const Icon(Icons.edit),

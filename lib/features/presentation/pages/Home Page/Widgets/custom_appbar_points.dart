@@ -8,7 +8,8 @@ import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/text_styles.dart';
 
 class CustomHomeAppbarPoints extends StatelessWidget {
-  const CustomHomeAppbarPoints({super.key});
+  final int points;
+  const CustomHomeAppbarPoints({super.key, required this.points});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +29,7 @@ class CustomHomeAppbarPoints extends StatelessWidget {
           SvgPicture.asset(SVGAssets.lightning),
           Padding(
             padding: EdgeInsets.only(right: AppPadding.p8.w),
-            child: Text(
-              "3400",
+            child: Text("$points",
               style: AppTextStyles.homePointsTextStyle(context),
             ),
           ),

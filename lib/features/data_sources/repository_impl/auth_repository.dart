@@ -14,7 +14,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<void> register(User user) async => await remoteDataSource.registerUser(
         UserRegisterModel(
-          type: user.userRole,
+          userRole: user.userRole,
           firstName: user.firstName,
           lastName: user.lastName,
           phoneNumber: user.phoneNumber,

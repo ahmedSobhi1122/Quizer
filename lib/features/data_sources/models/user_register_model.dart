@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:quizer/core/constants/enum.dart';
 
 class UserRegisterModel {
-  final UserRole? type;
+  final UserRole? userRole;
   final String? firstName;
   final String? lastName;
   final String? phoneNumber;
@@ -10,9 +10,11 @@ class UserRegisterModel {
   final String? email;
   final String? password;
   final String? token;
+  final String? id;
 
   UserRegisterModel({
-    this.type,
+    this.id,
+    this.userRole,
     this.firstName,
     this.lastName,
     this.phoneNumber,
@@ -24,7 +26,7 @@ class UserRegisterModel {
 
   factory UserRegisterModel.fromJson(Map<String, dynamic> json) {
     return UserRegisterModel(
-      type: json['type'] != null ? UserRole.values[json['type']] : null,
+      userRole: json['type'] != null ? UserRole.values[json['type']] : null,
       firstName: json['firstName'],
       lastName: json['lastName'],
       phoneNumber: json['phoneNumber'],
@@ -37,7 +39,7 @@ class UserRegisterModel {
 
   FormData toJson() {
     return FormData.fromMap({
-      'userRole': type?.index,
+      'userRole': userRole?.index,
       'firstName': firstName,
       'lastName': lastName,
       'phoneNumber': phoneNumber,

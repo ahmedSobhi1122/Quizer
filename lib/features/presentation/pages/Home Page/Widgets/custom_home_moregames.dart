@@ -6,7 +6,7 @@ import '../../../../../core/resources/app_values.dart';
 import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/text_styles.dart';
 
-class CustomHomeMoreGames extends StatelessWidget {
+class CustomHomeQuizzes extends StatelessWidget {
   static SliverGridDelegateWithFixedCrossAxisCount gridDelegate =
       SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -16,7 +16,7 @@ class CustomHomeMoreGames extends StatelessWidget {
   static const NeverScrollableScrollPhysics gridPhysics =
       NeverScrollableScrollPhysics();
 
-  const CustomHomeMoreGames({super.key});
+  const CustomHomeQuizzes({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +24,16 @@ class CustomHomeMoreGames extends StatelessWidget {
       gridDelegate: gridDelegate,
       itemCount: 20,
       itemBuilder: (context, index) {
-        return CustomGame(index: index);
+        return CustomQuiz(index: index);
       },
     );
   }
 }  // TODO GridView.builder here -- better change to sliver I think
 
-class CustomGame extends StatelessWidget {
+class CustomQuiz extends StatelessWidget {
   final int index;
 
-  const CustomGame({super.key, required this.index});
+  const CustomQuiz({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {

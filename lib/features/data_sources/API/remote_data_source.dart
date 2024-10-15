@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:quizer/core/resources/constants.dart';
+import 'package:quizer/core/constants/constants.dart';
 import 'package:quizer/features/data_sources/models/user_home_profile_model.dart';
 import 'package:quizer/features/data_sources/models/user_login_model.dart';
 import 'package:quizer/features/data_sources/models/user_otp_profile_model.dart';
@@ -15,29 +15,30 @@ class RemoteDataSource {
   RemoteDataSource(this.dio);
 
   ///register by email and password
-  Future<void> registerUser(UserRegisterModel user) async {
+  Future<UserRegisterModel> registerUser(UserRegisterModel user) async {
     // print(1);
     // print(user.toJson().fields);
-    // try {
+    try {
       final response = await dio.request(
-        '${Constants.baseUrl}account/register',
+        '${Constants.baseUrl}auth/emailPassword/register',
         data: user.toJson(),
         options: Options(
           method: 'POST',
         ),
       );
 
-      print("print:                                 ${response.statusMessage} ,  ${response.data} , ${response.statusCode}");
+      // print("print:                                 ${response.statusMessage} ,  ${response.data} , ${response.statusCode}");
       if (response.statusCode == 200) {
         // successful
+        return UserRegisterModel.fromJson(response.data["data"]);
       } else {
-        throw Exception('Failed to register user');
+        throw Exception(response.data["message"]);
       }
-    // } catch (error) {
-    //   // print(2);
-    //   // print(error);
-    //   throw Exception('Error during registration: $error');
-    // }
+    } catch (error) {
+      //   // print(2);
+      // print(error);
+      throw Exception('Error during registration: $error');
+    }
   }
 
   ///login by email and password
@@ -45,7 +46,7 @@ class RemoteDataSource {
     // var headers = { 'Authorization' : 'Bearer ${Constants.token}'; };
     try {
       final response = await dio.request(
-        '${Constants.baseUrl}account/login',
+        '${Constants.baseUrl}auth/emailPassword/login',
         data: user.toJson(),
         options: Options(
           method: 'POST',
@@ -54,9 +55,9 @@ class RemoteDataSource {
       // print(response.data);
       if (response.statusCode == 200) {
         // successful
-        return UserLoginModel.fromJson(response.data);
+        return UserLoginModel.fromJson(response.data["data"]);
       } else {
-        throw Exception('Failed to log in');
+        throw Exception(response.data["message"]);
       }
     } catch (error) {
       throw Exception('Error during login: $error');
@@ -133,9 +134,7 @@ class RemoteDataSource {
     try {
       final response = await dio.request(
         '${Constants.baseUrl}email/setOTP',
-        data: FormData.fromMap({
-          'email': email,
-        }),
+        data: FormData.fromMap({'email': email}),
         options: Options(
           method: 'POST',
         ),
@@ -237,10 +236,10 @@ class RemoteDataSource {
       print(response.data);
       if (response.statusCode == 200) {
         // successful
-        user = OTPProfileModel.fromJson(response.data);
+        user = OTPProfileModel.fromJson(response.data["data"]);
         return user;
       } else {
-        throw Exception('User Not Found');
+        throw Exception(response.data["message"]);
       }
     } catch (error) {
       throw Exception('Error during get otp profile: $error');
@@ -267,12 +266,10 @@ class RemoteDataSource {
         // successful
         user = HomeProfileModel.fromJson(responseData);
         return user;
-      }
-      else {
+      } else {
         throw Exception('Error: $responseMessage');
       }
-    }
-    catch (error) {
+    } catch (error) {
       throw Exception('Error during get data profile: $error');
     }
   }
@@ -290,14 +287,13 @@ class RemoteDataSource {
       );
       if (response.statusCode == 200) {
         // successful
-        user = ProfileModel.fromJson(response.data);
+        user = ProfileModel.fromJson(response.data["data"]);
         return user;
       } else {
-        throw Exception('Failed to get data profile');
+        throw Exception(response.data["message"]);
       }
     } catch (error) {
       throw Exception('Error during get profile: $error');
     }
   }
-
 }

@@ -8,7 +8,8 @@ import '../../../../../core/resources/text_styles.dart';
 import '../../../common/custom_progress.dart';
 
 class CustomDailyTask extends StatelessWidget {
-  const CustomDailyTask({super.key});
+  final bool noRebuild;
+  const CustomDailyTask({super.key, required this.noRebuild});
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +20,12 @@ class CustomDailyTask extends StatelessWidget {
         color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(AppBorderRadius.br16),
       ),
-      child: const Row(
+      child:  Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-           DailyImage(),
-           DailyContent()
+           const DailyImage(),
+           DailyContent(noRebuild: noRebuild,)
         ],
       ),
     );
@@ -58,7 +59,8 @@ class DailyImage extends StatelessWidget {
 
 // Daily Content Custom Widget
 class DailyContent extends StatelessWidget {
-  const DailyContent({super.key});
+  final bool noRebuild;
+  const DailyContent({super.key, required this.noRebuild});
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +78,7 @@ class DailyContent extends StatelessWidget {
           Text("Solve 16 Question!",style: AppTextStyles.homeDailyTaskTitleTextStyle(context),),
           SizedBox(height: AppSize.s24.h),
           CustomProgress(
+            noRebuild: noRebuild,
             start: 0,
             end: 2,
             borderColor: AppColors.transparentColor,

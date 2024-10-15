@@ -86,7 +86,7 @@ class ProfileScreen extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(height: 10.h,),
-                                  const CustomAppBarRank()
+                                   const CustomAppBarRank(rank: "Newbie",)
                                 ],
                               ),
                             ),
@@ -114,7 +114,7 @@ class ProfileScreen extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
+                            SizedBox(
                               height: 60.h,
                               width: 60.w,
                               child: Image.asset(

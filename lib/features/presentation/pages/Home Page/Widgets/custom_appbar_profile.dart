@@ -1,5 +1,7 @@
 // Custom AppBar Profile
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/core/helper/image_handler.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../config/routes/screen_export.dart';
 import '../../../../../core/resources/app_colors.dart';
@@ -9,8 +11,13 @@ import '../../../common/custom_appbar_rank.dart';
 
 class CustomAppbarProfile extends StatelessWidget {
   final bool? isClickable;
+  final String? imageUrl;
+  final String? name;
+  final String? rank;
   final void Function()? onTap;
-  const CustomAppbarProfile({super.key, this.isClickable, this.onTap});
+
+  const CustomAppbarProfile(
+      {super.key, this.isClickable, this.onTap, required this.imageUrl, required this.name, required this.rank});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +27,7 @@ class CustomAppbarProfile extends StatelessWidget {
       children: [
         // Circular Avatar with border
         InkWell(
-        onTap: isClickable == true ? onTap : () {},
+          onTap: isClickable == true ? onTap : () {},
           child: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -30,13 +37,12 @@ class CustomAppbarProfile extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding:  EdgeInsets.all(AppPadding.p8.r),
-              child:  FittedBox(
+              padding: EdgeInsets.all(AppPadding.p8.r),
+              child: FittedBox(
                 fit: BoxFit.contain,
-                child: CircleAvatar(
-                  radius: AppBorderRadius.br32.r,
-                  backgroundColor: AppColors.warningColor,
-                  backgroundImage: const AssetImage('assets/images/avatar.png'), // TODO change Image
+                child: MainImage(
+                  width: AppSize.s60.r,
+                  imageUrl: imageUrl!,
                 ),
               ),
             ),
@@ -50,13 +56,16 @@ class CustomAppbarProfile extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(bottom: AppPadding.p12.h),
-                child: Text("Ahmed Mohsen",style: AppTextStyles.homeNameTextStyle(context),),
+                child: Text(
+                  name!,
+                  style: AppTextStyles.homeNameTextStyle(context),
+                ),
               ),
-              const CustomAppBarRank(),
+               CustomAppBarRank(rank: rank,),
             ],
-          ),),
+          ),
+        ),
       ],
     );
   }
 }
-

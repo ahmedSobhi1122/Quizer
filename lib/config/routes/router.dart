@@ -3,6 +3,7 @@ import 'package:quizer/features/presentation/cubit/home_cubit.dart';
 import 'package:quizer/features/presentation/cubit/profile_cubit.dart';
 import 'package:quizer/features/presentation/pages/Home%20Page/home_page.dart';
 import 'package:quizer/features/presentation/pages/create%20question%20page/create_question_screen.dart';
+import 'package:quizer/features/presentation/pages/edit%20profile%20page/edite_profile_screen.dart';
 import 'package:quizer/features/presentation/pages/quiz%20setting%20page/quiz_setting_screen.dart';
 import 'package:quizer/features/presentation/pages/setting%20page/setting_screen.dart';
 import 'package:quizer/features/presentation/pages/start%20quiz%20page/start_quiz_screen.dart';
@@ -127,6 +128,10 @@ class RouteGenerator {
       case Routes.settingScreenRoute:
         return MaterialPageRoute(
           builder: (context) => const SettingScreen(),
+        );
+      case Routes.editProfileScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) =>  EditProfileScreen(),
         );
 
       case Routes.startQuizScreenRoute:

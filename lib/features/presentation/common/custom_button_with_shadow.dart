@@ -5,17 +5,20 @@ import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton(
+  CustomButton(
       {super.key,
       required this.text,
       required this.onPressed,
       required this.color,
-      required this.colorText});
+      required this.colorText,
+      this.borderColor = AppColors.purpleColor,
+      });
 
   final String text;
   final VoidCallback onPressed;
   final Color color;
   final Color colorText;
+  Color borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,7 @@ class CustomButton extends StatelessWidget {
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppBorderRadius.br24.r),
-              side: const BorderSide(color: AppColors.purpleColor),
+              side:  BorderSide(color: borderColor),
             ),
           ),
           child: Text(

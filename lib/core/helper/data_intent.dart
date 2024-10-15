@@ -23,7 +23,7 @@ class DataIntent {
   static UserRole? _userRole;
   static String? _token;
 
-  //login data
+  //login data or register data
   static User? _dataUser;
 
   static void pushDataUser(User dataUser) => _dataUser = dataUser;

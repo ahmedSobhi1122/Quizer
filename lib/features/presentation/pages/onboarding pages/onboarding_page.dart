@@ -1,6 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quizer/config/routes/screen_export.dart';
+import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
@@ -119,7 +120,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
                 SizedBox(height: AppSize.s40.h),
-                currentIndex == contents.length - 1 ? const BuildButton() : const SizedBox.shrink(),
+                currentIndex == contents.length - 1
+                    ? const BuildButton()
+                    : const SizedBox.shrink(),
                 SizedBox(height: AppSize.s40.h),
               ],
             ),
@@ -147,14 +150,22 @@ class BuildButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomButton(text: "Get Started!", onPressed: (){}, color: AppColors.purpleColor, colorText: AppColors.whiteColor),
-        SizedBox(height: AppSize.s10.h),
-        CustomButton(text: "Already have an account?", onPressed: (){}, color: AppColors.buttonPurpleColor, colorText: AppColors.purpleColor),
-      ]
-    );
+    return Column(children: [
+      CustomButton(
+          text: "Get Started!",
+          onPressed: () {
+            context.pushReplacementNamed(Routes.signUpScreenRoute);
+          },
+          color: AppColors.purpleColor,
+          colorText: AppColors.whiteColor),
+      SizedBox(height: AppSize.s10.h),
+      CustomButton(
+          text: "Already have an account?",
+          onPressed: () {
+            context.pushReplacementNamed(Routes.logInScreenRoute);
+          },
+          color: AppColors.buttonPurpleColor,
+          colorText: AppColors.purpleColor),
+    ]);
   }
 }
-
-

@@ -21,7 +21,7 @@ class _DateOfBirthState extends State<DateOfBirth> {
 
   @override
   void initState() {
-    context.read<RegisterCubit>().birthDateController.text = "";
+    // context.read<RegisterCubit>().birthDateController.text = "";
     super.initState();
   }
 

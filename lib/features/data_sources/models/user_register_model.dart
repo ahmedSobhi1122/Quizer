@@ -26,14 +26,9 @@ class UserRegisterModel {
 
   factory UserRegisterModel.fromJson(Map<String, dynamic> json) {
     return UserRegisterModel(
-      userRole: json['type'] != null ? UserRole.values[json['type']] : null,
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      phoneNumber: json['phoneNumber'],
-      birthDate:
-          json['birthDate'] != null ? DateTime.parse(json['birthDate']) : null,
-      email: json['email'],
-      password: json['password'],
+      token: json['token'],
+      userRole: getUserRoleFromInt(json['userRole']),
+      id: json['id'],
     );
   }
 
@@ -47,5 +42,18 @@ class UserRegisterModel {
       'email': email,
       'password': password,
     });
+  }
+}
+
+UserRole getUserRoleFromInt(int userRole) {
+  switch (userRole) {
+    case 0:
+      return UserRole.ADMIN;
+    case 1:
+      return UserRole.STUDENT;
+    case 2:
+      return UserRole.TEACHER;
+    default:
+      throw Exception('Invalid rank value');
   }
 }

@@ -7,14 +7,9 @@ import 'package:quizer/features/presentation/common/custom_app_bar.dart';
 import 'widgets/fields.dart';
 import 'package:quizer/features/presentation/state/register_state.dart';
 
-class DataInfoScreen extends StatefulWidget {
+class DataInfoScreen extends StatelessWidget {
   const DataInfoScreen({super.key});
 
-  @override
-  State<DataInfoScreen> createState() => _DataInfoScreenState();
-}
-
-class _DataInfoScreenState extends State<DataInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +36,7 @@ class _DataInfoScreenState extends State<DataInfoScreen> {
                 style: AppTextStyles.subHeaderSignupTextStyle(context),
               ),
               SizedBox(height: AppSize.s90.h),
-              const Fields(),
+              Fields(),
             ]);
           },
         ),

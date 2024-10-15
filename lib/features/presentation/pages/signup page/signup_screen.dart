@@ -14,8 +14,15 @@ import 'package:quizer/features/presentation/pages/signup%20page/widgets/or_line
 import 'package:quizer/features/presentation/pages/signup%20page/widgets/social.dart';
 import 'package:quizer/features/presentation/state/register_state.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final GlobalKey<FormState> formKeyRegister = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +57,9 @@ class SignUpScreen extends StatelessWidget {
                     style: AppTextStyles.subHeaderSignupTextStyle(context),
                   ),
                   SizedBox(height: AppSize.s50.h),
-                  const Fields(),
+                  Fields(
+                    formKeyRegister: formKeyRegister,
+                  ),
                   SizedBox(height: AppSize.s12.h),
                   Row(
                     children: [
@@ -70,21 +79,22 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(height: AppSize.s50.h),
                   BlocListener<RegisterCubit, RegisterState>(
                     listener: (context, state) {
-                      if (state is RegisterSuccess) {
-                      } else if (state is RegisterFailure) {
-                        context.message(message: state.error);
-                      } else {}
+                      print(state);
+                      final route = ModalRoute.of(context);
+                      final isCurrentRoute = route?.isCurrent ?? false;
+                      if (isCurrentRoute) {
+                        if (state is RegisterSuccess) {
+                        } else if (state is RegisterFailure) {
+                          context.message(message: state.error);
+                        } else {}
+                      }
                     },
                     child: CustomButton(
                       color: AppColors.buttonPurpleColor,
                       colorText: AppColors.purpleColor,
                       text: "Next",
                       onPressed: () async {
-                        if (context
-                            .read<RegisterCubit>()
-                            .formKeyRegister
-                            .currentState!
-                            .validate()) {
+                        if (formKeyRegister.currentState!.validate()) {
                           context.pushNamed(Routes.selectionScreenRoute);
                         }
                       },

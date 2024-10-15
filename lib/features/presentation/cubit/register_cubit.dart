@@ -12,8 +12,6 @@ class RegisterCubit extends Cubit<RegisterState> {
   final GoogleAuthUseCase googleAuthUserUseCase;
   final FacebookAuthUseCase facebookAuthUserUseCase;
 
-  final formKeyInfo = GlobalKey<FormState>();
-  final formKeyRegister = GlobalKey<FormState>();
   late UserRole userRole = UserRole.values.first;
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
@@ -57,7 +55,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         email: emailController.text,
         password: passwordController.text,
       );
-      // print("${user.type}");
+      // print("${user.userRole}");
       // print("${user.firstName}");
       // print("${user.lastName}");
       // print("${user.birthDate}");
@@ -65,9 +63,10 @@ class RegisterCubit extends Cubit<RegisterState> {
       // print("${user.email}");
       // print("${user.password}");
 
-      await registerUserUseCase.call(user);
+      User userData = await registerUserUseCase.call(user);
       emit(RegisterSuccess());
     } catch (error) {
+      print(error.toString());
       emit(RegisterFailure(error.toString()));
     }
   }

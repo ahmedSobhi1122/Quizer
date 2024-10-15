@@ -10,14 +10,15 @@ import 'package:quizer/features/presentation/pages/signup%20page/widgets/passwor
 import 'package:quizer/features/presentation/state/register_state.dart';
 
 class Fields extends StatelessWidget {
+  final GlobalKey<FormState> formKeyRegister;
   const Fields({
-    super.key,
+    super.key, required this.formKeyRegister,
   });
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: context.read<RegisterCubit>().formKeyRegister,
+      key: formKeyRegister,
       child: Column(
         children: [
           SizedBox(

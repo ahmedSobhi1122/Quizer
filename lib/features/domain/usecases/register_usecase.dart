@@ -6,5 +6,5 @@ class RegisterUseCase {
 
   RegisterUseCase(this.repository);
 
-  Future<void> call(User user) async => await repository.register(user);
+  Future<User> call(User user) async => await repository.register(user);
 }

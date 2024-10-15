@@ -13,14 +13,16 @@ import 'package:quizer/features/presentation/pages/data%20info%20page/widgets/da
 import 'package:quizer/features/presentation/state/register_state.dart';
 
 class Fields extends StatelessWidget {
-  const Fields({
+  final GlobalKey<FormState> formKeyInfo = GlobalKey<FormState>();
+
+  Fields({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: context.read<RegisterCubit>().formKeyInfo,
+      key: formKeyInfo,
       child: Column(
         children: [
           SizedBox(
@@ -73,22 +75,21 @@ class Fields extends StatelessWidget {
           SizedBox(height: AppSize.s160.h),
           BlocListener<RegisterCubit, RegisterState>(
             listener: (context, state) {
-              if (state is RegisterSuccess) {
-                // context.pushNamed(Routes.signUpScreenRoute);
-                context.message(message: "success");
+              final route = ModalRoute.of(context);
+              final isCurrentRoute = route?.isCurrent ?? false;
+              if (isCurrentRoute) {
+                if (state is RegisterSuccess) {
+                  context.pushNamed(Routes.logInScreenRoute);
+                  context.message(message: "success");
+                }
               }
             },
             child: CustomButton(
               color: AppColors.lightPurpleColor.withOpacity(.7),
               colorText: AppColors.purpleColor,
-              text: "Next",
+              text: "Sign Up",
               onPressed: () async {
-                if (context
-                    .read<RegisterCubit>()
-                    .formKeyInfo
-                    .currentState!
-                    .validate()) {
-                  context.pushNamed(Routes.signUpScreenRoute);
+                if (formKeyInfo.currentState!.validate()) {
                   await context.read<RegisterCubit>().register();
                 }
               },

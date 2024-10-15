@@ -16,9 +16,9 @@ class RemoteDataSource {
 
   ///register by email and password
   Future<UserRegisterModel> registerUser(UserRegisterModel user) async {
-    // print(1);
+    print(1);
     // print(user.toJson().fields);
-    try {
+    // try {
       final response = await dio.request(
         '${Constants.baseUrl}auth/emailPassword/register',
         data: user.toJson(),
@@ -27,18 +27,20 @@ class RemoteDataSource {
         ),
       );
 
-      // print("print:                                 ${response.statusMessage} ,  ${response.data} , ${response.statusCode}");
+      print(
+          "print:                                 ${response.statusMessage} ,  ${response.data["data"]} , ${response.statusCode}");
       if (response.statusCode == 200) {
         // successful
         return UserRegisterModel.fromJson(response.data["data"]);
       } else {
+        print("message : " + response.data["message"]);
         throw Exception(response.data["message"]);
       }
-    } catch (error) {
-      //   // print(2);
-      // print(error);
-      throw Exception('Error during registration: $error');
-    }
+    // } catch (error) {
+    //   // print(2);
+    //   print(error);
+    //   throw Exception('Error during registration: $error');
+    // }
   }
 
   ///login by email and password

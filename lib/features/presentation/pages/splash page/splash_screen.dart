@@ -1,7 +1,9 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/config/routes/screen_export.dart';
+import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/loading.dart';
 import 'package:quizer/features/presentation/pages/splash%20page/widgets/logo.dart';
@@ -39,7 +41,11 @@ class _SplashScreenState extends State<SplashScreen> {
               SizedBox(
                 height: 218.h,
               ),
-              const Loading(),
+              Lottie.asset(
+                LottieAssets.loading,
+                width: AppSize.s100.w,
+                height: AppSize.s100.h,
+              ),
             ],
           ),
         ),

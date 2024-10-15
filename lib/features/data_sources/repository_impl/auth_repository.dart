@@ -12,17 +12,24 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this.remoteDataSource);
 
   @override
-  Future<void> register(User user) async => await remoteDataSource.registerUser(
-        UserRegisterModel(
-          userRole: user.userRole,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          phoneNumber: user.phoneNumber,
-          birthDate: user.birthDate,
-          email: user.email,
-          password: user.password,
-        ),
-      );
+  Future<User> register(User user) async {
+    UserRegisterModel userData = await remoteDataSource.registerUser(
+      UserRegisterModel(
+        userRole: user.userRole,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phoneNumber: user.phoneNumber,
+        birthDate: user.birthDate,
+        email: user.email,
+        password: user.password,
+      ),
+    );
+    return User(
+      id: userData.id,
+      userRole: userData.userRole,
+      token: userData.token,
+    );
+  }
 
   @override
   Future<User> login(User user) async {

@@ -1,5 +1,3 @@
-import '../constants/enum.dart';
-
 import 'package:quizer/core/constants/enum.dart';
 import 'package:quizer/features/domain/entities/user.dart';
 

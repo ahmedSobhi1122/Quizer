@@ -1,63 +1,88 @@
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:quizer/core/resources/app_colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
+import 'package:quizer/core/helper/extensions.dart';
+import 'package:quizer/core/resources/assets_manager.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../resources/app_values.dart';
+import 'package:quizer/core/resources/app_values.dart';
 
-class MainImage extends StatelessWidget {
-  const MainImage({
-    super.key,
-    required this.imageUrl,
-    this.width = AppSize.s100,
-    this.height = AppSize.s100,
-    this.backgroundColor,
-    this.borderColor,
-  });
+class ImageManager extends StatelessWidget {
+  final String? url;
+  final double? width;
+  final double? height;
+  final BoxFit? fit;
 
-  final String imageUrl;
-  final double width;
-  final double height;
-  final Color? backgroundColor;
-  final Color? borderColor;
+  const ImageManager({super.key, this.url, this.width, this.height, this.fit});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        color: backgroundColor ?? AppColors.whiteColor,
-        shape: BoxShape.circle,
-        border: borderColor != null
-            ? Border.all(
-                color: borderColor!,
-                width: AppSize.s1,
-                strokeAlign: BorderSide.strokeAlignOutside,
-              )
-            : null,
-      ),
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      child: imageUrl.contains('http')
-          ? CachedNetworkImage(
-              imageUrl: imageUrl,
-              fit: BoxFit.cover,
-              progressIndicatorBuilder: (context, url, progress) {
-                return const Skeletonizer(
-                    enabled: true, child: SizedBox.shrink());
-              },
-            )
-          : imageUrl.contains('cache')
-              ? Image.memory(
-                  File(imageUrl).readAsBytesSync(),
-                  fit: BoxFit.cover,
-                )
-              : Image.asset(
-                  imageUrl,
-                  fit: BoxFit.cover,
-                ),
+    return _getImage(url);
+  }
+
+  Widget _getImage(String? url) {
+    if (url.isNullOrEmpty()) {
+      return Image.asset(ImageAssets.defaultImage);
+    }
+
+    if (url!.startsWith("http")) {
+      return _networkImage(url);
+    } else if (url.endsWith(".svg")) {
+      return SvgPicture.asset(
+        url,
+        height: height?.r ?? AppSize.s48,
+        width: width?.r ?? AppSize.s48,
+        fit: fit ?? BoxFit.contain,
+      );
+    } else if (url.endsWith(".json") || url.endsWith(".gif")) {
+      return Lottie.asset(
+        url,
+        height: height?.r ?? AppSize.s48,
+        width: width?.r ?? AppSize.s48,
+        fit: fit ?? BoxFit.contain,
+      );
+    } else if (url.contains('cache')) {
+      return _cachedImage(url);
+    } else {
+      return Image.asset(
+        url,
+        height: height?.r ?? AppSize.s48,
+        width: width?.r ?? AppSize.s48,
+        fit: fit ?? BoxFit.contain,
+      );
+    }
+  }
+
+  Widget _networkImage(String url) {
+    return CachedNetworkImage(
+      imageUrl: url,
+      height: height?.r ?? AppSize.s48,
+      width: width?.r ?? AppSize.s48,
+      fit: fit ?? BoxFit.contain,
+      progressIndicatorBuilder: (context, url, progress) {
+        return const Skeletonizer(enabled: true, child: SizedBox.shrink());
+      },
     );
+  }
+
+  Widget _cachedImage(String path) {
+    try {
+      return Image.memory(
+        File(path).readAsBytesSync(),
+        height: height?.r ?? AppSize.s48,
+        width: width?.r ?? AppSize.s48,
+        fit: fit ?? BoxFit.contain,
+      );
+    } catch (e) {
+      return Image.asset(
+        ImageAssets.defaultImage,
+        height: height?.r ?? AppSize.s48,
+        width: width?.r ?? AppSize.s48,
+        fit: fit ?? BoxFit.contain,
+      );
+    }
   }
 }

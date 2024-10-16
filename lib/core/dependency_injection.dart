@@ -23,6 +23,7 @@ import 'package:quizer/features/presentation/cubit/login_cubit.dart';
 import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../features/domain/usecases/get_home_categories_usecase.dart';
 import '../features/domain/usecases/get_profile_data_usecase.dart';
 import '../features/presentation/cubit/home_cubit.dart';
 import '../features/presentation/cubit/profile_cubit.dart';
@@ -45,6 +46,7 @@ Future<void> init() async {
   sl.registerLazySingleton<GetProfileDataUseCase>(() => GetProfileDataUseCase(sl()));
   sl.registerLazySingleton<GetHomeProfileUseCase>(() => GetHomeProfileUseCase(sl()));
   sl.registerLazySingleton<GetHomeQuizzesUseCase>(() => GetHomeQuizzesUseCase(sl()));
+  sl.registerLazySingleton<GetHomeCategoriesUseCase>(() => GetHomeCategoriesUseCase(sl()));
   sl.registerLazySingleton<LoginUseCase>(() => LoginUseCase(sl()));
   sl.registerLazySingleton<GetOTPUseCase>(() => GetOTPUseCase(sl()));
   sl.registerLazySingleton<RegisterUseCase>(() => RegisterUseCase(sl()));
@@ -59,6 +61,6 @@ Future<void> init() async {
   sl.registerLazySingleton<RegisterCubit>(() => RegisterCubit(sl(),sl(),sl()));
   sl.registerFactory<LoginCubit>(() => LoginCubit(sl(),sl(),sl(),sl()));
   sl.registerFactory<ProfileCubit>(() => ProfileCubit(sl()));
-  sl.registerLazySingleton<HomeCubit>(() => HomeCubit(sl(),sl()));
+  sl.registerLazySingleton<HomeCubit>(() => HomeCubit(sl(),sl(),sl()));
   sl.registerLazySingleton<ForgetPasswordCubit>(() => ForgetPasswordCubit(sl(),sl(),sl(),sl(),sl()));
 }

@@ -23,7 +23,7 @@ class CustomHomeCategories extends StatelessWidget {
         itemExtent: context.width / 5,
         itemCount: 5,
         itemBuilder: (context, index) {
-          return const CategoryItem();
+          return CategoryItem();
         },
       ),
     );
@@ -46,7 +46,7 @@ class CategoryItem extends StatelessWidget {
             color: AppColors.purpleColor50,
           ),
           Text(
-            "Technology",
+            "technology",
             style: AppTextStyles.homeCategoryTextStyle(context),
           )
         ],

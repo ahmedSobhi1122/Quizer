@@ -53,11 +53,11 @@ class PasswordField extends StatelessWidget {
 }
 
 class ConfirmPasswordField extends StatelessWidget {
-  bool isPasswordVisible;
+  bool isConfirmPasswordVisible;
 
   ConfirmPasswordField({
     super.key,
-    this.isPasswordVisible = false,
+    this.isConfirmPasswordVisible = false,
   });
 
   @override
@@ -77,7 +77,7 @@ class ConfirmPasswordField extends StatelessWidget {
           border: const OutlineInputBorder(),
           suffixIcon: IconButton(
             icon: Icon(
-              isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+              isConfirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
               color: Colors.black45,
             ),
             onPressed: () =>

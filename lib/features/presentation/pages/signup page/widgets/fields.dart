@@ -13,7 +13,9 @@ import '../../../../../config/themes/theme.dart';
 
 class Fields extends StatelessWidget {
   final GlobalKey<FormState> formKeyRegister;
-  const Fields({
+  bool isPasswordVisible = false;
+  bool isConfirmPasswordVisible = false;
+  Fields({
     super.key, required this.formKeyRegister,
   });
 
@@ -46,24 +48,22 @@ class Fields extends StatelessWidget {
           BlocBuilder<RegisterCubit, RegisterState>(
             builder: (context, state) {
               if (state is RegisterPasswordVisibilityChanged) {
-                return PasswordField(
-                  isPasswordVisible: state.isPasswordVisible,
-                );
-              } else {
-                return PasswordField();
+                isPasswordVisible = state.isPasswordVisible;
               }
+              return PasswordField(
+                isPasswordVisible: isPasswordVisible,
+              );
             },
           ),
           SizedBox(height: AppSize.s24.h),
           BlocBuilder<RegisterCubit, RegisterState>(
             builder: (context, state) {
               if (state is RegisterConfirmPasswordVisibilityChanged) {
-                return ConfirmPasswordField(
-                  isPasswordVisible: state.isConfirmPasswordVisible,
-                );
-              } else {
-                return ConfirmPasswordField();
+                isConfirmPasswordVisible = state.isConfirmPasswordVisible;
               }
+              return ConfirmPasswordField(
+                isConfirmPasswordVisible: isConfirmPasswordVisible,
+              );
             },
           ),
         ],

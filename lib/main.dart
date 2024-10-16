@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/date_symbol_data_file.dart';
 import 'package:quizer/config/routes/route_constants.dart';
 import 'package:quizer/core/dependency_injection.dart';
 import 'package:themed/themed.dart';
@@ -70,7 +71,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState(){
     super.initState();
-    Themed.currentTheme = DarkTheme;
+    super.initState();
+    Themed.currentTheme = LightTheme;
   }
 
   @override

@@ -1,7 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:quizer/core/helper/validation.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
@@ -23,7 +23,7 @@ class _DateOfBirthState extends State<DateOfBirth> {
 
   @override
   void initState() {
-    // context.read<RegisterCubit>().birthDateController.text = "";
+    context.read<RegisterCubit>().birthDateController.text = "";
     super.initState();
   }
 
@@ -57,7 +57,7 @@ class _DateOfBirthState extends State<DateOfBirth> {
         print("---------------------------1");
         print(pickedDate);
         if (pickedDate != null) {
-          String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate!).toString();
+          String formattedDate = pickedDate!.toString().split(" ")[0];
           setState(() {
             context.read<RegisterCubit>().birthDateController.text =
                 formattedDate;

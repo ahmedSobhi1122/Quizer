@@ -9,6 +9,7 @@ import 'package:quizer/features/data_sources/models/user_otp_profile_model.dart'
 import 'package:quizer/features/data_sources/models/user_profile_model.dart';
 import 'package:quizer/features/data_sources/models/user_register_model.dart';
 
+import '../models/home_categories_model.dart';
 import '../models/home_quizzes_model.dart';
 
 class RemoteDataSource {
@@ -261,11 +262,10 @@ class RemoteDataSource {
       );
       var responseData = response.data["data"];
       var responseMessage = response.data["message"];
-      print(responseMessage);
-      print(responseData);
+      // print(responseMessage);
+      // print(responseData);
 
       if (response.statusCode == 200) {
-        // successful
         user = HomeProfileModel.fromJson(responseData);
         return user;
       } else {
@@ -293,8 +293,8 @@ class RemoteDataSource {
       var responseMessage = response.data["message"];
 
       if (response.statusCode == 200) {
-        print(responseMessage);
-        print(responseData);
+        // print(responseMessage);
+        // print(responseData);
         quizzes = responseData!.map((quiz) => HomeQuizzesModel.fromJson(quiz))
             .toList();
         return quizzes;
@@ -306,6 +306,42 @@ class RemoteDataSource {
     catch (error) {
       throw Exception(
           'remote_data_source--Error getting Home Profile Data: $error');
+    }
+  }
+
+  ///home Categories TODO -- Add Token to header
+  Future<List<HomeCategoriesModel>> homeCategories(String token) async {
+    List<HomeCategoriesModel> categories = [];
+
+    try {
+      final response = await dio.request(
+        '${Constants.baseUrl}category',
+        options: Options(
+          method: 'GET',
+        ),
+      );
+
+      var responseData = response.data["data"] as List?;
+      var responseMessage = response.data["message"];
+
+      if (response.statusCode == 200) {
+        print(responseMessage);
+        print(responseData);
+        print("----------------------------before map");
+        categories = responseData!.map((category) => HomeCategoriesModel.fromJson(category))
+            .toList();
+        print("----------------------------after map");
+        return categories;
+      }
+      else {
+        print("----------------------------before Exception");
+        throw Exception('Error: $responseMessage');
+      }
+      return categories;
+    }
+    catch (error) {
+      throw Exception(
+          'remote_data_source--Error getting Categories Data: $error');
     }
   }
 

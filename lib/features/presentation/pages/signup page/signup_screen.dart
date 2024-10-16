@@ -68,10 +68,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         width: AppSize.s24.w,
                       ),
                       const Checkable(),
-                      Text(
-                        "Remember me",
-                        style: AppTextStyles.rememberMeTextStyle(context),
-                      ),
                     ],
                   ),
                   const OrLine(),

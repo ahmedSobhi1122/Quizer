@@ -1,5 +1,7 @@
+import 'package:quizer/features/data_sources/models/home_categories_model.dart';
 import 'package:quizer/features/domain/entities/quiz.dart';
 
+import '../../domain/entities/category.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/repository/account_repository.dart';
 import '../API/remote_data_source.dart';
@@ -71,5 +73,22 @@ class AccountRepositoryImpl implements AccountRepository {
   Future<void> updateProfile(String id) {
     // TODO: implement updateProfile
     throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Category>> getHomeCategories(String token) async {
+
+    final List<HomeCategoriesModel> categoryModels = await remoteDataSource.homeCategories(token);
+
+    List<Category> categories = [];
+    for (var categoryModel in categoryModels) {
+      categories.add(
+          new Category
+          (
+          id: categoryModel.id,
+          name: categoryModel.name,
+          image: categoryModel.image,));
+    }
+    return categories;
   }
 }

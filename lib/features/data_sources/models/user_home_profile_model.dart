@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:quizer/core/constants/enum.dart';
 
+import '../../domain/entities/user.dart';
+
 class HomeProfileModel {
   final String? userID;
   final String? firstName;
@@ -62,37 +64,3 @@ DailyTask deserializeDailyTask(Map<String, dynamic> json)
     points: json['points'],
     lastReset: DateTime.parse(json['lastReset']));
 }
-
-class DailyTask {
-  final int? taskID;
-  final String? userID;
-  final String? taskName;
-  final int? progress;
-  final int? goal;
-  final bool? isCompleted;
-
-  final int? points;
-  final DateTime? lastReset;
-
-  DailyTask(
-      {this.taskID,
-      this.userID,
-      this.taskName,
-      this.progress,
-      this.goal,
-      this.isCompleted,
-      this.points,
-      this.lastReset});
-}
-
-/*
-    public int Id { get; set; }
-    public string UserId { get; set; } = string.Empty;
-    public string TaskName { get; set; } = string.Empty;
-    public int Progress { get; set; }
-    public int Goal { get; set; }
-    public bool IsCompleted { get; set; }
-
-    public int Points { get; set; }
-    public DateTime LastReset { get; set; }
-*/

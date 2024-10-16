@@ -1,6 +1,9 @@
+import 'package:quizer/features/domain/entities/quiz.dart';
+
 import '../../domain/entities/user.dart';
 import '../../domain/repository/account_repository.dart';
 import '../API/remote_data_source.dart';
+import '../models/home_quizzes_model.dart';
 
 class AccountRepositoryImpl implements AccountRepository {
   final RemoteDataSource remoteDataSource;
@@ -16,7 +19,29 @@ class AccountRepositoryImpl implements AccountRepository {
       rank: user.rank,
       points: user.points,
       profileImage: user.profileImage,
+      dailyTask: user.dailyTask,
     );
+  }
+
+  @override
+  Future<List<Quiz>> getHomeQuizzes(String token) async {
+    final List<HomeQuizzesModel> quizModels =
+    await remoteDataSource.homeQuizzes(token);
+    List<Quiz> quizzes = [];
+    for (var quizModel in quizModels) {
+      quizzes.add(Quiz(
+          id: quizModel.id,
+          name: quizModel.name,
+          description: quizModel.description,
+          madeBy: quizModel.madeBy,
+          rating: quizModel.rating,
+          questionCount: quizModel.questionCount,
+          maxTime: quizModel.maxTime,
+          solveCount: quizModel.solveCount,
+          image: quizModel.image,
+          createdOn: quizModel.createdOn));
+    }
+    return quizzes;
   }
 
   @override

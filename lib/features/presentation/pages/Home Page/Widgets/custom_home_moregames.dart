@@ -1,12 +1,15 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/core/constants/constants.dart';
+import 'package:quizer/features/domain/entities/quiz.dart';
+import 'package:quizer/features/presentation/state/home_state.dart';
 
 import '../../../../../config/routes/screen_export.dart';
 import '../../../../../core/resources/app_colors.dart';
 import '../../../../../core/resources/app_values.dart';
-import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/text_styles.dart';
 
 class CustomHomeQuizzes extends StatelessWidget {
+  final List<Quiz>? quizzes;
   static SliverGridDelegateWithFixedCrossAxisCount gridDelegate =
       SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -16,24 +19,25 @@ class CustomHomeQuizzes extends StatelessWidget {
   static const NeverScrollableScrollPhysics gridPhysics =
       NeverScrollableScrollPhysics();
 
-  const CustomHomeQuizzes({super.key});
+  const CustomHomeQuizzes({super.key, this.quizzes = const []});
 
   @override
   Widget build(BuildContext context) {
-    return SliverGrid.builder(
+    return GridView.builder(
       gridDelegate: gridDelegate,
-      itemCount: 20,
+      itemCount: quizzes!.length,
+      shrinkWrap: true,
+      physics: gridPhysics,
       itemBuilder: (context, index) {
-        return CustomQuiz(index: index);
+        return CustomQuiz(quiz: quizzes![index],);
       },
     );
   }
 }  // TODO GridView.builder here -- better change to sliver I think
 
 class CustomQuiz extends StatelessWidget {
-  final int index;
-
-  const CustomQuiz({super.key, required this.index});
+  final Quiz quiz;
+  const CustomQuiz({super.key, required this.quiz});
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +56,9 @@ class CustomQuiz extends StatelessWidget {
                   topRight: Radius.circular(AppBorderRadius.br16),
                 ),
                 child: Container(
-                  decoration: const BoxDecoration(
+                  decoration:  BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage(ImageAssets.cringe),
+                        image: NetworkImage(Constants.url + quiz.image!),
                         fit: BoxFit.cover),
                   ),
                 )),
@@ -70,11 +74,11 @@ class CustomQuiz extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: "Arabic Language Quiz",
+                          text: quiz.name,
                           style: AppTextStyles.homeTitlesTextStyle(context),
                         ),
                         TextSpan(
-                          text: "\n • By Ahmed Mohsen",
+                          text: "\n • By ${quiz.madeBy}",
                           style:
                               AppTextStyles.homeGameCardTitleTextStyle(context),
                         ),
@@ -83,7 +87,7 @@ class CustomQuiz extends StatelessWidget {
                   ),
                   // Title and Author
                   const Spacer(),
-                  const CustomInfo()
+                   CustomInfo(questions: quiz.questionCount!,time: quiz.maxTime!,rate: quiz.rating!,)
                 ],
               ),
             ),
@@ -95,19 +99,22 @@ class CustomQuiz extends StatelessWidget {
 }
 
 class CustomInfo extends StatelessWidget {
-  const CustomInfo({super.key});
+  final int questions;
+  final int time;
+  final double rate;
+  const CustomInfo({super.key, required this.questions, required this.time, required this.rate});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("15 Question",style:
+        Text("$questions Question",style:
         AppTextStyles.homeGameCardTitleTextStyle(context)),
         const CustomDot(),
-        const CustomInfoComponent(data: "15Min",icon: Icons.timer),
+         CustomInfoComponent(data: "${time}Min",icon: Icons.timer),
         const CustomDot(),
-        const CustomInfoComponent(data: "3.5/5",icon: Icons.star),
+         CustomInfoComponent(data: "$rate/5",icon: Icons.star),
       ],
     );
   }

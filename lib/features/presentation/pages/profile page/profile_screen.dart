@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/constants/constants.dart';
 import 'package:quizer/core/constants/enum.dart';
 import 'package:quizer/core/resources/app_colors.dart';
@@ -170,7 +171,7 @@ class Profile extends StatelessWidget {
                             Text(
                               (firstName ?? "Ahmed ") + (lastName ?? "Mohsen"),
                               style: TextStyle(
-                                color: AppColors.blackColor80,
+                                color: MyTheme.textColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: FontSize.f17,
                               ),
@@ -205,7 +206,7 @@ class Profile extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: AppColors.gold,
                     borderRadius: BorderRadius.circular(10.r),
-                    border: Border.all(color: Colors.black, width: 1.w)),
+                    border: Border.all(color: MyTheme.textColor, width: 1.w)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -221,7 +222,7 @@ class Profile extends StatelessWidget {
                       firstPlaceCount.toString(),
                       style: TextStyle(
                         fontWeight: FontWeight.w900,
-                        color: AppColors.blackColor60,
+                        color: MyTheme.textColor,
                         fontSize: FontSize.f15,
                       ),
                     ),
@@ -234,7 +235,7 @@ class Profile extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: AppColors.silver,
                     borderRadius: BorderRadius.circular(10.r),
-                    border: Border.all(color: Colors.black, width: 1.w)),
+                    border: Border.all(color: MyTheme.textColor, width: 1.w)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -250,7 +251,7 @@ class Profile extends StatelessWidget {
                       secondPlaceCount.toString(),
                       style: TextStyle(
                           fontWeight: FontWeight.w900,
-                          color: AppColors.blackColor60,
+                          color: MyTheme.textColor,
                           fontSize: FontSize.f15),
                     ),
                   ],
@@ -262,7 +263,7 @@ class Profile extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: AppColors.gold,
                     borderRadius: BorderRadius.circular(10.r),
-                    border: Border.all(color: Colors.black, width: 1.w)),
+                    border: Border.all(color: MyTheme.textColor, width: 1.w)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -278,7 +279,7 @@ class Profile extends StatelessWidget {
                       thirdPlaceCount.toString(),
                       style: TextStyle(
                           fontWeight: FontWeight.w900,
-                          color: AppColors.blackColor60,
+                          color: MyTheme.textColor,
                           fontSize: FontSize.f15),
                     ),
                   ],
@@ -296,7 +297,7 @@ class Profile extends StatelessWidget {
                 "Achievements",
                 style: TextStyle(
                     fontSize: FontSize.f24,
-                    color: AppColors.blackColor80,
+                    color: MyTheme.textColor,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(
@@ -315,7 +316,7 @@ class Profile extends StatelessWidget {
                           color: AppColors.gray,
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(
-                            color: AppColors.blackColor80,
+                            color: MyTheme.textColor,
                             width: 1,
                           ),
                         ),
@@ -334,7 +335,7 @@ class Profile extends StatelessWidget {
                           color: AppColors.gray,
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(
-                            color: AppColors.blackColor80,
+                            color: MyTheme.textColor,
                             width: 1,
                           ),
                         ),
@@ -353,7 +354,7 @@ class Profile extends StatelessWidget {
                           color: AppColors.gray,
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(
-                            color: AppColors.blackColor80,
+                            color: MyTheme.textColor,
                             width: 1,
                           ),
                         ),
@@ -372,7 +373,7 @@ class Profile extends StatelessWidget {
                           color: AppColors.gray,
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(
-                            color: AppColors.blackColor80,
+                            color: MyTheme.textColor,
                             width: 1,
                           ),
                         ),
@@ -391,7 +392,7 @@ class Profile extends StatelessWidget {
                           color: AppColors.gray,
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(
-                            color: AppColors.blackColor80,
+                            color: MyTheme.textColor,
                             width: 1,
                           ),
                         ),
@@ -410,7 +411,7 @@ class Profile extends StatelessWidget {
                           color: AppColors.gray,
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(
-                            color: AppColors.blackColor80,
+                            color: MyTheme.textColor,
                             width: 1,
                           ),
                         ),
@@ -429,7 +430,7 @@ class Profile extends StatelessWidget {
                           color: AppColors.gray,
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(
-                            color: AppColors.blackColor80,
+                            color: MyTheme.textColor,
                             width: 1,
                           ),
                         ),
@@ -448,7 +449,7 @@ class Profile extends StatelessWidget {
                           color: AppColors.gray,
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(
-                            color: AppColors.blackColor80,
+                            color: MyTheme.textColor,
                             width: 1,
                           ),
                         ),
@@ -467,7 +468,7 @@ class Profile extends StatelessWidget {
                           color: AppColors.gray,
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(
-                            color: AppColors.blackColor80,
+                            color: MyTheme.textColor,
                             width: 1,
                           ),
                         ),
@@ -486,7 +487,7 @@ class Profile extends StatelessWidget {
                           color: AppColors.gray,
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(
-                            color: AppColors.blackColor80,
+                            color: MyTheme.textColor,
                             width: 1,
                           ),
                         ),
@@ -508,7 +509,7 @@ class Profile extends StatelessWidget {
                 "About",
                 style: TextStyle(
                     fontSize: FontSize.f24,
-                    color: AppColors.blackColor80,
+                    color: MyTheme.textColor,
                     fontWeight: FontWeight.bold),
               ),
               Text(
@@ -516,7 +517,7 @@ class Profile extends StatelessWidget {
                     "A brief description of Jackson Logan as a UI/UX designer, emphasizing his experience in creating visually appealing and functional designs. It mentions his interest in a variety of design and programming tools.",
                 style: TextStyle(
                     fontSize: FontSize.f18,
-                    color: AppColors.blackColor80,
+                    color: MyTheme.textColor,
                     fontWeight: FontWeight.w600),
               ),
             ],

@@ -19,6 +19,8 @@ class MyTheme{
   static const primaryButtonTextColor = ColorRef(Colors.white,id: 'buttonTextColor');
   static const secondaryButtonTextColor = ColorRef(Color(0xFF6960FB),id: 'onButton');
 
+  static const selectedBorder = ColorRef(Color(0xFF958EFF), id: 'selectedBorder');
+
   static const studentSelectColor = ColorRef(Color(0xFF7B61FD), id:'teacher');
   static const teacherSelectColor = ColorRef(Color(0xFFFDB461), id:'student');
 

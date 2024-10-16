@@ -28,7 +28,7 @@ class SelectedContainer extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
             style: BorderStyle.solid,
-            color: AppColors.blackColor.withOpacity(.4)),
+            color: MyTheme.textColor),
         borderRadius: BorderRadius.circular(AppBorderRadius.br24.r),
         // color: fillColor,
       ),
@@ -167,7 +167,7 @@ class _SelectionState extends State<Selection> {
                 color: MyTheme.teacherSelectColor,
                 icon: Icon(
                   Icons.person,
-                  color: AppColors.whiteColor,
+                  color: MyTheme.textColor,
                   size: AppSize.s36.r,
                 ),
                 fillColor: _fillColor2,

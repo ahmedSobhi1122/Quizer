@@ -18,6 +18,7 @@ import 'package:quizer/features/presentation/pages/Login%20page/widgets/or_line.
 import 'package:quizer/features/presentation/pages/data%20info%20page/widgets/date_of_birth.dart';
 import 'package:quizer/features/presentation/state/login_state.dart';
 
+import '../../../../config/themes/theme.dart';
 import '../../../../core/helper/validation.dart';
 import '../signup page/widgets/social.dart';
 
@@ -74,8 +75,8 @@ class LoginScreen extends StatelessWidget {
                       }
                     },
                     child: CustomButton(
-                      color: AppColors.purpleColor,
-                      colorText: AppColors.whiteColor,
+                      color: MyTheme.primaryButtonColor,
+                      colorText: MyTheme.primaryButtonTextColor,
                       text: "Login",
                       onPressed: () async {
                         if (context
@@ -98,8 +99,8 @@ class LoginScreen extends StatelessWidget {
                     text: "Create new account",
                     onPressed: () =>
                         context.pushNamed(Routes.signUpScreenRoute),
-                    color: AppColors.buttonPurpleColor,
-                    colorText: AppColors.purpleColor,
+                    color: MyTheme.secondaryButtonColor,
+                    colorText: MyTheme.secondaryButtonTextColor,
                   )
                 ],
               ),
@@ -166,7 +167,7 @@ class Password extends StatelessWidget {
           decoration: InputDecoration(
             labelText: 'Password',
             labelStyle:
-                const TextStyle(color: AppColors.purpleColor),
+                const TextStyle(color: MyTheme.disabledColor),
             contentPadding:
                 EdgeInsets.all(AppPadding.defaultPadding.r),
             border: const OutlineInputBorder(),
@@ -175,7 +176,7 @@ class Password extends StatelessWidget {
                 context.read<LoginCubit>().isPasswordVisible
                     ? Icons.visibility
                     : Icons.visibility_off,
-                color: AppColors.purpleColor50,
+                color: Colors.black45,
               ),
               onPressed: () => context
                   .read<LoginCubit>()

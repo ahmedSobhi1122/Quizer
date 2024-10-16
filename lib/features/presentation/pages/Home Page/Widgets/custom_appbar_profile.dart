@@ -40,9 +40,9 @@ class CustomAppbarProfile extends StatelessWidget {
               padding: EdgeInsets.all(AppPadding.p8.r),
               child: FittedBox(
                 fit: BoxFit.contain,
-                child: MainImage(
+                child: ImageManager(
                   width: AppSize.s60.r,
-                  imageUrl: imageUrl!,
+                  url: imageUrl!,
                 ),
               ),
             ),

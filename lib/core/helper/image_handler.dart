@@ -33,15 +33,15 @@ class ImageManager extends StatelessWidget {
     } else if (url.endsWith(".svg")) {
       return SvgPicture.asset(
         url,
-        height: height?.r ?? AppSize.s48,
-        width: width?.r ?? AppSize.s48,
+        height: height?.r ?? AppSize.s48.r,
+        width: width?.r ?? AppSize.s48.r,
         fit: fit ?? BoxFit.contain,
       );
     } else if (url.endsWith(".json") || url.endsWith(".gif")) {
       return Lottie.asset(
         url,
-        height: height?.r ?? AppSize.s48,
-        width: width?.r ?? AppSize.s48,
+        height: height?.r ?? AppSize.s48.r,
+        width: width?.r ?? AppSize.s48.r,
         fit: fit ?? BoxFit.contain,
       );
     } else if (url.contains('cache')) {
@@ -49,8 +49,8 @@ class ImageManager extends StatelessWidget {
     } else {
       return Image.asset(
         url,
-        height: height?.r ?? AppSize.s48,
-        width: width?.r ?? AppSize.s48,
+        height: height?.r ?? AppSize.s48.r,
+        width: width?.r ?? AppSize.s48.r,
         fit: fit ?? BoxFit.contain,
       );
     }
@@ -59,8 +59,8 @@ class ImageManager extends StatelessWidget {
   Widget _networkImage(String url) {
     return CachedNetworkImage(
       imageUrl: url,
-      height: height?.r ?? AppSize.s48,
-      width: width?.r ?? AppSize.s48,
+      height: height?.r ?? AppSize.s48.r,
+      width: width?.r ?? AppSize.s48.r,
       fit: fit ?? BoxFit.contain,
       progressIndicatorBuilder: (context, url, progress) {
         return const Skeletonizer(enabled: true, child: SizedBox.shrink());
@@ -72,15 +72,15 @@ class ImageManager extends StatelessWidget {
     try {
       return Image.memory(
         File(path).readAsBytesSync(),
-        height: height?.r ?? AppSize.s48,
-        width: width?.r ?? AppSize.s48,
+        height: height?.r ?? AppSize.s48.r,
+        width: width?.r ?? AppSize.s48.r,
         fit: fit ?? BoxFit.contain,
       );
     } catch (e) {
       return Image.asset(
         ImageAssets.defaultImage,
-        height: height?.r ?? AppSize.s48,
-        width: width?.r ?? AppSize.s48,
+        height: height?.r ?? AppSize.s48.r,
+        width: width?.r ?? AppSize.s48.r,
         fit: fit ?? BoxFit.contain,
       );
     }

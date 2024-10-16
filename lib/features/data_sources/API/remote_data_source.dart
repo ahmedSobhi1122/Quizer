@@ -315,11 +315,11 @@ class RemoteDataSource {
     try {
       final response = await dio.request(
         '${Constants.baseUrl}account/getProfile',
-        data: user.toJson(),
         options: Options(
           headers: {'Authorization': 'Bearer $token'},
           method: 'POST',
         ),
+        data: user.toJson(),
       );
       if (response.statusCode == 200) {
         // successful

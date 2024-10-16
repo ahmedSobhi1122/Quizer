@@ -64,8 +64,8 @@ class _OtpScreenState extends State<OtpScreen> {
                           state is ForgetPasswordSuccess) {
                         return Column(
                           children: [
-                            MainImage(
-                              imageUrl: Constants.url + image,
+                            ImageManager(
+                              url: Constants.url + image,
                             ),
                             SizedBox(height: AppSize.s16.h),
                             Text(

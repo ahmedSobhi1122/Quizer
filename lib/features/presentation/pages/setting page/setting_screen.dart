@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/config/routes/screen_export.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/config/routes/route_constants.dart';
 import 'package:quizer/core/constants/enum.dart';
+import 'package:themed/themed.dart';
+
+import '../../../../config/themes/theme.dart';
+import '../../../../core/resources/app_colors.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -149,7 +154,8 @@ class _SettingScreenState extends State<SettingScreen> {
         builder: (context) => AlertDialog(
               title: const Text('About Quizzo'),
               content: const Text(
-                  'Welcome to Quizzo! 🎉 A fun and interactive app where you can create your own mini quizzes, challenge yourself across various topics, and compete with friends like never before. With engaging questions in multiple fields and a game-like competitive experience, Quizzo turns learning into a fun challenge. Ready to test your knowledge and have some fun? Let the quiz battle begin!'),
+                  'Welcome to Quizzo! 🎉 A fun and interactive app where you can create your own mini quizzes, challenge yourself across various topics, and compete with friends like never before. With engaging questions in multiple fields and a game-like competitive experience, Quizzo turns learning into a fun challenge. Ready to test your knowledge and have some fun? Let the quiz battle begin!',
+              style: TextStyle(color: Colors.black),),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
@@ -163,35 +169,35 @@ class _SettingScreenState extends State<SettingScreen> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Center(
-            child: Text(
-              'Logout',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          content: const Text('Are you sure you want to Logout?'),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text(
-                    'Cancel',
-                    style: TextStyle(color: Colors.green),
-                  ),
+              title: const Center(
+                child: Text(
+                  'Logout',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text(
-                    'Logout',
-                    style: TextStyle(color: Colors.red),
-                  ),
-                ),
+              ),
+              content: const Text('Are you sure you want to Logout?'),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text(
+                        'Cancel',
+                        style: TextStyle(color: Colors.green),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text(
+                        'Logout',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
+                  ],
+                )
               ],
-            )
-          ],
-        ));
+            ));
   }
 
   void _chooseTheme(String theme) {
@@ -199,8 +205,16 @@ class _SettingScreenState extends State<SettingScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('You selected $theme')),
     );
+    if(theme == Themes.LIGHT.name){
+      Themed.currentTheme  = LightTheme;
+    }else{
+      Themed.currentTheme = DarkTheme;
+    }
     setState(() {
       this.theme = theme;
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => SettingScreen()),
+      );
     });
   }
 
@@ -224,7 +238,6 @@ class _SettingScreenState extends State<SettingScreen> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -238,7 +251,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 "Setting",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: MyTheme.textColor,
                   fontSize: AppSize.s32,
                 ),
               ),
@@ -247,14 +260,22 @@ class _SettingScreenState extends State<SettingScreen> {
                 "Account",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: MyTheme.textColor,
                   fontSize: AppSize.s22,
                 ),
               ),
               SizedBox(height: 10.h),
               ListTile(
-                title: const Text("Edit Personal Info"),
-                trailing: const Icon(Icons.arrow_forward_ios),
+                title: const Text(
+                  "Edit Personal Info",
+                  style: TextStyle(
+                    color: MyTheme.textColor,
+                  ),
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: MyTheme.textColor,
+                ),
                 onTap: () {
                   print("Edit Personal Info");
                   context.pushNamed(Routes.profileScreenRoute);
@@ -262,9 +283,13 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
               SizedBox(height: 10.h),
               ListTile(
-                textColor: Colors.red,
-                title: const Text("Delete Account"),
-                trailing: const Icon(Icons.arrow_forward_ios),
+                title: const Text(
+                  "Delete Account",
+                  style:
+                      TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                ),
+                trailing: const Icon(Icons.arrow_forward_ios,
+                    color: MyTheme.textColor),
                 onTap: () {
                   _deleteDialog();
                   print("Delete Account");
@@ -275,13 +300,18 @@ class _SettingScreenState extends State<SettingScreen> {
                 "General",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: MyTheme.textColor,
                   fontSize: AppSize.s22,
                 ),
               ),
               SizedBox(height: 10.h),
               ListTile(
-                title: const Text("Theme"),
+                title: const Text(
+                  "Theme",
+                  style: TextStyle(
+                    color: MyTheme.textColor,
+                  ),
+                ),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -289,12 +319,14 @@ class _SettingScreenState extends State<SettingScreen> {
                       theme,
                       style: const TextStyle(
                         fontSize: AppSize.s14,
+                        color: MyTheme.textColor,
                       ),
                     ),
                     SizedBox(
                       width: 10.w,
                     ),
-                    const Icon(Icons.arrow_forward_ios)
+                    const Icon(Icons.arrow_forward_ios,
+                        color: MyTheme.textColor)
                   ],
                 ),
                 onTap: () {
@@ -304,7 +336,12 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
               SizedBox(height: 10.h),
               ListTile(
-                title: const Text("Language"),
+                title: const Text(
+                  "Language",
+                  style: TextStyle(
+                    color: MyTheme.textColor,
+                  ),
+                ),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -312,12 +349,14 @@ class _SettingScreenState extends State<SettingScreen> {
                       language,
                       style: const TextStyle(
                         fontSize: AppSize.s14,
+                        color: MyTheme.textColor
                       ),
                     ),
                     SizedBox(
                       width: 10.w,
                     ),
-                    const Icon(Icons.arrow_forward_ios)
+                    const Icon(Icons.arrow_forward_ios,
+                        color: MyTheme.textColor)
                   ],
                 ),
                 onTap: () {
@@ -327,20 +366,27 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
               SizedBox(height: 10.h),
               ListTile(
-                title: const Text("Notification"),
+                title: const Text(
+                  "Notification",
+                  style: TextStyle(
+                    color: MyTheme.textColor,
+                  ),
+                ),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       notification,
                       style: const TextStyle(
-                        fontSize: AppSize.s14,
+                          fontSize: AppSize.s14,
+                          color: MyTheme.textColor
                       ),
                     ),
                     SizedBox(
                       width: 10.w,
                     ),
-                    const Icon(Icons.arrow_forward_ios)
+                    const Icon(Icons.arrow_forward_ios,
+                        color: MyTheme.textColor)
                   ],
                 ),
                 onTap: () {
@@ -353,14 +399,20 @@ class _SettingScreenState extends State<SettingScreen> {
                 "About",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: MyTheme.textColor,
                   fontSize: AppSize.s22,
                 ),
               ),
               SizedBox(height: 10.h),
               ListTile(
-                title: const Text("About Quizzo"),
-                trailing: const Icon(Icons.arrow_forward_ios),
+                title: const Text(
+                  "About Quizzo",
+                  style: TextStyle(
+                    color: MyTheme.textColor,
+                  ),
+                ),
+                trailing: const Icon(Icons.arrow_forward_ios,
+                    color: MyTheme.textColor),
                 onTap: () {
                   print("About");
                   _aboutDialog();
@@ -373,8 +425,13 @@ class _SettingScreenState extends State<SettingScreen> {
                 color: Colors.grey,
               ),
               ListTile(
-                title: const Text("Logout"),
-                trailing: const Icon(Icons.logout),
+                title: const Text(
+                  "Logout",
+                  style: TextStyle(
+                    color: MyTheme.textColor,
+                  ),
+                ),
+                trailing: const Icon(Icons.logout, color: MyTheme.textColor),
                 splashColor: Colors.red[400],
                 onTap: () {
                   print("Logout");

@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 
+import '../../../config/themes/theme.dart';
+
 class CustomDropdown extends StatefulWidget {
   final List<String> items;
   final String? selectedValue;
@@ -54,7 +56,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                 widget.hint,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
-                color: AppColors.whiteColor40,
+                color: MyTheme.textColor,
                 fontSize: AppSize.s16,
               ),
             ),

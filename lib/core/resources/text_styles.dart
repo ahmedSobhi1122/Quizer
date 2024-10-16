@@ -131,7 +131,7 @@ class AppTextStyles {
 
   static TextStyle homeTitlesTextStyle(BuildContext context) => getBlackStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blackColor,
+        color: MyTheme.textColor,
         fontSize: FontSize.f14,
       );
 

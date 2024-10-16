@@ -10,6 +10,8 @@ import 'package:quizer/features/presentation/common/drop_list.dart';
 import 'package:quizer/config/routes/route_constants.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
 
+import '../../../../config/themes/theme.dart';
+
 class QuizSettingScreen extends StatefulWidget {
   @override
   State<QuizSettingScreen> createState() => _QuizSettingScreenState();
@@ -30,10 +32,10 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
         width: 50.w,
         margin: EdgeInsets.symmetric(horizontal: 8.w),
         decoration: BoxDecoration(
-          color: _selectedIndex == index ? AppColors.darkPurpleColor10 : Colors.grey[300],
+          color: _selectedIndex == index ? MyTheme.backgroundColor1 : MyTheme.disabledColor,
           borderRadius: BorderRadius.circular(10.r),
           border: Border.all(
-            color: _selectedIndex == index ? AppColors.lightPurpleColor : Colors.grey,
+            color: _selectedIndex == index ? MyTheme.selectedBorder : Colors.grey,
             width: 2,
           )
         ),
@@ -41,7 +43,7 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
           child: Text(
             "${_times[index%_times.length]}",
             style: const TextStyle(
-              color: Colors.white,
+              color: MyTheme.textColor,
               fontSize: AppSize.s20,
               fontWeight: FontWeight.bold
             ),
@@ -71,7 +73,7 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: AppSize.s22.sp,
-                      color: AppColors.blackColor80,
+                      color: MyTheme.textColor,
                     ),
                   ),
                 ),
@@ -97,17 +99,22 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
                   height: AppSize.s20.h,
                 ),
                 TextField(
+                  maxLength: 30,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: AppColors.whiteColor40,
+                    color: MyTheme.textColor,
                     fontSize: AppSize.s16,
                   ),
                   decoration: InputDecoration(
                     labelText: "Quiz Title",
                     labelStyle: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: AppColors.whiteColor40,
+                      color: MyTheme.textColor,
                       fontSize: AppSize.s16,
+                    ),
+                    counterStyle: TextStyle(
+                      color: MyTheme.textColor,
+                      fontWeight: FontWeight.bold
                     ),
                     fillColor: Colors.white60,
                     suffixIcon: Icon(
@@ -116,16 +123,6 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "20/30",
-                      style: TextStyle(
-                          color: Colors.grey[700], fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
                 SizedBox(
                   height: AppSize.s20.h,
                 ),
@@ -133,7 +130,7 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
                     "Quiz time (minute)",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey[700],
+                    color: MyTheme.textColor,
                     fontSize: AppSize.s16
                   ),
                 ),
@@ -160,40 +157,27 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
                 SizedBox(
                   height: AppSize.s20.h,
                 ),
-                Container(
-                  height: 200.h,
-                  decoration: BoxDecoration(
-                    color: Colors.white60,
-                    borderRadius: BorderRadius.circular(10.r),
+                const TextField(
+                  maxLength: 500,
+                  maxLines: 5,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: MyTheme.textColor,
+                    fontSize: AppSize.s16,
                   ),
-                  child: const TextField(
-                    maxLines: null,
-                    expands: true,
-                    style: TextStyle(
+                  decoration: InputDecoration(
+                    labelText: "Description",
+                    fillColor: Colors.white60,
+                    labelStyle: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: AppColors.whiteColor40,
+                      color: MyTheme.textColor,
                       fontSize: AppSize.s16,
                     ),
-                    decoration: InputDecoration(
-                      labelText: "Description",
-                      fillColor: Colors.white30,
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.whiteColor40,
-                        fontSize: AppSize.s16,
-                      ),
+                    counterStyle: TextStyle(
+                        color: MyTheme.textColor,
+                        fontWeight: FontWeight.bold
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "250/500",
-                      style: TextStyle(
-                          color: Colors.grey[700], fontWeight: FontWeight.bold),
-                    ),
-                  ],
                 ),
                 SizedBox(
                   height: AppSize.s50.h,

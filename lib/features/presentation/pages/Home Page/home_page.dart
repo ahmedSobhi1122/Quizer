@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/core/resources/app_values.dart';
+import 'package:quizer/features/domain/entities/user.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/pages/Home%20Page/Widgets/custom_home_categories.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -31,7 +32,9 @@ class _HomePageState extends State<HomePage> {
 
     context
         .read<HomeCubit>()
-        .getHomeProfileData("92aecb4b-1dcf-4606-8982-653e1799c474");
+        .getHomeProfileData("fed87f19-df40-4f97-9302-aabaf6438203",
+        "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiemVpYWQiLCJmYW1pbHlfbmFtZSI6Im1vaGFtbWVkIiwiZW1haWwiOiJ6YXphb3NrYXI5MjhAZ21haWwuY29tIiwibmJmIjoxNzI5MDM4Nzg2LCJleHAiOjE3MzAyNDgzODYsImlhdCI6MTcyOTAzODc4NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2In0.58w65fyn17yi-5t0Qzdza5zYZoKvouRNibQf9mOH867umzUEIWKrDQZkdCgznZoteKJiAHLTSzlq4l8EAPpcoA"
+        );
     super.initState();
   }
 
@@ -56,11 +59,13 @@ class _HomePageState extends State<HomePage> {
                       if (state is HomeProfileDataLoading) {
                         return  Skeletonizer(
                           enabled: true,
-                          child: CustomDailyTask(noRebuild: state.noRebuild,),
+                          child: CustomDailyTask(noRebuild: true,dailyTask: DailyTask()),
                         );
-                      } else if (state is HomeProfileDataSuccess) {
-                        return  CustomDailyTask(noRebuild: state.noRebuild,);
-                      } else if (state is HomeFailure) {
+                      }
+                      else if (state is HomeProfileDataSuccess) {
+                        return  CustomDailyTask(noRebuild: state.noRebuild,dailyTask: state.user.dailyTask!,);
+                      }
+                      else if (state is HomeFailure) {
                         return const SizedBox.shrink();
                       }
                       return const SizedBox.shrink();
@@ -99,7 +104,25 @@ class _HomePageState extends State<HomePage> {
                   child: SizedBox(height: AppSize.s12.h),
                 ),
                 /// Quizzes SliverGrid.Builder
-                const CustomHomeQuizzes(),
+                SliverToBoxAdapter(
+                  child: BlocBuilder<HomeCubit, HomeState>(
+                    builder: (context, state) {
+                      if (state is HomeProfileDataLoading) {
+                        return const Skeletonizer(
+                          enabled: true,
+                          child:  CustomHomeQuizzes(),
+                        );
+                      }
+                      else if (state is HomeProfileDataSuccess) {
+                        return  CustomHomeQuizzes(quizzes: state.quizzes,);
+                      }
+                      else if (state is HomeFailure) {
+                        return const SizedBox.shrink();
+                      }
+                      return const SizedBox.shrink();
+                    },
+                  ),
+                ),
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/features/domain/entities/user.dart';
 
 import '../../../../../config/routes/screen_export.dart';
 import '../../../../../core/resources/app_colors.dart';
@@ -9,7 +10,8 @@ import '../../../common/custom_progress.dart';
 
 class CustomDailyTask extends StatelessWidget {
   final bool noRebuild;
-  const CustomDailyTask({super.key, required this.noRebuild});
+  final DailyTask dailyTask;
+  const CustomDailyTask({super.key, required this.noRebuild, required this.dailyTask});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class CustomDailyTask extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
            const DailyImage(),
-           DailyContent(noRebuild: noRebuild,)
+           DailyContent(noRebuild: noRebuild, dailyTask: dailyTask)
         ],
       ),
     );
@@ -60,7 +62,8 @@ class DailyImage extends StatelessWidget {
 // Daily Content Custom Widget
 class DailyContent extends StatelessWidget {
   final bool noRebuild;
-  const DailyContent({super.key, required this.noRebuild});
+  final DailyTask dailyTask;
+  const DailyContent({super.key, required this.noRebuild, required this.dailyTask});
 
   @override
   Widget build(BuildContext context) {
@@ -75,12 +78,12 @@ class DailyContent extends StatelessWidget {
             AppTextStyles.homeDailyTaskHeaderTextStyle(
                 context),
           ),
-          Text("Solve 16 Question!",style: AppTextStyles.homeDailyTaskTitleTextStyle(context),),
+          Text(dailyTask.taskName!,style: AppTextStyles.homeDailyTaskTitleTextStyle(context)),
           SizedBox(height: AppSize.s24.h),
           CustomProgress(
             noRebuild: noRebuild,
             start: 0,
-            end: 2,
+            end: dailyTask.progress! == 0 ? 0 : dailyTask.goal! / dailyTask.progress!,
             borderColor: AppColors.transparentColor,
             backgroundColor:
             AppColors.orangeAccent.withOpacity(0.5),
@@ -95,7 +98,7 @@ class DailyContent extends StatelessWidget {
               children: [
                 Text("Progress",style: AppTextStyles.homeDailyTaskSubTitleTextStyle(context),),
                 SizedBox(width: AppSize.s145.w),
-                Text("8 / 16",style: AppTextStyles.homeDailyTaskSubTitleTextStyle(context),),
+                Text("${dailyTask.progress} / ${dailyTask.goal}",style: AppTextStyles.homeDailyTaskSubTitleTextStyle(context),),
               ],
             ),
         ],

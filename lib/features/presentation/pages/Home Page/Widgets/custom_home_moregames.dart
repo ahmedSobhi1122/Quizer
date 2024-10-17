@@ -1,7 +1,10 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/constants/constants.dart';
+import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/features/domain/entities/quiz.dart';
-import 'package:quizer/features/presentation/state/home_state.dart';
+import 'package:quizer/features/presentation/state/home_profile_state.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../config/routes/screen_export.dart';
 import '../../../../../core/resources/app_colors.dart';
@@ -25,25 +28,28 @@ class CustomHomeQuizzes extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       gridDelegate: gridDelegate,
-      itemCount: quizzes!.length,
+      itemCount: quizzes!.isEmpty ? 2 : quizzes!.length,
       shrinkWrap: true,
       physics: gridPhysics,
       itemBuilder: (context, index) {
-        return CustomQuiz(quiz: quizzes![index],);
+        return CustomQuiz(quiz: quizzes!.isEmpty ? null : quizzes![index]);
       },
     );
   }
-}  // TODO GridView.builder here -- better change to sliver I think
+} // TODO GridView.builder here -- better change to sliver I think
 
 class CustomQuiz extends StatelessWidget {
-  final Quiz quiz;
-  const CustomQuiz({super.key, required this.quiz});
+  final Quiz? quiz;
+
+  const CustomQuiz({super.key, this.quiz});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Skeletonizer(
+        enabled: quiz == null ? true : false,
+        child: Container(
       decoration: BoxDecoration(
-        color: AppColors.whiteColor.withOpacity(0.6),
+        color: MyTheme.contentCardBG,
         borderRadius: BorderRadius.circular(AppBorderRadius.br16),
       ),
       child: Column(
@@ -56,9 +62,9 @@ class CustomQuiz extends StatelessWidget {
                   topRight: Radius.circular(AppBorderRadius.br16),
                 ),
                 child: Container(
-                  decoration:  BoxDecoration(
+                  decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(Constants.url + quiz.image!),
+                        image: NetworkImage(quiz == null ? ImageAssets.cringe : Constants.url + quiz!.image!),
                         fit: BoxFit.cover),
                   ),
                 )),
@@ -66,7 +72,11 @@ class CustomQuiz extends StatelessWidget {
           Flexible(
             flex: 1,
             child: Padding(
-              padding: EdgeInsets.only(top: AppPadding.p8.h,left: AppPadding.p8.w,right: AppPadding.p8.w,bottom: AppPadding.p12.h),
+              padding: EdgeInsets.only(
+                  top: AppPadding.p8.h,
+                  left: AppPadding.p8.w,
+                  right: AppPadding.p8.w,
+                  bottom: AppPadding.p12.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -74,11 +84,11 @@ class CustomQuiz extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: quiz.name,
+                          text: quiz == null ? "Default Name" : quiz!.name,
                           style: AppTextStyles.homeTitlesTextStyle(context),
                         ),
                         TextSpan(
-                          text: "\n • By ${quiz.madeBy}",
+                          text: quiz == null ? "\n • By Me" : "\n • By ${quiz!.madeBy}",
                           style:
                               AppTextStyles.homeGameCardTitleTextStyle(context),
                         ),
@@ -87,14 +97,18 @@ class CustomQuiz extends StatelessWidget {
                   ),
                   // Title and Author
                   const Spacer(),
-                   CustomInfo(questions: quiz.questionCount!,time: quiz.maxTime!,rate: quiz.rating!,)
+                   CustomInfo(
+                    questions: quiz == null ? 5 : quiz!.questionCount!,
+                    time: quiz == null ? 5 : quiz!.maxTime!,
+                    rate: quiz == null ? 0.0 : quiz!.rating!,
+                  )
                 ],
               ),
             ),
-          )  // TODO CardData here
+          ) // TODO CardData here
         ],
       ),
-    );
+    ));
   }
 }
 
@@ -102,19 +116,24 @@ class CustomInfo extends StatelessWidget {
   final int questions;
   final int time;
   final double rate;
-  const CustomInfo({super.key, required this.questions, required this.time, required this.rate});
+
+  const CustomInfo(
+      {super.key,
+      required this.questions,
+      required this.time,
+      required this.rate});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("$questions Question",style:
-        AppTextStyles.homeGameCardTitleTextStyle(context)),
+        Text("$questions Question",
+            style: AppTextStyles.homeGameCardTitleTextStyle(context)),
         const CustomDot(),
-         CustomInfoComponent(data: "${time}Min",icon: Icons.timer),
+        CustomInfoComponent(data: "${time}Min", icon: Icons.timer),
         const CustomDot(),
-         CustomInfoComponent(data: "$rate/5",icon: Icons.star),
+        CustomInfoComponent(data: "$rate/5", icon: Icons.star),
       ],
     );
   }
@@ -124,15 +143,17 @@ class CustomInfoComponent extends StatelessWidget {
   final String data;
   final IconData icon;
 
-  const CustomInfoComponent({super.key, required this.data, required this.icon});
+  const CustomInfoComponent(
+      {super.key, required this.data, required this.icon});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-        children: [
-          Text(data,style:
-          AppTextStyles.homeGameCardTitleTextStyle(context)),
-      Icon(icon,size: AppSize.s10.r,)
+    return Row(children: [
+      Text(data, style: AppTextStyles.homeGameCardTitleTextStyle(context)),
+      Icon(
+        icon,
+        size: AppSize.s10.r,
+      )
     ]);
   }
 }
@@ -142,7 +163,7 @@ class CustomDot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(" • ", style: AppTextStyles.homeGameCardTitleTextStyle(context));
+    return Text(" • ",
+        style: AppTextStyles.homeGameCardTitleTextStyle(context));
   }
 }
-

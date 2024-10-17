@@ -72,7 +72,7 @@ class _MyAppState extends State<MyApp> {
   void initState(){
     super.initState();
     super.initState();
-    Themed.currentTheme = LightTheme;
+    Themed.currentTheme = DarkTheme;
   }
 
   @override
@@ -89,7 +89,7 @@ class _MyAppState extends State<MyApp> {
         darkTheme: AppTheme.darkTheme(context),
         themeMode: ThemeMode.light,
         onGenerateRoute: router.RouteGenerator.getRoute,
-        initialRoute: Routes.profileScreenRoute,
+        initialRoute: Routes.homeScreenRoute,
       ),
     );
   }

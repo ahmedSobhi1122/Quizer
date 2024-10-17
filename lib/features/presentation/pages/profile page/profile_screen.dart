@@ -18,6 +18,8 @@ import 'package:quizer/features/presentation/cubit/profile_cubit.dart';
 import 'package:quizer/features/presentation/state/profile_state.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import '../../../../core/helper/data_intent.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -40,10 +42,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    // context.read<ProfileCubit>().getProfile(DataIntent.getIdUser()!);
-    context.read<ProfileCubit>().getProfile(
-        "fed87f19-df40-4f97-9302-aabaf6438203",
-        "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiemVpYWQiLCJmYW1pbHlfbmFtZSI6Im1vaGFtbWVkIiwiZW1haWwiOiJ6YXphb3NrYXI5MjhAZ21haWwuY29tIiwibmJmIjoxNzI5MDMyOTUzLCJleHAiOjE3MzAyNDI1NTMsImlhdCI6MTcyOTAzMjk1MywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2In0.4Kvvdq5wtxIMsO9pOMlnGZpix_yV7q1QT9lirIlF4GWatVWjOmXdztHQ1p759J-CVR2UQVg63iJ79xfHJ8wG5A");
+    String? userID = DataIntent.getUserID();
+    String? token = DataIntent.getToken();
+    context.read<ProfileCubit>().getProfile(userID!,token!);
   }
 
   @override
@@ -64,12 +65,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 profileImage = Constants.url + state.user.profileImage!;
                 coverImage = Constants.url + state.user.coverImage!;
                 _loading = false;
-              } else if (state is ProfileFailure) {
+              }
+              else if (state is ProfileFailure) {
                 _loading = false;
                 return Center(
                   child: Text(state.error),
                 );
-              } else if (state is ProfileLoading) {
+              }
+              else if (state is ProfileLoading) {
                 _loading = true;
               }
               return Skeletonizer(
@@ -147,8 +150,7 @@ class Profile extends StatelessWidget {
                         children: [
                           BackButton(
                             onPressed: () {
-                              context.pushReplacementNamed(
-                                  Routes.signUpScreenRoute);
+                              context.pop();
                             },
                           ),
                           const Spacer(),

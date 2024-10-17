@@ -2,6 +2,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/features/domain/entities/user.dart';
 
 import '../../../../../config/routes/screen_export.dart';
+import '../../../../../config/themes/theme.dart';
 import '../../../../../core/resources/app_colors.dart';
 import '../../../../../core/resources/app_values.dart';
 import '../../../../../core/resources/assets_manager.dart';
@@ -19,7 +20,7 @@ class CustomDailyTask extends StatelessWidget {
       width: AppSize.s390.w,
       height: AppSize.s130.h,
       decoration: BoxDecoration(
-        color: AppColors.whiteColor,
+        color: MyTheme.contentCardBG,
         borderRadius: BorderRadius.circular(AppBorderRadius.br16),
       ),
       child:  Row(

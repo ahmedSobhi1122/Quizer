@@ -2,6 +2,8 @@ import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
 import 'package:quizer/features/presentation/cubit/home_profile_cubit.dart';
 import 'package:quizer/features/presentation/cubit/profile_cubit.dart';
 import 'package:quizer/features/presentation/pages/Home%20Page/home_page.dart';
+import 'package:quizer/features/presentation/pages/category%20page/category_screen.dart';
+import 'package:quizer/features/presentation/pages/category%20search%20page/category_search_screen.dart';
 import 'package:quizer/features/presentation/pages/create%20question%20page/create_question_screen.dart';
 import 'package:quizer/features/presentation/pages/edit%20profile%20page/edite_profile_screen.dart';
 import 'package:quizer/features/presentation/pages/quiz%20setting%20page/quiz_setting_screen.dart';
@@ -159,6 +161,11 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => const StartQuizScreen(),
         );
+      case Routes.categoryScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => const CategoryScreen(),
+        );
+
 
       default:
         return unDefinedRoute();

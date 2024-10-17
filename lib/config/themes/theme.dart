@@ -67,3 +67,36 @@ Map<ThemeRef,Object> DarkTheme = {
   MyTheme.secondaryButtonColor : Color(0xFF181636),
 
 };
+
+Map<ThemeRef, Object> BlueTheme = {
+  MyTheme.backgroundColor: const Color(0xFFE3F2FD),
+  MyTheme.backgroundColor1: const Color(0xFFBBDEFB),
+  MyTheme.backgroundColor2: const Color(0xFF90CAF9),
+  MyTheme.backgroundColor3: const Color(0xFF64B5F6),
+
+  // Home
+  MyTheme.appbarTop: const Color(0xFF2196F3),
+  MyTheme.appbarBottom: const Color(0xFF1976D2),
+  MyTheme.appbarShadow: const Color(0xFF1E88E5),
+
+  MyTheme.contentCardBG: const Color(0xFFE1F5FE).withOpacity(0.60),
+  MyTheme.categoriesBG: const Color(0xFF29B6F6),
+  MyTheme.quizzesBG: const Color(0xFF03A9F4),
+
+  MyTheme.textColor: Colors.blueGrey,
+  MyTheme.reverseColor: Colors.white,
+
+  MyTheme.primaryButtonColor: const Color(0xFF0288D1),
+  MyTheme.secondaryButtonColor: const Color(0xFFB3E5FC),
+
+  MyTheme.primaryButtonTextColor: Colors.white,
+  MyTheme.secondaryButtonTextColor: const Color(0xFF01579B),
+
+  MyTheme.selectedBorder: const Color(0xFF0288D1),
+
+  MyTheme.studentSelectColor: const Color(0xFF4FC3F7),
+  MyTheme.teacherSelectColor: const Color(0xFF03A9F4),
+
+  MyTheme.disabledColor: const Color(0xFF90A4AE),
+};
+

@@ -99,7 +99,7 @@ class RouteGenerator {
         );
 ////////////////////////////////////////////////////////////////////////////////
 
-    /// Home
+      /// Home
       case Routes.homeScreenRoute:
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
@@ -125,7 +125,7 @@ class RouteGenerator {
       case Routes.profileScreenRoute:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<ProfileCubit>(
-            create: (context) =>  sl<ProfileCubit>(),
+            create: (context) => sl<ProfileCubit>(),
             child: const ProfileScreen(),
           ),
         );
@@ -137,9 +137,8 @@ class RouteGenerator {
         );
       case Routes.LeaderBoardScreenRoute:
         return MaterialPageRoute(
-          builder: (context) =>  LeaderBoardScreen(),
+          builder: (context) => LeaderBoardScreen(),
         );
-
 
       case Routes.createQuestionScreenRoute:
         return MaterialPageRoute(
@@ -152,7 +151,10 @@ class RouteGenerator {
         );
       case Routes.editProfileScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => EditProfileScreen(),
+          builder: (context) => BlocProvider<ProfileCubit>(
+            create: (context) => sl<ProfileCubit>(),
+            child: EditProfileScreen(),
+          ),
         );
 
       case Routes.startQuizScreenRoute:

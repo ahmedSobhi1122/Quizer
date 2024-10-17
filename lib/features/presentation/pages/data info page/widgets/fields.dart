@@ -5,7 +5,6 @@ import 'package:quizer/config/routes/route_constants.dart';
 import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/helper/validation.dart';
-import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';

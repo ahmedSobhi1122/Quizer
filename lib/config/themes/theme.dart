@@ -64,6 +64,6 @@ Map<ThemeRef,Object> DarkTheme = {
   MyTheme.textColor: Colors.white,
   MyTheme.reverseColor : Colors.black,
 
-  MyTheme.secondaryButtonColor : Color(0xFF181636),
+  MyTheme.secondaryButtonColor : const Color(0xFF181636),
 
 };

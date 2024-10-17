@@ -1,5 +1,4 @@
 import 'package:quizer/core/constants/enum.dart';
-import 'package:quizer/features/domain/entities/user.dart';
 
 class DataIntent {
   DataIntent._();

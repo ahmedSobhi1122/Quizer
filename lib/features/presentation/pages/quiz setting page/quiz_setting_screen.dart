@@ -1,9 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/image_upload.dart';
 import 'package:quizer/features/presentation/common/drop_list.dart';
@@ -21,6 +23,11 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
   final List<int> _times = [5, 10, 15, 20, 25, 30,];
   final List<String> _category = ['football', 'science', 'math', 'history', 'geography'];
   int _selectedIndex = -1;
+
+
+  File? _image;
+  final ImagePicker _picker = ImagePicker();
+
   Widget timeItem(int index) {
     return GestureDetector(
       onTap: () {
@@ -86,6 +93,17 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
                     // height: 200.h,
                     hint: "Quiz Image!",
                     fitter: BoxFit.contain,
+                    onImageSelected: () async {
+                      final pickedFile = await _picker.pickImage(
+                          source: ImageSource.gallery);
+
+                      if (pickedFile != null) {
+                        setState(() {
+                          _image = File(pickedFile.path);
+                        });
+                      }
+                    },
+                    image: _image,
                   ),
                 ),
                 SizedBox(

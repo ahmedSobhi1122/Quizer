@@ -1,10 +1,8 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/themes/theme.dart';
-import 'package:quizer/core/constants/enum.dart';
 import 'package:quizer/core/helper/extensions.dart';
 
 import '../../../../../config/routes/screen_export.dart';
-import '../../../../../core/resources/app_colors.dart';
 import '../../../../../core/resources/app_values.dart';
 import '../../../common/background.dart';
 import 'custom_appbar_points.dart';

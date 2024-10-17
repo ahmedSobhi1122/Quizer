@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:quizer/core/constants/enum.dart';
 
 class User {
@@ -9,18 +11,22 @@ class User {
   final String? password;
   final String? lastName;
   final String? firstName;
+  final String? profileImage;
   final String? coverImage;
+  final File? profileImageFile;
+  final File? coverImageFile;
   final String? description;
   final DateTime? birthDate;
   final String? phoneNumber;
   final int? firstPlaceCount;
   final int? thirdPlaceCount;
-  final String? profileImage;
   final int? secondPlaceCount;
   final int? points;
   final DailyTask? dailyTask;
 
   User({
+    this.profileImageFile,
+    this.coverImageFile,
     this.id,
     this.userRole,
     this.coverImage,
@@ -53,17 +59,14 @@ class DailyTask {
   final int? points;
   final DateTime? lastReset;
 
-  DailyTask
-      (
-        {
-          this.taskID = 9999,
-          this.userID = "Default User ID",
-          this.taskName = "Default Name",
-          this.progress = 0,
-          this.goal = 1,
-          this.isCompleted = false,
-          this.points = 9999,
-          DateTime? lastReset ,
-        }
-      ) : lastReset = lastReset ?? DateTime.now();
+  DailyTask({
+    this.taskID = 9999,
+    this.userID = "Default User ID",
+    this.taskName = "Default Name",
+    this.progress = 0,
+    this.goal = 1,
+    this.isCompleted = false,
+    this.points = 9999,
+    DateTime? lastReset,
+  }) : lastReset = lastReset ?? DateTime.now();
 }

@@ -1,5 +1,5 @@
 class Constants {
-  static const String url = 'https://9903-41-234-223-224.ngrok-free.app';
+  static const String url = 'https://2912-41-234-223-224.ngrok-free.app';
   static const String baseUrl = '$url/api/';
   static const Duration apiTimeOut = Duration(seconds: 30);
   static const Duration defaultDuration = Duration(milliseconds: 300);

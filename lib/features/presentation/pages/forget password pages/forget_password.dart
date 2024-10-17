@@ -3,7 +3,6 @@ import 'package:quizer/config/routes/screen_export.dart';
 import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/core/helper/extensions.dart';
-import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/common/background.dart';

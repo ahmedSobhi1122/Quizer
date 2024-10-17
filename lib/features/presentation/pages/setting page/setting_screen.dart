@@ -1,14 +1,12 @@
-import 'package:flutter/material.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/screen_export.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_values.dart';
-import 'package:quizer/config/routes/route_constants.dart';
 import 'package:quizer/core/constants/enum.dart';
 import 'package:themed/themed.dart';
 
 import '../../../../config/themes/theme.dart';
-import '../../../../core/resources/app_colors.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});

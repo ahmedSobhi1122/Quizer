@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:quizer/core/constants/enum.dart';
 
@@ -14,9 +16,13 @@ class ProfileModel {
   final String? description;
   final String? profileImage;
   final String? coverImage;
+  final File? profileImageFile;
+  final File? coverImageFile;
   final String? email;
 
   ProfileModel({
+    this.profileImageFile,
+    this.coverImageFile,
     this.token,
     this.id,
     this.email,
@@ -45,6 +51,17 @@ class ProfileModel {
       );
 
   FormData toJson() => FormData.fromMap({'userID': id});
+
+  Future<FormData> toJsonUpdate() async => FormData.fromMap({
+        'userID': id,
+        'firstName': firstName,
+        'lastName': lastName,
+        'description': description,
+        "profileImage": await MultipartFile.fromFile(profileImageFile!.path,
+            filename: profileImageFile!.path.split('/').last),
+        "coverImage": await MultipartFile.fromFile(coverImageFile!.path,
+            filename: coverImageFile!.path.split('/').last),
+      });
 }
 
 Rank getRankFromInt(int rank) {

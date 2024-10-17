@@ -74,9 +74,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState(){
     super.initState();
-    super.initState();
     String? theme = sl<AppPrefs>().getString("theme");
-    print("..................................."+theme!);
     switch(theme){
       case "LIGHT":
         Themed.currentTheme = LightTheme;
@@ -85,7 +83,6 @@ class _MyAppState extends State<MyApp> {
       default:
         Themed.currentTheme = BlueTheme;
     }
-    Themed.currentTheme  = DarkTheme;
   }
 
   @override

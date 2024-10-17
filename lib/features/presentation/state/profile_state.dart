@@ -10,6 +10,8 @@ class ProfileInitial extends ProfileState {}
 
 class ProfileLoading extends ProfileState {}
 
+class ProfileUpdateSuccess extends ProfileState {}
+
 class ProfileSuccess extends ProfileState {
   final User user;
 

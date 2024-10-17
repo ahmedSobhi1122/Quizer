@@ -9,6 +9,8 @@ import 'package:quizer/features/data_sources/models/user_otp_profile_model.dart'
 import 'package:quizer/features/data_sources/models/user_profile_model.dart';
 import 'package:quizer/features/data_sources/models/user_register_model.dart';
 
+import '../../domain/entities/user.dart' as entity;
+
 import '../models/home_categories_model.dart';
 import '../models/home_quizzes_model.dart';
 
@@ -73,7 +75,7 @@ class RemoteDataSource {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       if (googleUser != null) {
         final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+            await googleUser.authentication;
 
         final credential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken,
@@ -81,7 +83,7 @@ class RemoteDataSource {
         );
 
         UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithCredential(credential);
+            await FirebaseAuth.instance.signInWithCredential(credential);
         //TODO :  send data to server
         return userCredential.user;
       }
@@ -96,17 +98,17 @@ class RemoteDataSource {
     print(1);
     try {
       final LoginResult result =
-      await FacebookAuth.instance.login(permissions: ['email']);
+          await FacebookAuth.instance.login(permissions: ['email']);
 
       print(2);
       if (result.status == LoginStatus.success) {
         final AccessToken accessToken = result.accessToken!;
 
         final OAuthCredential credential =
-        FacebookAuthProvider.credential(accessToken.tokenString);
+            FacebookAuthProvider.credential(accessToken.tokenString);
 
         UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithCredential(credential);
+            await FirebaseAuth.instance.signInWithCredential(credential);
         // Optionally, fetch user data from Facebook
         final userData = await FacebookAuth.instance.getUserData(
           fields: "email,name,picture",
@@ -295,15 +297,14 @@ class RemoteDataSource {
       if (response.statusCode == 200) {
         // print(responseMessage);
         // print(responseData);
-        quizzes = responseData!.map((quiz) => HomeQuizzesModel.fromJson(quiz))
+        quizzes = responseData!
+            .map((quiz) => HomeQuizzesModel.fromJson(quiz))
             .toList();
         return quizzes;
-      }
-      else {
+      } else {
         throw Exception('Error: $responseMessage');
       }
-    }
-    catch (error) {
+    } catch (error) {
       throw Exception(
           'remote_data_source--Error getting Home Profile Data: $error');
     }
@@ -328,18 +329,16 @@ class RemoteDataSource {
         print(responseMessage);
         print(responseData);
         print("----------------------------before map");
-        categories = responseData!.map((category) => HomeCategoriesModel.fromJson(category))
+        categories = responseData!
+            .map((category) => HomeCategoriesModel.fromJson(category))
             .toList();
         print("----------------------------after map");
         return categories;
-      }
-      else {
+      } else {
         print("----------------------------before Exception");
         throw Exception('Error: $responseMessage');
       }
-      return categories;
-    }
-    catch (error) {
+    } catch (error) {
       throw Exception(
           'remote_data_source--Error getting Categories Data: $error');
     }
@@ -361,6 +360,34 @@ class RemoteDataSource {
         // successful
         user = ProfileModel.fromJson(response.data["data"]);
         return user;
+      } else {
+        throw Exception(response.data["message"]);
+      }
+    } catch (error) {
+      throw Exception('Error during get profile: $error');
+    }
+  }
+
+  ///edit profile
+  Future<void> updateProfile(entity.User user) async {
+    try {
+      final response = await dio.request(
+        '${Constants.baseUrl}account/updateProfile',
+        options: Options(
+          headers: {'Authorization': 'Bearer ${user.token}'},
+          method: 'POST',
+        ),
+        data: FormData.fromMap({
+          'userID': user.id,
+          'firstName': user.firstName,
+          'lastName': user.lastName,
+          'description': user.description,
+          'profileImage': user.profileImage,
+          'coverImage': user.coverImage,
+        }),
+      );
+      if (response.statusCode == 200) {
+        // successful
       } else {
         throw Exception(response.data["message"]);
       }

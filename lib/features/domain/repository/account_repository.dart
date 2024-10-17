@@ -8,6 +8,6 @@ abstract class AccountRepository {
   Future<List<Quiz>> getHomeQuizzes(String token);
   Future<List<Category>> getHomeCategories(String token);
   Future<User> getProfile(String id,String token);
-  Future<void> updateProfile(String email);
+  Future<void> updateProfile(User user);
   Future<void> deleteAccount(String email);
 }

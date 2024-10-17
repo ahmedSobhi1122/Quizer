@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/features/domain/entities/user.dart';
 import 'package:quizer/features/presentation/common/background.dart';
+import 'package:quizer/features/presentation/cubit/home_cubit.dart';
 import 'package:quizer/features/presentation/pages/Home%20Page/Widgets/custom_home_categories.dart';
+import 'package:quizer/features/presentation/state/home_state.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/resources/assets_manager.dart';
-import '../../cubit/home_cubit.dart';
-import '../../state/home_state.dart';
 import 'Widgets/custom_clickable_titles.dart';
 import 'Widgets/custom_daily_task.dart';
 import 'Widgets/custom_home_appbar.dart';
@@ -173,7 +172,7 @@ class _HomePageState extends State<HomePage> {
               {
                 _loading = false;
               }
-              else if (state is HomeProfileDataSuccess) {
+              if (state is HomeProfileDataSuccess) {
                   profileST = state;
                   profileSuccess = true;
                   print("profile-appBar is true");

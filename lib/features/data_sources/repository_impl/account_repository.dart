@@ -1,11 +1,11 @@
+import 'package:quizer/features/data_sources/API/remote_data_source.dart';
 import 'package:quizer/features/data_sources/models/home_categories_model.dart';
+import 'package:quizer/features/data_sources/models/home_quizzes_model.dart';
+import 'package:quizer/features/domain/entities/category.dart';
 import 'package:quizer/features/domain/entities/quiz.dart';
+import 'package:quizer/features/domain/entities/user.dart';
+import 'package:quizer/features/domain/repository/account_repository.dart';
 
-import '../../domain/entities/category.dart';
-import '../../domain/entities/user.dart';
-import '../../domain/repository/account_repository.dart';
-import '../API/remote_data_source.dart';
-import '../models/home_quizzes_model.dart';
 
 class AccountRepositoryImpl implements AccountRepository {
   final RemoteDataSource remoteDataSource;
@@ -70,9 +70,8 @@ class AccountRepositoryImpl implements AccountRepository {
   }
 
   @override
-  Future<void> updateProfile(String id) {
-    // TODO: implement updateProfile
-    throw UnimplementedError();
+  Future<void> updateProfile(User user) async {
+    await remoteDataSource.updateProfile(user);
   }
 
   @override

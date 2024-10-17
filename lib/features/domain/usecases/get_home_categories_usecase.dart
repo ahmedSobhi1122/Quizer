@@ -1,6 +1,6 @@
 import 'package:quizer/features/domain/entities/category.dart';
+import 'package:quizer/features/domain/repository/account_repository.dart';
 
-import '../repository/account_repository.dart';
 
 class GetHomeCategoriesUseCase {
   final AccountRepository repository;

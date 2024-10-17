@@ -154,6 +154,34 @@ class AppTextStyles {
         color: MyTheme.textColor,
         fontSize: FontSize.f12,
       );
+  static TextStyle leaderBoardCardTitleTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor,
+
+        fontSize: FontSize.f18,
+      );
+  static TextStyle leaderBoardCardSubtitleTextStyle(BuildContext context) =>
+      getRegularStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.blackColor,
+
+        fontSize: FontSize.f10,
+      );
+  static TextStyle leaderBoardRanktitleTextStyle(BuildContext context) =>
+      getRegularStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.whiteColor,
+
+        fontSize: FontSize.f10,
+      );
+  static TextStyle leaderBoardRankSubtitleTextStyle(BuildContext context) =>
+      getRegularStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: AppColors.whiteColor,
+
+        fontSize: FontSize.f8,
+      );
 
   ///Start quiz
   static TextStyle statQuizTitleTextStyle(BuildContext context) =>

@@ -8,6 +8,7 @@ import 'package:quizer/features/presentation/pages/quiz%20setting%20page/quiz_se
 import 'package:quizer/features/presentation/pages/setting%20page/setting_screen.dart';
 import 'package:quizer/features/presentation/pages/start%20quiz%20page/start_quiz_screen.dart';
 
+import '../../features/presentation/pages/leadboard page/leadboard_page.dart';
 import '../../features/presentation/cubit/home_categories_cubit.dart';
 import '../../features/presentation/cubit/home_quizzes_cubit.dart';
 import 'screen_export.dart';
@@ -134,6 +135,11 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => QuizSettingScreen(),
         );
+      case Routes.LeaderBoardScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) =>  LeaderBoardScreen(),
+        );
+
 
       case Routes.createQuestionScreenRoute:
         return MaterialPageRoute(

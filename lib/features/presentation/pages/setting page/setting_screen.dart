@@ -4,7 +4,9 @@ import 'package:quizer/config/routes/screen_export.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/constants/enum.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:themed/themed.dart';
+import 'package:quizer/features/data_sources/local/app_prefs.dart';
 
 import '../../../../config/themes/theme.dart';
 
@@ -17,8 +19,24 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   String language = 'English';
-  String theme = 'Light';
+  String theme = sl<AppPrefs>().getString("theme").toString().toLowerCase();
   String notification = 'On';
+
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPreferences();
+  }
+
+  Future<void> _loadPreferences() async {
+    setState(() {
+      theme = sl<AppPrefs>().getString('theme') ?? 'light';
+      language = sl<AppPrefs>().getString('language') ?? 'English';
+      notification = sl<AppPrefs>().getString('notification') ?? 'On';
+    });
+  }
+
 
   void _deleteDialog() {
     showDialog(
@@ -100,13 +118,13 @@ class _SettingScreenState extends State<SettingScreen> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                title: Text(Themes.LIGHT.name),
+                title: Text(Themes.LIGHT.name.toLowerCase()),
                 onTap: () {
                   _chooseTheme(Themes.LIGHT.name);
                 },
               ),
               ListTile(
-                title: Text(Themes.DARK.name),
+                title: Text(Themes.DARK.name.toLowerCase()),
                 onTap: () {
                   _chooseTheme(Themes.DARK.name);
                 },
@@ -160,7 +178,8 @@ class _SettingScreenState extends State<SettingScreen> {
                   child: const Text('Ok'),
                 ),
               ],
-            ));
+            )
+    );
   }
 
   void _logoutDialog() {
@@ -204,9 +223,13 @@ class _SettingScreenState extends State<SettingScreen> {
       SnackBar(content: Text('You selected $theme')),
     );
     if(theme == Themes.LIGHT.name){
+      sl<AppPrefs>().setString("theme", Themes.LIGHT.name);
       Themed.currentTheme  = LightTheme;
-    }else{
+    }else if(theme == Themes.DARK.name){
+      sl<AppPrefs>().setString("theme", Themes.DARK.name);
       Themed.currentTheme = DarkTheme;
+    }else{
+      Themed.currentTheme = BlueTheme;
     }
     setState(() {
       this.theme = theme;
@@ -217,6 +240,7 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   void _chooseLanguage(String language) {
+    sl<AppPrefs>().setString("language", language);
     Navigator.of(context).pop();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('You selected $language')),
@@ -227,6 +251,7 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   void _chooseNotification(String notification) {
+    sl<AppPrefs>().setString("notification", notification);
     Navigator.of(context).pop();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('You selected $notification')),

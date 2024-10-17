@@ -22,5 +22,6 @@ class Routes {
   static const String SecondQuizScreenRoute="/second_quiz";
   static const String LeaderBoardScreenRoute="/Leaderboard";
   static const String editProfileScreenRoute="/edit_profile";
+  static const String categoryScreenRoute="/category";
 
 }

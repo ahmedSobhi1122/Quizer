@@ -34,12 +34,12 @@ class RemoteDataSource {
       if (response.statusCode == 200) {
         // successful
         return UserRegisterModel.fromJson(response.data["data"]);
-      } else {
+      }
+      else {
         throw Exception(response.data["message"]);
       }
     } catch (error) {
-      //   // print(2);
-      // print(error);
+      print(error);
       throw Exception('Error during registration: $error');
     }
   }

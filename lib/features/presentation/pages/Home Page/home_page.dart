@@ -33,12 +33,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // String? userID = DataIntent.getUserID();
-    // String? token = DataIntent.getToken();
-    String token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiemVpYWQiLCJmYW1pbHlfbmFtZSI6Im1vaGFtbWVkIiwiZW1haWwiOiJ6YXphb3NrYXI5MjhAZ21haWwuY29tIiwibmJmIjoxNzI5MDM4Nzg2LCJleHAiOjE3MzAyNDgzODYsImlhdCI6MTcyOTAzODc4NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2In0.58w65fyn17yi-5t0Qzdza5zYZoKvouRNibQf9mOH867umzUEIWKrDQZkdCgznZoteKJiAHLTSzlq4l8EAPpcoA";
-    String userID = "fed87f19-df40-4f97-9302-aabaf6438203";
-    DataIntent.pushToken(token);
-    DataIntent.pushUserID(userID);    // TODO remove the push statements when Login/Register returns them
+    String? userID = DataIntent.getUserID();
+    String? token = DataIntent.getToken();
+    DataIntent.pushToken(token!);
+    DataIntent.pushUserID(userID!);    // TODO remove the push statements when Login/Register returns them
 
     context.read<HomeProfileCubit>().getHomeProfile(userID);
     context.read<HomeQuizzesCubit>().getHomeQuizzes(token);
@@ -48,12 +46,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    late HomeProfileLoaded _profileState;
-    late HomeCategoriesLoaded _categoriesState;
-    late HomeQuizzesLoaded _quizzesState;
-    bool _profileLoading = true;
-    bool _categoriesLoading = true;
-    bool _quizzesLoading = true;
+    late HomeProfileLoaded profileState;
+    late HomeCategoriesLoaded categoriesState;
+    late HomeQuizzesLoaded quizzesState;
+    bool profileLoading = true;
+    bool categoriesLoading = true;
+    bool quizzesLoading = true;
 
     return Scaffold(
       body: Stack(
@@ -72,16 +70,16 @@ class _HomePageState extends State<HomePage> {
                   child: BlocBuilder<HomeProfileCubit, HomeProfileState>(
                     builder: (context, state) {
                       if (state is HomeProfileLoaded) {
-                        _profileState = state;
-                        _profileLoading = false;
+                        profileState = state;
+                        profileLoading = false;
                       }
                       else if (state is HomeProfileFailure) {
                         return Center(child: throw Exception(state.error));
                       }
                       return  Skeletonizer(
-                      enabled: _profileLoading,
-                      child: _profileLoading == false ?
-                      CustomDailyTask(noRebuild: _profileState.noRebuild,dailyTask: _profileState.user.dailyTask!) :
+                      enabled: profileLoading,
+                      child: profileLoading == false ?
+                      CustomDailyTask(noRebuild: profileState.noRebuild,dailyTask: profileState.user.dailyTask!) :
                       CustomDailyTask(noRebuild: true,dailyTask: DailyTask()),
                       );
                     },
@@ -105,16 +103,16 @@ class _HomePageState extends State<HomePage> {
                   child: BlocBuilder<HomeCategoriesCubit, HomeCategoriesState>(
                     builder: (context,state) {
                       if (state is HomeCategoriesLoaded) {
-                        _categoriesState = state;
-                        _categoriesLoading = false;
+                        categoriesState = state;
+                        categoriesLoading = false;
                       }
                       else if (state is HomeCategoriesFailure) {
                         return Center(child: throw Exception(state.error));
                       }
                       return Skeletonizer(
-                        enabled: _categoriesLoading,
-                        child: _categoriesLoading == false ?
-                        CustomHomeCategories(categories: _categoriesState.categories) :
+                        enabled: categoriesLoading,
+                        child: categoriesLoading == false ?
+                        CustomHomeCategories(categories: categoriesState.categories) :
                         const CustomHomeCategories()
                       );
                     }
@@ -139,14 +137,14 @@ class _HomePageState extends State<HomePage> {
                   child: BlocBuilder<HomeQuizzesCubit, HomeQuizzesState>(
                     builder: (context, state) {
                       if (state is HomeQuizzesLoaded) {
-                        _quizzesState = state;
-                        _quizzesLoading = false;
+                        quizzesState = state;
+                        quizzesLoading = false;
                       }
                       else if (state is HomeQuizzesFailure) {
                         return Center(child: throw Exception(state.error));
                       }
-                      return  _quizzesLoading == false ?
-                        CustomHomeQuizzes(quizzes: _quizzesState.quizzes) :
+                      return  quizzesLoading == false ?
+                        CustomHomeQuizzes(quizzes: quizzesState.quizzes) :
                         const CustomHomeQuizzes();
                     },
                   ),
@@ -157,19 +155,19 @@ class _HomePageState extends State<HomePage> {
           BlocBuilder<HomeProfileCubit, HomeProfileState>(
             builder: (context, state) {
               if (state is HomeProfileLoaded) {
-                  _profileState = state;
-                  _profileLoading = false;
+                  profileState = state;
+                  profileLoading = false;
               }
               else if (state is HomeProfileFailure) {
                 return Center(child: throw Exception(state.error));
               }
               return Skeletonizer(
-                enabled: _profileLoading,
-                child: _profileLoading == false ? CustomHomeAppbar(
-                  imageUrl: Constants.url + _profileState.user.profileImage!,
-                  name: "${_profileState.user.firstName!} ${_profileState.user.lastName!}",
-                  rank: _profileState.rankToString(_profileState.user.rank!),
-                  points: _profileState.user.points,
+                enabled: profileLoading,
+                child: profileLoading == false ? CustomHomeAppbar(
+                  imageUrl: Constants.url + profileState.user.profileImage!,
+                  name: "${profileState.user.firstName!} ${profileState.user.lastName!}",
+                  rank: profileState.rankToString(profileState.user.rank!),
+                  points: profileState.user.points,
                 ) : const CustomHomeAppbar(
                   imageUrl: ImageAssets.avatar,
                   name: "Default Name",

@@ -7,6 +7,8 @@ import 'package:quizer/features/domain/usecases/google_auth_usecase.dart';
 import 'package:quizer/features/domain/usecases/register_usecase.dart';
 import 'package:quizer/features/presentation/state/register_state.dart';
 
+import '../../../core/helper/data_intent.dart';
+
 class RegisterCubit extends Cubit<RegisterState> {
   final RegisterUseCase registerUserUseCase;
   final GoogleAuthUseCase googleAuthUserUseCase;
@@ -64,6 +66,9 @@ class RegisterCubit extends Cubit<RegisterState> {
       // print("${user.password}");
 
       User userData = await registerUserUseCase.call(user);
+      DataIntent.pushUserID(userData.id!);
+      DataIntent.pushToken(userData.token!);
+      DataIntent.pushUserRole(userData.userRole!);
       emit(RegisterSuccess());
     } catch (error) {
       print(error.toString());

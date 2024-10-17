@@ -32,8 +32,10 @@ class LoginCubit extends Cubit<LoginState> {
         email: emailController.text,
         password: passwordController.text,
       );
-      final dataUser = await loginUserUseCase.call(user);
-      DataIntent.pushDataUser(dataUser);
+      final User userData = await loginUserUseCase.call(user);
+      DataIntent.pushUserID(userData.id!);
+      DataIntent.pushToken(userData.token!);
+      DataIntent.pushUserRole(userData.userRole!);
       emit(LoginSuccess());
     } catch (error) {
       emit(LoginFailure(error.toString()));

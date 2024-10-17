@@ -16,27 +16,11 @@ class DataIntent {
     return value;
   }
 //------------------------------------
-  //login to forget password
+  // login-register to All Screens
   static String? _userID;
   static UserRole? _userRole;
   static String? _token;
 
-  //login data or register data
-  static User? _dataUser;
-
-  static void pushDataUser(User dataUser) => _dataUser = dataUser;
-  // static void editIdDataUser(int id) {
-  //   _dataUser.id = id;
-  // }
-  // static void editTokenDataUser(String token) {
-  //   _dataUser.token = token;
-  // }
-  static String? getIdUser() => _dataUser?.id;
-  static String? getTokenUser() => _dataUser?.token;
-  static UserRole? getUserRoleUser() => _dataUser?.userRole;
-
-//------------------------------------
-  // home To Profile
   static void pushUserID(String userID) {
     _userID = userID;
   }

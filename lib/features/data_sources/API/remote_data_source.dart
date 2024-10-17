@@ -40,8 +40,7 @@ class RemoteDataSource {
         throw Exception(response.data["message"]);
       }
     } catch (error) {
-      //   // print(2);
-      // print(error);
+      print(error);
       throw Exception('Error during registration: $error');
     }
   }
@@ -264,8 +263,8 @@ class RemoteDataSource {
       );
       var responseData = response.data["data"];
       var responseMessage = response.data["message"];
-      // print(responseMessage);
-      // print(responseData);
+      print(responseMessage);
+      print(responseData);
 
       if (response.statusCode == 200) {
         user = HomeProfileModel.fromJson(responseData);
@@ -295,10 +294,9 @@ class RemoteDataSource {
       var responseMessage = response.data["message"];
 
       if (response.statusCode == 200) {
-        // print(responseMessage);
-        // print(responseData);
-        quizzes = responseData!
-            .map((quiz) => HomeQuizzesModel.fromJson(quiz))
+        print(responseMessage);
+        print(responseData);
+        quizzes = responseData!.map((quiz) => HomeQuizzesModel.fromJson(quiz))
             .toList();
         return quizzes;
       } else {

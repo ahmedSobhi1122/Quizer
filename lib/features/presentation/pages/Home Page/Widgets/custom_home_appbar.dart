@@ -1,5 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/constants/enum.dart';
+import 'package:quizer/core/helper/extensions.dart';
 
 import '../../../../../config/routes/screen_export.dart';
 import '../../../../../core/resources/app_colors.dart';
@@ -27,16 +29,16 @@ class CustomHomeAppbar extends StatelessWidget {
             paddingTop: AppPadding.p38,
             paddingLeft: AppPadding.p24,
             paddingRight: AppPadding.p24,
-            colors: const [
-              AppColors.appbar_top,
-              AppColors.appbar_bottom,
-              AppColors.under_appbar_shadow,
+            colors:  const [
+              MyTheme.appbarTop,
+              MyTheme.appbarBottom,
+              MyTheme.appbarShadow,
             ],
             child:  Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CustomAppbarProfile(imageUrl: imageUrl,name: name, rank: rank),
+                CustomAppbarProfile(imageUrl: imageUrl,name: name, rank: rank,isClickable: true,onTap: (){context.pushNamed(Routes.profileScreenRoute);},),
                 CustomHomeAppbarPoints(points: points!,),
               ],
             ),
@@ -45,15 +47,15 @@ class CustomHomeAppbar extends StatelessWidget {
           Container(
             height: AppSize.s12.h,
             decoration:
-            const BoxDecoration(color: AppColors.under_appbar_shadow, boxShadow: [
+             BoxDecoration(color: MyTheme.appbarShadow, boxShadow: [
               BoxShadow(
-                color: AppColors.under_appbar_shadow,
-                blurRadius: 10,
-                spreadRadius: 6,
-                offset: Offset(0, 5),
+                color: MyTheme.appbarShadow,
+                blurRadius: 10.r,
+                spreadRadius: 6.r,
+                offset: Offset(0, 5.h),
               ),
-              BoxShadow(
-                color: AppColors.under_appbar_shadow,
+              const BoxShadow(
+                color: MyTheme.appbarShadow,
                 blurRadius: 10,
                 spreadRadius: 10,
                 offset: Offset(0, 5),

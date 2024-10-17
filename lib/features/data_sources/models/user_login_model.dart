@@ -22,7 +22,7 @@ class UserLoginModel {
     return UserLoginModel(
       token: json['token'],
       userRole: getUserRoleFromInt(json['userRole']),
-      id: json['id'],
+      id: json['userId'],
     );
   }
 

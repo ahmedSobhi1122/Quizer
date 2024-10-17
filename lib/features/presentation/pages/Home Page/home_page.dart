@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/features/domain/entities/user.dart';
 import 'package:quizer/features/presentation/common/background.dart';
-import 'package:quizer/features/presentation/cubit/home_cubit.dart';
+import 'package:quizer/features/presentation/cubit/home_categories_cubit.dart';
+import 'package:quizer/features/presentation/cubit/home_quizzes_cubit.dart';
 import 'package:quizer/features/presentation/pages/Home%20Page/Widgets/custom_home_categories.dart';
-import 'package:quizer/features/presentation/state/home_state.dart';
+import 'package:quizer/features/presentation/state/home_categories_state.dart';
+import 'package:quizer/features/presentation/state/home_quizzes_state.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/resources/assets_manager.dart';
+import '../../cubit/home_profile_cubit.dart';
+import '../../state/home_profile_state.dart';
 import 'Widgets/custom_clickable_titles.dart';
 import 'Widgets/custom_daily_task.dart';
 import 'Widgets/custom_home_appbar.dart';
@@ -24,30 +29,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late HomeProfileDataSuccess? profileST;
-  late HomeQuizzesDataSuccess? quizST;
-  late HomeCategoriesDataSuccess? categoryST;
-  bool profileSuccess = false;
-  bool quizzesSuccess = false;
-  bool categoriesSuccess = false;
-  bool _loading = true;
 
 
   @override
   void initState() {
-    // String? userID = DataIntent.getUserID();
-    // String? token = DataIntent.getToken();
-    String token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiemVpYWQiLCJmYW1pbHlfbmFtZSI6Im1vaGFtbWVkIiwiZW1haWwiOiJ6YXphb3NrYXI5MjhAZ21haWwuY29tIiwibmJmIjoxNzI5MDM4Nzg2LCJleHAiOjE3MzAyNDgzODYsImlhdCI6MTcyOTAzODc4NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2In0.58w65fyn17yi-5t0Qzdza5zYZoKvouRNibQf9mOH867umzUEIWKrDQZkdCgznZoteKJiAHLTSzlq4l8EAPpcoA";
-    String userID = "fed87f19-df40-4f97-9302-aabaf6438203";
+    String? userID = DataIntent.getUserID();
+    String? token = DataIntent.getToken();
+    DataIntent.pushToken(token!);
+    DataIntent.pushUserID(userID!);    // TODO remove the push statements when Login/Register returns them
 
-    context.read<HomeCubit>().getHomeProfileData(userID);
-    context.read<HomeCubit>().getHomeQuizzesData(token);
-    context.read<HomeCubit>().getHomeCategoriesData(token);
+    context.read<HomeProfileCubit>().getHomeProfile(userID);
+    context.read<HomeQuizzesCubit>().getHomeQuizzes(token);
+    context.read<HomeCategoriesCubit>().getHomeCategories(token);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    late HomeProfileLoaded profileState;
+    late HomeCategoriesLoaded categoriesState;
+    late HomeQuizzesLoaded quizzesState;
+    bool profileLoading = true;
+    bool categoriesLoading = true;
+    bool quizzesLoading = true;
 
     return Scaffold(
       body: Stack(
@@ -63,24 +67,19 @@ class _HomePageState extends State<HomePage> {
                 ),
                 /// Daily Task
                 SliverToBoxAdapter(
-                  child: BlocBuilder<HomeCubit, HomeState>(
+                  child: BlocBuilder<HomeProfileCubit, HomeProfileState>(
                     builder: (context, state) {
-                      if(categoriesSuccess && quizzesSuccess && profileSuccess)
-                      {
-                          _loading = false;
+                      if (state is HomeProfileLoaded) {
+                        profileState = state;
+                        profileLoading = false;
                       }
-                      if (state is HomeProfileDataSuccess) {
-                        profileST = state;
-                        profileSuccess = true;
-                        print("profile-dailyTask is true");
-                      }
-                      else if (state is HomeFailure) {
-                        return Center(child: Text(state.error));
+                      else if (state is HomeProfileFailure) {
+                        return Center(child: throw Exception(state.error));
                       }
                       return  Skeletonizer(
-                      enabled: _loading,
-                      child: _loading == false ?
-                      CustomDailyTask(noRebuild: profileST!.noRebuild,dailyTask: profileST!.user.dailyTask!) :
+                      enabled: profileLoading,
+                      child: profileLoading == false ?
+                      CustomDailyTask(noRebuild: profileState.noRebuild,dailyTask: profileState.user.dailyTask!) :
                       CustomDailyTask(noRebuild: true,dailyTask: DailyTask()),
                       );
                     },
@@ -101,24 +100,19 @@ class _HomePageState extends State<HomePage> {
                 ),
                 /// Categories
                 SliverToBoxAdapter(
-                  child: BlocBuilder<HomeCubit, HomeState>(
+                  child: BlocBuilder<HomeCategoriesCubit, HomeCategoriesState>(
                     builder: (context,state) {
-                      if(categoriesSuccess && quizzesSuccess && profileSuccess)
-                      {
-                          _loading = false;
+                      if (state is HomeCategoriesLoaded) {
+                        categoriesState = state;
+                        categoriesLoading = false;
                       }
-                      if (state is HomeCategoriesDataSuccess) {
-                        categoryST = state;
-                        categoriesSuccess = true;
-                        print("category is true");
-                      }
-                      else if (state is HomeFailure) {
-                        return  Center(child: Text(state.error));
+                      else if (state is HomeCategoriesFailure) {
+                        return Center(child: throw Exception(state.error));
                       }
                       return Skeletonizer(
-                        enabled: _loading,
-                        child: _loading == false ?
-                        const CustomHomeCategories() :
+                        enabled: categoriesLoading,
+                        child: categoriesLoading == false ?
+                        CustomHomeCategories(categories: categoriesState.categories) :
                         const CustomHomeCategories()
                       );
                     }
@@ -140,53 +134,40 @@ class _HomePageState extends State<HomePage> {
                 ),
                 /// Quizzes SliverGrid.Builder
                 SliverToBoxAdapter(
-                  child: BlocBuilder<HomeCubit, HomeState>(
+                  child: BlocBuilder<HomeQuizzesCubit, HomeQuizzesState>(
                     builder: (context, state) {
-                      if(categoriesSuccess && quizzesSuccess && profileSuccess)
-                      {
-                          _loading = false;
+                      if (state is HomeQuizzesLoaded) {
+                        quizzesState = state;
+                        quizzesLoading = false;
                       }
-                      if (state is HomeQuizzesDataSuccess) {
-                        quizST = state;
-                        quizzesSuccess = true;
-                        print("quiz is true");
+                      else if (state is HomeQuizzesFailure) {
+                        return Center(child: throw Exception(state.error));
                       }
-                      else if (state is HomeFailure) {
-                        return Center(child: Text(state.error));
-                      }
-                      return  Skeletonizer(
-                        enabled: _loading,
-                        child:  _loading == false ?
-                        CustomHomeQuizzes(quizzes: quizST!.quizzes) :
-                        const CustomHomeQuizzes(),
-                      );
+                      return  quizzesLoading == false ?
+                        CustomHomeQuizzes(quizzes: quizzesState.quizzes) :
+                        const CustomHomeQuizzes();
                     },
                   ),
                 ),
               ],
             ),
           ),
-          BlocBuilder<HomeCubit, HomeState>(
+          BlocBuilder<HomeProfileCubit, HomeProfileState>(
             builder: (context, state) {
-              if(categoriesSuccess && quizzesSuccess && profileSuccess)
-              {
-                _loading = false;
+              if (state is HomeProfileLoaded) {
+                  profileState = state;
+                  profileLoading = false;
               }
-              if (state is HomeProfileDataSuccess) {
-                  profileST = state;
-                  profileSuccess = true;
-                  print("profile-appBar is true");
-              }
-              else if (state is HomeFailure) {
-                return const SizedBox.shrink();
+              else if (state is HomeProfileFailure) {
+                return Center(child: throw Exception(state.error));
               }
               return Skeletonizer(
-                enabled: _loading,
-                child: _loading == false ? CustomHomeAppbar(
-                  imageUrl: Constants.url + profileST!.user.profileImage!,
-                  name: "${profileST!.user.firstName!} ${profileST!.user.lastName!}",
-                  rank: profileST!.rankToString(profileST!.user.rank!),
-                  points: profileST!.user.points,
+                enabled: profileLoading,
+                child: profileLoading == false ? CustomHomeAppbar(
+                  imageUrl: Constants.url + profileState.user.profileImage!,
+                  name: "${profileState.user.firstName!} ${profileState.user.lastName!}",
+                  rank: profileState.rankToString(profileState.user.rank!),
+                  points: profileState.user.points,
                 ) : const CustomHomeAppbar(
                   imageUrl: ImageAssets.avatar,
                   name: "Default Name",

@@ -28,7 +28,7 @@ class UserRegisterModel {
     return UserRegisterModel(
       token: json['token'],
       userRole: getUserRoleFromInt(json['userRole']),
-      id: json['id'],
+      id: json['userId'],
     );
   }
 

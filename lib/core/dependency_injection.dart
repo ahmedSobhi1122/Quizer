@@ -20,13 +20,15 @@ import 'package:quizer/features/domain/usecases/update_profile_usecase.dart';
 import 'package:quizer/features/domain/usecases/user_exist_usecase.dart';
 import 'package:quizer/features/domain/usecases/verify_otp_usecase.dart';
 import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
+import 'package:quizer/features/presentation/cubit/home_categories_cubit.dart';
+import 'package:quizer/features/presentation/cubit/home_quizzes_cubit.dart';
 import 'package:quizer/features/presentation/cubit/login_cubit.dart';
 import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../features/domain/usecases/get_home_categories_usecase.dart';
 import '../features/domain/usecases/get_profile_data_usecase.dart';
-import '../features/presentation/cubit/home_cubit.dart';
+import '../features/presentation/cubit/home_profile_cubit.dart';
 import '../features/presentation/cubit/profile_cubit.dart';
 
 final sl = GetIt.instance;
@@ -63,6 +65,8 @@ Future<void> init() async {
   sl.registerLazySingleton<RegisterCubit>(() => RegisterCubit(sl(),sl(),sl()));
   sl.registerFactory<LoginCubit>(() => LoginCubit(sl(),sl(),sl(),sl()));
   sl.registerFactory<ProfileCubit>(() => ProfileCubit(sl(),sl()));
-  sl.registerFactory<HomeCubit>(() => HomeCubit(sl(),sl(),sl()));
+  sl.registerLazySingleton<HomeProfileCubit>(() => HomeProfileCubit(sl()));
+  sl.registerLazySingleton<HomeCategoriesCubit>(() => HomeCategoriesCubit(sl()));
+  sl.registerLazySingleton<HomeQuizzesCubit>(() => HomeQuizzesCubit(sl()));
   sl.registerLazySingleton<ForgetPasswordCubit>(() => ForgetPasswordCubit(sl(),sl(),sl(),sl(),sl()));
 }

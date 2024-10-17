@@ -111,21 +111,21 @@ class AppTextStyles {
   static TextStyle homeDailyTaskHeaderTextStyle(BuildContext context) =>
       getBlackStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blackColor,
+        color: MyTheme.textColor,
         fontSize: FontSize.f20,
       );
 
   static TextStyle homeDailyTaskTitleTextStyle(BuildContext context) =>
       getRegularStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blackColor,
+        color: MyTheme.textColor,
         fontSize: FontSize.f16,
       );
 
   static TextStyle homeDailyTaskSubTitleTextStyle(BuildContext context) =>
       getLightStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blackColor,
+        color: MyTheme.textColor,
         fontSize: FontSize.f14,
       );
 
@@ -145,13 +145,13 @@ class AppTextStyles {
   static TextStyle homeGameCardTitleTextStyle(BuildContext context) =>
       getBlackStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blackColor,
+        color: MyTheme.textColor,
         fontSize: FontSize.f10,
       );
   static TextStyle homeCategoryTextStyle(BuildContext context) =>
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blackColor,
+        color: MyTheme.textColor,
         fontSize: FontSize.f12,
       );
 

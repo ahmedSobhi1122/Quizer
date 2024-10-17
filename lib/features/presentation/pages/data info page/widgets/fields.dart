@@ -80,7 +80,7 @@ class Fields extends StatelessWidget {
               final isCurrentRoute = route?.isCurrent ?? false;
               if (isCurrentRoute) {
                 if (state is RegisterSuccess) {
-                  context.pushNamed(Routes.logInScreenRoute);
+                  context.pushReplacementNamed(Routes.homeScreenRoute);
                   context.message(message: "success");
                 }
               }

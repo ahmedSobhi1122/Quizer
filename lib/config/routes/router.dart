@@ -44,8 +44,8 @@ class RouteGenerator {
 
       case Routes.dataInfoScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider.value(
-            value: sl<RegisterCubit>(),
+          builder: (context) => BlocProvider(
+            create: (context) => sl<RegisterCubit>(),
             child: const DataInfoScreen(),
           ),
         );

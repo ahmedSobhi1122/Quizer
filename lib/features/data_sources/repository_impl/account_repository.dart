@@ -1,6 +1,7 @@
 import 'package:quizer/features/data_sources/API/remote_data_source.dart';
 import 'package:quizer/features/data_sources/models/home_categories_model.dart';
 import 'package:quizer/features/data_sources/models/home_quizzes_model.dart';
+import 'package:quizer/features/data_sources/models/leaderboard_model.dart';
 import 'package:quizer/features/data_sources/models/user_profile_model.dart';
 import 'package:quizer/features/domain/entities/category.dart';
 import 'package:quizer/features/domain/entities/quiz.dart';
@@ -64,7 +65,7 @@ class AccountRepositoryImpl implements AccountRepository {
   }
 
   @override
-  Future<void> deleteAccount(String email) {
+  Future<void> deleteAccount(String userID, String token) {
     // TODO: implement getProfile
     throw UnimplementedError();
   }
@@ -98,5 +99,24 @@ class AccountRepositoryImpl implements AccountRepository {
         token: user.token,
       ),
     );
+  }
+
+  @override
+  Future<List<User>> getLeaderBoard(String token) async {
+    List<LeaderBoardModel> listOfUser =
+        await remoteDataSource.getLeaderBoard(token);
+    List<User> users = [];
+    for (var user in listOfUser) {
+      users.add(
+        User(
+          id: user.userID,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          points: user.points,
+          profileImage: user.profileImage,
+        ),
+      );
+    }
+    return users;
   }
 }

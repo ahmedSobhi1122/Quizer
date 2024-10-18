@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
+import 'package:quizer/core/constants/constants.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +25,7 @@ class ImageManager extends StatelessWidget {
   }
 
   Widget _getImage(String? url) {
-    if (url.isNullOrEmpty()) {
+    if (url.isNullOrEmpty() || url == Constants.url) {
       return Image.asset(ImageAssets.defaultImage);
     }
 

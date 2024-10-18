@@ -9,5 +9,6 @@ abstract class AccountRepository {
   Future<List<Category>> getHomeCategories(String token);
   Future<User> getProfile(String id,String token);
   Future<void> updateProfile(User user);
-  Future<void> deleteAccount(String email);
+  Future<void> deleteAccount(String userID,String token);
+  Future<List<User>> getLeaderBoard(String token);
 }

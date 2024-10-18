@@ -1,9 +1,9 @@
-
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quizer/core/constants/constants.dart';
+import 'package:quizer/features/data_sources/models/leaderboard_model.dart';
 import 'package:quizer/features/data_sources/models/user_home_profile_model.dart';
 import 'package:quizer/features/data_sources/models/user_login_model.dart';
 import 'package:quizer/features/data_sources/models/user_otp_profile_model.dart';
@@ -348,8 +348,7 @@ class RemoteDataSource {
   Future<QuizModel> getQuiz(String token, int id) async {
     late final QuizModel quiz;
 
-    try
-    {
+    try {
       final response = await dio.request(
         '${Constants.baseUrl}quiz/$id',
         options: Options(
@@ -369,9 +368,7 @@ class RemoteDataSource {
       } else {
         throw Exception('Error: $responseMessage');
       }
-    }
-    catch (error)
-    {
+    } catch (error) {
       throw Exception('remote_data_source -- Error GET ONE QUIZ: $error');
     }
   }
@@ -410,55 +407,55 @@ class RemoteDataSource {
     // print(user.lastName);
     // print(user.description);
     var userData = await user.toJsonUpdate();
-      try {
-        final response = await dio.request(
-          '${Constants.baseUrl}account/updateProfile',
-          options: Options(
-            headers: {
-              'Authorization': 'Bearer ${user.token}',
-              "Content-Type": "multipart/form-data",
-            },
-            method: 'PUT',
-          ),
-          data: userData,
-        );
-        if (response.statusCode == 200) {
-          // successful
-        } else {
-          throw Exception(response.data["message"]);
-        }
-      } catch (error) {
-        throw Exception('Error during get profile: $error');
+    try {
+      final response = await dio.request(
+        '${Constants.baseUrl}account/updateProfile',
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer ${user.token}',
+            "Content-Type": "multipart/form-data",
+          },
+          method: 'PUT',
+        ),
+        data: userData,
+      );
+      if (response.statusCode == 200) {
+        // successful
+      } else {
+        throw Exception(response.data["message"]);
       }
+    } catch (error) {
+      throw Exception('Error during get profile: $error');
     }
-  //   var headers = {'Authorization': '••••••'};
-  //   var data = FormData.fromMap({
-  //     'files': [
-  //       await MultipartFile.fromFile(user.profileImage!,
-  //           filename: user.profileImage),
-  //       await MultipartFile.fromFile(user.coverImage!,
-  //           filename: user.coverImage)
-  //     ],
-  //     'userID': '55268294-54c4-424f-8547-c83b1672053b',
-  //     'firstName': 'ZeiadUpdated',
-  //     'lastName': 'TahaUpdated',
-  //     'description': 'DescriptionUpdated'
-  //   });
-  //
-  //   var dio = Dio();
-  //   var response = await dio.request(
-  //     'http://localhost:5226/api/account/updateProfile',
-  //     options: Options(
-  //       method: 'PUT',
-  //       headers: headers,
-  //     ),
-  //     data: data,
-  //   );
-  //
-  //   if (response.statusCode == 200) {
-  //     print(json.encode(response.data));
-  //   } else {
-  //     print(response.statusMessage);
-  //   }
-  // }
+  }
+
+  ///leaderboard
+  Future<List<LeaderBoardModel>> getLeaderBoard(String token) async {
+    List<LeaderBoardModel> leaderboard = [];
+    try {
+      final response = await dio.request(
+        '${Constants.baseUrl}account/leaderboard',
+        options: Options(
+          headers: {'Authorization': 'Bearer $token'},
+          method: 'GET',
+        ),
+      );
+
+      var responseData = response.data["data"] as List;
+      var responseMessage = response.data["message"];
+      print(responseMessage);
+      print(responseData);
+
+      if (response.statusCode == 200) {
+        leaderboard = responseData
+            .map((leader) => LeaderBoardModel.fromJson(leader))
+            .toList();
+        return leaderboard;
+      } else {
+        throw Exception('Error: $responseMessage');
+      }
+    } catch (error) {
+      throw Exception('remote_data_source -- Error GET ONE QUIZ: $error');
+    }
+  }
 }

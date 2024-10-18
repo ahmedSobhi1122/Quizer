@@ -5,14 +5,19 @@ import 'package:quizer/features/data_sources/API/remote_data_source.dart';
 import 'package:quizer/features/data_sources/local/app_prefs.dart';
 import 'package:quizer/features/data_sources/repository_impl/account_repository.dart';
 import 'package:quizer/features/data_sources/repository_impl/auth_repository.dart';
+import 'package:quizer/features/data_sources/repository_impl/quiz_repository.dart';
 import 'package:quizer/features/domain/repository/account_repository.dart';
 import 'package:quizer/features/domain/repository/auth_repository.dart';
+import 'package:quizer/features/domain/repository/quiz_repository.dart';
 import 'package:quizer/features/domain/usecases/facebook_auth_usecase.dart';
+import 'package:quizer/features/domain/usecases/get_home_categories_usecase.dart';
 import 'package:quizer/features/domain/usecases/get_home_profile_data_usecase.dart';
 import 'package:quizer/features/domain/usecases/get_home_quizzes_usecase.dart';
 import 'package:quizer/features/domain/usecases/get_otp_usecase.dart';
+import 'package:quizer/features/domain/usecases/get_profile_data_usecase.dart';
 import 'package:quizer/features/domain/usecases/get_quiz_usecase.dart';
 import 'package:quizer/features/domain/usecases/google_auth_usecase.dart';
+import 'package:quizer/features/domain/usecases/leaderboard_usecase.dart';
 import 'package:quizer/features/domain/usecases/login_usecase.dart';
 import 'package:quizer/features/domain/usecases/otp_profile_usecase.dart';
 import 'package:quizer/features/domain/usecases/register_usecase.dart';
@@ -22,18 +27,15 @@ import 'package:quizer/features/domain/usecases/user_exist_usecase.dart';
 import 'package:quizer/features/domain/usecases/verify_otp_usecase.dart';
 import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
 import 'package:quizer/features/presentation/cubit/home_categories_cubit.dart';
+import 'package:quizer/features/presentation/cubit/home_profile_cubit.dart';
 import 'package:quizer/features/presentation/cubit/home_quizzes_cubit.dart';
+import 'package:quizer/features/presentation/cubit/leaderboard_cubit.dart';
 import 'package:quizer/features/presentation/cubit/login_cubit.dart';
+import 'package:quizer/features/presentation/cubit/profile_cubit.dart';
 import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 import 'package:quizer/features/presentation/cubit/start_quiz_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../features/data_sources/repository_impl/quiz_repository.dart';
-import '../features/domain/repository/quiz_repository.dart';
-import '../features/domain/usecases/get_home_categories_usecase.dart';
-import '../features/domain/usecases/get_profile_data_usecase.dart';
-import '../features/presentation/cubit/home_profile_cubit.dart';
-import '../features/presentation/cubit/profile_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -66,11 +68,13 @@ Future<void> init() async {
   sl.registerLazySingleton<OtpProfileUseCase>(() => OtpProfileUseCase(sl()));
   sl.registerLazySingleton<ResetPasswordUseCase>(() => ResetPasswordUseCase(sl()));
   sl.registerLazySingleton<UpdateProfileUsecase>(() => UpdateProfileUsecase(sl()));
+  sl.registerLazySingleton<LeaderboardUsecase>(() => LeaderboardUsecase(sl()));
 
   /// Cubits
   sl.registerLazySingleton<RegisterCubit>(() => RegisterCubit(sl(),sl(),sl()));
   sl.registerFactory<LoginCubit>(() => LoginCubit(sl(),sl(),sl(),sl()));
   sl.registerFactory<ProfileCubit>(() => ProfileCubit(sl(),sl()));
+  sl.registerFactory<LeaderboardCubit>(() => LeaderboardCubit(sl()));
   sl.registerLazySingleton<HomeProfileCubit>(() => HomeProfileCubit(sl()));
   sl.registerLazySingleton<StartQuizCubit>(() => StartQuizCubit(sl()));
   sl.registerLazySingleton<HomeCategoriesCubit>(() => HomeCategoriesCubit(sl()));

@@ -2,6 +2,7 @@ import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
 import 'package:quizer/features/presentation/cubit/home_profile_cubit.dart';
 import 'package:quizer/features/presentation/cubit/leaderboard_cubit.dart';
 import 'package:quizer/features/presentation/cubit/profile_cubit.dart';
+import 'package:quizer/features/presentation/cubit/setting_cubit.dart';
 import 'package:quizer/features/presentation/cubit/start_quiz_cubit.dart';
 import 'package:quizer/features/presentation/pages/Home%20Page/home_page.dart';
 import 'package:quizer/features/presentation/pages/category%20page/category_screen.dart';
@@ -176,7 +177,10 @@ class RouteGenerator {
 
       case Routes.settingScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => const SettingScreen(),
+          builder: (context) => BlocProvider(
+            create: (context) => sl<SettingCubit>(),
+              child: const SettingScreen()
+          ),
         );
 
 ////////////////////////////////////////////////////////////////////////////////

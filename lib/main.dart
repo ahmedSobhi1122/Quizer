@@ -72,15 +72,17 @@ class _MyAppState extends State<MyApp> {
   void initState(){
     super.initState();
     String? theme = sl<AppPrefs>().getString("theme");
-    switch(theme){
-      case "LIGHT":
-        Themed.currentTheme = LightTheme;
-      case "DARK":
-        Themed.currentTheme = DarkTheme;
-      default:
-        // Themed.currentTheme = BlueTheme;
-        Themed.currentTheme = DarkTheme;
-    }
+    Themed.currentTheme = LightTheme;
+
+    // switch(theme){
+    //   case "LIGHT":
+    //     Themed.currentTheme = LightTheme;
+    //   case "DARK":
+    //     Themed.currentTheme = DarkTheme;
+    //   default:
+    //     // Themed.currentTheme = BlueTheme;
+    //     Themed.currentTheme = DarkTheme;
+    // }
   }
 
   @override
@@ -97,7 +99,7 @@ class _MyAppState extends State<MyApp> {
         darkTheme: AppTheme.darkTheme(context),
         themeMode: ThemeMode.light,
         onGenerateRoute: router.RouteGenerator.getRoute,
-        initialRoute: Routes.leaderBoardScreenRoute,
+        initialRoute: Routes.settingScreenRoute,
       ),
     );
   }

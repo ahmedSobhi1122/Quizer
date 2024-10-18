@@ -458,4 +458,26 @@ class RemoteDataSource {
       throw Exception('remote_data_source -- Error GET ONE QUIZ: $error');
     }
   }
+
+  Future<void> deleteAccount(String userID,String token) async {
+    try {
+      final response = await dio.request(
+        '${Constants.baseUrl}account/delete',
+        options: Options(
+          headers: {'Authorization': 'Bearer $token'},
+          method: 'DELETE',
+        ),
+        data: FormData.fromMap({'userID': userID}),
+      );
+      if (response.statusCode == 200) {
+        print('Account deleted successfully');
+      } else {
+        throw Exception('Error deleting account');
+      }
+    }
+    catch (error) {
+      throw Exception('remote_data_source -- Error DELETE ACCOUNT: $error');
+    }
+  }
+
 }

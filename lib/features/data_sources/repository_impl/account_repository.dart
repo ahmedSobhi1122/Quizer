@@ -65,9 +65,8 @@ class AccountRepositoryImpl implements AccountRepository {
   }
 
   @override
-  Future<void> deleteAccount(String userID, String token) {
-    // TODO: implement getProfile
-    throw UnimplementedError();
+  Future<void> deleteAccount(String userID, String token) async {
+    await remoteDataSource.deleteAccount(userID, token);
   }
 
   @override

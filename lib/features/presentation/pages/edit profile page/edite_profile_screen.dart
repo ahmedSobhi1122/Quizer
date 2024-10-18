@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quizer/config/themes/theme.dart';
+import 'package:quizer/core/helper/data_intent.dart';
+import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/app_fonts.dart';
@@ -23,10 +25,11 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  String id = "55268294-54c4-424f-8547-c83b1672053b";
-  String token =
-      "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiWmVpYWQiLCJmYW1pbHlfbmFtZSI6Ik1vaGFtbWVkIiwiZW1haWwiOiJ6ZWlhZG00YnVzaW5lc3NAZ21haWwuY29tIiwibmJmIjoxNzI5MTkzOTY2LCJleHAiOjE3MzE4NzU5NjYsImlhdCI6MTcyOTE5Mzk2NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2In0.qbQi3s0NO8TC7SVc1fKTdenU1W6Rg98Yh4A0-eoAoukfxGBIFCY1KCYVmMPrFzj42gwNnnWoH_G3m9-XuGa73g";
-
+  // String id = "55268294-54c4-424f-8547-c83b1672053b";
+  // String token =
+  //     "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiWmVpYWQiLCJmYW1pbHlfbmFtZSI6Ik1vaGFtbWVkIiwiZW1haWwiOiJ6ZWlhZG00YnVzaW5lc3NAZ21haWwuY29tIiwibmJmIjoxNzI5MTkzOTY2LCJleHAiOjE3MzE4NzU5NjYsImlhdCI6MTcyOTE5Mzk2NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2In0.qbQi3s0NO8TC7SVc1fKTdenU1W6Rg98Yh4A0-eoAoukfxGBIFCY1KCYVmMPrFzj42gwNnnWoH_G3m9-XuGa73g";
+  String? id = DataIntent.getUserID();
+  String? token = DataIntent.getToken();
   String? _userName = "Ahmed Mohsen";
 
   String? _aboutMe =
@@ -191,21 +194,34 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         SizedBox(width: 50.w),
                         Expanded(
-                          child: CustomButton(
-                            color: MyTheme.primaryButtonColor,
-                            colorText: MyTheme.primaryButtonTextColor,
-                            text: "Finish",
-                            onPressed: () async {
-                              await context.read<ProfileCubit>().updateProfile(
-                                    id: id,
-                                    name: nameController.text,
-                                    description: aboutController.text,
-                                    profileImage: _imageProfile!,
-                                    coverImage: _imageCover!,
-                                    token: token,
-                                  );
-                              // context.pop();
+                          child: BlocListener<ProfileCubit, ProfileState>(
+                            listener: (context, state) {
+                              print(state);
+                              if(state is ProfileUpdateSuccess){
+                                context.pop();
+                                context.message(message: "success update",color: AppColors.successColor);
+                              } else {
+                                context.message(message: "loading update",color: AppColors.errorColor);
+                              }
                             },
+                            child: CustomButton(
+                              color: MyTheme.primaryButtonColor,
+                              colorText: MyTheme.primaryButtonTextColor,
+                              text: "Finish",
+                              onPressed: () async {
+                                await context
+                                    .read<ProfileCubit>()
+                                    .updateProfile(
+                                      id: id ?? "",
+                                      name: nameController.text,
+                                      description: aboutController.text,
+                                      profileImage: _imageProfile!,
+                                      coverImage: _imageCover!,
+                                      token: token ?? "",
+                                    );
+                                // context.pop();
+                              },
+                            ),
                           ),
                         )
                       ]),

@@ -49,6 +49,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(DataIntent.getUserID());
+    print(DataIntent.getToken());
     return Scaffold(
       body: Background(
         child: SingleChildScrollView(

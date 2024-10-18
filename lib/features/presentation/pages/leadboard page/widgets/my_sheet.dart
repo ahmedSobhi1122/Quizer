@@ -43,7 +43,7 @@ class MyDraggableSheet extends StatelessWidget {
                 name:
                     "${users?[index + 3].firstName ?? ""} ${users?[index + 3].lastName ?? ""}",
                 points: users?[index + 3].points ?? 0,
-                rank: index + 3,
+                rank: index + 4,
                 url: Constants.url + (users?[index + 3].profileImage ?? ""),
               );
             },

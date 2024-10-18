@@ -6,8 +6,10 @@ import 'package:quizer/core/resources/text_styles.dart';
 
 
 class Category extends StatelessWidget {
+  final int? maxTime;
+  final int? questionsCount;
   const Category({
-    super.key,
+    super.key, this.maxTime, this.questionsCount,
   });
 
   @override
@@ -23,22 +25,6 @@ class Category extends StatelessWidget {
         Row(
           children: [
             Text(
-              "Category :",
-              style: AppTextStyles.statQuizTitleInformationTextStyle(context),
-            ),
-            SizedBox(
-              width: AppSize.s10.w,
-            ),
-            Text(
-              "Math",
-              style: AppTextStyles.statQuizInformationTextStyle(context),
-            )
-          ],
-        ),
-        SizedBox(height: AppSize.s10.h),
-        Row(
-          children: [
-            Text(
               "Time :",
               style: AppTextStyles.statQuizTitleInformationTextStyle(context),
             ),
@@ -46,7 +32,7 @@ class Category extends StatelessWidget {
               width: AppSize.s10.w,
             ),
             Text(
-              "X minutes",
+              maxTime != null ? "$maxTime minutes" : "X minutes",
               style: AppTextStyles.statQuizInformationTextStyle(context),
             )
           ],
@@ -61,8 +47,7 @@ class Category extends StatelessWidget {
             SizedBox(
               width: AppSize.s10.w,
             ),
-            Text(
-              "X questions",
+            Text( questionsCount != null ? "$questionsCount questions" : "X questions",
               style: AppTextStyles.statQuizInformationTextStyle(context),
             )
           ],

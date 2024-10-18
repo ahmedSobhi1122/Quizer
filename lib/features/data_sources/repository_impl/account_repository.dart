@@ -35,7 +35,7 @@ class AccountRepositoryImpl implements AccountRepository {
           id: quizModel.id,
           name: quizModel.name,
           description: quizModel.description,
-          madeBy: quizModel.madeBy,
+          authorName: quizModel.authorName,
           rating: quizModel.rating,
           questionCount: quizModel.questionCount,
           maxTime: quizModel.maxTime,

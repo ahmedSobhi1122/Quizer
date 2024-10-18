@@ -7,3 +7,5 @@ enum Themes { LIGHT, DARK }
 enum Languages { ENGLISH, ARABIC, FRENCH }
 
 enum States { ON, OFF }
+
+enum QuestionTypeModel{ MULTIBLE_CHOICE, TRUE_FALSE}

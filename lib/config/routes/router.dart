@@ -1,6 +1,7 @@
 import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
 import 'package:quizer/features/presentation/cubit/home_profile_cubit.dart';
 import 'package:quizer/features/presentation/cubit/profile_cubit.dart';
+import 'package:quizer/features/presentation/cubit/start_quiz_cubit.dart';
 import 'package:quizer/features/presentation/pages/Home%20Page/home_page.dart';
 import 'package:quizer/features/presentation/pages/create%20question%20page/create_question_screen.dart';
 import 'package:quizer/features/presentation/pages/edit%20profile%20page/edite_profile_screen.dart';
@@ -118,14 +119,21 @@ class RouteGenerator {
         );
 
 ////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-      ///profile
+    ///profile
       case Routes.profileScreenRoute:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<ProfileCubit>(
             create: (context) =>  sl<ProfileCubit>(),
             child: const ProfileScreen(),
+          ),
+        );
+////////////////////////////////////////////////////////////////////////////////
+      ///Start Quiz
+      case Routes.startQuizScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<StartQuizCubit>(
+            create: (context) =>  sl<StartQuizCubit>(),
+            child: const StartQuizScreen(),
           ),
         );
 ////////////////////////////////////////////////////////////////////////////////
@@ -147,11 +155,6 @@ class RouteGenerator {
       case Routes.editProfileScreenRoute:
         return MaterialPageRoute(
           builder: (context) => EditProfileScreen(),
-        );
-
-      case Routes.startQuizScreenRoute:
-        return MaterialPageRoute(
-          builder: (context) => const StartQuizScreen(),
         );
 
       default:

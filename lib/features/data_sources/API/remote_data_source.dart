@@ -13,6 +13,7 @@ import '../../domain/entities/user.dart' as entity;
 
 import '../models/home_categories_model.dart';
 import '../models/home_quizzes_model.dart';
+import '../models/quiz_model.dart';
 
 class RemoteDataSource {
   late Dio dio;
@@ -278,7 +279,7 @@ class RemoteDataSource {
     }
   }
 
-  ///home Quizzes TODO -- Add Token to header
+  ///home Quizzes
   Future<List<HomeQuizzesModel>> homeQuizzes(String token) async {
     List<HomeQuizzesModel> quizzes = [];
 
@@ -287,6 +288,7 @@ class RemoteDataSource {
         '${Constants.baseUrl}quiz',
         options: Options(
           method: 'GET',
+          headers: {'Authorization': 'Bearer $token'},
         ),
       );
 
@@ -308,7 +310,7 @@ class RemoteDataSource {
     }
   }
 
-  ///home Categories TODO -- Add Token to header
+  ///home Categories
   Future<List<HomeCategoriesModel>> homeCategories(String token) async {
     List<HomeCategoriesModel> categories = [];
 
@@ -317,6 +319,7 @@ class RemoteDataSource {
         '${Constants.baseUrl}category',
         options: Options(
           method: 'GET',
+          headers: {'Authorization': 'Bearer $token'},
         ),
       );
 
@@ -339,6 +342,38 @@ class RemoteDataSource {
     } catch (error) {
       throw Exception(
           'remote_data_source--Error getting Categories Data: $error');
+    }
+  }
+
+  ///Get One Quiz
+  Future<QuizModel> getQuiz(String token, int id) async {
+    late final QuizModel quiz;
+
+    try
+    {
+      final response = await dio.request(
+        '${Constants.baseUrl}quiz/$id',
+        options: Options(
+          method: 'GET',
+          headers: {'Authorization': 'Bearer $token'},
+        ),
+      );
+
+      var responseData = response.data["data"];
+      var responseMessage = response.data["message"];
+
+      if (response.statusCode == 200) {
+        print(responseMessage);
+        print(responseData);
+        quiz = QuizModel.fromJson(responseData);
+        return quiz;
+      } else {
+        throw Exception('Error: $responseMessage');
+      }
+    }
+    catch (error)
+    {
+      throw Exception('remote_data_source -- Error GET ONE QUIZ: $error');
     }
   }
 

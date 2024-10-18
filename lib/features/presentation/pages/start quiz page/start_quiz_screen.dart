@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/config/routes/screen_export.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
@@ -8,46 +10,91 @@ import 'package:quizer/features/presentation/pages/start%20quiz%20page/widgets/c
 import 'package:quizer/features/presentation/pages/start%20quiz%20page/widgets/description.dart';
 import 'package:quizer/features/presentation/pages/start%20quiz%20page/widgets/image_quiz.dart';
 import 'package:quizer/features/presentation/pages/start%20quiz%20page/widgets/rate.dart';
-class StartQuizScreen extends StatelessWidget {
+import 'package:skeletonizer/skeletonizer.dart';
+
+import '../../../../core/constants/constants.dart';
+import '../../../domain/entities/quiz.dart';
+import '../../cubit/start_quiz_cubit.dart';
+import '../../state/start_quiz_state.dart';
+class StartQuizScreen extends StatefulWidget {
   const StartQuizScreen({super.key});
 
   @override
+  State<StartQuizScreen> createState() => _StartQuizScreenState();
+
+}
+
+class _StartQuizScreenState extends State<StartQuizScreen> {
+   bool? _loading;
+   Quiz? quiz;
+  @override
+  void initState() {
+    const String token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiWmVpYWQiLCJmYW1pbHlfbmFtZSI6Ik1vaGFtbWVkIiwiZW1haWwiOiJ6ZWlhZG00YnVzaW5lc3NAZ21haWwuY29tIiwibmJmIjoxNzI5MTkzOTY2LCJleHAiOjE3MzE4NzU5NjYsImlhdCI6MTcyOTE5Mzk2NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2In0.qbQi3s0NO8TC7SVc1fKTdenU1W6Rg98Yh4A0-eoAoukfxGBIFCY1KCYVmMPrFzj42gwNnnWoH_G3m9-XuGa73g";
+    const int id = 1;
+    context.read<StartQuizCubit>().getQuizData(token, id);
+    _loading = true;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Math test",
-          style: AppTextStyles.statQuizTitleTextStyle(context),
-        ),
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppPadding.defaultPadding.w),
-        child: Column(
-          children: [
-            SizedBox(height: AppSize.s10.h),
-            const ImageQuiz(),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: AppPadding.p32.h),
-              child: const DisplayRate(
-                rating: 1.5,
-              ),
+
+    return BlocBuilder<StartQuizCubit, StartQuizState> (builder: (context, state){
+      if(state is StartQuizLoaded)
+      {
+        _loading = false;
+        quiz = state.quiz;
+        print("_loading is false");
+      }
+      if(state is StartQuizFailure)
+      {
+        print(state.error);
+      }
+      return  Skeletonizer(
+        enabled: _loading!,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: MyTheme.backgroundColor,
+            leading: const BackButton(color: MyTheme.textColor,), //TODO pop the screen here
+            title: Text( quiz == null ?
+              "Math test" : quiz!.name!,
+              style: AppTextStyles.statQuizTitleTextStyle(context),
             ),
-            const Description(),
-            SizedBox(height: AppSize.s32.h),
-            const Category(),
-            const Spacer(),
-            CustomButton(
-                color: AppColors.purpleColor,
-                colorText: AppColors.whiteColor,
-                text: "Start",
-                onPressed: () {
-                  //TODO : Push To Quiz Screen
-                }),
-            SizedBox(height: AppSize.s50.h),
-          ],
+          ),
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: AppPadding.defaultPadding.w),
+            child: Column(
+              children: [
+                SizedBox(height: AppSize.s10.h),
+                 quiz!= null ?
+                 ImageQuiz(imageUrl: Constants.url+quiz!.image!,authorImageUrl: Constants.url+quiz!.authorImage!, authorName: quiz!.authorName,playCount: quiz!.solveCount,)
+                     : const ImageQuiz(),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: AppPadding.p32.h),
+                  child: DisplayRate(
+                    rating: quiz == null ?
+                    1.5 : quiz!.rating!,
+                  ),
+                ),
+                Description(description: quiz == null ?
+                "Default Description" : quiz!.description!,),
+                SizedBox(height: AppSize.s32.h),
+                Category(maxTime: quiz == null ? 10 : quiz!.maxTime!,questionsCount: quiz == null ? 10 : quiz!.questionCount!),
+                const Spacer(),
+                CustomButton(
+                    color: AppColors.purpleColor,
+                    colorText: AppColors.whiteColor,
+                    text: "Start",
+                    onPressed: () {
+                      //TODO : Push To Quiz Screen
+                    }),
+                SizedBox(height: AppSize.s50.h),
+              ],
+            ),
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
 

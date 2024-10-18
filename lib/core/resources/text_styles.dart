@@ -159,28 +159,28 @@ class AppTextStyles {
   static TextStyle statQuizTitleTextStyle(BuildContext context) =>
       getBlackStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blackColor,
+        color: MyTheme.textColor,
         fontSize: FontSize.f32,
       );
 
   static TextStyle statQuizTitleSectionTextStyle(BuildContext context) =>
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blackColor,
+        color: MyTheme.textColor,
         fontSize: FontSize.f32,
       );
 
   static TextStyle statQuizSubtitleSectionTextStyle(BuildContext context) =>
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.greyColor,
+        color: MyTheme.textColor,
         fontSize: FontSize.f16,
       );
 
   static TextStyle statQuizTitleInformationTextStyle(BuildContext context) =>
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blackColor,
+        color: MyTheme.textColor,
         fontSize: FontSize.f20,
       );
 

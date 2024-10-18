@@ -88,7 +88,7 @@ class CustomQuiz extends StatelessWidget {
                           style: AppTextStyles.homeTitlesTextStyle(context),
                         ),
                         TextSpan(
-                          text: quiz == null ? "\n • By Me" : "\n • By ${quiz!.madeBy}",
+                          text: quiz == null ? "\n • By Me" : "\n • By ${quiz!.authorName}",
                           style:
                               AppTextStyles.homeGameCardTitleTextStyle(context),
                         ),

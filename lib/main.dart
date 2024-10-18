@@ -78,7 +78,8 @@ class _MyAppState extends State<MyApp> {
       case "DARK":
         Themed.currentTheme = DarkTheme;
       default:
-        Themed.currentTheme = BlueTheme;
+        // Themed.currentTheme = BlueTheme;
+        Themed.currentTheme = DarkTheme;
     }
   }
 
@@ -96,7 +97,7 @@ class _MyAppState extends State<MyApp> {
         darkTheme: AppTheme.darkTheme(context),
         themeMode: ThemeMode.light,
         onGenerateRoute: router.RouteGenerator.getRoute,
-        initialRoute: Routes.startQuizScreenRoute,
+        initialRoute: Routes.leaderBoardScreenRoute,
       ),
     );
   }

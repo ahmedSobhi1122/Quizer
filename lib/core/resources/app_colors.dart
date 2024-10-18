@@ -79,9 +79,9 @@ class AppColors {
   static const Color orangeAccent = Color(0xFFFBA444);
   static const Color darkPurple = Color(0xFFB193E2);
   static const Color deepDarkPurple = Color(0xFF664ED1);
-  static const Color gold = Color(0xFFFFD700);
-  static const Color silver = Color(0xFFC0C0C0);
-  static const Color bronze = Color(0x80B86B4A);
+  static const Color gold = Color(0xFFFFD54B);
+  static const Color silver = Color(0xFFE1E1E2);
+  static const Color bronze = Color(0xFFF6B191);
   static const Color gray = Color(0x8095989A);
   static const Color softRed = Color(0xFFECCBD7);
 

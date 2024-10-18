@@ -148,39 +148,25 @@ class AppTextStyles {
         color: MyTheme.textColor,
         fontSize: FontSize.f10,
       );
-  static TextStyle homeCategoryTextStyle(BuildContext context) =>
-      getBoldStyle(
+
+  static TextStyle homeCategoryTextStyle(BuildContext context) => getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: MyTheme.textColor,
         fontSize: FontSize.f12,
       );
-  static TextStyle leaderBoardCardTitleTextStyle(BuildContext context) =>
+
+  static TextStyle leaderBoardTitleTextStyle(BuildContext context) =>
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.blackColor,
-
-        fontSize: FontSize.f18,
+        fontSize: FontSize.f16,
       );
-  static TextStyle leaderBoardCardSubtitleTextStyle(BuildContext context) =>
+
+  static TextStyle leaderBoardSubtitleTextStyle(BuildContext context) =>
       getRegularStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.blackColor,
-
-        fontSize: FontSize.f10,
-      );
-  static TextStyle leaderBoardRanktitleTextStyle(BuildContext context) =>
-      getRegularStyle(
-        fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.whiteColor,
-
-        fontSize: FontSize.f10,
-      );
-  static TextStyle leaderBoardRankSubtitleTextStyle(BuildContext context) =>
-      getRegularStyle(
-        fontFamily: AppLanguages.getPrimaryFont(context),
-        color: AppColors.whiteColor,
-
-        fontSize: FontSize.f8,
+        color: AppColors.greyColor,
+        fontSize: FontSize.f14,
       );
 
   ///Start quiz
@@ -218,16 +204,25 @@ class AppTextStyles {
         color: AppColors.purpleColor,
         fontSize: FontSize.f18,
       );
-  static TextStyle statQuizNameTextStyle(BuildContext context) =>
-      getBoldStyle(
+
+  static TextStyle statQuizNameTextStyle(BuildContext context) => getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.whiteColor,
         fontSize: FontSize.f14,
       );
+
   static TextStyle statQuizNumberTextStyle(BuildContext context) =>
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: AppColors.blackColor,
         fontSize: FontSize.f10,
+      );
+
+  ///leaderboard
+  static TextStyle leaderboardTitleTextStyle(BuildContext context) =>
+      getBlackStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: MyTheme.textColor,
+        fontSize: FontSize.f32,
       );
 }

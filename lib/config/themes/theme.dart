@@ -45,7 +45,7 @@ class MyTheme{
 Map<ThemeRef,Object> LightTheme = {
   MyTheme.backgroundColor : Colors.white,
   MyTheme.reverseColor : Colors.white,
-  MyTheme.textColor: Colors.black.withOpacity(.8),
+  MyTheme.textColor: Colors.black,
 };
 
 

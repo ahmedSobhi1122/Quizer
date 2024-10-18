@@ -44,7 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
     String? userID = DataIntent.getUserID();
     String? token = DataIntent.getToken();
-    context.read<ProfileCubit>().getProfile(userID!,token!);
+    context.read<ProfileCubit>().getProfile(userID!, token!);
   }
 
   @override
@@ -65,14 +65,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 profileImage = Constants.url + state.user.profileImage!;
                 coverImage = Constants.url + state.user.coverImage!;
                 _loading = false;
-              }
-              else if (state is ProfileFailure) {
+              } else if (state is ProfileFailure) {
                 _loading = false;
                 return Center(
                   child: Text(state.error),
                 );
-              }
-              else if (state is ProfileLoading) {
+              } else if (state is ProfileLoading) {
                 _loading = true;
               }
               return Skeletonizer(
@@ -148,11 +146,7 @@ class Profile extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          BackButton(
-                            onPressed: () {
-                              context.pop();
-                            },
-                          ),
+                          const BackButton(),
                           const Spacer(),
                           IconButton(
                             onPressed: () {

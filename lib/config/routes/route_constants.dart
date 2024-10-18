@@ -18,9 +18,9 @@ class Routes {
   static const String createQuestionScreenRoute="/create_question";
   static const String settingScreenRoute="/setting";
   static const String homeScreenRoute="/home";
-  static const String FirstQuizScreenRoute="/first_quiz";
-  static const String SecondQuizScreenRoute="/second_quiz";
-  static const String LeaderBoardScreenRoute="/Leaderboard";
+  static const String firstQuizScreenRoute="/first_quiz";
+  static const String secondQuizScreenRoute="/second_quiz";
+  static const String leaderBoardScreenRoute="/Leaderboard";
   static const String editProfileScreenRoute="/edit_profile";
   static const String categoryScreenRoute="/category";
 

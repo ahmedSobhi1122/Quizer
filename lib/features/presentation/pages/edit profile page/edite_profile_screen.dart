@@ -200,7 +200,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               if(state is ProfileUpdateSuccess){
                                 context.pop();
                                 context.message(message: "success update",color: AppColors.successColor);
-                              } else {
+                              } else if(state is ProfileLoading){
                                 context.message(message: "loading update",color: AppColors.errorColor);
                               }
                             },

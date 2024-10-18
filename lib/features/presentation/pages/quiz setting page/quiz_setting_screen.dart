@@ -22,7 +22,18 @@ class QuizSettingScreen extends StatefulWidget {
 class _QuizSettingScreenState extends State<QuizSettingScreen> {
   final List<int> _times = [5, 10, 15, 20, 25, 30,];
   final List<String> _category = ['football', 'science', 'math', 'history', 'geography'];
+  final ScrollController _scrollController = ScrollController();
   int _selectedIndex = -1;
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollController.jumpTo(50.0 * 506);
+    });
+  }
 
 
   File? _image;
@@ -166,6 +177,7 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
 
                     ),
                     child: ListView.builder(
+                      controller: _scrollController,
                       scrollDirection: Axis.horizontal,
                       itemCount: _times.length * 1000,
                       itemBuilder: (context, index) =>timeItem(index % _times.length),

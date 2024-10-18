@@ -3,14 +3,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/date_symbol_data_file.dart';
 import 'package:quizer/config/routes/route_constants.dart';
+import 'package:quizer/config/themes/app_theme.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/dependency_injection.dart';
 import 'package:themed/themed.dart';
 import 'config/routes/router.dart' as router;
-import 'config/themes/app_theme.dart';
-import 'config/themes/theme.dart';
 import 'core/resources/language_manager.dart';
+import 'features/data_sources/local/app_prefs.dart';
 
 late final WidgetsBinding engine;
 
@@ -71,8 +71,15 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState(){
     super.initState();
-    super.initState();
-    Themed.currentTheme = LightTheme;
+    String? theme = sl<AppPrefs>().getString("theme");
+    switch(theme){
+      case "LIGHT":
+        Themed.currentTheme = LightTheme;
+      case "DARK":
+        Themed.currentTheme = DarkTheme;
+      default:
+        Themed.currentTheme = BlueTheme;
+    }
   }
 
   @override

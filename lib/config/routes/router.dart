@@ -3,12 +3,15 @@ import 'package:quizer/features/presentation/cubit/home_profile_cubit.dart';
 import 'package:quizer/features/presentation/cubit/profile_cubit.dart';
 import 'package:quizer/features/presentation/cubit/start_quiz_cubit.dart';
 import 'package:quizer/features/presentation/pages/Home%20Page/home_page.dart';
+import 'package:quizer/features/presentation/pages/category%20page/category_screen.dart';
+import 'package:quizer/features/presentation/pages/category%20search%20page/category_search_screen.dart';
 import 'package:quizer/features/presentation/pages/create%20question%20page/create_question_screen.dart';
 import 'package:quizer/features/presentation/pages/edit%20profile%20page/edite_profile_screen.dart';
 import 'package:quizer/features/presentation/pages/quiz%20setting%20page/quiz_setting_screen.dart';
 import 'package:quizer/features/presentation/pages/setting%20page/setting_screen.dart';
 import 'package:quizer/features/presentation/pages/start%20quiz%20page/start_quiz_screen.dart';
 
+import '../../features/presentation/pages/leadboard page/leadboard_page.dart';
 import '../../features/presentation/cubit/home_categories_cubit.dart';
 import '../../features/presentation/cubit/home_quizzes_cubit.dart';
 import 'screen_export.dart';
@@ -123,7 +126,7 @@ class RouteGenerator {
       case Routes.profileScreenRoute:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<ProfileCubit>(
-            create: (context) =>  sl<ProfileCubit>(),
+            create: (context) => sl<ProfileCubit>(),
             child: const ProfileScreen(),
           ),
         );
@@ -142,6 +145,10 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => QuizSettingScreen(),
         );
+      case Routes.LeaderBoardScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => LeaderBoardScreen(),
+        );
 
       case Routes.createQuestionScreenRoute:
         return MaterialPageRoute(
@@ -154,8 +161,16 @@ class RouteGenerator {
         );
       case Routes.editProfileScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => EditProfileScreen(),
+          builder: (context) => BlocProvider<ProfileCubit>(
+            create: (context) => sl<ProfileCubit>(),
+            child: const EditProfileScreen(),
+          ),
         );
+      case Routes.categoryScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => const CategoryScreen(),
+        );
+
 
       default:
         return unDefinedRoute();

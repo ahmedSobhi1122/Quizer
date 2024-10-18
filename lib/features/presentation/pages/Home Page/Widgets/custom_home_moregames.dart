@@ -3,11 +3,9 @@ import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/constants/constants.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/features/domain/entities/quiz.dart';
-import 'package:quizer/features/presentation/state/home_profile_state.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../config/routes/screen_export.dart';
-import '../../../../../core/resources/app_colors.dart';
 import '../../../../../core/resources/app_values.dart';
 import '../../../../../core/resources/text_styles.dart';
 

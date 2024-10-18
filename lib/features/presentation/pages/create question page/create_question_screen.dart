@@ -1,10 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/helper/extensions.dart';
-import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/image_upload.dart';
 
@@ -26,6 +27,10 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
   Map<int, List<String>> _questionMap = {};
   int? _selectedAnswerIndex;
   int _questionIndex = 0;
+
+
+  File? _image;
+  final ImagePicker _picker = ImagePicker();
 
   void _addAnswer() {
     if (_answers.length < _maxAnswers &&
@@ -145,7 +150,17 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                   height: 100.h,
                   child: ImageUploadField(
                     hint: "Question image!",
-                    fitter: BoxFit.cover,
+                    fitter: BoxFit.cover,  onImageSelected: () async {
+                    final pickedFile = await _picker.pickImage(
+                        source: ImageSource.gallery);
+
+                    if (pickedFile != null) {
+                      setState(() {
+                        _image = File(pickedFile.path);
+                      });
+                    }
+                  },
+                    image: _image,
                   ),
                 ),
                 SizedBox(

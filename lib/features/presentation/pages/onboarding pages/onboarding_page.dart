@@ -7,7 +7,6 @@ import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
 
 import '../../../../config/themes/theme.dart';
-import '../../../../core/resources/app_colors.dart';
 import '../../../../core/resources/app_values.dart';
 
 class OnboardingContent {

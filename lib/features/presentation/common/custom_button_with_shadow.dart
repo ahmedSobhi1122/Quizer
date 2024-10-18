@@ -5,14 +5,14 @@ import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton(
-      {super.key,
-      required this.text,
-      required this.onPressed,
-      required this.color,
-      required this.colorText,
-      this.borderColor = AppColors.purpleColor,
-      });
+  CustomButton({
+    super.key,
+    required this.text,
+    required this.onPressed,
+    required this.color,
+    required this.colorText,
+    this.borderColor = AppColors.purpleColor,
+  });
 
   final String text;
   final VoidCallback onPressed;
@@ -37,12 +37,13 @@ class CustomButton extends StatelessWidget {
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppBorderRadius.br24.r),
-              side:  BorderSide(color: borderColor),
+              side: BorderSide(color: borderColor),
             ),
           ),
           child: Text(
             text,
-            style: AppTextStyles.customButtonTextStyle(context, color: colorText),
+            style:
+                AppTextStyles.customButtonTextStyle(context, color: colorText),
           ),
         ),
       ),

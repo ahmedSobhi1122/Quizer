@@ -1,11 +1,11 @@
 import 'package:quizer/features/data_sources/API/remote_data_source.dart';
 import 'package:quizer/features/data_sources/models/home_categories_model.dart';
 import 'package:quizer/features/data_sources/models/home_quizzes_model.dart';
+import 'package:quizer/features/data_sources/models/user_profile_model.dart';
 import 'package:quizer/features/domain/entities/category.dart';
 import 'package:quizer/features/domain/entities/quiz.dart';
 import 'package:quizer/features/domain/entities/user.dart';
 import 'package:quizer/features/domain/repository/account_repository.dart';
-
 
 class AccountRepositoryImpl implements AccountRepository {
   final RemoteDataSource remoteDataSource;
@@ -28,7 +28,7 @@ class AccountRepositoryImpl implements AccountRepository {
   @override
   Future<List<Quiz>> getHomeQuizzes(String token) async {
     final List<HomeQuizzesModel> quizModels =
-    await remoteDataSource.homeQuizzes(token);
+        await remoteDataSource.homeQuizzes(token);
     List<Quiz> quizzes = [];
     for (var quizModel in quizModels) {
       quizzes.add(Quiz(
@@ -70,24 +70,33 @@ class AccountRepositoryImpl implements AccountRepository {
   }
 
   @override
-  Future<void> updateProfile(User user) async {
-    await remoteDataSource.updateProfile(user);
-  }
-
-  @override
   Future<List<Category>> getHomeCategories(String token) async {
-
-    final List<HomeCategoriesModel> categoryModels = await remoteDataSource.homeCategories(token);
+    final List<HomeCategoriesModel> categoryModels =
+        await remoteDataSource.homeCategories(token);
 
     List<Category> categories = [];
     for (var categoryModel in categoryModels) {
-      categories.add(
-          new Category
-          (
-          id: categoryModel.id,
-          name: categoryModel.name,
-          image: categoryModel.image,));
+      categories.add(new Category(
+        id: categoryModel.id,
+        name: categoryModel.name,
+        image: categoryModel.image,
+      ));
     }
     return categories;
+  }
+
+  @override
+  Future<void> updateProfile(User user) async {
+    await remoteDataSource.updateProfile(
+      ProfileModel(
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        description: user.description,
+        profileImageFile: user.profileImageFile,
+        coverImageFile: user.coverImageFile,
+        token: user.token,
+      ),
+    );
   }
 }

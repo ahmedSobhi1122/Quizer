@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:quizer/features/domain/entities/user.dart';
 
@@ -11,6 +13,20 @@ class ProfileInitial extends ProfileState {}
 class ProfileLoading extends ProfileState {}
 
 class ProfileUpdateSuccess extends ProfileState {}
+
+class ProfileCoverSelected extends ProfileState {
+  File? image;
+  ProfileCoverSelected(this.image);
+  @override
+  List<Object?> get props => [image];
+}
+
+class ProfileAvatarSelected extends ProfileState {
+  File? image;
+  ProfileAvatarSelected(this.image);
+  @override
+  List<Object?> get props => [image];
+}
 
 class ProfileSuccess extends ProfileState {
   final User user;

@@ -1,3 +1,4 @@
+
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -8,8 +9,6 @@ import 'package:quizer/features/data_sources/models/user_login_model.dart';
 import 'package:quizer/features/data_sources/models/user_otp_profile_model.dart';
 import 'package:quizer/features/data_sources/models/user_profile_model.dart';
 import 'package:quizer/features/data_sources/models/user_register_model.dart';
-
-import '../../domain/entities/user.dart' as entity;
 
 import '../models/home_categories_model.dart';
 import '../models/home_quizzes_model.dart';
@@ -48,7 +47,6 @@ class RemoteDataSource {
 
   ///login by email and password
   Future<UserLoginModel> loginUser(UserLoginModel user) async {
-    // var headers = { 'Authorization' : 'Bearer ${Constants.token}'; };
     try {
       final response = await dio.request(
         '${Constants.baseUrl}auth/emailPassword/login',
@@ -298,7 +296,8 @@ class RemoteDataSource {
       if (response.statusCode == 200) {
         print(responseMessage);
         print(responseData);
-        quizzes = responseData!.map((quiz) => HomeQuizzesModel.fromJson(quiz))
+        quizzes = responseData!
+            .map((quiz) => HomeQuizzesModel.fromJson(quiz))
             .toList();
         return quizzes;
       } else {
@@ -402,30 +401,64 @@ class RemoteDataSource {
   }
 
   ///edit profile
-  Future<void> updateProfile(entity.User user) async {
-    try {
-      final response = await dio.request(
-        '${Constants.baseUrl}account/updateProfile',
-        options: Options(
-          headers: {'Authorization': 'Bearer ${user.token}'},
-          method: 'POST',
-        ),
-        data: FormData.fromMap({
-          'userID': user.id,
-          'firstName': user.firstName,
-          'lastName': user.lastName,
-          'description': user.description,
-          'profileImage': user.profileImage,
-          'coverImage': user.coverImage,
-        }),
-      );
-      if (response.statusCode == 200) {
-        // successful
-      } else {
-        throw Exception(response.data["message"]);
+  Future<void> updateProfile(ProfileModel user) async {
+    // print(user.id);
+    // print(user.token);
+    // print(user.coverImageFile!.path.split('/').last);
+    // print(user.profileImageFile!.path.split('/').last);
+    // print(user.firstName);
+    // print(user.lastName);
+    // print(user.description);
+    var userData = await user.toJsonUpdate();
+      try {
+        final response = await dio.request(
+          '${Constants.baseUrl}account/updateProfile',
+          options: Options(
+            headers: {
+              'Authorization': 'Bearer ${user.token}',
+              "Content-Type": "multipart/form-data",
+            },
+            method: 'PUT',
+          ),
+          data: userData,
+        );
+        if (response.statusCode == 200) {
+          // successful
+        } else {
+          throw Exception(response.data["message"]);
+        }
+      } catch (error) {
+        throw Exception('Error during get profile: $error');
       }
-    } catch (error) {
-      throw Exception('Error during get profile: $error');
     }
-  }
+  //   var headers = {'Authorization': '••••••'};
+  //   var data = FormData.fromMap({
+  //     'files': [
+  //       await MultipartFile.fromFile(user.profileImage!,
+  //           filename: user.profileImage),
+  //       await MultipartFile.fromFile(user.coverImage!,
+  //           filename: user.coverImage)
+  //     ],
+  //     'userID': '55268294-54c4-424f-8547-c83b1672053b',
+  //     'firstName': 'ZeiadUpdated',
+  //     'lastName': 'TahaUpdated',
+  //     'description': 'DescriptionUpdated'
+  //   });
+  //
+  //   var dio = Dio();
+  //   var response = await dio.request(
+  //     'http://localhost:5226/api/account/updateProfile',
+  //     options: Options(
+  //       method: 'PUT',
+  //       headers: headers,
+  //     ),
+  //     data: data,
+  //   );
+  //
+  //   if (response.statusCode == 200) {
+  //     print(json.encode(response.data));
+  //   } else {
+  //     print(response.statusMessage);
+  //   }
+  // }
 }

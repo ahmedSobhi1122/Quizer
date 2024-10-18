@@ -92,7 +92,6 @@ class _MyAppState extends State<MyApp> {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) => MaterialApp(
-
         debugShowCheckedModeBanner: false,
         title: 'Quizer',
         theme: AppTheme.lightTheme(context),

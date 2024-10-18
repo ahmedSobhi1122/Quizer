@@ -33,11 +33,10 @@ class RouteGenerator {
         );
 ////////////////////////////////////////////////////////////////////////////////
 
-    ///register
+      ///register
       case Routes.selectionScreenRoute:
         return MaterialPageRoute(
-          builder: (context) =>
-          BlocProvider<RegisterCubit>.value(
+          builder: (context) => BlocProvider<RegisterCubit>.value(
             value: sl<RegisterCubit>(),
             child: const SelectionScreen(),
           ),
@@ -45,38 +44,34 @@ class RouteGenerator {
 
       case Routes.dataInfoScreenRoute:
         return MaterialPageRoute(
-          builder: (context) =>
-              BlocProvider.value(
-                value: sl<RegisterCubit>(),
-                child: const DataInfoScreen(),
-              ),
+          builder: (context) => BlocProvider.value(
+            value: sl<RegisterCubit>(),
+            child: const DataInfoScreen(),
+          ),
         );
 
       case Routes.signUpScreenRoute:
         return MaterialPageRoute(
-          builder: (context) =>
-              BlocProvider<RegisterCubit>(
-                create: (context) => sl<RegisterCubit>(),
-                child: const SignUpScreen(),
-              ),
+          builder: (context) => BlocProvider<RegisterCubit>(
+            create: (context) => sl<RegisterCubit>(),
+            child: const SignUpScreen(),
+          ),
         );
 ////////////////////////////////////////////////////////////////////////////////
 
-    ///login
+      ///login
       case Routes.logInScreenRoute:
         return MaterialPageRoute(
-          builder: (context) =>
-              BlocProvider(
-                  create: (context) => sl<LoginCubit>(),
-                  child: const LoginScreen()),
+          builder: (context) => BlocProvider(
+              create: (context) => sl<LoginCubit>(),
+              child: const LoginScreen()),
         );
 ////////////////////////////////////////////////////////////////////////////////
 
-    ///reset password
+      ///reset password
       case Routes.forgetPasswordScreenRoute:
         return MaterialPageRoute(
-          builder: (context) =>
-          BlocProvider<ForgetPasswordCubit>.value(
+          builder: (context) => BlocProvider<ForgetPasswordCubit>.value(
             // create: (context) => sl<ForgetPasswordCubit>(),
             value: sl<ForgetPasswordCubit>(),
             child: const ForgetPasswordScreen(),
@@ -85,8 +80,7 @@ class RouteGenerator {
 
       case Routes.otpScreenRoute:
         return MaterialPageRoute(
-          builder: (context) =>
-          BlocProvider<ForgetPasswordCubit>.value(
+          builder: (context) => BlocProvider<ForgetPasswordCubit>.value(
             value: sl<ForgetPasswordCubit>(),
             child: const OtpScreen(),
           ),
@@ -94,8 +88,7 @@ class RouteGenerator {
 
       case Routes.otpCheckScreenRoute:
         return MaterialPageRoute(
-          builder: (context) =>
-          BlocProvider<ForgetPasswordCubit>.value(
+          builder: (context) => BlocProvider<ForgetPasswordCubit>.value(
             value: sl<ForgetPasswordCubit>(),
             child: const OtpCheckScreen(),
           ),
@@ -103,53 +96,49 @@ class RouteGenerator {
 
       case Routes.newPasswordScreenRoute:
         return MaterialPageRoute(
-          builder: (context) =>
-          BlocProvider<ForgetPasswordCubit>.value(
+          builder: (context) => BlocProvider<ForgetPasswordCubit>.value(
             value: sl<ForgetPasswordCubit>(),
             child: const NewPasswordScreen(),
           ),
         );
 ////////////////////////////////////////////////////////////////////////////////
 
-    /// Home
+      /// Home
       case Routes.homeScreenRoute:
         return MaterialPageRoute(
-          builder: (context) =>
-              MultiBlocProvider(
-                providers: [
-                  BlocProvider<HomeProfileCubit>(
-                    create: (context) => sl<HomeProfileCubit>(),
-                  ),
-                  BlocProvider<HomeQuizzesCubit>(
-                    create: (context) => sl<HomeQuizzesCubit>(),
-                  ),
-                  BlocProvider<HomeCategoriesCubit>(
-                    create: (context) => sl<HomeCategoriesCubit>(),
-                  ),
-                ],
-                child: const HomePage(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider<HomeProfileCubit>(
+                create: (context) => sl<HomeProfileCubit>(),
               ),
+              BlocProvider<HomeQuizzesCubit>(
+                create: (context) => sl<HomeQuizzesCubit>(),
+              ),
+              BlocProvider<HomeCategoriesCubit>(
+                create: (context) => sl<HomeCategoriesCubit>(),
+              ),
+            ],
+            child: const HomePage(),
+          ),
         );
 
 ////////////////////////////////////////////////////////////////////////////////
-    ///profile
+      ///profile
       case Routes.profileScreenRoute:
         return MaterialPageRoute(
-          builder: (context) =>
-              BlocProvider<ProfileCubit>(
-                create: (context) => sl<ProfileCubit>(),
-                child: const ProfileScreen(),
-              ),
+          builder: (context) => BlocProvider<ProfileCubit>(
+            create: (context) => sl<ProfileCubit>(),
+            child: const ProfileScreen(),
+          ),
         );
 ////////////////////////////////////////////////////////////////////////////////
-    ///Start Quiz
+      ///Start Quiz
       case Routes.startQuizScreenRoute:
         return MaterialPageRoute(
-          builder: (context) =>
-              BlocProvider<StartQuizCubit>(
-                create: (context) => sl<StartQuizCubit>(),
-                child: const StartQuizScreen(),
-              ),
+          builder: (context) => BlocProvider<StartQuizCubit>(
+            create: (context) => sl<StartQuizCubit>(),
+            child: const StartQuizScreen(),
+          ),
         );
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -159,14 +148,13 @@ class RouteGenerator {
         );
 
 ////////////////////////////////////////////////////////////////////////////////
-    ///leaderBoard
+      ///leaderBoard
       case Routes.leaderBoardScreenRoute:
         return MaterialPageRoute(
-          builder: (context) =>
-              BlocProvider(
-                create: (context) => sl<LeaderboardCubit>(),
-                child: LeaderBoardScreen(),
-              ),
+          builder: (context) => BlocProvider<LeaderboardCubit>(
+            create: (context) => sl<LeaderboardCubit>(),
+            child: const LeaderBoardScreen(),
+          ),
         );
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -175,23 +163,24 @@ class RouteGenerator {
           builder: (context) => CreateQuestionScreen(),
         );
 
+////////////////////////////////////////////////////////////////////////////////
+      ///setting
       case Routes.settingScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
+          builder: (context) => BlocProvider<SettingCubit>(
             create: (context) => sl<SettingCubit>(),
-              child: const SettingScreen()
+            child: const SettingScreen(),
           ),
         );
 
 ////////////////////////////////////////////////////////////////////////////////
-    ///edit profile
+      ///edit profile
       case Routes.editProfileScreenRoute:
         return MaterialPageRoute(
-          builder: (context) =>
-              BlocProvider<ProfileCubit>(
-                create: (context) => sl<ProfileCubit>(),
-                child: const EditProfileScreen(),
-              ),
+          builder: (context) => BlocProvider<ProfileCubit>(
+            create: (context) => sl<ProfileCubit>(),
+            child: const EditProfileScreen(),
+          ),
         );
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -200,7 +189,6 @@ class RouteGenerator {
           builder: (context) => const CategoryScreen(),
         );
 
-
       default:
         return unDefinedRoute();
     }
@@ -208,13 +196,12 @@ class RouteGenerator {
 
   static Route<dynamic> unDefinedRoute() {
     return MaterialPageRoute(
-      builder: (_) =>
-          Scaffold(
-            appBar: AppBar(
-              title: const Text("No Route Found"),
-            ),
-            body: const Center(child: Text("No Route Found")),
-          ),
+      builder: (_) => Scaffold(
+        appBar: AppBar(
+          title: const Text("No Route Found"),
+        ),
+        body: const Center(child: Text("No Route Found")),
+      ),
     );
   }
 }

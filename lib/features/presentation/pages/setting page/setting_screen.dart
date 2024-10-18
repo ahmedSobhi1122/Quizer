@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quizer/config/routes/screen_export.dart';
+import 'package:quizer/config/routes/route_constants.dart';
+import 'package:quizer/core/dependency_injection.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/constants/enum.dart';
@@ -9,7 +12,6 @@ import 'package:themed/themed.dart';
 import 'package:quizer/features/data_sources/local/app_prefs.dart';
 
 import '../../../../config/themes/theme.dart';
-import '../../../domain/usecases/delete_account_usecase.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -37,45 +39,59 @@ class _SettingScreenState extends State<SettingScreen> {
     });
   }
 
-  void _deleteDialog() {
+  void _deleteDialog(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: const Center(
-                child: Text(
-                  'Delete Account',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+      context: context,
+      builder: (_) => BlocProvider<SettingCubit>.value(
+        value: BlocProvider.of<SettingCubit>(context),
+        child: AlertDialog(
+          title: const Center(
+            child: Text(
+              'Delete Account',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          content: const Text(
+              'Are you sure you want to delete your account? This action is irreversible, and all your data will be permanently removed.'),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.green),
+                  ),
                 ),
-              ),
-              content: const Text(
-                  'Are you sure you want to delete your account? This action is irreversible, and all your data will be permanently removed.'),
-              actions: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    TextButton(
-                      onPressed: () => context.pop(),
-                      child: const Text(
-                        'Cancel',
-                        style: TextStyle(color: Colors.green),
-                      ),
+                BlocListener<SettingCubit, SettingState>(
+                  listener: (context, state) {
+                    if (state is SettingSuccess) {
+                      Navigator.of(context)
+                          .pushReplacementNamed(Routes.logInScreenRoute);
+                    }
+                  },
+                  child: TextButton(
+                    onPressed: () async {
+                      String? id = "deb99e7a-e6fd-4866-b936-a95ab34f4570";
+                      String? token =
+                          "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiQWhtZWQiLCJmYW1pbHlfbmFtZSI6IlNvYmhpIiwiZW1haWwiOiJAZ21haWwuY29tIiwibmJmIjoxNzI5Mjc0MDM5LCJleHAiOjE3MzE5NTYwMzksImlhdCI6MTcyOTI3NDAzOSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2In0.c0W8ChCwZusMl3pNidz79ajGigpiTdJP0-Bg1_8ImQgdW66S4tGxnfm0GtMO6QiDbC4lakwEMQgMI6_fBrriMA";
+                      await context
+                          .read<SettingCubit>()
+                          .deleteAccount(id, token);
+                    },
+                    child: const Text(
+                      'Delete',
+                      style: TextStyle(color: Colors.red),
                     ),
-                    TextButton(
-                      onPressed: () async {
-                        String? id = "deb99e7a-e6fd-4866-b936-a95ab34f4570";
-                        String? token =
-                            "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiQWhtZWQiLCJmYW1pbHlfbmFtZSI6IlNvYmhpIiwiZW1haWwiOiJAZ21haWwuY29tIiwibmJmIjoxNzI5Mjc0MDM5LCJleHAiOjE3MzE5NTYwMzksImlhdCI6MTcyOTI3NDAzOSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2In0.c0W8ChCwZusMl3pNidz79ajGigpiTdJP0-Bg1_8ImQgdW66S4tGxnfm0GtMO6QiDbC4lakwEMQgMI6_fBrriMA";
-                        await context.read<DeleteAccountUsecase>().call(id, token);
-                      },
-                      child: const Text(
-                        'Delete',
-                        style: TextStyle(color: Colors.red),
-                      ),
-                    ),
-                  ],
-                )
+                  ),
+                ),
               ],
-            ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void _languageDialog() {
@@ -310,11 +326,11 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
               SizedBox(height: 10.h),
               BlocListener<SettingCubit, SettingState>(
-                listener: (BuildContext context, SettingState state) {
+                listener: (context, state) {
+                  print(state);
                   if (state is SettingSuccess) {
                     context.pushReplacementNamed(Routes.logInScreenRoute);
                   }
-                  print(state);
                 },
                 child: ListTile(
                   title: const Text(
@@ -325,7 +341,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   trailing: const Icon(Icons.arrow_forward_ios,
                       color: MyTheme.textColor),
                   onTap: () {
-                    _deleteDialog();
+                    _deleteDialog(context);
                     print("Delete Account");
                   },
                 ),

@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/route_constants.dart';
+import 'package:quizer/config/themes/app_theme.dart';
 import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/dependency_injection.dart';
 import 'package:themed/themed.dart';
 import 'config/routes/router.dart' as router;
-import 'config/themes/app_theme.dart';
-import 'config/themes/theme.dart';
 import 'core/resources/language_manager.dart';
 import 'features/data_sources/local/app_prefs.dart';
 

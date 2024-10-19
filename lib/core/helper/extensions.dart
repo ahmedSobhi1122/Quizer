@@ -39,6 +39,7 @@ extension SnakBar on BuildContext {
   }) =>
       ScaffoldMessenger.of(this).showSnackBar(
         SnackBar(
+          behavior: SnackBarBehavior.floating,
           content: Text(
             message,
             style: TextStyle(color: textColor ?? AppColors.whiteColor),

@@ -27,13 +27,6 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
 
 
 
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollController.jumpTo(50.0 * 506);
-    });
-  }
 
 
   File? _image;
@@ -173,13 +166,13 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
                     padding: EdgeInsets.symmetric(horizontal: AppPadding.p5,vertical: AppPadding.p5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.r),
-                      color: Colors.black12,
+                      color: MyTheme.textColor.withOpacity(.3),
 
                     ),
                     child: ListView.builder(
                       controller: _scrollController,
                       scrollDirection: Axis.horizontal,
-                      itemCount: _times.length * 1000,
+                      itemCount: _times.length,
                       itemBuilder: (context, index) =>timeItem(index % _times.length),
                     ),
                   ),

@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                     listener: (context, state) {
                       if (state is LoginSuccess) {
                         context.message(message: "success");
-                        context.pushReplacementNamed(Routes.homeScreenRoute);
+                        context.pushReplacementNamed(Routes.MainScreenRoute);
                       } else if (state is LoginFailure) {
                         context.message(message: "error${state.error}");
                       }

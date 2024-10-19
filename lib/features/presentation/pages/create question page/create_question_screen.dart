@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:quizer/config/themes/theme.dart';
@@ -23,6 +22,7 @@ class CreateQuestionScreen extends StatefulWidget {
 }
 
 class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
+
   final TextEditingController _questionController = TextEditingController();
   final TextEditingController _answerController = TextEditingController();
   final List<String> _answers = [];
@@ -187,7 +187,7 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                   QuestionButtons(
                     onAddMore: _addMore,
                     onFinish: () {
-                      // Your finish logic here
+
                     },
                   ),
                 ],

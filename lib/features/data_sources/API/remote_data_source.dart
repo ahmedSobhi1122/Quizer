@@ -283,7 +283,7 @@ class RemoteDataSource {
 
     try {
       final response = await dio.request(
-        '${Constants.baseUrl}quiz',
+        '${Constants.baseUrl}quiz/getAll',
         options: Options(
           method: 'GET',
           headers: {'Authorization': 'Bearer $token'},

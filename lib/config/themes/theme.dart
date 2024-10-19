@@ -14,8 +14,8 @@ class MyTheme{
   static const appbarBottom = ColorRef(Color(0xff9b86fa));
   static const appbarShadow = ColorRef(Color(0xffa391fb));
   static  ColorRef contentCardBG = ColorRef(const Color(0xffFFFFFF).withOpacity(0.60));
-  static const categoriesBG = ColorRef(Color(0xffa391fb));
-  static const quizzesBG = ColorRef(Color(0xffa391fb));
+  static const navigationBarForeground = ColorRef(Color(0xFFB7A9FD),id: "navigationBarBackground");
+  static const navigationBarBackground = ColorRef(Color(0xFFECEBF2),id: "navigationBarForeground");
 
   static const textColor = ColorRef(Colors.black,id: 'textColor');
 
@@ -64,6 +64,9 @@ Map<ThemeRef,Object> DarkTheme = {
   MyTheme.textColor: Colors.white,
   MyTheme.reverseColor : Colors.black,
 
+  MyTheme.navigationBarBackground:  const Color(0xFF141028),
+  MyTheme.navigationBarForeground:  const Color(0xff2b1c77),
+
   MyTheme.secondaryButtonColor : const Color(0xFF181636),
 
 };
@@ -80,8 +83,6 @@ Map<ThemeRef, Object> BlueTheme = {
   MyTheme.appbarShadow: const Color(0xFF1E88E5),
 
   MyTheme.contentCardBG: const Color(0xFFE1F5FE).withOpacity(0.60),
-  MyTheme.categoriesBG: const Color(0xFF29B6F6),
-  MyTheme.quizzesBG: const Color(0xFF03A9F4),
 
   MyTheme.textColor: Colors.blueGrey,
   MyTheme.reverseColor: Colors.white,

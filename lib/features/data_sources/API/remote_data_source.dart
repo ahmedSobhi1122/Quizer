@@ -484,4 +484,26 @@ class RemoteDataSource {
       throw Exception('remote_data_source -- Error DELETE ACCOUNT: $error');
     }
   }
+
+  ///create quiz
+  Future<void> createQuizInfo(QuizModel quiz, String token) async {
+    var data = await quiz.toJson();
+    try {
+      final response = await dio.request(
+        '${Constants.baseUrl}quiz/create',
+        options: Options(
+          headers: {'Authorization': 'Bearer $token'},
+          method: 'POST',
+        ),
+        data: data,
+      );
+      if (response.statusCode == 200) {
+        print('Quiz created successfully');
+      } else {
+        throw Exception('Error creating quiz');
+      }
+    } catch (error) {
+      throw Exception('remote_data_source -- Error CREATE QUIZ: $error');
+    }
+  }
 }

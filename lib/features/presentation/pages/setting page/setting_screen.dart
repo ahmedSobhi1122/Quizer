@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/route_constants.dart';
 import 'package:quizer/core/dependency_injection.dart';
+import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/constants/enum.dart';
@@ -22,8 +23,13 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   String language = 'English';
-  String theme = sl<AppPrefs>().getString("theme").toString().toLowerCase();
-  String notification = 'On';
+  String theme = (sl<AppPrefs>().getString(KeyPrefs.THEME.name) ?? "light")
+      .toString()
+      .toLowerCase();
+  String notification =
+      sl<AppPrefs>().getBool(KeyPrefs.IS_NOTIFICATON.name) == true
+          ? "On"
+          : "Off";
 
   @override
   void initState() {
@@ -33,9 +39,12 @@ class _SettingScreenState extends State<SettingScreen> {
 
   Future<void> _loadPreferences() async {
     setState(() {
-      theme = sl<AppPrefs>().getString('theme') ?? 'light';
+      theme = sl<AppPrefs>().getString(KeyPrefs.THEME.name) ?? 'light';
       language = sl<AppPrefs>().getString('language') ?? 'English';
-      notification = sl<AppPrefs>().getString('notification') ?? 'On';
+      notification =
+          (sl<AppPrefs>().getBool(KeyPrefs.IS_NOTIFICATON.name) ?? true)
+              ? 'ON'
+              : 'OFF';
     });
   }
 
@@ -73,12 +82,11 @@ class _SettingScreenState extends State<SettingScreen> {
                   },
                   child: TextButton(
                     onPressed: () async {
-                      String? id = "508a676b-eaca-43de-a6d2-8d810f101a33";
-                      String? token =
-                          "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiemVpYWQiLCJmYW1pbHlfbmFtZSI6Im1vaGFtbWVkIiwiZW1haWwiOiJ6YXphb3NrYXI5MjhAZ21haWwuY29tIiwibmJmIjoxNzI5MzA1MTEwLCJleHAiOjE3MzE5ODcxMTAsImlhdCI6MTcyOTMwNTExMCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2In0.8yXZSufGpX0Dx9KD0jjEaMe3n4eYshpH5pSBnO9g-ET36DOLBTy0ftbxn6fnGpstC83CIvspHdMNv-wpH9JirA";
+                      String? id = DataIntent.getUserID();
+                      String? token = DataIntent.getToken();
                       await context
                           .read<SettingCubit>()
-                          .deleteAccount(id, token);
+                          .deleteAccount(id!, token!);
                     },
                     child: const Text(
                       'Delete',
@@ -140,12 +148,14 @@ class _SettingScreenState extends State<SettingScreen> {
               ListTile(
                 title: Text(Themes.LIGHT.name.toLowerCase()),
                 onTap: () {
+                  sl<AppPrefs>().setString(KeyPrefs.THEME.name,Themes.LIGHT.name);
                   _chooseTheme(Themes.LIGHT.name);
                 },
               ),
               ListTile(
                 title: Text(Themes.DARK.name.toLowerCase()),
                 onTap: () {
+                  sl<AppPrefs>().setString(KeyPrefs.THEME.name,Themes.DARK.name);
                   _chooseTheme(Themes.DARK.name);
                 },
               ),
@@ -225,7 +235,13 @@ class _SettingScreenState extends State<SettingScreen> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () {
+                        sl<AppPrefs>()
+                            .setBool(KeyPrefs.IS_LOGGEDIN.name, false);
+                        sl<AppPrefs>().removeKey(KeyPrefs.TOKEN.name);
+                        sl<AppPrefs>().removeKey(KeyPrefs.ID.name);
+                        context.pushReplacementNamed(Routes.logInScreenRoute);
+                      },
                       child: const Text(
                         'Logout',
                         style: TextStyle(color: Colors.red),
@@ -253,7 +269,7 @@ class _SettingScreenState extends State<SettingScreen> {
     }
     setState(() {
       this.theme = theme;
-        context.pushReplacementNamed(Routes.MainScreenRoute);
+      context.pushReplacementNamed(Routes.MainScreenRoute);
     });
   }
 
@@ -269,7 +285,7 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   void _chooseNotification(String notification) {
-    sl<AppPrefs>().setString("notification", notification);
+    sl<AppPrefs>().setBool(KeyPrefs.IS_NOTIFICATON.name, notification == "ON");
     Navigator.of(context).pop();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('You selected $notification')),

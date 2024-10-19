@@ -16,7 +16,10 @@ import 'package:quizer/features/presentation/pages/data%20info%20page/widgets/da
 import 'package:quizer/features/presentation/state/login_state.dart';
 
 import '../../../../config/themes/theme.dart';
+import '../../../../core/constants/enum.dart';
+import '../../../../core/dependency_injection.dart';
 import '../../../../core/helper/validation.dart';
+import '../../../data_sources/local/app_prefs.dart';
 import '../signup page/widgets/social.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -67,6 +70,9 @@ class LoginScreen extends StatelessWidget {
                     listener: (context, state) {
                       if (state is LoginSuccess) {
                         context.message(message: "success");
+                        sl<AppPrefs>().setBool(KeyPrefs.IS_LOGGEDIN.name, true);
+                        sl<AppPrefs>().setString(KeyPrefs.TOKEN.name, DataIntent.getToken()!);
+                        sl<AppPrefs>().setString(KeyPrefs.ID.name, DataIntent.getUserID()!);
                         context.pushReplacementNamed(Routes.MainScreenRoute);
                       } else if (state is LoginFailure) {
                         context.message(message: "error${state.error}");

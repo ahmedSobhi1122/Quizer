@@ -1,12 +1,13 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-import 'package:quizer/config/themes/theme.dart';
+import 'package:quizer/core/constants/enum.dart';
+import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/config/routes/screen_export.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
+import 'package:quizer/features/data_sources/local/app_prefs.dart';
 import 'package:quizer/features/presentation/common/background.dart';
-import 'package:quizer/features/presentation/common/loading.dart';
 import 'package:quizer/features/presentation/pages/splash%20page/widgets/logo.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -20,8 +21,18 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3),
-        () => context.pushReplacementNamed(Routes.onboardingScreenRoute));
+    Future.delayed(const Duration(seconds: 3), () {
+      if (sl<AppPrefs>().getBool(KeyPrefs.OLD_USER.name) == null) {
+        sl<AppPrefs>().setBool(KeyPrefs.OLD_USER.name, true);
+        context.pushReplacementNamed(Routes.onboardingScreenRoute);
+      } else if (sl<AppPrefs>().getBool(KeyPrefs.IS_LOGGEDIN.name) == true) {
+        DataIntent.pushUserID(sl<AppPrefs>().getString(KeyPrefs.ID.name)!);
+        DataIntent.pushToken(sl<AppPrefs>().getString(KeyPrefs.TOKEN.name)!);
+        context.pushReplacementNamed(Routes.MainScreenRoute);
+      } else {
+        context.pushReplacementNamed(Routes.logInScreenRoute);
+      }
+    });
   }
 
   @override

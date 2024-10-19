@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quizer/config/themes/theme.dart';
+import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/domain/entities/user.dart';
 import 'package:quizer/features/presentation/cubit/leaderboard_cubit.dart';
@@ -19,21 +20,21 @@ class LeaderBoardScreen extends StatefulWidget {
 class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
   List<User> users = [
     User(
-      id: "43d48674-ebfb-4596-b9e9-7a02b291fb8f",
+      id: DataIntent.getUserID(),
       firstName: "Ahmed",
       lastName: "Sobhi",
       profileImage: "/images/unknown/default.jpeg",
       points: 0,
     ),
     User(
-      id: "43d48674-ebfb-4596-b9e9-7a02b291fb8f",
+      id: DataIntent.getUserID(),
       firstName: "Ahmed",
       lastName: "Sobhi",
       profileImage: "/images/unknown/default.jpeg",
       points: 0,
     ),
     User(
-      id: "43d48674-ebfb-4596-b9e9-7a02b291fb8f",
+      id: DataIntent.getUserID(),
       firstName: "Ahmed",
       lastName: "Sobhi",
       profileImage: "/images/unknown/default.jpeg",
@@ -44,8 +45,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
 
   @override
   void initState() {
-    context.read<LeaderboardCubit>().getLeaderboard(
-        "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiemVpYWQiLCJmYW1pbHlfbmFtZSI6Im1vaGFtbWVkIiwiZW1haWwiOiJ6YXphb3NrYXI5MjhAZ21haWwuY29tIiwibmJmIjoxNzI5MzA1MTEwLCJleHAiOjE3MzE5ODcxMTAsImlhdCI6MTcyOTMwNTExMCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2In0.8yXZSufGpX0Dx9KD0jjEaMe3n4eYshpH5pSBnO9g-ET36DOLBTy0ftbxn6fnGpstC83CIvspHdMNv-wpH9JirA");
+    context.read<LeaderboardCubit>().getLeaderboard(DataIntent.getToken()!);
     super.initState();
   }
 
@@ -53,13 +53,12 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(
-          color: MyTheme.textColor,
-        ),
+        leading: SizedBox.shrink(),
         title: Text(
           "Leaderboard",
           style: AppTextStyles.leaderboardTitleTextStyle(context),
         ),
+        centerTitle: true,
         backgroundColor: MyTheme.backgroundColor,
       ),
       backgroundColor: MyTheme.backgroundColor,

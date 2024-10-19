@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
+import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/pages/category%20search%20page/category_search_screen.dart';
 
 import '../../../../config/themes/theme.dart';
@@ -55,12 +56,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyTheme.backgroundColor,
-        leading: const Icon(Icons.arrow_back,
-            color: MyTheme.textColor),
-        title: const Text(
+        leading: const SizedBox.shrink(),
+        title: Text(
           "Categories",
-          style: TextStyle(fontWeight: FontWeight.bold,color: MyTheme.textColor),
+          style: AppTextStyles.leaderboardTitleTextStyle(context),
         ),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {

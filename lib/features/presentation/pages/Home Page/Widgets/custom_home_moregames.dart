@@ -62,7 +62,7 @@ class CustomQuiz extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(quiz == null ? ImageAssets.cringe : Constants.url + quiz!.image!),
+                        image: NetworkImage(quiz == null ? ImageAssets.avatar : Constants.url + quiz!.image!),
                         fit: BoxFit.cover),
                   ),
                 )),

@@ -78,10 +78,10 @@ Future<void> init() async {
   sl.registerFactory<LoginCubit>(() => LoginCubit(sl(),sl(),sl(),sl()));
   sl.registerFactory<ProfileCubit>(() => ProfileCubit(sl(),sl()));
   sl.registerFactory<LeaderboardCubit>(() => LeaderboardCubit(sl()));
-  sl.registerLazySingleton<HomeProfileCubit>(() => HomeProfileCubit(sl()));
+  sl.registerFactory<HomeProfileCubit>(() => HomeProfileCubit(sl()));
   sl.registerLazySingleton<StartQuizCubit>(() => StartQuizCubit(sl()));
-  sl.registerLazySingleton<HomeCategoriesCubit>(() => HomeCategoriesCubit(sl()));
-  sl.registerLazySingleton<HomeQuizzesCubit>(() => HomeQuizzesCubit(sl()));
+  sl.registerFactory<HomeCategoriesCubit>(() => HomeCategoriesCubit(sl()));
+  sl.registerFactory<HomeQuizzesCubit>(() => HomeQuizzesCubit(sl()));
   sl.registerLazySingleton<ForgetPasswordCubit>(() => ForgetPasswordCubit(sl(),sl(),sl(),sl(),sl()));
   sl.registerFactory<SettingCubit>(() => SettingCubit(sl()));
 }

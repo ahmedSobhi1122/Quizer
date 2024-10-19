@@ -19,3 +19,8 @@ export 'package:quizer/features/presentation/pages/profile%20page/profile_screen
 export '../../core/dependency_injection.dart';
 export '../../features/presentation/pages/onboarding pages/onboarding_page.dart';
 export 'route_constants.dart';
+export 'package:quizer/features/presentation/pages/quiz setting page/quiz_setting_screen.dart';
+export 'package:quizer/features/presentation/pages/create question page/create_question_screen.dart';
+export 'package:quizer/features/presentation/pages/category page/category_screen.dart';
+export 'package:quizer/features/presentation/pages/setting page/setting_screen.dart';
+

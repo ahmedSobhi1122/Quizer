@@ -73,9 +73,9 @@ class _SettingScreenState extends State<SettingScreen> {
                   },
                   child: TextButton(
                     onPressed: () async {
-                      String? id = "deb99e7a-e6fd-4866-b936-a95ab34f4570";
+                      String? id = "508a676b-eaca-43de-a6d2-8d810f101a33";
                       String? token =
-                          "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiQWhtZWQiLCJmYW1pbHlfbmFtZSI6IlNvYmhpIiwiZW1haWwiOiJAZ21haWwuY29tIiwibmJmIjoxNzI5Mjc0MDM5LCJleHAiOjE3MzE5NTYwMzksImlhdCI6MTcyOTI3NDAzOSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2In0.c0W8ChCwZusMl3pNidz79ajGigpiTdJP0-Bg1_8ImQgdW66S4tGxnfm0GtMO6QiDbC4lakwEMQgMI6_fBrriMA";
+                          "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiemVpYWQiLCJmYW1pbHlfbmFtZSI6Im1vaGFtbWVkIiwiZW1haWwiOiJ6YXphb3NrYXI5MjhAZ21haWwuY29tIiwibmJmIjoxNzI5MzA1MTEwLCJleHAiOjE3MzE5ODcxMTAsImlhdCI6MTcyOTMwNTExMCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2In0.8yXZSufGpX0Dx9KD0jjEaMe3n4eYshpH5pSBnO9g-ET36DOLBTy0ftbxn6fnGpstC83CIvspHdMNv-wpH9JirA";
                       await context
                           .read<SettingCubit>()
                           .deleteAccount(id, token);
@@ -253,9 +253,7 @@ class _SettingScreenState extends State<SettingScreen> {
     }
     setState(() {
       this.theme = theme;
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => SettingScreen()),
-      );
+        context.pushReplacementNamed(Routes.MainScreenRoute);
     });
   }
 

@@ -8,6 +8,7 @@ import 'package:quizer/features/presentation/pages/Home%20Page/home_page.dart';
 import 'package:quizer/features/presentation/pages/category%20page/category_screen.dart';
 import 'package:quizer/features/presentation/pages/create%20question%20page/create_question_screen.dart';
 import 'package:quizer/features/presentation/pages/edit%20profile%20page/edite_profile_screen.dart';
+import 'package:quizer/features/presentation/pages/entry%20point/entry_screen.dart';
 import 'package:quizer/features/presentation/pages/quiz%20setting%20page/quiz_setting_screen.dart';
 import 'package:quizer/features/presentation/pages/setting%20page/setting_screen.dart';
 import 'package:quizer/features/presentation/pages/start%20quiz%20page/start_quiz_screen.dart';
@@ -187,6 +188,32 @@ class RouteGenerator {
       case Routes.categoryScreenRoute:
         return MaterialPageRoute(
           builder: (context) => const CategoryScreen(),
+        );
+      case Routes.MainScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider<SettingCubit>(
+                create: (context) => sl<SettingCubit>(),
+              ),
+              BlocProvider<HomeProfileCubit>(
+                create: (context) => sl<HomeProfileCubit>(),
+              ),
+              BlocProvider<HomeQuizzesCubit>(
+                create: (context) => sl<HomeQuizzesCubit>(),
+              ),
+              BlocProvider<HomeCategoriesCubit>(
+                create: (context) => sl<HomeCategoriesCubit>(),
+              ),
+              BlocProvider<ProfileCubit>(
+                create: (context) => sl<ProfileCubit>(),
+              ),
+              BlocProvider<LeaderboardCubit>(
+                create: (context) => sl<LeaderboardCubit>(),
+              ),
+            ],
+              child: MainScreen()
+          ),
         );
 
       default:

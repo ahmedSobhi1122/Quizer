@@ -23,5 +23,6 @@ class Routes {
   static const String leaderBoardScreenRoute="/Leaderboard";
   static const String editProfileScreenRoute="/edit_profile";
   static const String categoryScreenRoute="/category";
+  static const String MainScreenRoute="/main";
 
 }

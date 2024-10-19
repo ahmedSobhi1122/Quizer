@@ -85,15 +85,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         } else {}
                       }
                     },
-                    child: CustomButton(
-                      color: MyTheme.secondaryButtonColor,
-                      colorText: MyTheme.secondaryButtonTextColor,
-                      text: "Next",
-                      onPressed: () async {
-                        if (formKeyRegister.currentState!.validate()) {
-                          context.pushNamed(Routes.selectionScreenRoute);
-                        }
-                      },
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: CustomButton(
+                                text: "Sign in",
+                                onPressed: () {
+                                  context.pushReplacementNamed(
+                                      Routes.logInScreenRoute);
+                                },
+                                color: MyTheme.secondaryButtonColor,
+                                colorText: MyTheme.secondaryButtonTextColor)),
+                        SizedBox(width: AppSize.s24.w),
+                        Expanded(
+                          child: CustomButton(
+                            color: MyTheme.secondaryButtonColor,
+                            colorText: MyTheme.secondaryButtonTextColor,
+                            text: "Next",
+                            onPressed: () async {
+                              if (formKeyRegister.currentState!.validate()) {
+                                context.pushNamed(Routes.selectionScreenRoute);
+                              }
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

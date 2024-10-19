@@ -96,7 +96,7 @@ class LoginScreen extends StatelessWidget {
                   CustomButton(
                     text: "Create new account",
                     onPressed: () =>
-                        context.pushNamed(Routes.signUpScreenRoute),
+                        context.pushReplacementNamed(Routes.signUpScreenRoute),
                     color: MyTheme.secondaryButtonColor,
                     colorText: MyTheme.secondaryButtonTextColor,
                   )

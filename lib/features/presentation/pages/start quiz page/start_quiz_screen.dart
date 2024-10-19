@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quizer/config/routes/screen_export.dart';
+import 'package:quizer/config/routes/route_constants.dart';
 import 'package:quizer/config/themes/theme.dart';
+import 'package:quizer/core/constants/constants.dart';
 import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
+import 'package:quizer/features/domain/entities/quiz.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
+import 'package:quizer/features/presentation/cubit/start_quiz_cubit.dart';
 import 'package:quizer/features/presentation/pages/start%20quiz%20page/widgets/category.dart';
 import 'package:quizer/features/presentation/pages/start%20quiz%20page/widgets/description.dart';
 import 'package:quizer/features/presentation/pages/start%20quiz%20page/widgets/image_quiz.dart';
 import 'package:quizer/features/presentation/pages/start%20quiz%20page/widgets/rate.dart';
+import 'package:quizer/features/presentation/state/start_quiz_state.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../../core/constants/constants.dart';
-import '../../../domain/entities/quiz.dart';
-import '../../cubit/start_quiz_cubit.dart';
-import '../../state/start_quiz_state.dart';
 
 class StartQuizScreen extends StatefulWidget {
   const StartQuizScreen({super.key});

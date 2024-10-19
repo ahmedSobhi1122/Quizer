@@ -12,12 +12,12 @@ class CustomCardItem extends StatelessWidget {
   final VoidCallback onTap; // Add onTap callback
 
   const CustomCardItem({
-    Key? key,
+    super.key,
     required this.userName,
     required this.questionCount,
     required this.authorName,
     required this.onTap, // Accept onTap as a parameter
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

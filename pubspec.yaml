@@ -54,6 +54,8 @@ dependencies:
   cached_network_image:
   themed:
   awesome_notifications:
+  share_plus:
+  flutter_rating_bar:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

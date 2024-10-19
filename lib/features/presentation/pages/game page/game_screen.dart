@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/features/data_sources/models/question_model.dart';
+import 'package:quizer/features/domain/entities/quiz.dart';
 import 'package:quizer/features/presentation/cubit/game_cubit.dart';
 import 'package:quizer/features/presentation/pages/game%20page/widgets/custom_bottom_navigation.dart';
 import 'package:quizer/features/presentation/pages/game%20page/widgets/custom_question_view.dart';
 import 'package:quizer/features/presentation/pages/game%20page/widgets/custom_timer_bar.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/features/presentation/common/background.dart';
+import 'package:quizer/features/presentation/state/game_state.dart';
 
-import '../../../../config/routes/screen_export.dart';
-import '../../../domain/entities/quiz.dart';
-import 'package:quizer/core/helper/data_intent.dart';
-
-import '../../state/game_state.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -24,19 +22,19 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   late final List<QuestionModel?> questions;
   late final Quiz? quiz;
-  late final PageController _pageController; // Add PageController
+  late final PageController _pageController;
 
   @override
   void initState() {
     super.initState();
     quiz = DataIntent.getQuiz();
     questions = quiz!.questions!;
-    _pageController = PageController(initialPage: 0); // Initialize PageController
+    _pageController = PageController(initialPage: 0);
   }
 
   @override
   void dispose() {
-    _pageController.dispose(); // Dispose the controller when done
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -50,7 +48,7 @@ class _GameScreenState extends State<GameScreen> {
             BlocBuilder<GameCubit, GameState>(
               builder: (context, state) {
                 return PageView.builder(
-                  controller: _pageController, // Set the PageController here
+                  controller: _pageController,
                   onPageChanged: (index) {
                     context.read<GameCubit>().emit(
                         state.copyWith(currentQuestionIndex: index)); // Update the current question index in the cubit
@@ -83,8 +81,8 @@ class _GameScreenState extends State<GameScreen> {
               },
             ),
             CustomBottomNavigation(
-              pageController: _pageController, // Pass the PageController to the CustomBottomNavigation
-              totalQuestions: questions.length, // Also pass the total number of questions
+              pageController: _pageController,
+              totalQuestions: questions.length, 
             ),
           ],
         ),

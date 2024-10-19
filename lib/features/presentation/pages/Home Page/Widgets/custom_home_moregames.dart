@@ -1,8 +1,11 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/constants/constants.dart';
+import 'package:quizer/core/helper/data_intent.dart';
+import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/features/domain/entities/quiz.dart';
+import 'package:quizer/features/presentation/pages/Login%20page/login_screen.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../config/routes/screen_export.dart';
@@ -46,6 +49,11 @@ class CustomQuiz extends StatelessWidget {
     return Skeletonizer(
         enabled: quiz == null ? true : false,
         child: InkWell(
+          onTap: ()
+          {
+            DataIntent.pushQuizID(quiz!.id);
+            context.pushNamed(Routes.startQuizScreenRoute);
+          },
           child: Container(
                 decoration: BoxDecoration(
           color: MyTheme.contentCardBG,
@@ -99,7 +107,8 @@ class CustomQuiz extends StatelessWidget {
                      CustomInfo(
                       questions: quiz == null ? 5 : quiz!.questionCount!,
                       time: quiz == null ? 5 : quiz!.maxTime!,
-                      rate: quiz == null ? 0.0 : quiz!.rating!,
+                      rate: quiz == null ? 0.0 : double.parse(quiz!.rating!.toStringAsFixed(1))
+                       ,
                     )
                   ],
                 ),

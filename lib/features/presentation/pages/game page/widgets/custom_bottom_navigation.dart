@@ -7,7 +7,7 @@ import '../../../../../config/themes/theme.dart';
 import '../../../../../core/resources/app_values.dart';
 import '../../../common/custom_button_with_shadow.dart';
 
-class CustomBottomNavigation extends StatelessWidget {
+class CustomBottomNavigation extends StatefulWidget {
   final PageController pageController; // Add PageController
   final int totalQuestions; // Add total number of questions
 
@@ -18,49 +18,57 @@ class CustomBottomNavigation extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<CustomBottomNavigation> createState() => _CustomBottomNavigationState();
+}
+
+class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
+  String NextText = "Skip";
+
+  @override
   Widget build(BuildContext context) {
     return Positioned(
-        bottom: AppPadding.p20.h,
-        left: AppPadding.p24.w,
-        right: AppPadding.p24.w,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomButton(
-              width: 150,
-              text: "Previous",
-              colorText: MyTheme.secondaryButtonTextColor,
-              color: MyTheme.secondaryButtonColor,
-              borderColor: MyTheme.answersCardBorderColor,
-              onPressed: () {
-                // Navigate to the previous page
-                if (context.read<GameCubit>().state.currentQuestionIndex > 0) {
-                  context.read<GameCubit>().goToPreviousQuestion();
-                  pageController.previousPage(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                  );
-                }
-              },
-            ),
-            CustomButton(
-              width: 150,
-              text: "Skip",
-              colorText: MyTheme.secondaryButtonTextColor,
-              color: MyTheme.secondaryButtonColor,
-              borderColor: MyTheme.answersCardBorderColor,
-              onPressed: () {
-                // Navigate to the next page
-                if (context.read<GameCubit>().state.currentQuestionIndex < totalQuestions - 1) {
-                  context.read<GameCubit>().goToNextQuestion();
-                  pageController.nextPage(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                  );
-                }
-              },
-            ),
-          ],
-        ));
+      bottom: AppPadding.p20.h,
+      left: AppPadding.p24.w,
+      right: AppPadding.p24.w,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CustomButton(
+            width: 150,
+            text: "Previous",
+            colorText: MyTheme.secondaryButtonTextColor,
+            color: MyTheme.secondaryButtonColor,
+            borderColor: MyTheme.answersCardBorderColor,
+            onPressed: () {
+              // Navigate to the previous page
+              if (context.read<GameCubit>().state.currentQuestionIndex > 0) {
+                context.read<GameCubit>().goToPreviousQuestion();
+                widget.pageController.previousPage(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                );
+              }
+            },
+          ),
+          CustomButton(
+            width: 150,
+            text: NextText,
+            colorText: MyTheme.secondaryButtonTextColor,
+            color: MyTheme.secondaryButtonColor,
+            borderColor: MyTheme.answersCardBorderColor,
+            onPressed: () {
+              if (context.read<GameCubit>().state.currentQuestionIndex <
+                  widget.totalQuestions - 1) {
+                context.read<GameCubit>().goToNextQuestion();
+                widget.pageController.nextPage(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                );
+              }
+            },
+          ),
+        ],
+      ),
+    );
   }
 }

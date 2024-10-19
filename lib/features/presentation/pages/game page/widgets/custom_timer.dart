@@ -47,6 +47,7 @@ class _CustomTimerState extends State<CustomTimer> {
 
         // Stop the timer if the full duration has been reached
         if (_elapsedTime >= totalDurationInSeconds) {
+          /// TODO Push To Rating + Send Request
           _timer.cancel();
         }
       });

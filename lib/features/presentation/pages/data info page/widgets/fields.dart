@@ -7,10 +7,15 @@ import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/helper/validation.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
+import 'package:quizer/features/data_sources/local/app_prefs.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
 import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 import 'package:quizer/features/presentation/pages/data%20info%20page/widgets/date_of_birth.dart';
 import 'package:quizer/features/presentation/state/register_state.dart';
+
+import '../../../../../core/constants/enum.dart';
+import '../../../../../core/dependency_injection.dart';
+import '../../../../../core/helper/data_intent.dart';
 
 class Fields extends StatelessWidget {
   final GlobalKey<FormState> formKeyInfo = GlobalKey<FormState>();
@@ -79,6 +84,9 @@ class Fields extends StatelessWidget {
               final isCurrentRoute = route?.isCurrent ?? false;
               if (isCurrentRoute) {
                 if (state is RegisterSuccess) {
+                  sl<AppPrefs>().setBool(KeyPrefs.IS_LOGGEDIN.name, true);
+                  sl<AppPrefs>().setString(KeyPrefs.TOKEN.name, DataIntent.getToken()!);
+                  sl<AppPrefs>().setString(KeyPrefs.ID.name, DataIntent.getUserID()!);
                   context.pushReplacementNamed(Routes.MainScreenRoute);
                   context.message(message: "success");
                 }

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:quizer/features/presentation/pages/quiz%20page/old/second_quiz_screen.dart';
+import 'package:quizer/features/presentation/pages/game%20page/old/second_quiz_screen.dart';
 
 class CustomProgressComponent extends StatefulWidget {
   @override

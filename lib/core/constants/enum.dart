@@ -9,3 +9,5 @@ enum Languages { ENGLISH, ARABIC, FRENCH }
 enum States { ON, OFF }
 
 enum QuestionTypeModel{ MULTIBLE_CHOICE, TRUE_FALSE}
+
+enum KeyPrefs{IS_LOGGEDIN,TOKEN,ID,THEME,OLD_USER,IS_NOTIFICATON}

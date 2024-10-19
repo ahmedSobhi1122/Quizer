@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:quizer/features/data_sources/models/question_model.dart';
 
 class Quiz {
@@ -11,10 +13,12 @@ class Quiz {
   final int? maxTime;
   final int? solveCount;
   final String? image;
+  final File? imageFile;
   final DateTime? createdOn;
   final List<QuestionModel>? questions;
 
   Quiz({
+    this.imageFile,
     this.id,
     this.name,
     this.description,
@@ -26,6 +30,6 @@ class Quiz {
     this.image,
     this.createdOn,
     this.authorImage,
-    this.questions
+    this.questions,
   });
 }

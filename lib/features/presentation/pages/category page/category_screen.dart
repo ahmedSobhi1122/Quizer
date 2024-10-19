@@ -55,9 +55,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyTheme.backgroundColor,
-        leading: Icon(Icons.arrow_back,
+        leading: const Icon(Icons.arrow_back,
             color: MyTheme.textColor),
-        title: Text(
+        title: const Text(
           "Categories",
           style: TextStyle(fontWeight: FontWeight.bold,color: MyTheme.textColor),
         ),
@@ -66,7 +66,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             onPressed: () {
               showSearch(context: context, delegate: CategorySearchScreen());
             },
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             color: MyTheme.textColor,
           )
         ],
@@ -83,7 +83,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 Expanded(
                   child: GridView.builder(
                     itemCount: cate.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10,
@@ -113,10 +113,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                   left: 0,
                                   right: 0,
                                   child: Container(
-                                    padding: EdgeInsets.all(AppPadding.p8),
+                                    padding: const EdgeInsets.all(AppPadding.p8),
                                     child: Text(
                                       cate[index]['text']!,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: AppSize.s18,
                                         color: Colors.white,

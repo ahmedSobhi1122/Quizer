@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/themes/theme.dart';
-import 'package:quizer/features/presentation/common/background.dart';
 
 import '../../../../core/resources/app_values.dart';
 import '../../../../core/resources/assets_manager.dart';
@@ -56,7 +55,7 @@ class CategorySearchScreen extends SearchDelegate {
     return [
       if (query.isNotEmpty)
         IconButton(
-          icon: Icon(Icons.clear),
+          icon: const Icon(Icons.clear),
           onPressed: () {
             query = '';
             showSuggestions(context);
@@ -69,7 +68,7 @@ class CategorySearchScreen extends SearchDelegate {
   Widget? buildLeading(BuildContext context) {
     // Back button to close the search
     return IconButton(
-      icon: Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back),
       onPressed: () {
         close(context, null);
       },
@@ -112,12 +111,12 @@ class CategorySearchScreen extends SearchDelegate {
                 child: ListTile(
                   title: Text(
                     results[index]['text']!,
-                    style: TextStyle(fontSize: AppSize.s18,
+                    style: const TextStyle(fontSize: AppSize.s18,
                         fontWeight: FontWeight.bold,color: MyTheme.textColor),
                   ),
                   subtitle: Text(
                     results[index]['subtitle']!,
-                    style: TextStyle(fontSize: AppSize.s12,color: MyTheme.textColor),
+                    style: const TextStyle(fontSize: AppSize.s12,color: MyTheme.textColor),
                   ),
                 ),
               ),
@@ -139,7 +138,7 @@ class CategorySearchScreen extends SearchDelegate {
       itemCount: suggestions.length,
       itemBuilder: (BuildContext context, int index) {
         return Padding(
-          padding: EdgeInsets.all(AppPadding.p16),
+          padding: const EdgeInsets.all(AppPadding.p16),
           child: InkWell(
             onTap: (){},
             splashColor: MyTheme.textColor,
@@ -163,12 +162,12 @@ class CategorySearchScreen extends SearchDelegate {
                       child: ListTile(
                         title: Text(
                           suggestions[index]['text']!,
-                          style: TextStyle(fontSize: AppSize.s18,
+                          style: const TextStyle(fontSize: AppSize.s18,
                               fontWeight: FontWeight.bold,color: MyTheme.textColor),
                         ),
                         subtitle: Text(
                           suggestions[index]['subtitle']!,
-                          style: TextStyle(fontSize: AppSize.s12,color: MyTheme.textColor),
+                          style: const TextStyle(fontSize: AppSize.s12,color: MyTheme.textColor),
                         ),
                       ),
                     ),

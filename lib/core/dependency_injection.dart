@@ -43,7 +43,6 @@ import '../features/domain/usecases/delete_account_usecase.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
-
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   var dio = await DioFactory().getDio();
   sl.registerLazySingleton<Dio>(() => dio);

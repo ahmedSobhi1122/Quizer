@@ -15,6 +15,8 @@ import 'package:quizer/features/presentation/common/custom_button_with_shadow.da
 import '../../../../config/themes/theme.dart';
 
 class QuizSettingScreen extends StatefulWidget {
+  const QuizSettingScreen({super.key});
+
   @override
   State<QuizSettingScreen> createState() => _QuizSettingScreenState();
 }
@@ -98,7 +100,7 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
                 SizedBox(
                   height: AppSize.s40.h,
                 ),
-                Container(
+                SizedBox(
                   height: 200.h,
                   child: ImageUploadField(
                     // height: 200.h,
@@ -141,7 +143,7 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
                       color: MyTheme.textColor,
                       fontSize: AppSize.s16,
                     ),
-                    counterStyle: TextStyle(
+                    counterStyle: const TextStyle(
                       color: MyTheme.textColor,
                       fontWeight: FontWeight.bold
                     ),
@@ -155,7 +157,7 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
                 SizedBox(
                   height: AppSize.s20.h,
                 ),
-                Text(
+                const Text(
                     "Quiz time (minute)",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -170,7 +172,7 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
                   child: Container(
                     height: 50.w,
                     width: 325.w,
-                    padding: EdgeInsets.symmetric(horizontal: AppPadding.p5,vertical: AppPadding.p5),
+                    padding: const EdgeInsets.symmetric(horizontal: AppPadding.p5,vertical: AppPadding.p5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.r),
                       color: Colors.black12,

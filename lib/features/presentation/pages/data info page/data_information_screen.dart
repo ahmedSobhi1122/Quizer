@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quizer/config/routes/route_constants.dart';
-import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/common/custom_app_bar.dart';
-import 'package:quizer/features/presentation/common/loading.dart';
 import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 import 'package:quizer/features/presentation/state/register_state.dart';
 import 'widgets/fields.dart';

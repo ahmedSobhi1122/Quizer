@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/config/notifications/awesome_notifications.dart';
 import 'package:quizer/config/routes/route_constants.dart';
 import 'package:quizer/config/themes/app_theme.dart';
 import 'package:quizer/config/themes/theme.dart';
@@ -27,6 +28,7 @@ void main() async {
   // ]);
   engine = WidgetsFlutterBinding.ensureInitialized();
   await init();
+  await NotificationsModel.init();
   await Firebase.initializeApp(
     options: const FirebaseOptions(
       apiKey: "AIzaSyC1MrvfXPMxvlbzzvHtVEaLw901uQ8uGgA",
@@ -61,6 +63,7 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
+  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   const MyApp({super.key});
 
   @override
@@ -73,7 +76,6 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     String? theme = sl<AppPrefs>().getString("theme");
     Themed.currentTheme = LightTheme;
-
     switch(theme){
       case "LIGHT":
         Themed.currentTheme = LightTheme;
@@ -87,18 +89,20 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    NotificationsModel.scheduleDailyReminderNotification();
     return ScreenUtilInit(
       designSize: const Size(430, 932),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) => MaterialApp(
+        navigatorKey: MyApp.navigatorKey,
         debugShowCheckedModeBanner: false,
         title: 'Quizer',
         theme: AppTheme.lightTheme(context),
         darkTheme: AppTheme.darkTheme(context),
         themeMode: ThemeMode.light,
         onGenerateRoute: router.RouteGenerator.getRoute,
-        initialRoute: Routes.quizSettingScreenRoute,
+        initialRoute: Routes.logInScreenRoute,
       ),
     );
   }

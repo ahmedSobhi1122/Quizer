@@ -45,6 +45,17 @@ class DataIntent {
   static String? getToken() {
     return _token;
   }
+  //------------------------------------
+  // Home To Start Quiz
+  static int? _quizID;
+
+  static void pushQuizID(int? quizID) {
+    _quizID = quizID;
+  }
+
+  static int? getQuizID() {
+    return _quizID;
+  }
 //------------------------------------
   // Start Quiz To Game
   static Quiz? _quiz;

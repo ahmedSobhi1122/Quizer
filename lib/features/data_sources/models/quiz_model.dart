@@ -45,7 +45,7 @@ class QuizModel {
         rating: json['rating'],
         questionCount: json['questionCount'],
         maxTime: json['maxTime'],
-        solveCount: json['SolveCount'],
+        solveCount: json['solveCount'],
         image: json['image'],
         createdOn: json['createdOn'] != null
             ? DateTime.parse(json['createdOn'])

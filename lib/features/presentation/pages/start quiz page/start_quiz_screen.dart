@@ -18,70 +18,81 @@ import '../../../../core/constants/constants.dart';
 import '../../../domain/entities/quiz.dart';
 import '../../cubit/start_quiz_cubit.dart';
 import '../../state/start_quiz_state.dart';
+
 class StartQuizScreen extends StatefulWidget {
   const StartQuizScreen({super.key});
 
   @override
   State<StartQuizScreen> createState() => _StartQuizScreenState();
-
 }
 
 class _StartQuizScreenState extends State<StartQuizScreen> {
-   bool? _loading;
-   Quiz? quiz;
+  bool? _loading;
+  Quiz? quiz;
+
   @override
   void initState() {
-    const String token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiWmVpYWQiLCJmYW1pbHlfbmFtZSI6Ik1vaGFtbWVkIiwiZW1haWwiOiJ6ZWlhZG00YnVzaW5lc3NAZ21haWwuY29tIiwibmJmIjoxNzI5MTkzOTY2LCJleHAiOjE3MzE4NzU5NjYsImlhdCI6MTcyOTE5Mzk2NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2In0.qbQi3s0NO8TC7SVc1fKTdenU1W6Rg98Yh4A0-eoAoukfxGBIFCY1KCYVmMPrFzj42gwNnnWoH_G3m9-XuGa73g";
-    const int id = 3;
-    context.read<StartQuizCubit>().getQuizData(token, id);
+    String? userToken = DataIntent.getToken();
+    int? quizID = DataIntent.getQuizID();
+    context.read<StartQuizCubit>().getQuizData(userToken!, quizID!);
     _loading = true;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
-    return BlocBuilder<StartQuizCubit, StartQuizState> (builder: (context, state){
-      if(state is StartQuizLoaded)
-      {
+    return BlocBuilder<StartQuizCubit, StartQuizState>(
+        builder: (context, state) {
+      if (state is StartQuizLoaded) {
         _loading = false;
         quiz = state.quiz;
         print("_loading is false");
       }
-      if(state is StartQuizFailure)
-      {
+      if (state is StartQuizFailure) {
         print(state.error);
       }
-      return  Skeletonizer(
+      return Skeletonizer(
         enabled: _loading!,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: MyTheme.backgroundColor,
-            leading: const BackButton(color: MyTheme.textColor,), //TODO pop the screen here
-            title: Text( quiz == null ?
-              "Math test" : quiz!.name!,
+            leading: const BackButton(
+              color: MyTheme.textColor,
+            ),
+            //TODO pop the screen here
+            title: Text(
+              quiz == null ? "Math test" : quiz!.name!,
               style: AppTextStyles.statQuizTitleTextStyle(context),
             ),
           ),
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppPadding.defaultPadding.w),
+            padding:
+                EdgeInsets.symmetric(horizontal: AppPadding.defaultPadding.w),
             child: Column(
               children: [
                 SizedBox(height: AppSize.s10.h),
-                 quiz!= null ?
-                 ImageQuiz(imageUrl: Constants.url+quiz!.image!,authorImageUrl: Constants.url+quiz!.authorImage!, authorName: quiz!.authorName,playCount: quiz!.solveCount,)
-                     : const ImageQuiz(),
+                quiz != null
+                    ? ImageQuiz(
+                        imageUrl: Constants.url + quiz!.image!,
+                        authorImageUrl: Constants.url + quiz!.authorImage!,
+                        authorName: quiz!.authorName,
+                        playCount: quiz!.solveCount,
+                      )
+                    : const ImageQuiz(),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: AppPadding.p32.h),
                   child: DisplayRate(
-                    rating: quiz == null ?
-                    1.5 : quiz!.rating!,
+                    rating: quiz == null ? 1.5 : quiz!.rating!,
                   ),
                 ),
-                Description(description: quiz == null ?
-                "Default Description" : quiz!.description!,),
+                Description(
+                  description:
+                      quiz == null ? "Default Description" : quiz!.description!,
+                ),
                 SizedBox(height: AppSize.s32.h),
-                Category(maxTime: quiz == null ? 10 : quiz!.maxTime!,questionsCount: quiz == null ? 10 : quiz!.questionCount!),
+                Category(
+                    maxTime: quiz == null ? 10 : quiz!.maxTime!,
+                    questionsCount: quiz == null ? 10 : quiz!.questionCount!),
                 const Spacer(),
                 CustomButton(
                     color: AppColors.purpleColor,
@@ -100,6 +111,3 @@ class _StartQuizScreenState extends State<StartQuizScreen> {
     });
   }
 }
-
-
-

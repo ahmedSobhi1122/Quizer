@@ -232,4 +232,10 @@ class AppTextStyles {
         color: MyTheme.textColor,
         fontSize: FontSize.f22,
       );
+  static TextStyle gameQuestionCountTextStyle(BuildContext context) =>
+      getBlackStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: MyTheme.textColor,
+        fontSize: FontSize.f22,
+      );
 }

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:quizer/features/data_sources/models/answer_model.dart';
 
-import '../../../core/constants/enum.dart';
 
 class QuestionModel {
   final int? id;

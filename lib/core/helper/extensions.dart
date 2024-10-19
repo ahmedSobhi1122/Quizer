@@ -8,8 +8,7 @@ extension Navigation on BuildContext {
     return Navigator.of(this).pushNamed(routeName, arguments: arguments);
   }
 
-  pushNamedAndRemoveUntil(String routeName,
-      {Object? arguments, required RoutePredicate predicate}) {
+  pushNamedAndRemoveUntil(String routeName, {Object? arguments, required RoutePredicate predicate}) {
     return Navigator.of(this)
         .pushNamedAndRemoveUntil(routeName, predicate, arguments: arguments);
   }

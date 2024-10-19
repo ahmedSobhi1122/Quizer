@@ -8,14 +8,12 @@ import '../../../../../config/routes/screen_export.dart';
 import '../../../../../config/themes/theme.dart';
 
 class CustomTimerBar extends StatelessWidget {
-  final void Function()? onTap;
   final int currentQuestionIndex;
   final int totalQuestions;
   final double durationInMinutes; // The duration of the timer in minutes
 
   const CustomTimerBar({
     super.key,
-    this.onTap,
     required this.currentQuestionIndex,
     required this.totalQuestions,
     required this.durationInMinutes, // Accept the timer duration
@@ -39,7 +37,10 @@ class CustomTimerBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             InkWell(
-              onTap: onTap,
+              onTap: ()
+              {
+                context.pushNamedAndRemoveUntil(Routes.homeScreenRoute, predicate: (route) => false);
+              },
               child: Icon(
                 Icons.close,
                 size: AppSize.s36.r,
@@ -52,7 +53,7 @@ class CustomTimerBar extends StatelessWidget {
             ),
             Text(
               "${currentQuestionIndex + 1}/$totalQuestions",
-              style: AppTextStyles.leaderboardTitleTextStyle(context),
+              style: AppTextStyles.gameQuestionCountTextStyle(context),
             ),
           ],
         ),

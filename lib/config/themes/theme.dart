@@ -7,12 +7,17 @@ class MyTheme {
   static const backgroundColor2 = ColorRef(Color(0xFFCCC3F9));
   static const backgroundColor3 = ColorRef(Color(0xFFECEBF2));
 
-  /// Home
+  /// Home Screen
   static const appbarTop = ColorRef(Color(0xff8a72f9));
   static const appbarBottom = ColorRef(Color(0xff9b86fa));
   static const appbarShadow = ColorRef(Color(0xffa391fb));
-  static ColorRef contentCardBG =
-      ColorRef(const Color(0xffFFFFFF).withOpacity(0.60));
+  static  ColorRef contentCardBG = ColorRef(const Color(0xffFFFFFF).withOpacity(0.60));
+ /// Game Screen
+  static const timerBarColor = ColorRef(Color(0xFF525160));
+  static const answersCardColor = ColorRef(Color(0xFFA991D2));
+  static const answersCardBorderColor = ColorRef(Color(0xFF2F2E41));
+
+
   static const navigationBarForeground =
       ColorRef(Color(0xFFB7A9FD), id: "navigationBarBackground");
   static const navigationBarBackground =
@@ -65,6 +70,10 @@ Map<ThemeRef, Object> DarkTheme = {
   MyTheme.appbarBottom: const Color(0xFF3F3280),
   MyTheme.appbarShadow: const Color(0xFF3F3280),
   MyTheme.contentCardBG: const Color(0xFF525151).withOpacity(0.35),
+
+  /// Game
+  MyTheme.answersCardColor: const Color(0xFF35284E),
+  MyTheme.answersCardBorderColor: const Color(0xFF7A68FF),
 
   MyTheme.textColor: Colors.white,
   MyTheme.reverseColor: Colors.black,

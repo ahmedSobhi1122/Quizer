@@ -2,7 +2,7 @@ class Routes {
   Routes._();
 
   static const String splashScreenRoute = "/under_development";
-  static const String onbordingScreenRoute = "/onboarding";
+  static const String onboardingScreenRoute = "/onboarding";
   static const String selectionScreenRoute = "/selection";
   static const String logInScreenRoute = "/login";
   static const String startQuizScreenRoute = "/start_quiz";
@@ -18,11 +18,10 @@ class Routes {
   static const String createQuestionScreenRoute="/create_question";
   static const String settingScreenRoute="/setting";
   static const String homeScreenRoute="/home";
-  static const String firstQuizScreenRoute="/first_quiz";
-  static const String secondQuizScreenRoute="/second_quiz";
   static const String leaderBoardScreenRoute="/Leaderboard";
   static const String editProfileScreenRoute="/edit_profile";
   static const String categoryScreenRoute="/category";
+  static const String gameScreenRoute="/game";
   static const String MainScreenRoute="/main";
 
 }

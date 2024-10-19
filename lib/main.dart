@@ -102,8 +102,8 @@ class _MyAppState extends State<MyApp> {
         darkTheme: AppTheme.darkTheme(context),
         themeMode: ThemeMode.light,
         onGenerateRoute: router.RouteGenerator.getRoute,
-        initialRoute: Routes.signUpScreenRoute,
-      ),
+        initialRoute: Routes.startQuizScreenRoute,
+      )
     );
   }
 }

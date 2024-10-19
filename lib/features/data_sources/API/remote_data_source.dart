@@ -305,7 +305,7 @@ class RemoteDataSource {
       }
     } catch (error) {
       throw Exception(
-          'remote_data_source--Error getting Home Profile Data: $error');
+          'remote_data_source--Error getting Home Quizzes Data: $error');
     }
   }
 
@@ -355,7 +355,7 @@ class RemoteDataSource {
 
     try {
       final response = await dio.request(
-        '${Constants.baseUrl}quiz/$id',
+        '${Constants.baseUrl}quiz/getOne/$id',
         options: Options(
           method: 'GET',
           headers: {'Authorization': 'Bearer $token'},

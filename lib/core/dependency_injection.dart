@@ -22,10 +22,12 @@ import 'package:quizer/features/domain/usecases/login_usecase.dart';
 import 'package:quizer/features/domain/usecases/otp_profile_usecase.dart';
 import 'package:quizer/features/domain/usecases/register_usecase.dart';
 import 'package:quizer/features/domain/usecases/reset_password_usecase.dart';
+import 'package:quizer/features/domain/usecases/select_answer_usercase.dart';
 import 'package:quizer/features/domain/usecases/update_profile_usecase.dart';
 import 'package:quizer/features/domain/usecases/user_exist_usecase.dart';
 import 'package:quizer/features/domain/usecases/verify_otp_usecase.dart';
 import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
+import 'package:quizer/features/presentation/cubit/game_cubit.dart';
 import 'package:quizer/features/presentation/cubit/home_categories_cubit.dart';
 import 'package:quizer/features/presentation/cubit/home_profile_cubit.dart';
 import 'package:quizer/features/presentation/cubit/home_quizzes_cubit.dart';
@@ -59,6 +61,7 @@ Future<void> init() async {
   sl.registerLazySingleton<GetHomeProfileUseCase>(() => GetHomeProfileUseCase(sl()));
   sl.registerLazySingleton<GetHomeQuizzesUseCase>(() => GetHomeQuizzesUseCase(sl()));
   sl.registerLazySingleton<GetCategoriesUseCase>(() => GetCategoriesUseCase(sl()));
+  sl.registerLazySingleton<SelectAnswerUseCase>(() => SelectAnswerUseCase());
   sl.registerLazySingleton<GetQuizUseCase>(() => GetQuizUseCase(sl()));
   sl.registerLazySingleton<LoginUseCase>(() => LoginUseCase(sl()));
   sl.registerLazySingleton<GetOTPUseCase>(() => GetOTPUseCase(sl()));
@@ -82,6 +85,7 @@ Future<void> init() async {
   sl.registerLazySingleton<StartQuizCubit>(() => StartQuizCubit(sl()));
   sl.registerFactory<HomeCategoriesCubit>(() => HomeCategoriesCubit(sl()));
   sl.registerFactory<HomeQuizzesCubit>(() => HomeQuizzesCubit(sl()));
+  sl.registerFactory<GameCubit>(() => GameCubit(sl()));
   sl.registerLazySingleton<ForgetPasswordCubit>(() => ForgetPasswordCubit(sl(),sl(),sl(),sl(),sl()));
   sl.registerFactory<SettingCubit>(() => SettingCubit(sl()));
 }

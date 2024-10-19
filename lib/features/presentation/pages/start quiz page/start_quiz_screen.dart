@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizer/config/routes/screen_export.dart';
 import 'package:quizer/config/themes/theme.dart';
+import 'package:quizer/core/helper/data_intent.dart';
+import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_colors.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/resources/text_styles.dart';
@@ -30,7 +32,7 @@ class _StartQuizScreenState extends State<StartQuizScreen> {
   @override
   void initState() {
     const String token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiWmVpYWQiLCJmYW1pbHlfbmFtZSI6Ik1vaGFtbWVkIiwiZW1haWwiOiJ6ZWlhZG00YnVzaW5lc3NAZ21haWwuY29tIiwibmJmIjoxNzI5MTkzOTY2LCJleHAiOjE3MzE4NzU5NjYsImlhdCI6MTcyOTE5Mzk2NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2In0.qbQi3s0NO8TC7SVc1fKTdenU1W6Rg98Yh4A0-eoAoukfxGBIFCY1KCYVmMPrFzj42gwNnnWoH_G3m9-XuGa73g";
-    const int id = 1;
+    const int id = 3;
     context.read<StartQuizCubit>().getQuizData(token, id);
     _loading = true;
     super.initState();
@@ -86,7 +88,8 @@ class _StartQuizScreenState extends State<StartQuizScreen> {
                     colorText: AppColors.whiteColor,
                     text: "Start",
                     onPressed: () {
-                      //TODO : Push To Quiz Screen
+                      DataIntent.pushQuiz(quiz!);
+                      context.pushReplacementNamed(Routes.gameScreenRoute);
                     }),
                 SizedBox(height: AppSize.s50.h),
               ],

@@ -12,12 +12,14 @@ class CustomButton extends StatelessWidget {
     required this.color,
     required this.colorText,
     this.borderColor = AppColors.purpleColor,
+    this.width,
   });
 
   final String text;
   final VoidCallback onPressed;
   final Color color;
   final Color colorText;
+  final double? width;
   Color borderColor;
 
   @override
@@ -25,7 +27,7 @@ class CustomButton extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: SizedBox(
-        width: AppSize.s335.w,
+        width: width ?? AppSize.s335.w,
         height: AppSize.s60.h,
         child: ElevatedButton(
           onPressed: onPressed,

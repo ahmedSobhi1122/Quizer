@@ -1,4 +1,5 @@
 import 'package:quizer/core/constants/enum.dart';
+import 'package:quizer/features/domain/entities/quiz.dart';
 
 class DataIntent {
   DataIntent._();
@@ -44,6 +45,18 @@ class DataIntent {
   static String? getToken() {
     return _token;
   }
+//------------------------------------
+  // Start Quiz To Game
+  static Quiz? _quiz;
+
+  static void pushQuiz(Quiz quiz) {
+    _quiz = quiz;
+  }
+
+  static Quiz? getQuiz() {
+    return _quiz;
+  }
+
 
 //------------------------------------
   ///profile data

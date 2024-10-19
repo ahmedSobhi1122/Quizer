@@ -1,4 +1,4 @@
-import '../../../../config/routes/screen_export.dart';
+import '../../../../../config/routes/screen_export.dart';
 
 class NextScreen extends StatelessWidget {
   @override

@@ -13,6 +13,8 @@ import 'package:quizer/features/presentation/pages/quiz%20setting%20page/quiz_se
 import 'package:quizer/features/presentation/pages/setting%20page/setting_screen.dart';
 import 'package:quizer/features/presentation/pages/start%20quiz%20page/start_quiz_screen.dart';
 
+import '../../features/presentation/cubit/game_cubit.dart';
+import '../../features/presentation/pages/game page/game_screen.dart';
 import '../../features/presentation/pages/leadboard page/leadboard_page.dart';
 import '../../features/presentation/cubit/home_categories_cubit.dart';
 import '../../features/presentation/cubit/home_quizzes_cubit.dart';
@@ -28,7 +30,7 @@ class RouteGenerator {
           builder: (context) => const SplashScreen(),
         );
 
-      case Routes.onbordingScreenRoute:
+      case Routes.onboardingScreenRoute:
         return MaterialPageRoute(
           builder: (context) => const OnboardingScreen(),
         );
@@ -139,6 +141,15 @@ class RouteGenerator {
           builder: (context) => BlocProvider<StartQuizCubit>(
             create: (context) => sl<StartQuizCubit>(),
             child: const StartQuizScreen(),
+          ),
+        );
+////////////////////////////////////////////////////////////////////////////////
+    ///Quiz Game TODO - change cubit here
+      case Routes.gameScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<GameCubit>(
+            create: (context) =>  sl<GameCubit>(),
+            child: const GameScreen(),
           ),
         );
 ////////////////////////////////////////////////////////////////////////////////

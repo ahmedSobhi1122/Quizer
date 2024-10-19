@@ -45,68 +45,70 @@ class CustomQuiz extends StatelessWidget {
   Widget build(BuildContext context) {
     return Skeletonizer(
         enabled: quiz == null ? true : false,
-        child: Container(
-      decoration: BoxDecoration(
-        color: MyTheme.contentCardBG,
-        borderRadius: BorderRadius.circular(AppBorderRadius.br16),
-      ),
-      child: Column(
-        children: [
-          Flexible(
-            flex: 1,
-            child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(AppBorderRadius.br16),
-                  topRight: Radius.circular(AppBorderRadius.br16),
+        child: InkWell(
+          child: Container(
+                decoration: BoxDecoration(
+          color: MyTheme.contentCardBG,
+          borderRadius: BorderRadius.circular(AppBorderRadius.br16),
                 ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(quiz == null ? ImageAssets.avatar : Constants.url + quiz!.image!),
-                        fit: BoxFit.cover),
+                child: Column(
+          children: [
+            Flexible(
+              flex: 1,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(AppBorderRadius.br16),
+                    topRight: Radius.circular(AppBorderRadius.br16),
                   ),
-                )),
-          ), // TODO image here
-          Flexible(
-            flex: 1,
-            child: Padding(
-              padding: EdgeInsets.only(
-                  top: AppPadding.p8.h,
-                  left: AppPadding.p8.w,
-                  right: AppPadding.p8.w,
-                  bottom: AppPadding.p12.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: quiz == null ? "Default Name" : quiz!.name,
-                          style: AppTextStyles.homeTitlesTextStyle(context),
-                        ),
-                        TextSpan(
-                          text: quiz == null ? "\n • By Me" : "\n • By ${quiz!.authorName}",
-                          style:
-                              AppTextStyles.homeGameCardTitleTextStyle(context),
-                        ),
-                      ],
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(quiz == null ? ImageAssets.cringe : Constants.url + quiz!.image!),
+                          fit: BoxFit.cover),
                     ),
-                  ),
-                  // Title and Author
-                  const Spacer(),
-                   CustomInfo(
-                    questions: quiz == null ? 5 : quiz!.questionCount!,
-                    time: quiz == null ? 5 : quiz!.maxTime!,
-                    rate: quiz == null ? 0.0 : quiz!.rating!,
-                  )
-                ],
+                  )),
+            ), // TODO image here
+            Flexible(
+              flex: 1,
+              child: Padding(
+                padding: EdgeInsets.only(
+                    top: AppPadding.p8.h,
+                    left: AppPadding.p8.w,
+                    right: AppPadding.p8.w,
+                    bottom: AppPadding.p12.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: quiz == null ? "Default Name" : quiz!.name,
+                            style: AppTextStyles.homeTitlesTextStyle(context),
+                          ),
+                          TextSpan(
+                            text: quiz == null ? "\n • By Me" : "\n • By ${quiz!.authorName}",
+                            style:
+                                AppTextStyles.homeGameCardTitleTextStyle(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Title and Author
+                    const Spacer(),
+                     CustomInfo(
+                      questions: quiz == null ? 5 : quiz!.questionCount!,
+                      time: quiz == null ? 5 : quiz!.maxTime!,
+                      rate: quiz == null ? 0.0 : quiz!.rating!,
+                    )
+                  ],
+                ),
               ),
-            ),
-          ) // TODO CardData here
-        ],
-      ),
-    ));
+            ) // TODO CardData here
+          ],
+                ),
+              ),
+        ));
   }
 }
 

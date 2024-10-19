@@ -1,7 +1,7 @@
 import 'package:quizer/features/presentation/state/home_categories_state.dart';
 
 import '../../../config/routes/screen_export.dart';
-import '../../domain/usecases/get_home_categories_usecase.dart';
+import '../../domain/usecases/get_categories_usecase.dart';
 
 class HomeCategoriesCubit extends Cubit<HomeCategoriesState>
 {

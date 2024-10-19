@@ -10,7 +10,7 @@ import 'package:quizer/features/domain/repository/account_repository.dart';
 import 'package:quizer/features/domain/repository/auth_repository.dart';
 import 'package:quizer/features/domain/repository/quiz_repository.dart';
 import 'package:quizer/features/domain/usecases/facebook_auth_usecase.dart';
-import 'package:quizer/features/domain/usecases/get_home_categories_usecase.dart';
+import 'package:quizer/features/domain/usecases/get_categories_usecase.dart';
 import 'package:quizer/features/domain/usecases/get_home_profile_data_usecase.dart';
 import 'package:quizer/features/domain/usecases/get_home_quizzes_usecase.dart';
 import 'package:quizer/features/domain/usecases/get_otp_usecase.dart';

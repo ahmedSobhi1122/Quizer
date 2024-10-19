@@ -73,23 +73,29 @@ class _CustomAnswerState extends State<CustomAnswer> {
       child: Padding(
         padding:
             EdgeInsets.only(left: AppPadding.p16.w, right: AppPadding.p8.w),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            // Display the answer content
-            Text( widget.answer.content!,
-              style: AppTextStyles.statQuizSubtitleSectionTextStyle(context),
-              overflow: TextOverflow.ellipsis,
-            ),
-            // Radio button
-            Radio<String>(
-              value: widget.answer.content!,
-              groupValue: widget.selectedAnswer,
-              onChanged: (String? value) {
-                widget.onAnswerSelected(value!);
-              },
-            ),
-          ],
+        child: InkWell(
+          onTap: ()
+          {
+            widget.onAnswerSelected(widget.answer.content!);
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Display the answer content
+              Text( widget.answer.content!,
+                style: AppTextStyles.statQuizSubtitleSectionTextStyle(context),
+                overflow: TextOverflow.ellipsis,
+              ),
+              // Radio button
+              Radio<String>(
+                value: widget.answer.content!,
+                groupValue: widget.selectedAnswer,
+                onChanged: (String? value) {
+                  widget.onAnswerSelected(value!);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

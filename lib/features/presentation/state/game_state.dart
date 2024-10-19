@@ -17,7 +17,8 @@ class GameState {
     List<QuestionModel?>? questions,
     int? currentQuestionIndex,
     List<String?>? selectedAnswers,
-  }) {
+  })
+  {
     return GameState(
       questions: questions ?? this.questions,
       currentQuestionIndex: currentQuestionIndex ?? this.currentQuestionIndex,

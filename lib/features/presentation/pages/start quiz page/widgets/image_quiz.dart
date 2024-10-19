@@ -88,8 +88,7 @@ class ImageQuiz extends StatelessWidget {
                       top: AppSize.s28.h,
                       left: AppSize.s18.w,
                       child: Center(
-                        child: Text( playCount != null ?
-                          "$playCount" : "24",
+                        child: Text( playCount != null ? "$playCount" : "24",
                           style: AppTextStyles.statQuizNumberTextStyle(context),
                         ),
                       ),

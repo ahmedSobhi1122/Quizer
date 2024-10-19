@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:quizer/config/routes/screen_export.dart';
 import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/features/presentation/pages/Home%20Page/home_page.dart';
 import 'package:quizer/features/presentation/pages/category page/category_screen.dart';
@@ -10,6 +9,8 @@ import 'package:quizer/features/presentation/pages/setting page/setting_screen.d
 import 'package:themed/themed.dart';
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -18,11 +19,11 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 2;
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   final List<Widget> _pages = [
-    QuizSettingScreen(),
-    CategoryScreen(),
-    HomePage(),
-    LeaderBoardScreen(),
-    SettingScreen(),
+    const QuizSettingScreen(),
+    const CategoryScreen(),
+    const HomePage(),
+    const LeaderBoardScreen(),
+    const SettingScreen(),
   ];
 
   @override

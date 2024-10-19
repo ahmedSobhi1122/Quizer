@@ -58,7 +58,7 @@ Future<void> init() async {
   sl.registerLazySingleton<GetProfileDataUseCase>(() => GetProfileDataUseCase(sl()));
   sl.registerLazySingleton<GetHomeProfileUseCase>(() => GetHomeProfileUseCase(sl()));
   sl.registerLazySingleton<GetHomeQuizzesUseCase>(() => GetHomeQuizzesUseCase(sl()));
-  sl.registerLazySingleton<GetHomeCategoriesUseCase>(() => GetHomeCategoriesUseCase(sl()));
+  sl.registerLazySingleton<GetCategoriesUseCase>(() => GetCategoriesUseCase(sl()));
   sl.registerLazySingleton<GetQuizUseCase>(() => GetQuizUseCase(sl()));
   sl.registerLazySingleton<LoginUseCase>(() => LoginUseCase(sl()));
   sl.registerLazySingleton<GetOTPUseCase>(() => GetOTPUseCase(sl()));

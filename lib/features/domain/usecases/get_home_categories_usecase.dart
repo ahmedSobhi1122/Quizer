@@ -1,11 +1,12 @@
 import 'package:quizer/features/domain/entities/category.dart';
 import 'package:quizer/features/domain/repository/account_repository.dart';
 
-
-class GetHomeCategoriesUseCase {
+class GetCategoriesUseCase {
   final AccountRepository repository;
 
-  GetHomeCategoriesUseCase(this.repository);
+  GetCategoriesUseCase(this.repository);
 
-  Future<List<Category>> call(String token) async => await repository.getHomeCategories(token);
+  Future<List<Category>> call(
+          String token, int pageNumber, int pageSize) async =>
+      await repository.getCategories(token, pageNumber, pageSize);
 }

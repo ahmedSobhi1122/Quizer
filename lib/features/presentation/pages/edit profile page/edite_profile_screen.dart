@@ -30,10 +30,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   //     "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiWmVpYWQiLCJmYW1pbHlfbmFtZSI6Ik1vaGFtbWVkIiwiZW1haWwiOiJ6ZWlhZG00YnVzaW5lc3NAZ21haWwuY29tIiwibmJmIjoxNzI5MTkzOTY2LCJleHAiOjE3MzE4NzU5NjYsImlhdCI6MTcyOTE5Mzk2NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI2In0.qbQi3s0NO8TC7SVc1fKTdenU1W6Rg98Yh4A0-eoAoukfxGBIFCY1KCYVmMPrFzj42gwNnnWoH_G3m9-XuGa73g";
   String? id = DataIntent.getUserID();
   String? token = DataIntent.getToken();
-  String? _userName = "Ahmed Mohsen";
+  String? _userName =
+      "${DataIntent.getFirstName()} ${DataIntent.getLastName()}";
 
-  String? _aboutMe =
-      "A brief description of Jackson Logan as a UI/UX designer, emphasizing his experience in creating visually appealing and functional designs. It mentions his interest in a variety of design and programming tools.";
+  String? _aboutMe = DataIntent.getDescription();
 
   final nameController = TextEditingController();
 
@@ -44,8 +44,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   void initState() {
-    nameController.text = _userName!;
-    aboutController.text = _aboutMe!;
+    nameController.text = _userName ?? "";
+    aboutController.text = _aboutMe ?? "";
     super.initState();
   }
 
@@ -197,11 +197,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           child: BlocListener<ProfileCubit, ProfileState>(
                             listener: (context, state) {
                               print(state);
-                              if(state is ProfileUpdateSuccess){
+                              if (state is ProfileUpdateSuccess) {
                                 context.pop();
-                                context.message(message: "success update",color: AppColors.successColor);
-                              } else if(state is ProfileLoading){
-                                context.message(message: "loading update",color: AppColors.errorColor);
+                                context.message(
+                                    message: "success update",
+                                    color: AppColors.successColor);
+                              } else if (state is ProfileLoading) {
+                                context.message(
+                                    message: "loading update",
+                                    color: AppColors.errorColor);
                               }
                             },
                             child: CustomButton(
@@ -215,8 +219,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       id: id ?? "",
                                       name: nameController.text,
                                       description: aboutController.text,
-                                      profileImage: _imageProfile!,
-                                      coverImage: _imageCover!,
+                                      profileImage: _imageProfile,
+                                      coverImage: _imageCover,
                                       token: token ?? "",
                                     );
                                 // context.pop();

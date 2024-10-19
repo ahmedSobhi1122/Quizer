@@ -1,16 +1,16 @@
-class HomeCategoriesModel {
+class CategoriesModel {
   final int? id;
   final String? name;
   final String? image;
 
-  HomeCategoriesModel({
+  CategoriesModel({
     this.id,
     this.name,
     this.image,
   });
 
-  factory HomeCategoriesModel.fromJson(Map<String, dynamic> json) =>
-      HomeCategoriesModel(
+  factory CategoriesModel.fromJson(Map<String, dynamic> json) =>
+      CategoriesModel(
         id: json['id'],
         name: json['name'],
         image: json['image'],

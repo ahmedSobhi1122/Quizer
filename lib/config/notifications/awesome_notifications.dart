@@ -23,6 +23,7 @@ class NotificationsModel {
         ),
       ],
     );
+
     AwesomeNotifications().setListeners(
         onActionReceivedMethod: (receivedAction) =>
             onActionReceivedMethod(receivedAction));
@@ -38,7 +39,7 @@ class NotificationsModel {
   static scheduleDailyReminderNotification() async {
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
-        id: 10,
+        id: 1,
         channelKey: 'daily_reminder_channel',
         title: 'Daily Reminder',
         body: 'Don\'t forget to check the app today!',
@@ -59,8 +60,8 @@ class NotificationsModel {
         ),
       ],
       schedule: NotificationCalendar(
-        hour: 15, // Schedule at 10 AM
-        minute: 33,
+        hour: 19, // Schedule at 10 AM
+        minute: 20,
         second: 0,
         repeats: true, // Make it repeat daily
       ),

@@ -35,8 +35,8 @@ class ProfileCubit extends Cubit<ProfileState> {
     required String token,
     required String name,
     required String description,
-    required File profileImage,
-    required File coverImage,
+    required File? profileImage,
+    required File? coverImage,
   }) async {
     emit(ProfileLoading());
     try {

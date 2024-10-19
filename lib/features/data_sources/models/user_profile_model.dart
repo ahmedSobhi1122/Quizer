@@ -57,10 +57,14 @@ class ProfileModel {
         'firstName': firstName,
         'lastName': lastName,
         'description': description,
-        "profileImage": await MultipartFile.fromFile(profileImageFile!.path,
-            filename: profileImageFile!.path.split('/').last),
-        "coverImage": await MultipartFile.fromFile(coverImageFile!.path,
-            filename: coverImageFile!.path.split('/').last),
+        "profileImage": (profileImageFile != null)
+            ? await MultipartFile.fromFile(profileImageFile!.path,
+                filename: profileImageFile!.path.split('/').last)
+            : null,
+        "coverImage": (coverImageFile != null)
+            ? await MultipartFile.fromFile(coverImageFile!.path,
+                filename: coverImageFile!.path.split('/').last)
+            : null,
       });
 }
 

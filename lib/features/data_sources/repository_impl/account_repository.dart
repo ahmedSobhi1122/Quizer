@@ -70,17 +70,20 @@ class AccountRepositoryImpl implements AccountRepository {
   }
 
   @override
-  Future<List<Category>> getHomeCategories(String token) async {
-    final List<HomeCategoriesModel> categoryModels =
-        await remoteDataSource.homeCategories(token);
+  Future<List<Category>> getCategories(
+      String token, int pageNumber, int pageSize) async {
+    final List<CategoriesModel> categoryModels =
+        await remoteDataSource.getCategories(token, pageNumber, pageSize);
 
     List<Category> categories = [];
     for (var categoryModel in categoryModels) {
-      categories.add(new Category(
-        id: categoryModel.id,
-        name: categoryModel.name,
-        image: categoryModel.image,
-      ));
+      categories.add(
+        Category(
+          id: categoryModel.id,
+          name: categoryModel.name,
+          image: categoryModel.image,
+        ),
+      );
     }
     return categories;
   }

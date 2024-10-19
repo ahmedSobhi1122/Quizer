@@ -5,7 +5,7 @@ import '../../domain/usecases/get_home_categories_usecase.dart';
 
 class HomeCategoriesCubit extends Cubit<HomeCategoriesState>
 {
-  final GetHomeCategoriesUseCase getHomeCategoriesUseCase;
+  final GetCategoriesUseCase getHomeCategoriesUseCase;
   HomeCategoriesCubit(this.getHomeCategoriesUseCase) : super(HomeCategoriesInitial());
 
   Future<void> getHomeCategories (String token) async
@@ -13,7 +13,7 @@ class HomeCategoriesCubit extends Cubit<HomeCategoriesState>
     emit(HomeCategoriesLoading());
     try
     {
-      final categories = await getHomeCategoriesUseCase(token);
+      final categories = await getHomeCategoriesUseCase.call(token,1,100);
       emit(HomeCategoriesLoaded(categories: categories));
     }
     catch (e)

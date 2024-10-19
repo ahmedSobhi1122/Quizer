@@ -310,8 +310,9 @@ class RemoteDataSource {
   }
 
   ///home Categories
-  Future<List<HomeCategoriesModel>> homeCategories(String token) async {
-    List<HomeCategoriesModel> categories = [];
+  Future<List<CategoriesModel>> getCategories(
+      String token, int pageNumber, int pageSize) async {
+    List<CategoriesModel> categories = [];
 
     try {
       final response = await dio.request(
@@ -320,6 +321,10 @@ class RemoteDataSource {
           method: 'GET',
           headers: {'Authorization': 'Bearer $token'},
         ),
+        data: FormData.fromMap({
+          'PageNumber': pageNumber,
+          'PageSize': pageSize,
+        }),
       );
 
       var responseData = response.data["data"] as List?;
@@ -330,7 +335,7 @@ class RemoteDataSource {
         print(responseData);
         print("----------------------------before map");
         categories = responseData!
-            .map((category) => HomeCategoriesModel.fromJson(category))
+            .map((category) => CategoriesModel.fromJson(category))
             .toList();
         print("----------------------------after map");
         return categories;
@@ -459,7 +464,8 @@ class RemoteDataSource {
     }
   }
 
-  Future<void> deleteAccount(String userID,String token) async {
+  ///delete account
+  Future<void> deleteAccount(String userID, String token) async {
     try {
       final response = await dio.request(
         '${Constants.baseUrl}account/delete',
@@ -474,10 +480,8 @@ class RemoteDataSource {
       } else {
         throw Exception('Error deleting account');
       }
-    }
-    catch (error) {
+    } catch (error) {
       throw Exception('remote_data_source -- Error DELETE ACCOUNT: $error');
     }
   }
-
 }

@@ -15,6 +15,7 @@ import 'package:quizer/features/presentation/common/image_upload.dart';
 import 'package:quizer/features/presentation/cubit/profile_cubit.dart';
 import 'package:quizer/features/presentation/state/profile_state.dart';
 
+import '../../../../config/routes/route_constants.dart';
 import '../../common/custom_button_with_shadow.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -54,185 +55,194 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Scaffold(
       body: Background(
         child: SingleChildScrollView(
-          child: Column(
+          child: Stack(
             children: [
-              SizedBox(
-                height: 380.h,
-                child: Stack(
-                  children: [
-                    SizedBox(
-                      height: 290.h,
-                      child: BlocBuilder<ProfileCubit, ProfileState>(
-                        builder: (context, state) {
-                          if (state is ProfileCoverSelected) {
-                            _imageCover = state.image;
-                          }
-                          return ImageUploadField(
-                            fitter: BoxFit.cover,
-                            onImageSelected: () async {
-                              await context
-                                  .read<ProfileCubit>()
-                                  .coverImageSelection();
+              Column(
+                children: [
+                  SizedBox(
+                    height: 380.h,
+                    child: Stack(
+                      children: [
+                        SizedBox(
+                          height: 290.h,
+                          child: BlocBuilder<ProfileCubit, ProfileState>(
+                            builder: (context, state) {
+                              if (state is ProfileCoverSelected) {
+                                _imageCover = state.image;
+                              }
+                              return ImageUploadField(
+                                fitter: BoxFit.cover,
+                                onImageSelected: () async {
+                                  await context
+                                      .read<ProfileCubit>()
+                                      .coverImageSelection();
+                                },
+                                image: _imageCover,
+                              );
                             },
-                            image: _imageCover,
-                          );
-                        },
-                      ),
-                    ),
-                    Positioned(
-                      bottom: -5.h,
-                      child: Padding(
-                        padding: const EdgeInsets.all(AppPadding.p16),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 65.r,
-                              backgroundColor: MyTheme.textColor,
-                              // Avatar image
-                              child: CircleAvatar(
-                                radius: 63.r,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(100.r),
-                                  child:
-                                      BlocBuilder<ProfileCubit, ProfileState>(
-                                    builder: (context, state) {
-                                      if (state is ProfileAvatarSelected) {
-                                        _imageProfile = state.image;
-                                      }
-                                      return ImageUploadField(
-                                        fitter: BoxFit.cover,
-                                        onImageSelected: () async {
-                                          await context
-                                              .read<ProfileCubit>()
-                                              .profileImageSelection();
+                          ),
+                        ),
+                        Positioned(
+                          bottom: -5.h,
+                          child: Padding(
+                            padding: const EdgeInsets.all(AppPadding.p16),
+                            child: Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 65.r,
+                                  backgroundColor: MyTheme.textColor,
+                                  // Avatar image
+                                  child: CircleAvatar(
+                                    radius: 63.r,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(100.r),
+                                      child:
+                                          BlocBuilder<ProfileCubit, ProfileState>(
+                                        builder: (context, state) {
+                                          if (state is ProfileAvatarSelected) {
+                                            _imageProfile = state.image;
+                                          }
+                                          return ImageUploadField(
+                                            fitter: BoxFit.cover,
+                                            onImageSelected: () async {
+                                              await context
+                                                  .read<ProfileCubit>()
+                                                  .profileImageSelection();
+                                            },
+                                            image: _imageProfile,
+                                          );
                                         },
-                                        image: _imageProfile,
-                                      );
-                                    },
+                                      ),
+                                    ),
                                   ),
                                 ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20.h),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Name",
+                          style: TextStyle(
+                              fontSize: FontSize.f24,
+                              color: MyTheme.textColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10.h),
+                        SizedBox(
+                          height: 70.h,
+                          child: TextField(
+                            controller: nameController,
+                            keyboardType: TextInputType.name,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.r),
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 20.h),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Name",
-                      style: TextStyle(
-                          fontSize: FontSize.f24,
-                          color: MyTheme.textColor,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 10.h),
-                    SizedBox(
-                      height: 70.h,
-                      child: TextField(
-                        controller: nameController,
-                        keyboardType: TextInputType.name,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
+                            maxLength: 30,
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontSize: FontSize.f18,
+                                color: AppColors.blackColor80,
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
-                        maxLength: 30,
-                        maxLines: 1,
-                        style: TextStyle(
-                            fontSize: FontSize.f18,
-                            color: AppColors.blackColor80,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    SizedBox(height: 30.h),
-                    Text(
-                      "About",
-                      style: TextStyle(
-                          fontSize: FontSize.f24,
-                          color: MyTheme.textColor,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 10.h),
-                    SizedBox(
-                      height: 200.h,
-                      child: TextField(
-                        controller: aboutController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                          ),
+                        SizedBox(height: 30.h),
+                        Text(
+                          "About",
+                          style: TextStyle(
+                              fontSize: FontSize.f24,
+                              color: MyTheme.textColor,
+                              fontWeight: FontWeight.bold),
                         ),
-                        maxLength: 500,
-                        maxLines: 15,
-                        style: TextStyle(
-                            fontSize: FontSize.f18,
-                            color: AppColors.blackColor80,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 120.h,
-                      child: Row(children: [
-                        Expanded(
-                          child: CustomButton(
-                            text: "Cancel",
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            color: AppColors.softRed,
-                            colorText: Colors.red.withOpacity(.7),
-                            borderColor: Colors.red,
-                          ),
-                        ),
-                        SizedBox(width: 50.w),
-                        Expanded(
-                          child: BlocListener<ProfileCubit, ProfileState>(
-                            listener: (context, state) {
-                              print(state);
-                              if (state is ProfileUpdateSuccess) {
-                                context.pop();
-                                context.message(
-                                    message: "success update",
-                                    color: AppColors.successColor);
-                              } else if (state is ProfileLoading) {
-                                context.message(
-                                    message: "loading update",
-                                    color: AppColors.errorColor);
-                              }
-                            },
-                            child: CustomButton(
-                              color: MyTheme.primaryButtonColor,
-                              colorText: MyTheme.primaryButtonTextColor,
-                              text: "Finish",
-                              onPressed: () async {
-                                await context
-                                    .read<ProfileCubit>()
-                                    .updateProfile(
-                                      id: id ?? "",
-                                      name: nameController.text,
-                                      description: aboutController.text,
-                                      profileImage: _imageProfile,
-                                      coverImage: _imageCover,
-                                      token: token ?? "",
-                                    );
-                                // context.pop();
-                              },
+                        SizedBox(height: 10.h),
+                        SizedBox(
+                          height: 200.h,
+                          child: TextField(
+                            controller: aboutController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
                             ),
+                            maxLength: 500,
+                            maxLines: 15,
+                            style: TextStyle(
+                                fontSize: FontSize.f18,
+                                color: AppColors.blackColor80,
+                                fontWeight: FontWeight.w600),
                           ),
-                        )
-                      ]),
+                        ),
+                        SizedBox(
+                          height: 120.h,
+                          child: Row(children: [
+                            Expanded(
+                              child: CustomButton(
+                                text: "Cancel",
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                color: AppColors.softRed,
+                                colorText: Colors.red.withOpacity(.7),
+                                borderColor: Colors.red,
+                              ),
+                            ),
+                            SizedBox(width: 50.w),
+                            Expanded(
+                                child: CustomButton(
+                                  color: MyTheme.primaryButtonColor,
+                                  colorText: MyTheme.primaryButtonTextColor,
+                                  text: "Finish",
+                                  onPressed: () async {
+                                    await context
+                                        .read<ProfileCubit>()
+                                        .updateProfile(
+                                          id: id ?? "",
+                                          name: nameController.text,
+                                          description: aboutController.text,
+                                          profileImage: _imageProfile,
+                                          coverImage: _imageCover,
+                                          token: token ?? "",
+                                        );
+                                    // context.pop();
+                                  },
+                                ),
+                            ),
+                          ]),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
+        BlocListener<ProfileCubit, ProfileState>(
+          listener: (context, state) {
+            print(state);
+            if (state is ProfileUpdateSuccess) {
+              context.pushReplacementNamed(Routes.profileScreenRoute);
+              context.message(
+                  message: "success update",
+                  color: AppColors.successColor);
+            } else if (state is ProfileLoading) {
+              context.message(
+                  message: "loading update",
+                  color: AppColors.warningColor);
+            }else if(state is ProfileFailure){
+              context.message(
+                  message: "Error 404",
+                  color: AppColors.errorColor);
+            }
+          },
+          child: SizedBox.shrink(),
+        ),
             ],
           ),
         ),

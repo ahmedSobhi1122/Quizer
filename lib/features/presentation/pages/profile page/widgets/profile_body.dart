@@ -63,12 +63,11 @@ class Profile extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const BackButton(),
+                          BackButton(onPressed: (){context.pushReplacementNamed(Routes.MainScreenRoute);},),
                           const Spacer(),
                           IconButton(
                             onPressed: () {
-                              Navigator.pushNamed(
-                                  context, Routes.editProfileScreenRoute);
+                              context.pushReplacementNamed(Routes.editProfileScreenRoute);
                               print("Edit profile");
                             },
                             icon: const Icon(Icons.edit),

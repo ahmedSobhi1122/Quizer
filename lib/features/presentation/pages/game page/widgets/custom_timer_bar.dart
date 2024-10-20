@@ -39,7 +39,7 @@ class CustomTimerBar extends StatelessWidget {
             InkWell(
               onTap: ()
               {
-                context.pushNamedAndRemoveUntil(Routes.homeScreenRoute, predicate: (route) => false);
+                context.pushNamedAndRemoveUntil(Routes.MainScreenRoute, predicate: (route) => false);
               },
               child: Icon(
                 Icons.close,

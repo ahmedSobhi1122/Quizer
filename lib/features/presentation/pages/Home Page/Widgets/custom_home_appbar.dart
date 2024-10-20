@@ -36,7 +36,7 @@ class CustomHomeAppbar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CustomAppbarProfile(imageUrl: imageUrl,name: name, rank: rank,isClickable: true,onTap: (){context.pushNamed(Routes.profileScreenRoute);},),
+                CustomAppbarProfile(imageUrl: imageUrl,name: name, rank: rank,isClickable: true,onTap: (){context.pushReplacementNamed(Routes.profileScreenRoute);},),
                 CustomHomeAppbarPoints(points: points!,),
               ],
             ),

@@ -32,7 +32,7 @@ class NotificationsModel {
   static onActionReceivedMethod(ReceivedAction receivedAction) async {
     if (receivedAction.buttonKeyPressed == 'ACCEPT') {
       MyApp.navigatorKey.currentState
-          ?.pushNamed(Routes.logInScreenRoute); // go to login screen
+          ?.pushNamed(Routes.splashScreenRoute); // go to splash screen to check if user is logged in or not
     } else if (receivedAction.buttonKeyPressed == 'CANCEL') {}
   }
 
@@ -42,7 +42,7 @@ class NotificationsModel {
         id: 1,
         channelKey: 'daily_reminder_channel',
         title: 'Daily Reminder',
-        body: 'Don\'t forget to check the app today!',
+        body: '💡 Time to sharpen your mind! New quizzes await—test your knowledge now and climb the leaderboard! 🏆',
         notificationLayout: NotificationLayout.Default,
       ),
       actionButtons: [
@@ -60,11 +60,14 @@ class NotificationsModel {
         ),
       ],
       schedule: NotificationCalendar(
-        hour: 19, // Schedule at 10 AM
-        minute: 20,
+        // hour: 19, // Schedule at 10 AM
+        minute: 3,
         second: 0,
+        allowWhileIdle: true,
         repeats: true, // Make it repeat daily
       ),
     );
   }
+
+
 }

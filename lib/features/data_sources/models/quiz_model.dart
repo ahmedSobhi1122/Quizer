@@ -62,14 +62,14 @@ class QuizModel {
         'description': description,
         'questionCount': questionCount,
         'maxTime': maxTime,
-        'image': (imageFile != null)
+        'quizImage': (imageFile != null)
             ? await MultipartFile.fromFile(imageFile!.path,
                 filename: imageFile!.path.split('/').last)
             : null,
         'questions': questions?.map(
           (question) async => {
             'title': question.title,
-            'image': (question.imageFile != null)
+            'questionImage': (question.imageFile != null)
                 ? await MultipartFile.fromFile(question.imageFile!.path,
                     filename: question.imageFile!.path.split('/').last)
                 : null,

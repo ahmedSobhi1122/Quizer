@@ -24,7 +24,7 @@ class QuestionButtons extends StatelessWidget {
       children: [
         Expanded(
           child: CustomButton(
-            text: "Add More",
+            text: "Add",
             onPressed: onAddMore,
             color: MyTheme.secondaryButtonColor,
             colorText: MyTheme.secondaryButtonTextColor,

@@ -9,6 +9,7 @@ import 'package:quizer/features/data_sources/repository_impl/quiz_repository.dar
 import 'package:quizer/features/domain/repository/account_repository.dart';
 import 'package:quizer/features/domain/repository/auth_repository.dart';
 import 'package:quizer/features/domain/repository/quiz_repository.dart';
+import 'package:quizer/features/domain/usecases/create_quiz_usecase.dart';
 import 'package:quizer/features/domain/usecases/facebook_auth_usecase.dart';
 import 'package:quizer/features/domain/usecases/get_categories_usecase.dart';
 import 'package:quizer/features/domain/usecases/get_home_profile_data_usecase.dart';
@@ -34,12 +35,15 @@ import 'package:quizer/features/presentation/cubit/home_quizzes_cubit.dart';
 import 'package:quizer/features/presentation/cubit/leaderboard_cubit.dart';
 import 'package:quizer/features/presentation/cubit/login_cubit.dart';
 import 'package:quizer/features/presentation/cubit/profile_cubit.dart';
+import 'package:quizer/features/presentation/cubit/question_create_cubit.dart';
 import 'package:quizer/features/presentation/cubit/register_cubit.dart';
 import 'package:quizer/features/presentation/cubit/setting_cubit.dart';
 import 'package:quizer/features/presentation/cubit/start_quiz_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../features/domain/usecases/delete_account_usecase.dart';
+import '../features/presentation/cubit/create_question_answers_cubit.dart';
+import '../features/presentation/cubit/upload_image_cubit.dart';
 
 
 final sl = GetIt.instance;
@@ -75,6 +79,7 @@ Future<void> init() async {
   sl.registerLazySingleton<UpdateProfileUsecase>(() => UpdateProfileUsecase(sl()));
   sl.registerLazySingleton<LeaderboardUsecase>(() => LeaderboardUsecase(sl()));
   sl.registerLazySingleton<DeleteAccountUsecase>(() => DeleteAccountUsecase(sl()));
+  sl.registerLazySingleton<CreateQuizUseCase>(() => CreateQuizUseCase(sl()));
 
   /// Cubits
   sl.registerLazySingleton<RegisterCubit>(() => RegisterCubit(sl(),sl(),sl()));
@@ -88,4 +93,7 @@ Future<void> init() async {
   sl.registerFactory<GameCubit>(() => GameCubit(sl()));
   sl.registerLazySingleton<ForgetPasswordCubit>(() => ForgetPasswordCubit(sl(),sl(),sl(),sl(),sl()));
   sl.registerFactory<SettingCubit>(() => SettingCubit(sl()));
+  sl.registerFactory<QuestionCubit>(() => QuestionCubit(sl()));
+  sl.registerLazySingleton<CreateQuestionAnswersCubit>(() => CreateQuestionAnswersCubit());
+  sl.registerLazySingleton<UploadImageCubit>(() => UploadImageCubit());
 }

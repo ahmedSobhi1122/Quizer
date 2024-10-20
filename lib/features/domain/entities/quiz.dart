@@ -6,6 +6,7 @@ class Quiz {
   final int? id;
   final String? name;
   final String? description;
+  final String? authorID;
   final String? authorName;
   final String? authorImage;
   final double? rating;
@@ -22,14 +23,15 @@ class Quiz {
     this.id,
     this.name,
     this.description,
+    this.authorID,
     this.authorName,
+    this.authorImage,
     this.rating,
     this.questionCount,
     this.maxTime,
     this.solveCount,
     this.image,
     this.createdOn,
-    this.authorImage,
     this.questions,
   });
 }

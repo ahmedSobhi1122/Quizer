@@ -1,4 +1,5 @@
 import 'package:quizer/core/constants/enum.dart';
+import 'package:quizer/features/data_sources/models/quiz_model.dart';
 import 'package:quizer/features/domain/entities/quiz.dart';
 
 class DataIntent {
@@ -64,8 +65,28 @@ class DataIntent {
     _quiz = quiz;
   }
 
+  static void popQuiz() {
+    _quiz = null;
+  }
+
   static Quiz? getQuiz() {
     return _quiz;
+  }
+
+//------------------------------------
+  // Quiz Setting to Question Setting
+  static QuizModel? _quizModel;
+
+  static void pushQuizModel(QuizModel quizModel) {
+    _quizModel = quizModel;
+  }
+
+  static void popQuizModel() {
+    _quizModel = null;
+  }
+
+  static QuizModel? getQuizModel() {
+    return _quizModel;
   }
 
 

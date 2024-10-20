@@ -48,6 +48,7 @@ class _GameScreenState extends State<GameScreen> {
             BlocBuilder<GameCubit, GameState>(
               builder: (context, state) {
                 return PageView.builder(
+                  physics:  const NeverScrollableScrollPhysics(),
                   controller: _pageController,
                   onPageChanged: (index) {
                     context.read<GameCubit>().emit(

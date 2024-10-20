@@ -486,11 +486,11 @@ class RemoteDataSource {
   }
 
   ///create quiz
-  Future<void> createQuizInfo(QuizModel quiz, String token) async {
+  Future<void> createQuizInfo(String token, QuizModel quiz) async {
     var data = await quiz.toJson();
     try {
       final response = await dio.request(
-        '${Constants.baseUrl}quiz/create',
+        '${Constants.baseUrl}quiz/create/${2}',
         options: Options(
           headers: {'Authorization': 'Bearer $token'},
           method: 'POST',

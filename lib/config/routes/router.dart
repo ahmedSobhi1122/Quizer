@@ -1,3 +1,4 @@
+import 'package:quizer/features/presentation/cubit/create_question_answers_cubit.dart';
 import 'package:quizer/features/presentation/cubit/forget_password_cubit.dart';
 import 'package:quizer/features/presentation/cubit/home_profile_cubit.dart';
 import 'package:quizer/features/presentation/cubit/leaderboard_cubit.dart';
@@ -14,6 +15,8 @@ import 'package:quizer/features/presentation/pages/setting%20page/setting_screen
 import 'package:quizer/features/presentation/pages/start%20quiz%20page/start_quiz_screen.dart';
 
 import '../../features/presentation/cubit/game_cubit.dart';
+import '../../features/presentation/cubit/question_create_cubit.dart';
+import '../../features/presentation/cubit/upload_image_cubit.dart';
 import '../../features/presentation/pages/game page/game_screen.dart';
 import '../../features/presentation/pages/leadboard page/leadboard_page.dart';
 import '../../features/presentation/cubit/home_categories_cubit.dart';
@@ -157,6 +160,23 @@ class RouteGenerator {
       case Routes.quizSettingScreenRoute:
         return MaterialPageRoute(
           builder: (context) => QuizSettingScreen(),
+        );
+
+////////////////////////////////////////////////////////////////////////////////
+      case Routes.createQuestionScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => MultiBlocProvider(
+            providers: [
+            BlocProvider<QuestionCubit>(
+                create: (context) => sl<QuestionCubit>()),
+            BlocProvider<CreateQuestionAnswersCubit>(
+                create: (context) => sl<CreateQuestionAnswersCubit>()),
+              BlocProvider<UploadImageCubit>(
+                  create: (context) => sl<UploadImageCubit>()),
+
+            ],
+              child: CreateQuestionScreen(),
+          )
         );
 
 ////////////////////////////////////////////////////////////////////////////////

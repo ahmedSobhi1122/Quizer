@@ -9,7 +9,6 @@ class QuestionModel {
   final String? title;
   final String? image;
   final File? imageFile;
-  final QuestionTypeModel? type;
   final List<AnswerModel>? answers;
 
   QuestionModel({
@@ -17,7 +16,6 @@ class QuestionModel {
     this.id,
     this.title,
     this.image,
-    this.type,
     this.answers,
   });
 

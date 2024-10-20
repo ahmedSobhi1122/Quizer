@@ -1,3 +1,4 @@
+import 'package:quizer/features/data_sources/models/quiz_model.dart';
 import 'package:quizer/features/domain/entities/quiz.dart';
 import 'package:quizer/features/domain/repository/quiz_repository.dart';
 
@@ -24,5 +25,10 @@ class QuizRepositoryImpl implements QuizRepository {
         image: quizModel.image,
         createdOn: quizModel.createdOn,
         questions: quizModel.questions);
+  }
+
+  @override
+  Future<void> createQuiz(String token, QuizModel quiz) async {
+    await remoteDataSource.createQuizInfo(token, quiz);
   }
 }

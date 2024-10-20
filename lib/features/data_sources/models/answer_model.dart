@@ -1,7 +1,7 @@
 class AnswerModel {
   final int? id;
   final String? content;
-  final bool? isRightAnswer;
+  bool? isRightAnswer;
 
   AnswerModel({
     this.id, this.content, this.isRightAnswer

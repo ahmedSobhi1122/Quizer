@@ -56,5 +56,6 @@ class LottieAssets {
   static const String _basePath = "assets/lotties/";
 
   static const String loading = "${_basePath}loading.json";
+  static const String cup = "${_basePath}cup.json";
   // static const String loading = "${_basePath}loading.json";
 }

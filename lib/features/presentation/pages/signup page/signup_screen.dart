@@ -73,58 +73,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(height: AppSize.s24.h),
                   const Social(),
                   SizedBox(height: AppSize.s50.h),
-                  BlocListener<RegisterCubit, RegisterState>(
-                    listener: (context, state) {
-                      print(state);
-                      final route = ModalRoute.of(context);
-                      final isCurrentRoute = route?.isCurrent ?? false;
-                      if (isCurrentRoute) {
-                        if (state is RegisterSuccess) {
-                        } else if (state is RegisterFailure) {
-                          context.message(message: state.error);
-                        } else {}
-                      }
-                    },
-                    child: Row(
-                      children: [
-                        Expanded(
-                            child: CustomButton(
-                                text: "Sign in",
-                                onPressed: () {
-                                  context.pushReplacementNamed(
-                                      Routes.logInScreenRoute);
-                                },
-                                color: MyTheme.secondaryButtonColor,
-                                colorText: MyTheme.secondaryButtonTextColor)),
-                        SizedBox(width: AppSize.s24.w),
-                        Expanded(
+                  Row(
+                    children: [
+                      Expanded(
                           child: CustomButton(
-                            color: MyTheme.secondaryButtonColor,
-                            colorText: MyTheme.secondaryButtonTextColor,
-                            text: "Next",
-                            onPressed: () async {
-                              if (formKeyRegister.currentState!.validate()) {
-                                context.pushNamed(Routes.selectionScreenRoute);
-                              }
-                            },
-                          ),
+                              text: "Sign in",
+                              onPressed: () {
+                                context.pushReplacementNamed(
+                                    Routes.logInScreenRoute);
+                              },
+                              color: MyTheme.secondaryButtonColor,
+                              colorText: MyTheme.secondaryButtonTextColor)),
+                      SizedBox(width: AppSize.s24.w),
+                      Expanded(
+                        child: CustomButton(
+                          color: MyTheme.secondaryButtonColor,
+                          colorText: MyTheme.secondaryButtonTextColor,
+                          text: "Next",
+                          onPressed: () async {
+                            if (formKeyRegister.currentState!.validate()) {
+                              context.pushNamed(Routes.selectionScreenRoute);
+                            }
+                          },
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
-          ),
-          BlocBuilder<RegisterCubit, RegisterState>(
-            builder: (context, state) {
-              print(state);
-              if (state is RegisterLoading) {
-                return const Loading();
-              } else {
-                return const SizedBox.shrink();
-              }
-            },
           ),
         ],
       ),

@@ -6,6 +6,55 @@ class DataIntent {
   DataIntent._();
 
 //------------------------------------
+  //register
+  static String? _emailRegister;
+  static String? _passwordRegister;
+  static String? _confirmPasswordRegister;
+  static UserRole? _userRoleRegister;
+  static String? _firstNameRegister;
+  static String? _lastNameRegister;
+  static String? _phoneRegister;
+  static String? _birthDateRegister;
+
+  static void pushEmailRegister(String email) => _emailRegister = email;
+
+  static void pushPasswordRegister(String password) =>
+      _passwordRegister = password;
+
+  static void pushConfirmPasswordRegister(String confirmPassword) =>
+      _confirmPasswordRegister = confirmPassword;
+
+  static void pushUserRoleRegister(UserRole userRole) =>
+      _userRoleRegister = userRole;
+
+  static void pushFirstNameRegister(String firstName) =>
+      _firstNameRegister = firstName;
+
+  static void pushLastNameRegister(String lastName) =>
+      _lastNameRegister = lastName;
+
+  static void pushBirthDateRegister(String birthDate) =>
+     _birthDateRegister = birthDate;
+
+  static void pushPhoneRegister(String phone) => _phoneRegister = phone;
+
+  static String? getEmailRegister() => _emailRegister;
+
+  static String? getPasswordRegister() => _passwordRegister;
+
+  static String? getConfirmPasswordRegister() => _confirmPasswordRegister;
+
+  static UserRole? getUserRoleRegister() => _userRoleRegister;
+
+  static String? getFirstNameRegister() => _firstNameRegister;
+
+  static String? getLastNameRegister() => _lastNameRegister;
+
+  static String? getPhoneRegister() => _phoneRegister;
+
+  static String? getBirthDateRegister() => _birthDateRegister;
+
+//------------------------------------
   //login to forget password
   static String? _email;
 
@@ -46,6 +95,7 @@ class DataIntent {
   static String? getToken() {
     return _token;
   }
+
   //------------------------------------
   // Home To Start Quiz
   static int? _quizID;
@@ -57,6 +107,7 @@ class DataIntent {
   static int? getQuizID() {
     return _quizID;
   }
+
 //------------------------------------
   // Start Quiz To Game
   static Quiz? _quiz;
@@ -89,7 +140,6 @@ class DataIntent {
     return _quizModel;
   }
 
-
 //------------------------------------
   ///profile data
   static String? _firstName;
@@ -109,7 +159,9 @@ class DataIntent {
   }
 
   static String? getFirstName() => _firstName;
+
   static String? getLastName() => _lastName;
+
   static String? getDescription() => _description;
 //------------------------------------
 }

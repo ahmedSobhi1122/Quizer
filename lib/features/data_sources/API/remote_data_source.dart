@@ -82,7 +82,19 @@ class RemoteDataSource {
 
         UserCredential userCredential =
             await FirebaseAuth.instance.signInWithCredential(credential);
-        //TODO :  send data to server
+        try {
+          await dio.request(
+            '${Constants.baseUrl}auth/social',
+            data: FormData.fromMap({
+              'socialID': userCredential.user!.uid,
+            }),
+            options: Options(
+              method: 'POST',
+            ),
+          );
+        } catch (e) {
+          throw Exception('Error during Google sign in $e');
+        }
         return userCredential.user;
       }
     } catch (error) {
@@ -116,7 +128,19 @@ class RemoteDataSource {
         String? email = userData['email'];
         print("email : $email");
 
-        //TODO :  send data to server
+        try {
+          await dio.request(
+            '${Constants.baseUrl}auth/social',
+            data: FormData.fromMap({
+              'socialID': userCredential.user!.uid,
+            }),
+            options: Options(
+              method: 'POST',
+            ),
+          );
+        } catch (e) {
+          throw Exception('Error during Facebook sign in $e');
+        }
 
         return userCredential.user;
       } else if (result.status == LoginStatus.cancelled) {

@@ -1,6 +1,6 @@
+import 'package:quizer/features/data_sources/models/quiz_model.dart';
 import 'package:quizer/features/domain/entities/quiz.dart';
 
-import '../../data_sources/models/quiz_model.dart';
 
 abstract class QuizRepository {
   Future<Quiz> getQuiz(String token, int id);

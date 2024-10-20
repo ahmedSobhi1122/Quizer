@@ -22,8 +22,7 @@ class GameCubit extends Cubit<GameState> {
   // Function to navigate to the previous question
   void goToPreviousQuestion() {
     if (state.currentQuestionIndex > 0) {
-      emit(
-          state.copyWith(currentQuestionIndex: state.currentQuestionIndex - 1));
+      emit(state.copyWith(currentQuestionIndex: state.currentQuestionIndex - 1));
     }
   }
 

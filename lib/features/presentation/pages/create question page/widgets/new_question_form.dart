@@ -1,27 +1,28 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/core/helper/extensions.dart';
+import 'package:quizer/core/resources/app_values.dart';
+import 'package:quizer/features/data_sources/models/answer_model.dart';
 import 'package:quizer/features/data_sources/models/question_model.dart';
 import 'package:quizer/features/data_sources/models/quiz_model.dart';
 import 'package:quizer/features/presentation/common/custom_button_with_shadow.dart';
+import 'package:quizer/features/presentation/common/image_upload.dart';
+import 'package:quizer/features/presentation/cubit/create_question_answers_cubit.dart';
+import 'package:quizer/features/presentation/cubit/question_create_cubit.dart';
 import 'package:quizer/features/presentation/cubit/upload_image_cubit.dart';
+import 'package:quizer/features/presentation/pages/create%20question%20page/widgets/answer_list.dart';
 import 'package:quizer/features/presentation/pages/create%20question%20page/widgets/question_button.dart';
 import 'package:quizer/features/presentation/pages/create%20question%20page/widgets/question_field.dart';
+import 'package:quizer/features/presentation/state/create_question_answers_state.dart';
+import 'package:quizer/features/presentation/state/question_create_state.dart';
 import 'package:quizer/features/presentation/state/upload_image_state.dart';
 
-import '../../../../../config/routes/screen_export.dart';
-import '../../../../../config/themes/theme.dart';
-import '../../../../../core/resources/app_values.dart';
-import '../../../../data_sources/models/answer_model.dart';
-import '../../../common/image_upload.dart';
-import '../../../cubit/create_question_answers_cubit.dart';
-import '../../../cubit/question_create_cubit.dart';
-import '../../../state/create_question_answers_state.dart';
-import '../../../state/question_create_state.dart';
-import 'answer_list.dart';
 
 class NewQuestionForm extends StatelessWidget {
 
@@ -55,7 +56,7 @@ class NewQuestionForm extends StatelessWidget {
 
     return   SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(AppPadding.p8),
+          padding: EdgeInsets.all(AppPadding.p8.r),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

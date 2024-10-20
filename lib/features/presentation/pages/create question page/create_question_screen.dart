@@ -1,22 +1,20 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:quizer/config/routes/route_constants.dart';
 import 'package:quizer/config/themes/theme.dart';
 import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/helper/image_handler.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/features/data_sources/models/question_model.dart';
 import 'package:quizer/features/data_sources/models/quiz_model.dart';
 import 'package:quizer/features/presentation/common/background.dart';
+import 'package:quizer/features/presentation/common/button_back.dart';
 import 'package:quizer/features/presentation/common/loading.dart';
+import 'package:quizer/features/presentation/cubit/question_create_cubit.dart';
 import 'package:quizer/features/presentation/pages/create%20question%20page/widgets/new_question_form.dart';
-import '../../../../config/routes/route_constants.dart';
-import '../../../data_sources/models/question_model.dart';
-import '../../common/button_back.dart';
-import '../../cubit/question_create_cubit.dart';
-import '../../state/question_create_state.dart';
+import 'package:quizer/features/presentation/state/question_create_state.dart';
 
 class CreateQuestionScreen extends StatefulWidget {
   const CreateQuestionScreen({super.key});

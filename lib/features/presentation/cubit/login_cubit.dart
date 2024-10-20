@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quizer/core/constants/enum.dart';
 import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/features/domain/entities/user.dart';
 import 'package:quizer/features/domain/usecases/facebook_auth_usecase.dart';
@@ -46,6 +47,10 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginLoading());
     try {
       var userGoogle = await googleAuthUserUseCase.call();
+
+      DataIntent.pushUserID(userGoogle!.id!);
+      DataIntent.pushToken(userGoogle.token!);
+      DataIntent.pushUserRole(UserRole.STUDENT);
       emit(LoginSuccess());
     } catch (error) {
       emit(LoginFailure(error.toString()));
@@ -55,8 +60,12 @@ class LoginCubit extends Cubit<LoginState> {
   Future<bool?> authWithFacebook() async {
     emit(LoginLoading());
     try {
-      var p = await facebookAuthUseCase.call();
-      if (p != null) {
+      var userFacebook = await facebookAuthUseCase.call();
+      if (userFacebook != null) {
+
+        DataIntent.pushUserID(userFacebook.id!);
+        DataIntent.pushToken(userFacebook.token!);
+        DataIntent.pushUserRole(UserRole.STUDENT);
         emit(LoginSuccess());
       }
     } catch (error) {

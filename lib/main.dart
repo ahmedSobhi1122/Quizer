@@ -97,6 +97,7 @@ class _MyAppState extends State<MyApp> {
       NotificationsModel.scheduleDailyReminderNotification();
     }
 
+
     return ScreenUtilInit(
       designSize: const Size(430, 932),
       minTextAdapt: true,

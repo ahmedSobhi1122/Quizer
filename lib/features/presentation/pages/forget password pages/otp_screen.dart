@@ -64,8 +64,30 @@ class _OtpScreenState extends State<OtpScreen> {
                           state is ForgetPasswordSuccess) {
                         return Column(
                           children: [
-                            ImageManager(
-                              url: Constants.url + image,
+                            Container(
+                              width: 100.r,
+                              height: 100.r,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(),
+                                color: AppColors.whiteColor,
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: AppColors.whiteColor.withOpacity(0.80),
+                                    width: AppSize.s2.r,
+                                  ),
+                                ),
+                                child: ClipOval(
+                                  child: ImageManager(
+                                    width: AppSize.s60,
+                                    fit: BoxFit.cover,
+                                    url: Constants.url + image,
+                                  ),
+                                ),
+                              ),
                             ),
                             SizedBox(height: AppSize.s16.h),
                             Text(

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quizer/core/constants/enum.dart';
 import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/core/resources/app_values.dart';
+import 'package:quizer/features/data_sources/local/app_prefs.dart';
 import 'package:quizer/features/domain/entities/user.dart';
 import 'package:quizer/features/presentation/common/background.dart';
 import 'package:quizer/features/presentation/cubit/home_categories_cubit.dart';
@@ -13,6 +15,7 @@ import 'package:quizer/features/presentation/state/home_quizzes_state.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/constants/constants.dart';
+import '../../../../core/dependency_injection.dart';
 import '../../../../core/resources/assets_manager.dart';
 import '../../cubit/home_profile_cubit.dart';
 import '../../state/home_profile_state.dart';
@@ -33,8 +36,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    String? userID = DataIntent.getUserID();
-    String? token = DataIntent.getToken();
+    String? userID = sl<AppPrefs>().getString(KeyPrefs.ID.name);
+    String? token = sl<AppPrefs>().getString(KeyPrefs.TOKEN.name);
     DataIntent.pushToken(token!);
     DataIntent.pushUserID(userID!);    // TODO remove the push statements when Login/Register returns them
 

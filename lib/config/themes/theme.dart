@@ -18,6 +18,10 @@ class MyTheme {
   static const answersCardBorderColor = ColorRef(Color(0xFF2F2E41));
 
 
+
+  static const inputColor = ColorRef(Color(0x33A6A6A6));
+
+
   static const navigationBarForeground =
       ColorRef(Color(0xFFB7A9FD), id: "navigationBarBackground");
   static const navigationBarBackground =
@@ -82,6 +86,8 @@ Map<ThemeRef, Object> DarkTheme = {
   MyTheme.navigationBarForeground: const Color(0xff2b1c77),
 
   MyTheme.secondaryButtonColor: const Color(0xFF181636),
+
+  MyTheme.inputColor: Color(0x28FFFFFF),
 };
 
 Map<ThemeRef, Object> BlueTheme = {

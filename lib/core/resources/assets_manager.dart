@@ -19,6 +19,7 @@ class ImageAssets {
   static const String image = "${_imagePath}image.png";
   static const String question = "${_imagePath}question_mark.png";
   static const String exam = "${_imagePath}exam.png";
+  static const String chatbot = "${_imagePath}chatbot.png";
   // static const String unknownUserImage = "${_imagePath}unknown_user.jpg";
 
 }

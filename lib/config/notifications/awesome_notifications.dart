@@ -60,8 +60,8 @@ class NotificationsModel {
         ),
       ],
       schedule: NotificationCalendar(
-        // hour: 19, // Schedule at 10 AM
-        // minute: 0,
+        hour: 19, // Schedule at 10 AM
+        minute: 0,
         second: 5,
         allowWhileIdle: true,
         repeats: true, // Make it repeat daily

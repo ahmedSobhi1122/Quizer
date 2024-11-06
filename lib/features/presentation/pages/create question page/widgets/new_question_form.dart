@@ -122,7 +122,7 @@ class NewQuestionForm extends StatelessWidget {
                 controller: answerController,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: MyTheme.reverseColor,
+                  color: MyTheme.textColor,
                   fontSize: AppSize.s16,
                 ),
                 decoration: InputDecoration(

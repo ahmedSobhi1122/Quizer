@@ -16,7 +16,6 @@ import 'package:quizer/features/presentation/common/custom_button_with_shadow.da
 
 import '../../../../config/themes/theme.dart';
 import '../../../data_sources/models/quiz_model.dart';
-import '../../../domain/entities/quiz.dart';
 
 class QuizSettingScreen extends StatefulWidget {
   const QuizSettingScreen({super.key});
@@ -131,11 +130,7 @@ class _QuizSettingScreenState extends State<QuizSettingScreen> {
                 {
                   print(_quizTitleController.text);
                 },
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: MyTheme.textColor,
-                  fontSize: AppSize.s16,
-                ),
+                style: AppTextStyles.homeDailyTaskTitleTextStyle(context),
                 decoration: InputDecoration(
                   labelText: "Quiz Title",
                   labelStyle: const TextStyle(

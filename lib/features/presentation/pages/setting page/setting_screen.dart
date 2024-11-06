@@ -7,6 +7,7 @@ import 'package:quizer/core/helper/data_intent.dart';
 import 'package:quizer/core/helper/extensions.dart';
 import 'package:quizer/core/resources/app_values.dart';
 import 'package:quizer/core/constants/enum.dart';
+import 'package:quizer/core/resources/assets_manager.dart';
 import 'package:quizer/features/presentation/cubit/setting_cubit.dart';
 import 'package:quizer/features/presentation/state/setting_state.dart';
 import 'package:themed/themed.dart';
@@ -301,205 +302,228 @@ class _SettingScreenState extends State<SettingScreen> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(AppPadding.p16.r),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Setting",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: MyTheme.textColor,
-                  fontSize: AppSize.s32,
-                ),
-              ),
-              SizedBox(height: 20.h),
-              const Text(
-                "Account",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: MyTheme.textColor,
-                  fontSize: AppSize.s22,
-                ),
-              ),
-              SizedBox(height: 10.h),
-              ListTile(
-                title: const Text(
-                  "Edit Personal Info",
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Setting",
                   style: TextStyle(
+                    fontWeight: FontWeight.bold,
                     color: MyTheme.textColor,
+                    fontSize: AppSize.s32,
                   ),
                 ),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  color: MyTheme.textColor,
+                SizedBox(height: 20.h),
+                const Text(
+                  "Account",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: MyTheme.textColor,
+                    fontSize: AppSize.s22,
+                  ),
                 ),
-                onTap: () {
-                  print("Edit Personal Info");
-                  context.pushNamed(Routes.profileScreenRoute);
-                },
-              ),
-              SizedBox(height: 10.h),
-              BlocListener<SettingCubit, SettingState>(
-                listener: (context, state) {
-                  print(state);
-                  if (state is SettingSuccess) {
-                    context.pushReplacementNamed(Routes.logInScreenRoute);
-                  }
-                },
-                child: ListTile(
+                SizedBox(height: 10.h),
+                ListTile(
                   title: const Text(
-                    "Delete Account",
+                    "Edit Personal Info",
                     style: TextStyle(
-                        color: Colors.red, fontWeight: FontWeight.bold),
+                      color: MyTheme.textColor,
+                    ),
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: MyTheme.textColor,
+                  ),
+                  onTap: () {
+                    print("Edit Personal Info");
+                    context.pushNamed(Routes.profileScreenRoute);
+                  },
+                ),
+                SizedBox(height: 10.h),
+                BlocListener<SettingCubit, SettingState>(
+                  listener: (context, state) {
+                    print(state);
+                    if (state is SettingSuccess) {
+                      context.pushReplacementNamed(Routes.logInScreenRoute);
+                    }
+                  },
+                  child: ListTile(
+                    title: const Text(
+                      "Delete Account",
+                      style: TextStyle(
+                          color: Colors.red, fontWeight: FontWeight.bold),
+                    ),
+                    trailing: const Icon(Icons.arrow_forward_ios,
+                        color: MyTheme.textColor),
+                    onTap: () {
+                      _deleteDialog(context);
+                      print("Delete Account");
+                    },
+                  ),
+                ),
+                SizedBox(height: 20.h),
+                const Text(
+                  "General",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: MyTheme.textColor,
+                    fontSize: AppSize.s22,
+                  ),
+                ),
+                SizedBox(height: 10.h),
+                ListTile(
+                  title: const Text(
+                    "Theme",
+                    style: TextStyle(
+                      color: MyTheme.textColor,
+                    ),
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        theme,
+                        style: const TextStyle(
+                          fontSize: AppSize.s14,
+                          color: MyTheme.textColor,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      const Icon(Icons.arrow_forward_ios,
+                          color: MyTheme.textColor)
+                    ],
+                  ),
+                  onTap: () {
+                    print("Theme");
+                    _themeDialog();
+                  },
+                ),
+                SizedBox(height: 10.h),
+                ListTile(
+                  title: const Text(
+                    "Language",
+                    style: TextStyle(
+                      color: MyTheme.textColor,
+                    ),
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        language,
+                        style: const TextStyle(
+                            fontSize: AppSize.s14, color: MyTheme.textColor),
+                      ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      const Icon(Icons.arrow_forward_ios,
+                          color: MyTheme.textColor)
+                    ],
+                  ),
+                  onTap: () {
+                    print("Language");
+                    _languageDialog();
+                  },
+                ),
+                SizedBox(height: 10.h),
+                ListTile(
+                  title: const Text(
+                    "Notification",
+                    style: TextStyle(
+                      color: MyTheme.textColor,
+                    ),
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        notification,
+                        style: const TextStyle(
+                            fontSize: AppSize.s14, color: MyTheme.textColor),
+                      ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      const Icon(Icons.arrow_forward_ios,
+                          color: MyTheme.textColor)
+                    ],
+                  ),
+                  onTap: () {
+                    _notificationDialog();
+                    print("Notification");
+                  },
+                ),
+                SizedBox(height: 20.h),
+                const Text(
+                  "About",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: MyTheme.textColor,
+                    fontSize: AppSize.s22,
+                  ),
+                ),
+                SizedBox(height: 10.h),
+                ListTile(
+                  title: const Text(
+                    "About Quizzo",
+                    style: TextStyle(
+                      color: MyTheme.textColor,
+                    ),
                   ),
                   trailing: const Icon(Icons.arrow_forward_ios,
                       color: MyTheme.textColor),
                   onTap: () {
-                    _deleteDialog(context);
-                    print("Delete Account");
+                    print("About");
+                    _aboutDialog();
                   },
                 ),
-              ),
-              SizedBox(height: 20.h),
-              const Text(
-                "General",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: MyTheme.textColor,
-                  fontSize: AppSize.s22,
-                ),
-              ),
-              SizedBox(height: 10.h),
-              ListTile(
-                title: const Text(
-                  "Theme",
-                  style: TextStyle(
-                    color: MyTheme.textColor,
-                  ),
-                ),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      theme,
-                      style: const TextStyle(
-                        fontSize: AppSize.s14,
-                        color: MyTheme.textColor,
+                SizedBox(height: 10.h),
+                ListTile(
+                  title: Row(
+                    children: [
+                      Image.asset(ImageAssets.chatbot,
+                      width: 40.w,height: 40.h,),
+                      const Text(
+                        "  Chat bot",
+                        style: TextStyle(
+                          color: MyTheme.textColor,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    const Icon(Icons.arrow_forward_ios,
-                        color: MyTheme.textColor)
-                  ],
-                ),
-                onTap: () {
-                  print("Theme");
-                  _themeDialog();
-                },
-              ),
-              SizedBox(height: 10.h),
-              ListTile(
-                title: const Text(
-                  "Language",
-                  style: TextStyle(
-                    color: MyTheme.textColor,
+                    ],
                   ),
+                  trailing: const Icon(Icons.arrow_forward_ios,
+                      color: MyTheme.textColor),
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushNamed(Routes.chatScreenRoute);
+                  },
                 ),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      language,
-                      style: const TextStyle(
-                          fontSize: AppSize.s14, color: MyTheme.textColor),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    const Icon(Icons.arrow_forward_ios,
-                        color: MyTheme.textColor)
-                  ],
+                // const Spacer(),
+                Divider(
+                  height: 50.h,
+                  thickness: 1,
+                  color: Colors.grey,
                 ),
-                onTap: () {
-                  print("Language");
-                  _languageDialog();
-                },
-              ),
-              SizedBox(height: 10.h),
-              ListTile(
-                title: const Text(
-                  "Notification",
-                  style: TextStyle(
-                    color: MyTheme.textColor,
+                ListTile(
+                  title: const Text(
+                    "Logout",
+                    style: TextStyle(
+                      color: MyTheme.textColor,
+                    ),
                   ),
+                  trailing: const Icon(Icons.logout, color: MyTheme.textColor),
+                  splashColor: Colors.red[400],
+                  onTap: () {
+                    print("Logout");
+                    _logoutDialog();
+                  },
                 ),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      notification,
-                      style: const TextStyle(
-                          fontSize: AppSize.s14, color: MyTheme.textColor),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    const Icon(Icons.arrow_forward_ios,
-                        color: MyTheme.textColor)
-                  ],
-                ),
-                onTap: () {
-                  _notificationDialog();
-                  print("Notification");
-                },
-              ),
-              SizedBox(height: 20.h),
-              const Text(
-                "About",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: MyTheme.textColor,
-                  fontSize: AppSize.s22,
-                ),
-              ),
-              SizedBox(height: 10.h),
-              ListTile(
-                title: const Text(
-                  "About Quizzo",
-                  style: TextStyle(
-                    color: MyTheme.textColor,
-                  ),
-                ),
-                trailing: const Icon(Icons.arrow_forward_ios,
-                    color: MyTheme.textColor),
-                onTap: () {
-                  print("About");
-                  _aboutDialog();
-                },
-              ),
-              const Spacer(),
-              Divider(
-                height: 50.h,
-                thickness: 1,
-                color: Colors.grey,
-              ),
-              ListTile(
-                title: const Text(
-                  "Logout",
-                  style: TextStyle(
-                    color: MyTheme.textColor,
-                  ),
-                ),
-                trailing: const Icon(Icons.logout, color: MyTheme.textColor),
-                splashColor: Colors.red[400],
-                onTap: () {
-                  print("Logout");
-                  _logoutDialog();
-                },
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -63,14 +63,27 @@ class Profile extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          BackButton(onPressed: (){context.pushReplacementNamed(Routes.MainScreenRoute);},),
+                          CircleAvatar(
+                              backgroundColor: Colors.black12,
+                              child: BackButton(
+                              onPressed: () {
+                                context
+                                    .pushReplacementNamed(Routes.MainScreenRoute);
+                              },
+                          )),
                           const Spacer(),
-                          IconButton(
-                            onPressed: () {
-                              context.pushReplacementNamed(Routes.editProfileScreenRoute);
-                              print("Edit profile");
-                            },
-                            icon: const Icon(Icons.edit),
+                          CircleAvatar(
+                            backgroundColor: Colors.black12,
+                            child: IconButton(
+                              onPressed: () {
+                                context.pushReplacementNamed(
+                                    Routes.editProfileScreenRoute);
+                              },
+                              icon: const Icon(
+                                Icons.edit,
+                                color: MyTheme.textColor,
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -210,7 +223,7 @@ class Profile extends StatelessWidget {
                   height: 115.h,
                   width: 115.w,
                   decoration: BoxDecoration(
-                      color: AppColors.gold,
+                      color: AppColors.bronze,
                       borderRadius: BorderRadius.circular(10.r),
                       border: Border.all(color: MyTheme.textColor, width: 1.w)),
                   child: Column(

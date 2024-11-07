@@ -42,7 +42,7 @@ class _MainScreenState extends State<MainScreen> {
               color: getColor(3)),
           Icon(Icons.settings, size: 30, color: getColor(4)),
         ],
-        backgroundColor: MyTheme.navigationBarBackground,
+        backgroundColor: MyTheme.backgroundColor3,
         buttonBackgroundColor: MyTheme.navigationBarForeground,
         color: MyTheme.navigationBarForeground,
         animationDuration: const Duration(milliseconds: 300),

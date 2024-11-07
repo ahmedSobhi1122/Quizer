@@ -188,7 +188,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               child: CustomButton(
                                 text: "Cancel",
                                 onPressed: () {
-                                  Navigator.pop(context);
+                                  Navigator.pushReplacementNamed(context, Routes.profileScreenRoute);
                                 },
                                 color: AppColors.softRed,
                                 colorText: Colors.red.withOpacity(.7),
